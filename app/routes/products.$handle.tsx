@@ -116,6 +116,7 @@ function redirectToFirstVariant({
 export default function Product() {
   const {product, variants} = useLoaderData<typeof loader>();
   const {selectedVariant} = product;
+
   return (
     <div className="product">
       <ProductImage image={selectedVariant?.image} />
@@ -155,6 +156,7 @@ function ProductMain({
   variants: Promise<ProductVariantsQuery>;
 }) {
   const {title, descriptionHtml} = product;
+  console.log(product);
   return (
     <div className="product-main">
       <h1>{title}</h1>
@@ -358,6 +360,8 @@ const PRODUCT_VARIANT_FRAGMENT = `#graphql
       amount
       currencyCode
     }
+
+    
   }
 ` as const;
 
@@ -384,6 +388,14 @@ const PRODUCT_FRAGMENT = `#graphql
     seo {
       description
       title
+    }
+    metafield1: metafield(namespace: "custom", key: "fast") {
+      key
+      value
+    }
+    metafield2: metafield(namespace: "custom", key: "nike") {
+      key
+      value
     }
   }
   ${PRODUCT_VARIANT_FRAGMENT}
