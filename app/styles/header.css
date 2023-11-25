@@ -19,3 +19,9 @@
   width: 30%;
   display: flex;
 }
+
+.myheader .nav-left {
+  height: 100%;
+  width: 30%;
+  display: flex;
+}
