@@ -1,0 +1,21 @@
+.myheader {
+  background-color: red !important;
+  height: 100px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.myheader .nav-left {
+  height: 100%;
+  width: 70%;
+  display: flex;
+  align-items: center;
+}
+
+.myheader .nav-right {
+  height: 100%;
+  width: 30%;
+  display: flex;
+}

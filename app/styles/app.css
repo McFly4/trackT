@@ -8,6 +8,10 @@
   --color-light: #fff;
 }
 
+/* * {
+  background-color: #000;
+} */
+
 img {
   border-radius: 4px;
 }
@@ -18,7 +22,7 @@ img {
 * --------------------------------------------------
 */
 aside {
-  background: var(--color-light);
+  background: var(--color-dark);
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
   height: 100vh;
   max-width: var(--aside-width);
@@ -129,7 +133,7 @@ aside li {
 */
 .header {
   align-items: center;
-  background: #fff;
+  background: #000;
   display: flex;
   height: var(--header-height);
   padding: 0 1rem;
@@ -229,8 +233,8 @@ aside li {
 }
 
 .cart-summary-aside {
-  background: white;
-  border-top: 1px solid var(--color-dark);
+  background: #000;
+  border-top: 1px solid var(--color-white);
   bottom: 0;
   padding-top: 0.75rem;
   position: absolute;
@@ -262,7 +266,7 @@ aside li {
 }
 
 .predictive-search-form {
-  background: var(--color-light);
+  background: var(--color-dark);
   position: sticky;
   top: 0;
 }

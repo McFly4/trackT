@@ -1,7 +1,7 @@
 import {Await, NavLink} from '@remix-run/react';
 import {Suspense} from 'react';
 import type {HeaderQuery} from 'storefrontapi.generated';
-import type {LayoutProps} from './Layout';
+import type {LayoutProps} from '../Layout';
 import {useRootLoaderData} from '~/root';
 
 type HeaderProps = Pick<LayoutProps, 'header' | 'cart' | 'isLoggedIn'>;
@@ -11,8 +11,8 @@ type Viewport = 'desktop' | 'mobile';
 export function Header({header, isLoggedIn, cart}: HeaderProps) {
   const {shop, menu} = header;
   return (
-    <header className="header">
-      <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
+    <header className="myheader">
+      {/* <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
         <strong>{shop.name}</strong>
       </NavLink>
       <HeaderMenu
@@ -20,7 +20,21 @@ export function Header({header, isLoggedIn, cart}: HeaderProps) {
         viewport="desktop"
         primaryDomainUrl={header.shop.primaryDomain.url}
       />
-      <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
+      <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />   */}
+      <div className="nav-left">
+        <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
+          <strong>{shop.name}</strong>
+        </NavLink>
+        <div className="nav-icons">
+          <HeaderMenuMobileToggle />
+          <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
+            {isLoggedIn ? 'Account' : 'Sign in'}
+          </NavLink>
+          <SearchToggle />
+          <CartToggle cart={cart} />
+        </div>
+      </div>
+      <div className="nav-right"></div>
     </header>
   );
 }
@@ -57,7 +71,7 @@ export function HeaderMenu({
           Home
         </NavLink>
       )}
-      {(menu || FALLBACK_HEADER_MENU).items.map((item) => {
+      {/* {(menu || FALLBACK_HEADER_MENU).items.map((item) => {
         if (!item.url) return null;
 
         // if the url is internal, we strip the domain
@@ -80,26 +94,27 @@ export function HeaderMenu({
             {item.title}
           </NavLink>
         );
-      })}
+      })} */}
     </nav>
   );
 }
 
-function HeaderCtas({
-  isLoggedIn,
-  cart,
-}: Pick<HeaderProps, 'isLoggedIn' | 'cart'>) {
-  return (
-    <nav className="header-ctas" role="navigation">
-      <HeaderMenuMobileToggle />
-      <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
-        {isLoggedIn ? 'Account' : 'Sign in'}
-      </NavLink>
-      <SearchToggle />
-      <CartToggle cart={cart} />
-    </nav>
-  );
-}
+// function HeaderCtas({
+//   isLoggedIn,
+//   cart,
+// }: Pick<HeaderProps, 'isLoggedIn' | 'cart'>) {
+//   console.log(cart);
+//   return (
+//     <nav className="header-ctas" role="navigation">
+//       <HeaderMenuMobileToggle />
+//       <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
+//         {isLoggedIn ? 'Account' : 'Sign in'}
+//       </NavLink>
+//       <SearchToggle />
+//       <CartToggle cart={cart} />
+//     </nav>
+//   );
+// }
 
 function HeaderMenuMobileToggle() {
   return (
