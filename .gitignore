@@ -8,3 +8,7 @@ node_modules
 .shopify
 
 .vercel
+
+.yarn.lock
+.yarn-error.log
+```
