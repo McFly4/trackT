@@ -156,7 +156,6 @@ function ProductMain({
   variants: Promise<ProductVariantsQuery>;
 }) {
   const {title, descriptionHtml} = product;
-  console.log(product);
   return (
     <div className="product-main">
       <h1>{title}</h1>
