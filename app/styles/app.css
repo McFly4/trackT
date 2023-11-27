@@ -382,12 +382,13 @@ aside li {
 
 .panel-container .panel-products-grid {
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
-    margin-right: 90px;
+    justify-content: flex-start;
+    margin-left: -20px;
 }
 
-.panel-container .panel-products-grid .product-grid {
+.panel-container .panel-products-grid > * {
+    margin: 0 20px 70px 20px;
 }
 
 .panel-container .panel-products-grid .product-grid .product-img-grid {
