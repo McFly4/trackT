@@ -42,6 +42,21 @@ export default function HomePage() {
                             streetwear!
                         </p>
                     </div>
+                    <div className="panel-products-grid">
+                        {productsList.map((product: any) => (
+                            <div className="product-grid">
+                                <Link key={product.title} to={`/products/${product.handle}`}>
+                                    <div className="product-img-grid">
+                                        <img src={product.images.nodes[0].url} alt={product.title} />
+                                    </div>
+                                    <div className="product-info-grid">
+                                        <h3>{product.productType}</h3>
+                                        <p>{product.title}</p>
+                                    </div>
+                                </Link>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>
@@ -49,29 +64,30 @@ export default function HomePage() {
 }
 
 const HOME_PRODUCTS_QUERY = `#graphql
-query MetaObjects {
-    metaobjects(first: 10, type: "home_page_products") {
-      edges {
-        node {
-          fields {
-            references(first: 10) {
-              nodes {
-                ... on Product {
-                	title 
-                    productType
-                    images(first: 1) {
-                        nodes {
-                            url
+    query MetaObjects {
+        metaobjects(first: 20, type: "home_page_products") {
+        edges {
+            node {
+            fields {
+                references(first: 20) {
+                nodes {
+                    ... on Product {
+                        title 
+                        productType
+                        handle
+                        images(first: 1) {
+                            nodes {
+                                url
+                        }
                     }
-                  }
+                    }
                 }
-              }
+                }
             }
-          }
+            }
         }
-      }
+        }
     }
-  }
 ` as const;
 
 // import type { V2_MetaFunction } from "@shopify/remix-oxygen";

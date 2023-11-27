@@ -370,11 +370,47 @@ aside li {
     display: flex;
     flex-direction: column;
     width: 90%;
+    margin-bottom: 100px;
 }
 
 .panel-container .header h1 {
     margin-bottom: 20px;
     font-size: 40px;
+    text-transform: uppercase;
+}
+
+.panel-container .panel-products-grid {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-right: 90px;
+}
+
+.panel-container .panel-products-grid .product-grid {
+}
+
+.panel-container .panel-products-grid .product-grid .product-img-grid {
+    width: 343px;
+    height: 231px;
+    background-color: #fff;
+}
+
+.panel-container .panel-products-grid .product-grid .product-img-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.panel-container .panel-products-grid .product-grid .product-info-grid {
+    padding-left: 10px;
+}
+
+.panel-container .panel-products-grid .product-grid .product-info-grid h3 {
+    margin-top: 16px;
+}
+
+.panel-container .panel-products-grid .product-grid .product-info-grid p {
+    margin-top: 2px;
     text-transform: uppercase;
 }
 

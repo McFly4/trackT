@@ -11,6 +11,17 @@ button {
     cursor: pointer;
 }
 
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #fff;
+    margin: unset;
+}
+
 h1,
 h2,
 p {
@@ -25,20 +36,11 @@ h1 {
 }
 
 h2 {
-    font-size: 1.2rem;
-    font-weight: 700;
-    line-height: 1.4;
-    margin-bottom: 1rem;
+    font-size: 31px;
 }
 
-h4 {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-}
-
-h5 {
-    margin-bottom: 1rem;
-    margin-top: 0.5rem;
+h3 {
+    font-size: 23px;
 }
 
 p {
