@@ -12,6 +12,10 @@
   background-color: #000;
 } */
 
+*{
+    scroll-behavior: smooth;
+}
+
 /*
 * --------------------------------------------------
 * components/Aside
@@ -324,16 +328,15 @@ aside li {
 }
 
 .panel-trackt {
-    height: 500vh;
     display: flex;
 }
 
 .panel-trackt .filter-trackt {
     width: 230px;
-    height: 100%;
     position: relative;
     background-image: url(public/home/bg-filters.png);
     background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .panel-trackt .filter-trackt .filter-sticky {
@@ -365,6 +368,13 @@ aside li {
 
 .panel-container {
     margin-left: 75px;
+}
+
+.second-panel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
 }
 
 .panel-container .header {
@@ -415,6 +425,29 @@ aside li {
     margin-top: 2px;
     text-transform: uppercase;
 }
+
+.hfooter{
+    padding-top: 200px;
+}
+
+.hfooter .gofilters{
+    margin-top: 100px;
+    text-align: center;
+}
+.hfooter .gofilters h1 {
+    text-transform: uppercase;
+    margin-bottom: 20px;
+
+}
+
+.hfooter .gofilters button {
+    text-transform: uppercase;
+    margin-top: 40px;
+
+}
+
+
+
 
 /*
 * --------------------------------------------------

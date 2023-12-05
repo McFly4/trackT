@@ -40,5 +40,12 @@
     },
     "engines": {
         "node": ">=16.13"
+    },
+    "prettier": {
+        "tabWidth": 4,
+        "singleQuote": true,
+        "semi": false,
+        "jsxSingleQuote": true,
+        "jsxBracketSameLine": false
     }
 }
