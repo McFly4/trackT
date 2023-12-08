@@ -427,7 +427,7 @@ aside li {
 }
 
 .hfooter{
-    padding-top: 200px;
+    padding: 200px 0;
 }
 
 .hfooter .gofilters{
@@ -444,6 +444,31 @@ aside li {
     text-transform: uppercase;
     margin-top: 40px;
 
+}
+
+.hfooter .hinfos {
+    display: flex;
+    justify-content: center;
+    margin-top: 150px;
+}
+
+.hfooter .hinfos .hbox{
+    width: 40%;
+    background-color: #121212;
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hfooter .hinfos .hbox .htext{
+    width: 100%;
+    margin-left: 50px;
+}
+
+.hfooter .hinfos .hbox .htext h1{
+    text-transform: uppercase;
+    margin-bottom: 20px;
 }
 
 

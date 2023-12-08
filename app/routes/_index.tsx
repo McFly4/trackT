@@ -258,6 +258,63 @@ export default function HomePage() {
                     </p>
                     <button>Accéder aux filtres</button>
                 </div>
+                <div className='hinfos'>
+                    <div className='hbox'>
+                        <div
+                            style={{
+                                backgroundColor: 'green',
+                                width: '150px',
+                                height: '260px',
+                            }}
+                        ></div>
+                        <div className='htext'>
+                            <h1>EXCLUSIVITÉ À VOTRE PORTÉE</h1>
+                            <p>
+                                « Exclusif ne signifie pas inaccessible. Sur
+                                Trackt, nous vous ouvrons les portes d’un monde
+                                où l’exclusivité et le style se rencontrent. Des
+                                éditions limitées, des collaborations uniques,
+                                et des trouvailles rares – tout est sélectionné
+                                pour vous offrir une expérience de mode
+                                streetwear hors du commun. Notre sélection est
+                                votre passeport pour un style qui se démarque,
+                                pour des pièces que tout le monde ne peut pas
+                                avoir. Avec Trackt, habillez-vous dans ce qui
+                                définit le futur du streetwear, aujourd’hui. »
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        className='hbox'
+                        style={{
+                            marginLeft: '35px',
+                        }}
+                    >
+                        <div
+                            style={{
+                                backgroundColor: 'green',
+                                width: '150px',
+                                height: '260px',
+                            }}
+                        ></div>
+                        <div className='htext'>
+                            <h1>EXCLUSIVITÉ À VOTRE PORTÉE</h1>
+                            <p>
+                                « Exclusif ne signifie pas inaccessible. Sur
+                                Trackt, nous vous ouvrons les portes d’un monde
+                                où l’exclusivité et le style se rencontrent. Des
+                                éditions limitées, des collaborations uniques,
+                                et des trouvailles rares – tout est sélectionné
+                                pour vous offrir une expérience de mode
+                                streetwear hors du commun. Notre sélection est
+                                votre passeport pour un style qui se démarque,
+                                pour des pièces que tout le monde ne peut pas
+                                avoir. Avec Trackt, habillez-vous dans ce qui
+                                définit le futur du streetwear, aujourd’hui. »
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     )
