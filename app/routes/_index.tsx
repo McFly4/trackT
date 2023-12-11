@@ -1,5 +1,6 @@
 import { json, type LoaderFunctionArgs } from '@shopify/remix-oxygen'
 import { Link, type MetaFunction, useLoaderData } from '@remix-run/react'
+import MainProduct from '~/components/Common/mainProduct'
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
     return [{ title: `Hydrogen ` }]
@@ -13,9 +14,7 @@ export async function loader({ context }: LoaderFunctionArgs) {
 
 export default function HomePage() {
     const { products } = useLoaderData<typeof loader>()
-    const productsList =
-        products.metaobjects.edges[0].node.fields[0].references.nodes
-
+    const productsList = products.metaobjects.nodes[0].field.references.nodes
     const firstList = productsList.slice(0, 12)
     const secondList = productsList.slice(12, 16)
     const thirdList = productsList.slice(16, 20)
@@ -64,25 +63,7 @@ export default function HomePage() {
                         </div>
                         <div className='panel-products-grid'>
                             {firstList.map((product: any) => (
-                                <div className='product-grid'>
-                                    <Link
-                                        key={product.title}
-                                        to={`/products/${product.handle}`}
-                                    >
-                                        <div className='product-img-grid'>
-                                            <img
-                                                src={
-                                                    product.images.nodes[0].url
-                                                }
-                                                alt={product.title}
-                                            />
-                                        </div>
-                                        <div className='product-info-grid'>
-                                            <h3>{product.productType}</h3>
-                                            <p>{product.title}</p>
-                                        </div>
-                                    </Link>
-                                </div>
+                                <MainProduct product={product} />
                             ))}
                         </div>
                     </div>
@@ -95,13 +76,14 @@ export default function HomePage() {
                                 width: '750px',
                             }}
                         >
-                            <div
+                            <img
+                                src='/home/blue.png'
+                                alt='blue'
                                 style={{
-                                    width: '590px',
+                                    width: '580px',
                                     height: '340px',
-                                    backgroundColor: '#3950D3',
                                 }}
-                            ></div>
+                            />
                             <h2
                                 style={{
                                     color: '#3950D3',
@@ -135,25 +117,7 @@ export default function HomePage() {
                             }}
                         >
                             {secondList.map((product: any) => (
-                                <div className='product-grid'>
-                                    <Link
-                                        key={product.title}
-                                        to={`/products/${product.handle}`}
-                                    >
-                                        <div className='product-img-grid'>
-                                            <img
-                                                src={
-                                                    product.images.nodes[0].url
-                                                }
-                                                alt={product.title}
-                                            />
-                                        </div>
-                                        <div className='product-info-grid'>
-                                            <h3>{product.productType}</h3>
-                                            <p>{product.title}</p>
-                                        </div>
-                                    </Link>
-                                </div>
+                                <MainProduct product={product} />
                             ))}
                         </div>
                     </div>{' '}
@@ -173,25 +137,7 @@ export default function HomePage() {
                             }}
                         >
                             {thirdList.map((product: any) => (
-                                <div className='product-grid'>
-                                    <Link
-                                        key={product.title}
-                                        to={`/products/${product.handle}`}
-                                    >
-                                        <div className='product-img-grid'>
-                                            <img
-                                                src={
-                                                    product.images.nodes[0].url
-                                                }
-                                                alt={product.title}
-                                            />
-                                        </div>
-                                        <div className='product-info-grid'>
-                                            <h3>{product.productType}</h3>
-                                            <p>{product.title}</p>
-                                        </div>
-                                    </Link>
-                                </div>
+                                <MainProduct product={product} />
                             ))}
                         </div>
                         <div
@@ -202,13 +148,14 @@ export default function HomePage() {
                                 width: '750px',
                             }}
                         >
-                            <div
+                            <img
+                                src='/home/red.png'
+                                alt='red'
                                 style={{
-                                    width: '590px',
+                                    width: '580px',
                                     height: '340px',
-                                    backgroundColor: '#E51E1A',
                                 }}
-                            ></div>
+                            />
                             <h2
                                 style={{
                                     color: '#E51E1A',
@@ -270,7 +217,7 @@ export default function HomePage() {
                         <div className='htext'>
                             <h1>EXCLUSIVITÉ À VOTRE PORTÉE</h1>
                             <p>
-                                « Exclusif ne signifie pas inaccessible. Sur
+                                « Exclusif ne signifie pas inaccessible. Sur
                                 Trackt, nous vous ouvrons les portes d’un monde
                                 où l’exclusivité et le style se rencontrent. Des
                                 éditions limitées, des collaborations uniques,
@@ -280,7 +227,7 @@ export default function HomePage() {
                                 votre passeport pour un style qui se démarque,
                                 pour des pièces que tout le monde ne peut pas
                                 avoir. Avec Trackt, habillez-vous dans ce qui
-                                définit le futur du streetwear, aujourd’hui. »
+                                définit le futur du streetwear, aujourd’hui. »
                             </p>
                         </div>
                     </div>
@@ -300,7 +247,7 @@ export default function HomePage() {
                         <div className='htext'>
                             <h1>EXCLUSIVITÉ À VOTRE PORTÉE</h1>
                             <p>
-                                « Exclusif ne signifie pas inaccessible. Sur
+                                « Exclusif ne signifie pas inaccessible. Sur
                                 Trackt, nous vous ouvrons les portes d’un monde
                                 où l’exclusivité et le style se rencontrent. Des
                                 éditions limitées, des collaborations uniques,
@@ -310,7 +257,7 @@ export default function HomePage() {
                                 votre passeport pour un style qui se démarque,
                                 pour des pièces que tout le monde ne peut pas
                                 avoir. Avec Trackt, habillez-vous dans ce qui
-                                définit le futur du streetwear, aujourd’hui. »
+                                définit le futur du streetwear, aujourd’hui. »
                             </p>
                         </div>
                     </div>
@@ -322,151 +269,25 @@ export default function HomePage() {
 
 const HOME_PRODUCTS_QUERY = `#graphql
 query MetaObjects {
-metaobjects(first: 20, type: "home_page_products") {
-edges {
-  node {
-  fields {
-      references(first: 20) {
-      nodes {
-          ... on Product {
+  metaobjects(first: 20, type: "home") {
+    nodes {
+      field(key: "products") {
+        references(first: 20) {
+          nodes {
+            ... on Product {
               title
               productType
               handle
               images(first: 1) {
-                  nodes {
-                      url
+                nodes {
+                  url
+                }
               }
+            }
           }
-          }
+        }
       }
-      }
+    }
   }
-  }
-}
-}
 }
 ` as const
-
-// import type { V2_MetaFunction } from "@shopify/remix-oxygen";
-// import { defer, type LoaderArgs } from "@shopify/remix-oxygen";
-// import { Await, useLoaderData, Link } from "@remix-run/react";
-// import { Suspense } from "react";
-// import { Image, Money } from "@shopify/hydrogen";
-// import type { FeaturedCollectionFragment, RecommendedProductsQuery } from "storefrontapi.generated";
-
-// export const meta: V2_MetaFunction = () => {
-//     return [{ title: "TrackT" }];
-// };
-
-// export async function loader({ context }: LoaderArgs) {
-//     const { storefront } = context;
-//     const { collections } = await storefront.query(FEATURED_COLLECTION_QUERY);
-//     const featuredCollection = collections.nodes[0];
-//     const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
-
-//     return defer({ featuredCollection, recommendedProducts });
-// }
-
-// export default function Homepage() {
-//     const data = useLoaderData<typeof loader>();
-//     return (
-//         <div className="home">
-//             <FeaturedCollection collection={data.featuredCollection} />
-//             <RecommendedProducts products={data.recommendedProducts} />
-//         </div>
-//     );
-// }
-
-// function FeaturedCollection({ collection }: { collection: FeaturedCollectionFragment }) {
-//     const image = collection.image;
-//     return (
-//         <Link className="featured-collection" to={`/collections/${collection.handle}`}>
-//             {image && (
-//                 <div className="featured-collection-image">
-//                     <Image data={image} sizes="100vw" />
-//                 </div>
-//             )}
-//             <h1>{collection.title}</h1>
-//         </Link>
-//     );
-// }
-
-// function RecommendedProducts({ products }: { products: Promise<RecommendedProductsQuery> }) {
-//     return (
-//         <div className="recommended-products">
-//             <h2>Recommended Products</h2>
-//             <Suspense fallback={<div>Loading...</div>}>
-//                 <Await resolve={products}>
-//                     {({ products }) => (
-//                         <div className="recommended-products-grid">
-//                             {products.nodes.map((product: any) => (
-//                                 <Link key={product.id} className="recommended-product" to={`/products/${product.handle}`}>
-//                                     <Image data={product.images.nodes[0]} aspectRatio="1/1" sizes="(min-width: 45em) 20vw, 50vw" />
-//                                     <h4>{product.title}</h4>
-//                                     <small>
-//                                         <Money data={product.priceRange.minVariantPrice} />
-//                                     </small>
-//                                 </Link>
-//                             ))}
-//                         </div>
-//                     )}
-//                 </Await>
-//             </Suspense>
-//             <br />
-//         </div>
-//     );
-// }
-
-// const FEATURED_COLLECTION_QUERY = `#graphql
-//   fragment FeaturedCollection on Collection {
-//     id
-//     title
-//     image {
-//       id
-//       url
-//       altText
-//       width
-//       height
-//     }
-//     handle
-//   }
-//   query FeaturedCollection($country: CountryCode, $language: LanguageCode)
-//     @inContext(country: $country, language: $language) {
-//     collections(first: 1, sortKey: UPDATED_AT, reverse: true) {
-//       nodes {
-//         ...FeaturedCollection
-//       }
-//     }
-//   }
-// ` as const;
-
-// const RECOMMENDED_PRODUCTS_QUERY = `#graphql
-//   fragment RecommendedProduct on Product {
-//     id
-//     title
-//     handle
-//     priceRange {
-//       minVariantPrice {
-//         amount
-//         currencyCode
-//       }
-//     }
-//     images(first: 1) {
-//       nodes {
-//         id
-//         url
-//         altText
-//         width
-//         height
-//       }
-//     }
-//   }
-//   query RecommendedProducts ($country: CountryCode, $language: LanguageCode)
-//     @inContext(country: $country, language: $language) {
-//     products(first: 4, sortKey: UPDATED_AT, reverse: true) {
-//       nodes {
-//         ...RecommendedProduct
-//       }
-//     }
-//   }
-// ` as const;

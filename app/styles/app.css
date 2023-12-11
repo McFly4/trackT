@@ -1,5 +1,5 @@
 :root {
-    --aside-width: 400px;
+    --aside-width: 450px;
     --cart-aside-summary-height-with-discount: 300px;
     --cart-aside-summary-height: 250px;
     --grid-item-width: 355px;
@@ -12,7 +12,7 @@
   background-color: #000;
 } */
 
-*{
+* {
     scroll-behavior: smooth;
 }
 
@@ -52,6 +52,11 @@ aside header .close {
     text-decoration: none;
     transition: all 200ms;
     width: 20px;
+    color: #fff;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
 
 aside header .close:hover {
@@ -121,6 +126,7 @@ aside li {
     pointer-events: auto;
     visibility: visible;
 }
+
 /* reveal aside */
 .overlay:target aside {
     transform: translateX(calc(var(--aside-width) * -1));
@@ -206,6 +212,48 @@ aside li {
 * components/Cart
 * --------------------------------------------------
 */
+
+/* Override skeleton theme */
+
+.cart-line {
+    margin-left: 40px;
+}
+
+.cart-line-top {
+    display: flex;
+}
+
+.cart-line-top img {
+    height: 150px;
+    object-fit: cover;
+}
+
+.cart-line-top-data {
+    margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-line-top-data h4 {
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+.cart-line-top-data p {
+    font-size: 23px;
+}
+
+.cart-line-bottom {
+    margin-top: 10px;
+}
+
+.cart-line-bottom h3 {
+    font-size: 15px;
+    text-transform: uppercase;
+}
+
 .cart-main {
     height: 100%;
     max-height: calc(100vh - var(--cart-aside-summary-height));
@@ -217,17 +265,6 @@ aside li {
     max-height: calc(100vh - var(--cart-aside-summary-height-with-discount));
 }
 
-.cart-line {
-    display: flex;
-    padding: 0.75rem 0;
-}
-
-.cart-line img {
-    height: 100%;
-    display: block;
-    margin-right: 0.75rem;
-}
-
 .cart-summary-page {
     position: relative;
 }
@@ -235,15 +272,12 @@ aside li {
 .cart-summary-aside {
     background: #000;
     border-top: 1px solid var(--color-white);
-    bottom: 0;
+    bottom: 50px;
     padding-top: 0.75rem;
     position: absolute;
     width: calc(var(--aside-width) - 40px);
 }
 
-.cart-line-quantiy {
-    display: flex;
-}
 
 .cart-discount {
     align-items: center;
@@ -254,7 +288,29 @@ aside li {
 .cart-subtotal {
     align-items: center;
     display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
 }
+
+.cart-checkout {
+    cursor: pointer;
+    border-radius: 10px;
+    background-color: #fff;
+    height: 65px;
+}
+
+.cart-checkout a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.cart-checkout p {
+    color: #000;
+    font-weight: bold;
+}
+
 /*
 * --------------------------------------------------
 * components/Search
@@ -426,14 +482,15 @@ aside li {
     text-transform: uppercase;
 }
 
-.hfooter{
+.hfooter {
     padding: 200px 0;
 }
 
-.hfooter .gofilters{
+.hfooter .gofilters {
     margin-top: 100px;
     text-align: center;
 }
+
 .hfooter .gofilters h1 {
     text-transform: uppercase;
     margin-bottom: 20px;
@@ -452,7 +509,7 @@ aside li {
     margin-top: 150px;
 }
 
-.hfooter .hinfos .hbox{
+.hfooter .hinfos .hbox {
     width: 40%;
     background-color: #121212;
     padding: 40px;
@@ -461,17 +518,15 @@ aside li {
     align-items: center;
 }
 
-.hfooter .hinfos .hbox .htext{
+.hfooter .hinfos .hbox .htext {
     width: 100%;
     margin-left: 50px;
 }
 
-.hfooter .hinfos .hbox .htext h1{
+.hfooter .hinfos .hbox .htext h1 {
     text-transform: uppercase;
     margin-bottom: 20px;
 }
-
-
 
 
 /*
