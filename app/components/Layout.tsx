@@ -13,6 +13,8 @@ import {
     PredictiveSearchForm,
     PredictiveSearchResults,
 } from '~/components/Search'
+import { AsideSearch } from './AsideSearch'
+import { Link } from '@remix-run/react'
 
 export type LayoutProps = {
     cart: Promise<CartApiQueryFragment | null>
@@ -60,9 +62,8 @@ function CartAside({ cart }: { cart: LayoutProps['cart'] }) {
 
 function SearchAside() {
     return (
-        <Aside id='search-aside' heading='SEARCH'>
+        <AsideSearch id='search-aside' heading='SEARCH'>
             <div className='predictive-search'>
-                <br />
                 <PredictiveSearchForm>
                     {({ fetchResults, inputRef }) => (
                         <div>
@@ -75,12 +76,19 @@ function SearchAside() {
                                 type='search'
                             />
                             &nbsp;
-                            <button type='submit'>Search</button>
+                            <button
+                                onClick={() => {
+                                    history.go(-1)
+                                    window.location.href = `/search?q=${inputRef?.current?.value}`
+                                }}
+                            >
+                                <p>Rechercher</p>
+                            </button>
                         </div>
                     )}
                 </PredictiveSearchForm>
                 <PredictiveSearchResults />
             </div>
-        </Aside>
+        </AsideSearch>
     )
 }

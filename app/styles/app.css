@@ -1,5 +1,6 @@
 :root {
     --aside-width: 450px;
+    --asideSearch-width: 100%;
     --cart-aside-summary-height-with-discount: 300px;
     --cart-aside-summary-height: 250px;
     --grid-item-width: 355px;
@@ -59,9 +60,6 @@ aside header .close {
     right: 10px;
 }
 
-aside header .close:hover {
-    opacity: 1;
-}
 
 aside header h2 {
     margin-bottom: 0.6rem;
@@ -84,6 +82,28 @@ aside li {
     margin-bottom: 0.125rem;
 }
 
+.searchAside {
+    background-image: url(public/search.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    max-width: var(--asideSearch-width);
+    min-width: var(--asideSearch-width);
+}
+
+.searchAside main {
+    margin: 0;
+}
+
+aside .closeSearch {
+    color: #fff;
+    font-size: 30px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 10;
+}
+
 .overlay {
     background: rgba(0, 0, 0, 0.2);
     bottom: 0;
@@ -98,6 +118,7 @@ aside li {
     visibility: hidden;
     z-index: 10;
 }
+
 
 .overlay .close-outside {
     background: transparent;
@@ -131,55 +152,6 @@ aside li {
 .overlay:target aside {
     transform: translateX(calc(var(--aside-width) * -1));
 }
-
-/*
-* --------------------------------------------------
-* components/Header
-* --------------------------------------------------
-*/
-/* .header {
-    align-items: center;
-    background: #000;
-    display: flex;
-    height: var(--header-height);
-    padding: 0 1rem;
-    position: sticky;
-    top: 0;
-    z-index: 1;
-}
-
-.header-menu-mobile-toggle {
-    @media (min-width: 48em) {
-        display: none;
-    }
-}
-
-.header-menu-mobile {
-    display: flex;
-    flex-direction: column;
-    grid-gap: 1rem;
-}
-
-.header-menu-desktop {
-    display: none;
-    grid-gap: 1rem;
-    @media (min-width: 45em) {
-        display: flex;
-        grid-gap: 1rem;
-        margin-left: 3rem;
-    }
-}
-
-.header-menu-item {
-    cursor: pointer;
-}
-
-.header-ctas {
-    align-items: center;
-    display: flex;
-    grid-gap: 1rem;
-    margin-left: auto;
-} */
 
 /*
 * --------------------------------------------------
@@ -271,7 +243,6 @@ aside li {
 
 .cart-summary-aside {
     background: #000;
-    border-top: 1px solid var(--color-white);
     bottom: 50px;
     padding-top: 0.75rem;
     position: absolute;
@@ -316,16 +287,70 @@ aside li {
 * components/Search
 * --------------------------------------------------
 */
+
+/*.search {*/
+/*    background-image: url(public/search.png);*/
+/*    background-repeat: no-repeat;*/
+/*    background-size: cover;*/
+/*    height: 100vh;*/
+/*    width: 100%;*/
+/*}*/
+
+/*.search-input {*/
+/*    margin: 0 90px;*/
+/*    display: flex;*/
+/*    justify-content: space-around;*/
+/*}*/
 .predictive-search {
     height: calc(100vh - var(--header-height) - 40px);
-    overflow-y: auto;
 }
 
 .predictive-search-form {
-    background: var(--color-dark);
     position: sticky;
-    top: 0;
+    padding: 0 90px;
+    padding-top: 20px;
+
 }
+
+.predictive-search-form div {
+    display: flex;
+    width: 100%;
+    height: 50px;
+
+}
+
+.predictive-search-form input {
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+    width: 70%;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: none;
+    color: #fff;
+    outline: none;
+}
+
+.predictive-search-form button {
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    width: 15%;
+    margin-left: 32px;
+}
+
+.predictive-search-form button p {
+    font-size: 18px;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.predictive-search-form input::placeholder {
+    color: #fff;
+}
+
 
 .predictive-search-result {
     margin-bottom: 2rem;
