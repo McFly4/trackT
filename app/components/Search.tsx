@@ -330,28 +330,30 @@ export function PredictiveSearchResults() {
     return (
         <div className='predictive-search-results'>
             <div>
-                {results.map(({ type, items }) => (
-                    <PredictiveSearchResult
-                        goToSearchResult={goToSearchResult}
-                        items={items}
-                        key={type}
-                        searchTerm={searchTerm}
-                        type={type}
-                    />
-                ))}
+                {results.map(({ type, items }) => {
+                    return (
+                        <PredictiveSearchResult
+                            goToSearchResult={goToSearchResult}
+                            items={items}
+                            key={type}
+                            searchTerm={searchTerm}
+                            type={type}
+                        />
+                    )
+                })}
             </div>
             {/* view all results /search?q=term */}
-            {searchTerm.current && (
-                <Link
-                    onClick={goToSearchResult}
-                    to={`/search?q=${searchTerm.current}`}
-                >
-                    <p>
-                        View all results for <q>{searchTerm.current}</q>
-                        &nbsp; →
-                    </p>
-                </Link>
-            )}
+            {/*{searchTerm.current && (*/}
+            {/*    <Link*/}
+            {/*        onClick={goToSearchResult}*/}
+            {/*        to={`/search?q=${searchTerm.current}`}*/}
+            {/*    >*/}
+            {/*        <p>*/}
+            {/*            View all results for <q>{searchTerm.current}</q>*/}
+            {/*            &nbsp; →*/}
+            {/*        </p>*/}
+            {/*    </Link>*/}
+            {/*)}*/}
         </div>
     )
 }
@@ -391,9 +393,9 @@ function PredictiveSearchResult({
 
     return (
         <div className='predictive-search-result' key={type}>
-            <Link prefetch='intent' to={categoryUrl} onClick={goToSearchResult}>
-                <h5>{isSuggestions ? 'Suggestions' : type}</h5>
-            </Link>
+            {/*<Link prefetch='intent' to={categoryUrl} onClick={goToSearchResult}>*/}
+            {/*    <h5>{isSuggestions ? 'Suggestions' : type}</h5>*/}
+            {/*</Link>*/}
             <ul>
                 {items.map((item: NormalizedPredictiveSearchResultItem) => (
                     <SearchResultItem
@@ -410,37 +412,38 @@ function PredictiveSearchResult({
 type SearchResultItemProps = Pick<SearchResultTypeProps, 'goToSearchResult'> & {
     item: NormalizedPredictiveSearchResultItem
 }
-
 function SearchResultItem({ goToSearchResult, item }: SearchResultItemProps) {
+    const type = item.__typename
+    console.log(item)
     return (
-        <li className='predictive-search-result-item' key={item.id}>
-            <Link onClick={goToSearchResult} to={item.url}>
-                {item.image?.url && (
-                    <Image
-                        alt={item.image.altText ?? ''}
-                        src={item.image.url}
-                        width={50}
-                        height={50}
-                    />
-                )}
-                <div>
-                    {item.styledTitle ? (
-                        <div
-                            dangerouslySetInnerHTML={{
-                                __html: item.styledTitle,
-                            }}
+        type === 'Product' && (
+            <li className='predictive-search-result-item' key={item.id}>
+                <Link onClick={goToSearchResult} to={item.url}>
+                    {item.image?.url && (
+                        <Image
+                            alt={item.image.altText ?? ''}
+                            src={item.image.url}
                         />
-                    ) : (
-                        <span>{item.title}</span>
                     )}
-                    {item?.price && (
-                        <small>
-                            <Money data={item.price} />
-                        </small>
-                    )}
-                </div>
-            </Link>
-        </li>
+                    <div>
+                        {item.styledTitle ? (
+                            <div
+                                dangerouslySetInnerHTML={{
+                                    __html: item.styledTitle,
+                                }}
+                            />
+                        ) : (
+                            <span>{item.title}</span>
+                        )}
+                        {/*{item?.price && (*/}
+                        {/*    <small>*/}
+                        {/*        <Money data={item.price} />*/}
+                        {/*    </small>*/}
+                        {/*)}*/}
+                    </div>
+                </Link>
+            </li>
+        )
     )
 }
 
@@ -477,6 +480,7 @@ function usePredictiveSearch(): UseSearchReturn {
 
 /**
  * Converts a plural search type to a singular search type
+ *
  *
  * @example
  * ```js
