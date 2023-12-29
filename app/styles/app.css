@@ -1,3 +1,53 @@
+@font-face {
+    font-family: 'HelveticaNeue700';
+    src: url('../fonts/Helvetica/HelveticaNeueBlack.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'HelveticaNeue700Italic';
+    src: url('../fonts/Helvetica/HelveticaNeueBlackItalic.otf') format('opentype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'HelveticaNeue500';
+    src: url('../fonts/Helvetica/HelveticaNeueMedium.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'HelveticaNeue500Italic';
+    src: url('../fonts/Helvetica/HelveticaNeueMediumItalic.otf') format('opentype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'HelveticaNeue300';
+    src: url('../fonts/Helvetica/HelveticaNeueLight.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'HelveticaNeue300Italic';
+    src: url('../fonts/Helvetica/HelveticaNeueLightItalic.otf') format('opentype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+
+
+/* Ajoutez d'autres règles @font-face pour les différentes graisses */
+
+body {
+    font-family: 'HelveticaNeue400', sans-serif; /* Utilisez la police par défaut en cas d'échec du chargement de la police spécifiée */
+}
+
 :root {
     --aside-width: 450px;
     --asideSearch-width: 100%;

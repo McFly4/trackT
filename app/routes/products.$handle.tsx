@@ -1,3 +1,4 @@
+import React, { useState } from 'react'
 import { Suspense } from 'react'
 import { defer, redirect, type LoaderFunctionArgs } from '@shopify/remix-oxygen'
 import {
@@ -26,6 +27,7 @@ import type {
     SelectedOption,
 } from '@shopify/hydrogen/storefront-api-types'
 import { getVariantUrl } from '~/utils'
+import { Swiper, SwiperSlide } from 'swiper/react'
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
     return [{ title: `Hydrogen | ${data?.product.title ?? ''}` }]
@@ -116,14 +118,10 @@ function redirectToFirstVariant({
 export default function Product() {
     const { product, variants } = useLoaderData<typeof loader>()
     const { selectedVariant } = product
-    console.log(product)
     return (
         <>
             <div className='product'>
-                <ProductImage
-                    image={selectedVariant?.image}
-                    product={product}
-                />
+                <ProductImage image={selectedVariant} product={product} />
                 <ProductMain
                     selectedVariant={selectedVariant}
                     product={product}
@@ -134,26 +132,75 @@ export default function Product() {
     )
 }
 
-function ProductImage({
-    image,
-    product,
-}: {
-    image: ProductVariantFragment['image']
-    product: any
-}) {
+function ProductImage({ image, product }: { image: any; product: any }) {
     if (!image) {
         return <div className='product-image' />
     }
+
+    const firstImage = image?.product?.images.nodes[0].url
+    const images = image?.product?.images.nodes
+    const codeBar = [
+        { id: 0, url: '/product/code1.png' },
+        { id: 1, url: '/product/code2.png' },
+        { id: 2, url: '/product/code3.png' },
+        { id: 3, url: '/product/code4.png' },
+    ]
+
+    // Maintenant, codeBar est une liste d'objets avec des propriétés id et url.
+
+    const [mainImage, setMainImage] = useState(firstImage || image.url)
+
     return (
         <div className='product-image'>
             <div className='product-image-title'>
-                <h1>{product.title}</h1>
+                <h1>{product.vendor}</h1>
+                <h2>{product.collections?.nodes[0].title}</h2>
             </div>
-            <Image
-                alt={image.altText || 'Product Image'}
-                data={image}
-                key={image.id}
-            />
+            <div className='product-image-main'>
+                <img
+                    className='product-image-main-absolute tl'
+                    alt='top left'
+                    src='/product/tl.png'
+                />
+                <img
+                    className='product-image-main-absolute tr'
+                    alt='top right'
+                    src='/product/tr.png'
+                />
+                <img
+                    className='product-image-main-absolute bl'
+                    alt='bottom left'
+                    src='/product/bl.png'
+                />
+                <img
+                    className='product-image-main-absolute br'
+                    alt='bottom right'
+                    src='/product/br.png'
+                />
+
+                <Image
+                    alt={image.altText as any}
+                    height={image.height as any}
+                    src={mainImage}
+                    width={image.width as any}
+                />
+            </div>
+            <div className='product-image-list'>
+                {images.map((image: any, index: number) => (
+                    <div
+                        key={image.id}
+                        className='product-image-list-item'
+                        onClick={() => setMainImage(image.url)}
+                    >
+                        <img src={image.url} alt={image.altText} />
+                        <img
+                            src={codeBar[index].url}
+                            alt='code bar'
+                            className='product-image-list-item-code'
+                        />
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }
@@ -168,52 +215,53 @@ function ProductMain({
     variants: Promise<ProductVariantsQuery>
 }) {
     const { title, descriptionHtml } = product
+    console.log(product)
     return (
         <div className='product-main'>
             <h1>{title}</h1>
-            <ProductPrice selectedVariant={selectedVariant} />
-            <br />
-            <Suspense
-                fallback={
-                    <ProductForm
-                        product={product}
-                        selectedVariant={selectedVariant}
-                        variants={[]}
-                    />
-                }
-            >
-                <Await
-                    errorElement='There was a problem loading product variants'
-                    resolve={variants}
-                >
-                    {(data) => (
+            <div className='product-main-head'>
+                <ProductPrice selectedVariant={selectedVariant} />
+                <Suspense
+                    fallback={
                         <ProductForm
                             product={product}
                             selectedVariant={selectedVariant}
-                            variants={data.product?.variants.nodes || []}
+                            variants={[]}
                         />
-                    )}
-                </Await>
-            </Suspense>
-            <br />
-            <br />
-            <p>
-                <strong>Description</strong>
-            </p>
-            <br />
-            <div dangerouslySetInnerHTML={{ __html: descriptionHtml }} />
-            <br />
+                    }
+                >
+                    <Await
+                        errorElement='There was a problem loading product variants'
+                        resolve={variants}
+                    >
+                        {(data) => (
+                            <ProductForm
+                                product={product}
+                                selectedVariant={selectedVariant}
+                                variants={data.product?.variants.nodes || []}
+                            />
+                        )}
+                    </Await>
+                </Suspense>
+            </div>
+            <div className='product-main-features'></div>
+
+            {/*<p>*/}
+            {/*    <strong>Description</strong>*/}
+            {/*</p>*/}
+            {/*<div dangerouslySetInnerHTML={{ __html: descriptionHtml }} />*/}
         </div>
     )
 }
 
-function ProductPrice({
-    selectedVariant,
-}: {
-    selectedVariant: ProductFragment['selectedVariant']
-}) {
+function ProductPrice({ selectedVariant }: { selectedVariant: any }) {
+    const size = selectedVariant?.selectedOptions?.find(
+        (option: any) => option.name === 'Size'
+    )?.value
+
     return (
         <div className='product-price'>
+            <h2>Price</h2>
             {selectedVariant?.compareAtPrice ? (
                 <>
                     <p>Sale</p>
@@ -229,9 +277,32 @@ function ProductPrice({
                 </>
             ) : (
                 selectedVariant?.price && (
-                    <Money data={selectedVariant?.price} />
+                    <div className='product-price-container'>
+                        <img src={`/product/size/${size}.png`} alt='price' />
+                        <Money data={selectedVariant?.price} />
+                    </div>
                 )
             )}
+            <AddToCartButton
+                disabled={!selectedVariant || !selectedVariant.availableForSale}
+                onClick={() => {
+                    window.location.href = window.location.href + '#cart-aside'
+                }}
+                lines={
+                    selectedVariant
+                        ? [
+                              {
+                                  merchandiseId: selectedVariant.id,
+                                  quantity: 1,
+                              },
+                          ]
+                        : []
+                }
+            >
+                {selectedVariant?.availableForSale
+                    ? 'Ajouter au panier'
+                    : 'Sold out'}
+            </AddToCartButton>
         </div>
     )
 }
@@ -257,55 +328,56 @@ function ProductForm({
                 )}
             </VariantSelector>
             <br />
-            <AddToCartButton
-                disabled={!selectedVariant || !selectedVariant.availableForSale}
-                onClick={() => {
-                    window.location.href = window.location.href + '#cart-aside'
-                }}
-                lines={
-                    selectedVariant
-                        ? [
-                              {
-                                  merchandiseId: selectedVariant.id,
-                                  quantity: 1,
-                              },
-                          ]
-                        : []
-                }
-            >
-                {selectedVariant?.availableForSale ? 'Add to cart' : 'Sold out'}
-            </AddToCartButton>
         </div>
     )
 }
 
 function ProductOptions({ option }: { option: VariantOption }) {
+    // Tri alphabétique des valeurs
+    const sortedValues = option.values
+        .slice()
+        .sort((a, b) => a.value.localeCompare(b.value))
+
+    const midle = Math.ceil(sortedValues.length / 2)
+
     return (
         <div className='product-options' key={option.name}>
-            <h5>{option.name}</h5>
+            <h2>Taille</h2>
             <div className='product-options-grid'>
-                {option.values.map(({ value, isAvailable, isActive, to }) => {
-                    return (
-                        <Link
-                            className='product-options-item'
-                            key={option.name + value}
-                            prefetch='intent'
-                            preventScrollReset
-                            replace
-                            to={to}
-                            style={{
-                                border: isActive
-                                    ? '1px solid black'
-                                    : '1px solid transparent',
-                                opacity: isAvailable ? 1 : 0.3,
-                            }}
-                        >
-                            {value}
-                        </Link>
-                    )
-                })}
+                <Swiper
+                    slidesPerView={5}
+                    grabCursor={true}
+                    centeredSlides={true}
+                    initialSlide={midle}
+                >
+                    {sortedValues.map(
+                        ({ value, isAvailable, isActive, to }) => (
+                            <SwiperSlide key={option.name + value}>
+                                {({ isActive, isPrev, isNext }) => (
+                                    <Link
+                                        className='product-options-item'
+                                        prefetch='intent'
+                                        preventScrollReset
+                                        replace
+                                        to={to}
+                                        style={{
+                                            transition: 'all 0.3s ease',
+                                            fontSize: isActive
+                                                ? '40px'
+                                                : isPrev || isNext
+                                                ? '24px'
+                                                : '15px',
+                                        }}
+                                    >
+                                        {value}
+                                    </Link>
+                                )}
+                            </SwiperSlide>
+                        )
+                    )}
+                </Swiper>
             </div>
-            <br />
+            <button className='sizes-guid'>Guide des tailles</button>
         </div>
     )
 }
@@ -372,6 +444,15 @@ const PRODUCT_VARIANT_FRAGMENT = `#graphql
     product {
       title
       handle
+      images(first: 5) {
+        nodes {
+          id
+          altText
+          width
+          height
+          url
+        }
+      }
     }
     selectedOptions {
       name
@@ -412,13 +493,18 @@ const PRODUCT_FRAGMENT = `#graphql
       description
       title
     }
-    metafield1: metafield(namespace: "custom", key: "fast") {
+    metafield1: metafield(namespace: "custom", key: "feature") {
       key
       value
     }
     metafield2: metafield(namespace: "custom", key: "nike") {
       key
       value
+    }
+    collections(first: 1){
+        nodes{
+            title
+        }
     }
   }
   ${PRODUCT_VARIANT_FRAGMENT}

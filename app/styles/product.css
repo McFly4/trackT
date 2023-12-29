@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'Druk';
+    src: url('../fonts/Druk/Druk-Super-Trial.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .product{
     display: flex;
     justify-content: space-between;
@@ -5,15 +12,183 @@
 }
 
 .product-image{
-    width: 50%;
+    width: 40%;
 }
 
-.product-image img{
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+.product-image-title{
+    margin-bottom: 90px;
+
+}
+
+.product-image-title h1{
+    text-transform: uppercase;
+    font-size: 60px;
+}
+
+.product-image-title h2{
+    text-transform: uppercase;
+    font-size: 40px;
 }
 
 .product-main{
+    width: 55%;
+}
+
+.product-main h1{
+    font-family: 'Druk', sans-serif;
+    font-size: 100px;
+    text-transform: uppercase;
+    padding-left: 70px;
+}
+
+.product-main-head{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+    width: 100%;
+}
+
+
+
+.product-image-main{
+    margin-top: 50px;
+    position: relative;
+}
+
+.product-price{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 50%;
+}
+
+.product-price h2{
+    font-size: 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
+
+.product-price-container{
+    position: relative;
+}
+
+.product-options h2{
+    text-align: center;
+    font-size: 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 60px;
+}
+
+.product-options-item{
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.swiper-slide{
+    display: flex !important;
+    justify-content: center;
+}
+
+.sizes-guid{
+    border-radius: 5px;
+    background-color: #fff;
+    font-size: 25px;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 20px 40px;
+    margin: 0 auto;
+
+}
+
+.product-price{
+    width: 50%;
+}
+
+.product-form{
+    width: 50%;
+}
+
+.product-options{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+}
+
+.product-options-grid a{
+    color: #fff;
+}
+
+.product-price-container div{
+    opacity: 0.5;
+    position: absolute;
+    left: 50%;
+    bottom: 20%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    font-size: 40px;
+    color: #000;
+}
+
+.product-price form button{
+    border-radius: 5px;
+    background-color: #fff;
+    font-size: 25px;
+    text-transform: uppercase;
+    margin-top: 50px;
+    font-weight: 600;
+    padding: 20px 40px;
+}
+
+
+
+.product-image-main-absolute{
+    position: absolute;
+    object-fit: none;
+}
+
+.tl{
+    top: -50px;
+    left: -70px;
+}
+
+.tr{
+    top: -50px;
+    right: -70px;
+}
+
+.bl{
+    bottom: -50px;
+    left: -70px;
+}
+
+.br{
+    bottom: -70px;
+    right: -50px;
+}
+
+.product-image-list{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 120px;
+    overflow: hidden;
+    gap: 10px;
+}
+
+.product-image-list-item{
+    display: flex;
+    flex-direction: column;
+}
+
+.product-image-list-item-code{
+    object-fit: none !important;
+}
+
+.product-image-list img{
+    object-fit: contain;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
 }
