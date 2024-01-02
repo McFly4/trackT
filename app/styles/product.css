@@ -11,8 +11,14 @@
     padding-left: 80px;
 }
 
+.product-image-container{
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+}
+
 .product-image{
-    width: 40%;
+    width: 85%;
 }
 
 .product-image-title{
@@ -48,7 +54,23 @@
     width: 100%;
 }
 
+.product-main-features{
+    background-color: #121212;
+    padding: 30px 40px;
+    border-radius: 5px;
+}
 
+.product-main-features h2{
+    text-transform: uppercase;
+}
+
+.product-main-features pre{
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.5;
+    font-family: "Helvetica Neue";
+
+}
 
 .product-image-main{
     margin-top: 50px;
@@ -121,7 +143,7 @@
     color: #fff;
 }
 
-.product-price-container div{
+.product-price-container div {
     opacity: 0.5;
     position: absolute;
     left: 50%;
@@ -130,6 +152,10 @@
     transform: translate(-50%, -50%);
     font-size: 40px;
     color: #000;
+}
+
+.product-price-container div img{
+    cursor: not-allowed;
 }
 
 .product-price form button{
@@ -142,7 +168,82 @@
     padding: 20px 40px;
 }
 
+.product-connexe{
+    margin-top: 60px;
+    width: 85%;
+    background-color: #121212;
+    padding: 30px 40px;
+    border-radius: 5px;
 
+}
+
+.product-connexe-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 60px;
+
+}
+
+.navigation-buttons button:first-child {
+    margin-right: 5px;
+}
+
+
+.navigation-buttons button:first-child svg{
+    transform: rotate(180deg);
+
+}
+
+.navigation-buttons button{
+    background-color: #222222;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+.product-connexe-grid{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 40px;
+    grid-row-gap: 60px;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin; /* Pour Firefox */
+    padding-bottom: 50px;
+}
+
+.product-connexe-grid::-webkit-scrollbar {
+    width: 5px; /* Largeur de la barre de défilement */
+    height: 5px;
+}
+
+.product-connexe-grid::-webkit-scrollbar-thumb {
+    background-color: #fff; /* Couleur de la poignée de la barre */
+}
+
+.product-connexe-grid::-webkit-scrollbar-track {
+    background-color: #313131; /* Couleur du fond de la barre de défilement */
+}
+
+.product-connexe h2{
+    font-size: 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.product-connexe-1{
+    width: 230px;
+    height: 150px;
+}
+
+.product-connexe-1 img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
 .product-image-main-absolute{
     position: absolute;
@@ -191,4 +292,74 @@
     cursor: pointer;
     width: 100%;
     height: 100%;
+}
+
+/* BANNER */
+
+.productBanner{
+    margin: 50px 0;
+    width: 100%;
+}
+
+.productBanner img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* TRACKT */
+
+.trackT{
+    margin: 0 80px;
+    margin-top: 50px;
+    padding: 50px 80px;
+    background-color: #121212;
+    border-radius: 5px;
+}
+
+.trackT-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.trackT-header h2{
+    font-size: 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.trackT-grid{
+    display: flex;
+    gap: 50px;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin; /* Pour Firefox */
+    padding-bottom: 50px;
+}
+
+.trackt-grid-product{
+    width: 310px;
+    height: 200px;
+}
+
+.trackt-grid-product img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.trackT-grid::-webkit-scrollbar {
+    width: 5px; /* Largeur de la barre de défilement */
+    height: 5px;
+}
+
+.trackT-grid::-webkit-scrollbar-thumb {
+    background-color: #fff; /* Couleur de la poignée de la barre */
+}
+
+.trackT-grid::-webkit-scrollbar-track {
+    background-color: #313131; /* Couleur du fond de la barre de défilement */
 }

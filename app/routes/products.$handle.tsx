@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Suspense } from 'react'
 import { defer, redirect, type LoaderFunctionArgs } from '@shopify/remix-oxygen'
 import {
@@ -28,6 +28,7 @@ import type {
 } from '@shopify/hydrogen/storefront-api-types'
 import { getVariantUrl } from '~/utils'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import MainProduct from '~/components/Common/mainProduct'
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
     return [{ title: `Hydrogen | ${data?.product.title ?? ''}` }]
@@ -89,7 +90,9 @@ export async function loader({ params, request, context }: LoaderFunctionArgs) {
         variables: { handle },
     })
 
-    return defer({ product, variants })
+    const products = await context.storefront.query(TRACKT)
+
+    return defer({ product, variants, products })
 }
 
 function redirectToFirstVariant({
@@ -116,7 +119,7 @@ function redirectToFirstVariant({
 }
 
 export default function Product() {
-    const { product, variants } = useLoaderData<typeof loader>()
+    const { product, variants, products } = useLoaderData<typeof loader>()
     const { selectedVariant } = product
     return (
         <>
@@ -128,7 +131,122 @@ export default function Product() {
                     variants={variants}
                 />
             </div>
+            <div className='productBanner'>
+                <img src='/product/banner.png' alt='banner' />
+            </div>
+            <PanelTrackt products={products} />
         </>
+    )
+}
+
+function PanelTrackt({ products }: { products: any }) {
+    const gridRef = useRef<HTMLDivElement>(null)
+    const [isDragging, setDragging] = useState(false)
+    const [startX, setStartX] = useState(0)
+
+    const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+        setDragging(true)
+        setStartX(e.pageX - (gridRef.current?.offsetLeft || 0))
+    }
+
+    const handleMouseUp = () => {
+        setDragging(false)
+    }
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (!isDragging) return
+        const scrollLeft = e.pageX - startX
+        if (gridRef.current) {
+            gridRef.current.scrollLeft = scrollLeft
+        }
+    }
+
+    const scrollGrid = (direction: number) => {
+        const scrollAmount = 400 // Ajustez la valeur selon votre préférence
+        if (gridRef.current) {
+            gridRef.current.scrollBy({
+                left: direction * scrollAmount,
+                behavior: 'smooth',
+            })
+        }
+    }
+
+    return (
+        <div className='trackT'>
+            <div className='trackT-header'>
+                <h2>Panel TrackT</h2>
+                <div className='navigation-buttons'>
+                    <button onClick={() => scrollGrid(-1)}>
+                        <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            width='7.574'
+                            height='13.928'
+                            viewBox='0 0 7.574 13.928'
+                        >
+                            <path
+                                id='Tracé_416'
+                                data-name='Tracé 416'
+                                d='M-20862.068-17757.791a.61.61,0,0,1-.432-.18.612.612,0,0,1,0-.861l5.924-5.924-5.924-5.924a.612.612,0,0,1,0-.861.611.611,0,0,1,.863,0l6.355,6.354a.614.614,0,0,1,0,.863l-6.355,6.354A.61.61,0,0,1-20862.068-17757.791Z'
+                                transform='translate(20862.678 17771.719)'
+                                fill='#fff'
+                            />
+                        </svg>
+                    </button>
+                    <button onClick={() => scrollGrid(1)}>
+                        <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            width='7.574'
+                            height='13.928'
+                            viewBox='0 0 7.574 13.928'
+                        >
+                            <path
+                                id='Tracé_416'
+                                data-name='Tracé 416'
+                                d='M-20862.068-17757.791a.61.61,0,0,1-.432-.18.612.612,0,0,1,0-.861l5.924-5.924-5.924-5.924a.612.612,0,0,1,0-.861.611.611,0,0,1,.863,0l6.355,6.354a.614.614,0,0,1,0,.863l-6.355,6.354A.61.61,0,0,1-20862.068-17757.791Z'
+                                transform='translate(20862.678 17771.719)'
+                                fill='#fff'
+                            />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div
+                className='trackT-grid'
+                ref={gridRef}
+                onMouseDown={handleMouseDown}
+                onMouseUp={handleMouseUp}
+                onMouseMove={handleMouseMove}
+            >
+                {products?.metaobjects?.nodes[0]?.field?.references?.nodes?.map(
+                    (product: any) => (
+                        <Link
+                            key={product.title}
+                            to={`/products/${product.handle}`}
+                        >
+                            <div className='trackt-grid-product'>
+                                <img
+                                    src={product.images.nodes[0].url}
+                                    alt={product.title}
+                                />
+                            </div>
+                            <div className='product-connexe-2'>
+                                <h3>
+                                    {product.productType.length > 30
+                                        ? product.productType.slice(0, 30) +
+                                          '...'
+                                        : product.productType}
+                                </h3>
+                                <p>
+                                    {product.title.length > 30
+                                        ? product.title.slice(0, 30) + '...'
+                                        : product.title}
+                                </p>
+                            </div>
+                        </Link>
+                    )
+                )}
+            </div>
+        </div>
     )
 }
 
@@ -149,57 +267,170 @@ function ProductImage({ image, product }: { image: any; product: any }) {
     // Maintenant, codeBar est une liste d'objets avec des propriétés id et url.
 
     const [mainImage, setMainImage] = useState(firstImage || image.url)
+    const productsFromCollection = product?.collections?.nodes[0].products.nodes
+    const numberOfProducts = Math.ceil(
+        (productsFromCollection?.length || 0) / 2
+    )
+    const gridRef = useRef<HTMLDivElement>(null)
+    const [isDragging, setDragging] = useState(false)
+    const [startX, setStartX] = useState(0)
 
+    const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+        setDragging(true)
+        setStartX(e.pageX - (gridRef.current?.offsetLeft || 0))
+    }
+
+    const handleMouseUp = () => {
+        setDragging(false)
+    }
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (!isDragging) return
+        const scrollLeft = e.pageX - startX
+        if (gridRef.current) {
+            gridRef.current.scrollLeft = scrollLeft
+        }
+    }
+
+    const scrollGrid = (direction: number) => {
+        const scrollAmount = 400 // Ajustez la valeur selon votre préférence
+        if (gridRef.current) {
+            gridRef.current.scrollBy({
+                left: direction * scrollAmount,
+                behavior: 'smooth',
+            })
+        }
+    }
+
+    console.log(productsFromCollection)
     return (
-        <div className='product-image'>
-            <div className='product-image-title'>
-                <h1>{product.vendor}</h1>
-                <h2>{product.collections?.nodes[0].title}</h2>
-            </div>
-            <div className='product-image-main'>
-                <img
-                    className='product-image-main-absolute tl'
-                    alt='top left'
-                    src='/product/tl.png'
-                />
-                <img
-                    className='product-image-main-absolute tr'
-                    alt='top right'
-                    src='/product/tr.png'
-                />
-                <img
-                    className='product-image-main-absolute bl'
-                    alt='bottom left'
-                    src='/product/bl.png'
-                />
-                <img
-                    className='product-image-main-absolute br'
-                    alt='bottom right'
-                    src='/product/br.png'
-                />
+        <div className='product-image-container'>
+            <div className='product-image'>
+                <div className='product-image-title'>
+                    <h1>{product.vendor}</h1>
+                    <h2>{product.collections?.nodes[0].title}</h2>
+                </div>
+                <div className='product-image-main'>
+                    <img
+                        className='product-image-main-absolute tl'
+                        alt='top left'
+                        src='/product/tl.png'
+                    />
+                    <img
+                        className='product-image-main-absolute tr'
+                        alt='top right'
+                        src='/product/tr.png'
+                    />
+                    <img
+                        className='product-image-main-absolute bl'
+                        alt='bottom left'
+                        src='/product/bl.png'
+                    />
+                    <img
+                        className='product-image-main-absolute br'
+                        alt='bottom right'
+                        src='/product/br.png'
+                    />
 
-                <Image
-                    alt={image.altText as any}
-                    height={image.height as any}
-                    src={mainImage}
-                    width={image.width as any}
-                />
+                    <Image
+                        alt={image.altText as any}
+                        height={image.height as any}
+                        src={mainImage}
+                        width={image.width as any}
+                    />
+                </div>
+                <div className='product-image-list'>
+                    {images.map((image: any, index: number) => (
+                        <div
+                            key={image.id}
+                            className='product-image-list-item'
+                            onClick={() => setMainImage(image.url)}
+                        >
+                            <img src={image.url} alt={image.altText} />
+                            <img
+                                src={codeBar[index].url}
+                                alt='code bar'
+                                className='product-image-list-item-code'
+                            />
+                        </div>
+                    ))}
+                </div>
             </div>
-            <div className='product-image-list'>
-                {images.map((image: any, index: number) => (
-                    <div
-                        key={image.id}
-                        className='product-image-list-item'
-                        onClick={() => setMainImage(image.url)}
-                    >
-                        <img src={image.url} alt={image.altText} />
-                        <img
-                            src={codeBar[index].url}
-                            alt='code bar'
-                            className='product-image-list-item-code'
-                        />
+            <div className='product-connexe'>
+                <div className='product-connexe-header'>
+                    <h2>Produits connexes</h2>
+                    <div className='navigation-buttons'>
+                        <button onClick={() => scrollGrid(-1)}>
+                            <svg
+                                xmlns='http://www.w3.org/2000/svg'
+                                width='7.574'
+                                height='13.928'
+                                viewBox='0 0 7.574 13.928'
+                            >
+                                <path
+                                    id='Tracé_416'
+                                    data-name='Tracé 416'
+                                    d='M-20862.068-17757.791a.61.61,0,0,1-.432-.18.612.612,0,0,1,0-.861l5.924-5.924-5.924-5.924a.612.612,0,0,1,0-.861.611.611,0,0,1,.863,0l6.355,6.354a.614.614,0,0,1,0,.863l-6.355,6.354A.61.61,0,0,1-20862.068-17757.791Z'
+                                    transform='translate(20862.678 17771.719)'
+                                    fill='#fff'
+                                />
+                            </svg>
+                        </button>
+                        <button onClick={() => scrollGrid(1)}>
+                            <svg
+                                xmlns='http://www.w3.org/2000/svg'
+                                width='7.574'
+                                height='13.928'
+                                viewBox='0 0 7.574 13.928'
+                            >
+                                <path
+                                    id='Tracé_416'
+                                    data-name='Tracé 416'
+                                    d='M-20862.068-17757.791a.61.61,0,0,1-.432-.18.612.612,0,0,1,0-.861l5.924-5.924-5.924-5.924a.612.612,0,0,1,0-.861.611.611,0,0,1,.863,0l6.355,6.354a.614.614,0,0,1,0,.863l-6.355,6.354A.61.61,0,0,1-20862.068-17757.791Z'
+                                    transform='translate(20862.678 17771.719)'
+                                    fill='#fff'
+                                />
+                            </svg>
+                        </button>
                     </div>
-                ))}
+                </div>
+                <div
+                    className='product-connexe-grid'
+                    ref={gridRef}
+                    onMouseDown={handleMouseDown}
+                    onMouseUp={handleMouseUp}
+                    onMouseMove={handleMouseMove}
+                    style={{
+                        gridTemplateColumns: `repeat(${numberOfProducts}, 1fr)`,
+                    }}
+                >
+                    {productsFromCollection?.map((product: any) => (
+                        <Link
+                            key={product.title}
+                            to={`/products/${product.handle}`}
+                        >
+                            <div className='product-connexe-1'>
+                                <img
+                                    src={product.images.nodes[0].url}
+                                    alt={product.title}
+                                />
+                            </div>
+                            <div className='product-connexe-2'>
+                                <h3>
+                                    {product.productType.length > 30
+                                        ? product.productType.slice(0, 30) +
+                                          '...'
+                                        : product.productType}
+                                </h3>
+                                <p>
+                                    {product.title.length > 30
+                                        ? product.title.slice(0, 30) + '...'
+                                        : product.title}
+                                </p>
+                            </div>
+                        </Link>
+                    ))}
+                </div>
             </div>
         </div>
     )
@@ -215,7 +446,7 @@ function ProductMain({
     variants: Promise<ProductVariantsQuery>
 }) {
     const { title, descriptionHtml } = product
-    console.log(product)
+
     return (
         <div className='product-main'>
             <h1>{title}</h1>
@@ -244,8 +475,33 @@ function ProductMain({
                     </Await>
                 </Suspense>
             </div>
-            <div className='product-main-features'></div>
-
+            <div
+                className='product-main-features'
+                style={{
+                    marginTop: '50px',
+                    maxHeight: '220px',
+                }}
+            >
+                <h2>Caractéristiques</h2>
+                <div className='product-main-features-list'>
+                    {product?.metafield1?.value}
+                </div>
+            </div>
+            <div
+                className='product-main-features'
+                style={{
+                    marginTop: '10px',
+                }}
+            >
+                <h2
+                    style={{
+                        paddingBottom: '25px',
+                    }}
+                >
+                    Description
+                </h2>
+                <div dangerouslySetInnerHTML={{ __html: descriptionHtml }} />
+            </div>
             {/*<p>*/}
             {/*    <strong>Description</strong>*/}
             {/*</p>*/}
@@ -493,7 +749,7 @@ const PRODUCT_FRAGMENT = `#graphql
       description
       title
     }
-    metafield1: metafield(namespace: "custom", key: "feature") {
+    metafield1: metafield(namespace: "custom", key: "features") {
       key
       value
     }
@@ -504,6 +760,20 @@ const PRODUCT_FRAGMENT = `#graphql
     collections(first: 1){
         nodes{
             title
+            id
+              products(first: 25){
+                nodes{
+                  title
+                  handle
+                  productType
+                  vendor
+                  images(first: 1){
+                    nodes{
+                      url
+                    }
+                  }
+                }
+              }
         }
     }
   }
@@ -546,4 +816,29 @@ const VARIANTS_QUERY = `#graphql
       ...ProductVariants
     }
   }
+` as const
+
+const TRACKT = `#graphql
+query MetaObjects {
+  metaobjects(first: 20, type: "home") {
+    nodes {
+      field(key: "products") {
+        references(first: 20) {
+          nodes {
+            ... on Product {
+              title
+              productType
+              handle
+              images(first: 1) {
+                nodes {
+                  url
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
 ` as const
