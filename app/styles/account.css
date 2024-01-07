@@ -1,3 +1,96 @@
+/*
+* --------------------------------------------------
+* routes/account/login
+* --------------------------------------------------
+*/
+
+.register{
+    background-image: url("public/account/Login/register.png") !important;
+}
+
+.register-form{
+    display: flex;
+}
+
+.login{
+    background-image: url("public/account/Login/login.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    padding-left: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.login-form{
+    margin-top: 120px;
+}
+
+.login-form-field{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+    width: 600px;
+
+}
+
+.login-form-field label{
+    padding-left: 30px;
+    padding-bottom: 10px;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-family: "Helvetica Neue", sans-serif;
+}
+
+
+.login-form-field input{
+    border: none;
+    font-size: 18px;
+    height: 75px;
+    border-radius: 5px;
+    outline: none;
+    padding-left: 30px;
+    background: rgba(255, 255, 255, .1);
+    backdrop-filter: blur(10px);
+    color: #fff;
+
+}
+
+.login-form button{
+    padding: 0 40px;
+    height: 75px;
+    border-radius: 5px;
+    background: #fff;
+    color: #000;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.login-form-field p{
+    padding-top: 5px;
+    text-align: right;
+}
+
+.login .btn-register {
+    position: absolute;
+    bottom: 30px;
+    right: 35px;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 700;
+    height: 75px;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 0 40px;
+    background: rgb(181,112,70);
+    background: linear-gradient(90deg, rgba(181,112,70,1) 0%, rgba(160,101,65,1) 100%, rgba(32,32,32,1) 100%);
+}
+
 .account{
     display: flex;
     justify-content: space-between;
@@ -5,7 +98,7 @@
 
 .account-head{
     width: calc(100% - 320px);
-    margin-left: 90px;
+    margin-left: 410px;
 }
 
 .account .account-head h1{
@@ -19,8 +112,8 @@
 }
 
 .account-menu{
+    position: fixed;
     width: 320px;
-    position: relative;
     display: flex;
     flex-direction: column;
 }
@@ -28,5 +121,175 @@
 .account-menu .account-menu-bg{
     width: 320px;
     position: absolute;
+}
+
+.account-menu a{
+    width: 320px;
+    padding: 50px 0;
+    z-index: 5;
+}
+
+.account-menu a p{
+    font-size: 20px;
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding-left: 50px;
+}
+
+.btn-update{
+    font-size: 25px;
+    color: #000;
+    background-color: #fff;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 20px 40px;
+}
+
+.account-profile{
+    width: fit-content;
+}
+
+.addresses{
+    display: flex;
+    width: 85%;
+    justify-content: space-between;
+}
+
+.addresses .addresses-list{
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 10px 30px;
+}
+
+.popup-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup {
+    position: relative;
+    background: #000;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 13px 1000px rgba(0,0,0,0.5);
+    z-index: 10;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.address-input{
+    display: flex;
+
+}
+
+.address-input .login-form-field{
+    width: 250px !important;
+}
+
+.address-input input{
+    height: 50px;
+}
+.address-input label{
+    font-size: 12px;
+}
+
+.form-address-btn{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.form-address-btn button{
+    padding: 0 40px;
+    height: 45px;
+    border-radius: 5px;
+    background: #fff;
+    color: #000;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.new-address{
+    margin-top: 40px;
+    width: 85%;
+
+}
+
+.new-address .new-address-title{
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    height: 80px;
+    display: flex;
+    align-items: center;
+    padding-left: 40px;
+    cursor: pointer;
+
+}
+
+.trackT-size{
+    margin-top: 100px;
+}
+
+.trackT-size h2{
+    margin-bottom: 16px;
+}
+
+.trackT-size p{
+    margin-bottom: 60px;
+}
+
+.trackT-size-container{
+    width: 100%;
+    display: flex;
+}
+
+.trackT-size-container-item{
+    width: 375px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 20px 40px;
+}
+
+.trackT-size-container-item h2{
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+
+
+/* ORDERS */
+
+.shopnow{
+    padding: 0 40px;
+    height: 45px;
+    border-radius: 5px;
+    background: #fff;
+    color: #000;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
 }
 

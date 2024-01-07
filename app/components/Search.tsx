@@ -73,7 +73,7 @@ export function SearchForm({ searchTerm }: { searchTerm: string }) {
     // focus the input when cmd+k is pressed
     useEffect(() => {
         function handleKeyDown(event: KeyboardEvent) {
-            if (event.key === 'k' && event.metaKey) {
+            if (event.key === 'k') {
                 event.preventDefault()
                 inputRef.current?.focus()
             }
@@ -88,6 +88,10 @@ export function SearchForm({ searchTerm }: { searchTerm: string }) {
         return () => {
             document.removeEventListener('keydown', handleKeyDown)
         }
+    }, [])
+
+    useEffect(() => {
+        inputRef?.current?.focus()
     }, [])
 
     return (

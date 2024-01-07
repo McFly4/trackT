@@ -909,7 +909,7 @@ export type CustomerCreateMutation = {
 }
 
 export type RegisterLoginMutationVariables = StorefrontAPI.Exact<{
-    input: StorefrontAPI.CustomerAccessTokenCreateInput
+    input: any
     country?: StorefrontAPI.InputMaybe<StorefrontAPI.CountryCode>
     language?: StorefrontAPI.InputMaybe<StorefrontAPI.LanguageCode>
 }>

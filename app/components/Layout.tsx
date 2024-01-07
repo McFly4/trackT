@@ -15,6 +15,7 @@ import {
 } from '~/components/Search'
 import { AsideSearch } from './AsideSearch'
 import { Link } from '@remix-run/react'
+import { useLocation } from '@remix-run/react'
 
 export type LayoutProps = {
     cart: Promise<CartApiQueryFragment | null>
@@ -31,17 +32,29 @@ export function Layout({
     header,
     isLoggedIn,
 }: LayoutProps) {
+    const location = useLocation()
+
     return (
         <>
             <CartAside cart={cart} />
             <SearchAside />
-            <Header header={header} cart={cart} isLoggedIn={isLoggedIn} />
+            {location.pathname !== '/account/login' &&
+                location.pathname !== '/account/register' && (
+                    <Header
+                        header={header}
+                        cart={cart}
+                        isLoggedIn={isLoggedIn}
+                    />
+                )}
             <main>{children}</main>
-            <Suspense>
-                <Await resolve={footer}>
-                    {(footer) => <Footer menu={footer.menu} />}
-                </Await>
-            </Suspense>
+            {location.pathname !== '/account/login' &&
+                location.pathname !== '/account/register' && (
+                    <Suspense>
+                        <Await resolve={footer}>
+                            {(footer) => <Footer menu={footer.menu} />}
+                        </Await>
+                    </Suspense>
+                )}
         </>
     )
 }

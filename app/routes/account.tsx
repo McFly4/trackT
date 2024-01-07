@@ -1,6 +1,7 @@
 import { Form, NavLink, Outlet, useLoaderData } from '@remix-run/react'
 import { json, redirect, type LoaderFunctionArgs } from '@shopify/remix-oxygen'
 import type { CustomerFragment } from 'storefrontapi.generated'
+import { useLocation } from '@remix-run/react'
 
 export function shouldRevalidate() {
     return true
@@ -9,6 +10,7 @@ export function shouldRevalidate() {
 export async function loader({ request, context }: LoaderFunctionArgs) {
     const { session, storefront } = context
     const { pathname } = new URL(request.url)
+    const navImages = await storefront.query(NAV_IMAGES)
     const customerAccessToken = await session.get('customerAccessToken')
     const isLoggedIn = !!customerAccessToken?.accessToken
     const isAccountHome = pathname === '/account' || pathname === '/account/'
@@ -32,6 +34,7 @@ export async function loader({ request, context }: LoaderFunctionArgs) {
                 isAccountHome,
                 isPrivateRoute,
                 customer: null,
+                navImages,
             })
         }
     } else {
@@ -56,7 +59,7 @@ export async function loader({ request, context }: LoaderFunctionArgs) {
         }
 
         return json(
-            { isLoggedIn, isPrivateRoute, isAccountHome, customer },
+            { isLoggedIn, isPrivateRoute, isAccountHome, customer, navImages },
             {
                 headers: {
                     'Cache-Control': 'no-cache, no-store, must-revalidate',
@@ -76,7 +79,7 @@ export async function loader({ request, context }: LoaderFunctionArgs) {
 }
 
 export default function Acccount() {
-    const { customer, isPrivateRoute, isAccountHome } =
+    const { customer, isPrivateRoute, isAccountHome, navImages } =
         useLoaderData<typeof loader>()
 
     if (!isPrivateRoute && !isAccountHome) {
@@ -84,7 +87,10 @@ export default function Acccount() {
     }
 
     return (
-        <AccountLayout customer={customer as CustomerFragment}>
+        <AccountLayout
+            images={navImages}
+            customer={customer as CustomerFragment}
+        >
             <br />
             <br />
             <Outlet context={{ customer }} />
@@ -95,9 +101,11 @@ export default function Acccount() {
 function AccountLayout({
     customer,
     children,
+    images,
 }: {
     customer: CustomerFragment
     children: React.ReactNode
+    images: any
 }) {
     const heading = customer
         ? customer.firstName
@@ -105,31 +113,38 @@ function AccountLayout({
             : `Bienvenue chez vous.`
         : 'Account Details'
 
+    const location = useLocation()
+
     return (
         <div className='account'>
-            <AccountMenu />
-
+            <AccountMenu images={images} />
             <div className='account-head'>
-                <h1>{heading}</h1>
-                <p className='account-head-txt'>
-                    Votre espace personnel chez Trackt est votre tableau de bord
-                    pour tout ce qui vous concerne. Ici, vous pouvez gérer vos
-                    informations de livraison, mettre à jour vos détails de
-                    contact, et personnaliser vos préférences de communication.
-                    C’est l’endroit où vous pouvez garder un œil sur tout.
-                    <br />
-                    <br />
-                    Prenez le contrôle de votre expérience Trackt et rendez-la
-                    aussi unique que votre style.
-                </p>
-                <br />
+                {location.pathname === '/account/profile' && (
+                    <>
+                        <h1>{heading}</h1>
+                        <p className='account-head-txt'>
+                            Votre espace personnel chez Trackt est votre tableau
+                            de bord pour tout ce qui vous concerne. Ici, vous
+                            pouvez gérer vos informations de livraison, mettre à
+                            jour vos détails de contact, et personnaliser vos
+                            préférences de communication. C’est l’endroit où
+                            vous pouvez garder un œil sur tout.
+                            <br />
+                            <br />
+                            Prenez le contrôle de votre expérience Trackt et
+                            rendez-la aussi unique que votre style.
+                        </p>
+                        <br />
+                    </>
+                )}
+
                 {children}
             </div>
         </div>
     )
 }
 
-function AccountMenu() {
+function AccountMenu(images: any) {
     function isActiveStyle({
         isActive,
         isPending,
@@ -138,28 +153,51 @@ function AccountMenu() {
         isPending: boolean
     }) {
         return {
-            fontWeight: isActive ? 'bold' : undefined,
-            color: isPending ? 'grey' : 'black',
+            backgroundColor: isActive ? 'rgba(255, 255, 255, 0.1)' : undefined,
+            backdropFilter: isActive ? 'blur(10px)' : undefined,
+        }
+    }
+    const allImages =
+        images?.images?.metaobjects?.edges[0]?.node?.fields[0]?.references
+            ?.nodes
+
+    function randomImage() {
+        if (allImages && allImages.length > 0) {
+            const randomIndex = Math.floor(Math.random() * allImages.length)
+            const randomImageObject = allImages[randomIndex]
+            if (
+                randomImageObject &&
+                randomImageObject.image &&
+                randomImageObject.image.url
+            ) {
+                return randomImageObject.image.url
+            } else {
+                return '/account/nav.png'
+            }
+        } else {
+            return '/account/nav.png'
         }
     }
 
+    const randomImageUrl = randomImage()
+
     return (
-        <nav role='navigation' className='account-menu'>
-            <img className='account-menu-bg' src='/account/nav.png' />
+        <nav role='navigation' className='account-menu' onClick={randomImage}>
+            <img className='account-menu-bg' src={randomImageUrl} />
             <NavLink to='/account/profile' style={isActiveStyle}>
-                Mon espace trackt
+                <p>Mon espace trackt</p>
             </NavLink>
             <NavLink to='/account/orders' style={isActiveStyle}>
-                Commandes
+                <p>Commandes</p>
             </NavLink>
             <NavLink to='/account/profile' style={isActiveStyle}>
-                My best item
+                <p> My best item</p>
             </NavLink>
             <NavLink to='/account/addresses' style={isActiveStyle}>
-                Messagerie
+                <p>Messagerie</p>
             </NavLink>
             <NavLink to='/account/addresses' style={isActiveStyle}>
-                Fidélité
+                <p>Fidélité</p>
             </NavLink>
             {/*<Logout />*/}
         </nav>
@@ -219,4 +257,26 @@ const CUSTOMER_QUERY = `#graphql
     }
   }
   ${CUSTOMER_FRAGMENT}
+` as const
+
+const NAV_IMAGES = `#graphql
+query MetaObjects {
+  metaobjects(first: 20, type: "account") {
+    edges {
+      node {
+        fields {
+          references(first: 20) {
+            nodes {
+              ... on  MediaImage{
+                image{
+                  url
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
 ` as const
