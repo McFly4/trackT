@@ -5,6 +5,7 @@ import type {
     CustomerOrdersFragment,
     OrderItemFragment,
 } from 'storefrontapi.generated'
+import React, { useRef, useState } from 'react'
 
 export const meta: MetaFunction = () => {
     return [{ title: 'Orders' }]
@@ -17,6 +18,8 @@ export async function loader({ request, context }: LoaderFunctionArgs) {
     if (!customerAccessToken?.accessToken) {
         return redirect('/account/login')
     }
+
+    const products = await context.storefront.query(TRACKT)
 
     try {
         const paginationVariables = getPaginationVariables(request, {
@@ -37,7 +40,7 @@ export async function loader({ request, context }: LoaderFunctionArgs) {
             throw new Error('Customer not found')
         }
 
-        return json({ customer })
+        return json({ customer, products })
     } catch (error: unknown) {
         if (error instanceof Error) {
             return json({ error: error.message }, { status: 400 })
@@ -47,7 +50,10 @@ export async function loader({ request, context }: LoaderFunctionArgs) {
 }
 
 export default function Orders() {
-    const { customer } = useLoaderData<{ customer: CustomerOrdersFragment }>()
+    const { customer } = useLoaderData<{
+        customer: CustomerOrdersFragment
+    }>()
+
     const { orders, numberOfOrders } = customer
     return (
         <div className='orders'>
@@ -62,7 +68,10 @@ export default function Orders() {
     )
 }
 
-function OrdersTable({ orders }: Pick<CustomerOrdersFragment, 'orders'>) {
+function OrdersTable(
+    { orders }: Pick<CustomerOrdersFragment, 'orders'>,
+    trackT: any
+) {
     return (
         <div className='acccount-orders'>
             {orders?.nodes.length ? (
@@ -104,6 +113,38 @@ function OrdersTable({ orders }: Pick<CustomerOrdersFragment, 'orders'>) {
 }
 
 function EmptyOrders() {
+    const { products } = useLoaderData<{
+        products: any
+    }>()
+    const gridRef = useRef<HTMLDivElement>(null)
+    const [isDragging, setDragging] = useState(false)
+    const [startX, setStartX] = useState(0)
+    const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+        setDragging(true)
+        setStartX(e.pageX - (gridRef.current?.offsetLeft || 0))
+    }
+
+    const handleMouseUp = () => {
+        setDragging(false)
+    }
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (!isDragging) return
+        const scrollLeft = e.pageX - startX
+        if (gridRef.current) {
+            gridRef.current.scrollLeft = scrollLeft
+        }
+    }
+
+    const scrollGrid = (direction: number) => {
+        const scrollAmount = 400 // Ajustez la valeur selon votre préférence
+        if (gridRef.current) {
+            gridRef.current.scrollBy({
+                left: direction * scrollAmount,
+                behavior: 'smooth',
+            })
+        }
+    }
     return (
         <div>
             <div>
@@ -133,6 +174,86 @@ function EmptyOrders() {
                     découvrez, et laissez-vous inspirer. Bienvenue dans l’avenir
                     du shopping streetwear!
                 </p>
+            </div>
+            <div
+                className='trackT'
+                style={{
+                    margin: '50px 60px 0 0',
+                }}
+            >
+                <div className='trackT-header'>
+                    <h2>Panel TrackT</h2>
+                    <div className='navigation-buttons'>
+                        <button onClick={() => scrollGrid(-1)}>
+                            <svg
+                                xmlns='http://www.w3.org/2000/svg'
+                                width='7.574'
+                                height='13.928'
+                                viewBox='0 0 7.574 13.928'
+                            >
+                                <path
+                                    id='Tracé_416'
+                                    data-name='Tracé 416'
+                                    d='M-20862.068-17757.791a.61.61,0,0,1-.432-.18.612.612,0,0,1,0-.861l5.924-5.924-5.924-5.924a.612.612,0,0,1,0-.861.611.611,0,0,1,.863,0l6.355,6.354a.614.614,0,0,1,0,.863l-6.355,6.354A.61.61,0,0,1-20862.068-17757.791Z'
+                                    transform='translate(20862.678 17771.719)'
+                                    fill='#fff'
+                                />
+                            </svg>
+                        </button>
+                        <button onClick={() => scrollGrid(1)}>
+                            <svg
+                                xmlns='http://www.w3.org/2000/svg'
+                                width='7.574'
+                                height='13.928'
+                                viewBox='0 0 7.574 13.928'
+                            >
+                                <path
+                                    id='Tracé_416'
+                                    data-name='Tracé 416'
+                                    d='M-20862.068-17757.791a.61.61,0,0,1-.432-.18.612.612,0,0,1,0-.861l5.924-5.924-5.924-5.924a.612.612,0,0,1,0-.861.611.611,0,0,1,.863,0l6.355,6.354a.614.614,0,0,1,0,.863l-6.355,6.354A.61.61,0,0,1-20862.068-17757.791Z'
+                                    transform='translate(20862.678 17771.719)'
+                                    fill='#fff'
+                                />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div
+                    className='trackT-grid'
+                    ref={gridRef}
+                    onMouseDown={handleMouseDown}
+                    onMouseUp={handleMouseUp}
+                    onMouseMove={handleMouseMove}
+                >
+                    {products?.metaobjects?.nodes[0]?.field?.references?.nodes?.map(
+                        (product: any) => (
+                            <Link
+                                key={product.title}
+                                to={`/products/${product.handle}`}
+                            >
+                                <div className='trackt-grid-product'>
+                                    <img
+                                        src={product.images.nodes[0].url}
+                                        alt={product.title}
+                                    />
+                                </div>
+                                <div className='product-connexe-2'>
+                                    <h3>
+                                        {product.productType.length > 30
+                                            ? product.productType.slice(0, 30) +
+                                              '...'
+                                            : product.productType}
+                                    </h3>
+                                    <p>
+                                        {product.title.length > 30
+                                            ? product.title.slice(0, 30) + '...'
+                                            : product.title}
+                                    </p>
+                                </div>
+                            </Link>
+                        )
+                    )}
+                </div>
             </div>
         </div>
     )
@@ -228,4 +349,29 @@ const CUSTOMER_ORDERS_QUERY = `#graphql
       ...CustomerOrders
     }
   }
+` as const
+
+const TRACKT = `#graphql
+query MetaObjects {
+  metaobjects(first: 20, type: "home") {
+    nodes {
+      field(key: "products") {
+        references(first: 20) {
+          nodes {
+            ... on Product {
+              title
+              productType
+              handle
+              images(first: 1) {
+                nodes {
+                  url
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
 ` as const

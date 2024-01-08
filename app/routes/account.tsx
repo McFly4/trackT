@@ -1,3 +1,4 @@
+import React from 'react'
 import { Form, NavLink, Outlet, useLoaderData } from '@remix-run/react'
 import { json, redirect, type LoaderFunctionArgs } from '@shopify/remix-oxygen'
 import type { CustomerFragment } from 'storefrontapi.generated'
@@ -15,7 +16,7 @@ export async function loader({ request, context }: LoaderFunctionArgs) {
     const isLoggedIn = !!customerAccessToken?.accessToken
     const isAccountHome = pathname === '/account' || pathname === '/account/'
     const isPrivateRoute =
-        /^\/account\/(orders|orders\/.*|profile|addresses|addresses\/.*)$/.test(
+        /^\/account\/(orders|orders\/.*|profile|addresses|mybestitem|addresses\/.*)$/.test(
             pathname
         )
 
@@ -78,7 +79,7 @@ export async function loader({ request, context }: LoaderFunctionArgs) {
     }
 }
 
-export default function Acccount() {
+function Acccount() {
     const { customer, isPrivateRoute, isAccountHome, navImages } =
         useLoaderData<typeof loader>()
 
@@ -97,6 +98,8 @@ export default function Acccount() {
         </AccountLayout>
     )
 }
+
+export default React.memo(Acccount)
 
 function AccountLayout({
     customer,
@@ -180,7 +183,7 @@ function AccountMenu(images: any) {
     }
 
     const randomImageUrl = randomImage()
-
+    console.log(randomImageUrl)
     return (
         <nav role='navigation' className='account-menu' onClick={randomImage}>
             <img className='account-menu-bg' src={randomImageUrl} />
@@ -190,7 +193,7 @@ function AccountMenu(images: any) {
             <NavLink to='/account/orders' style={isActiveStyle}>
                 <p>Commandes</p>
             </NavLink>
-            <NavLink to='/account/profile' style={isActiveStyle}>
+            <NavLink to='/account/mybestitem' style={isActiveStyle}>
                 <p> My best item</p>
             </NavLink>
             <NavLink to='/account/addresses' style={isActiveStyle}>
