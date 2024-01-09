@@ -260,22 +260,63 @@ function EmptyOrders() {
 }
 
 function OrderItem({ order }: { order: OrderItemFragment }) {
+    const numberOfProducts = order.lineItems.nodes.length
+    const images = order.lineItems.nodes
+    const imageCount = images?.length || 0
+    const numRows = Math.ceil(imageCount / 2)
+    const numCols = Math.min(imageCount, 2)
+    const gridStyle = {
+        display: 'grid',
+        gridTemplateRows: `repeat(${numRows}, 1fr)`,
+        gridTemplateColumns: `repeat(${numCols}, 1fr)`,
+    }
+
+    console.log(images?.map((image: any) => image?.variant?.image?.url))
     return (
-        <>
-            <fieldset>
-                <Link to={`/account/orders/${order.id}`}>
-                    <strong>#{order.orderNumber}</strong>
-                </Link>
-                <p>{new Date(order.processedAt).toDateString()}</p>
-                <p>{order.financialStatus}</p>
-                <p>{order.fulfillmentStatus}</p>
-                <Money data={order.currentTotalPrice} />
-                <Link to={`/account/orders/${btoa(order.id)}`}>
-                    View Order →
-                </Link>
-            </fieldset>
-            <br />
-        </>
+        <Link to={`/account/orders/${btoa(order.id)}`}>
+            <div className='order'>
+                <div className='order-head'>
+                    <div className='order-head-image' style={gridStyle}>
+                        {images?.map((image, index) => (
+                            <div key={index} className='order-head-image-item'>
+                                <img
+                                    src={image?.variant?.image?.url}
+                                    alt={`Image ${index + 1}`}
+                                />
+                            </div>
+                        ))}
+                    </div>
+                    <div className='order-head-title'>
+                        <p>Commande #{order.orderNumber}</p>
+                    </div>
+                </div>
+                <div className='order-description'>
+                    <div className='order-description-item'>
+                        <p>Total</p>
+                        <p>{order.currentTotalPrice.amount} €</p>
+                    </div>
+                    <div className='order-description-item'>
+                        <p>Détail</p>
+                        <p>
+                            {numberOfProducts} Article
+                            {numberOfProducts > 1 ? 's' : ''}
+                        </p>
+                    </div>
+                    <div className='order-description-item'>
+                        <p>Date</p>
+                        <p>{new Date(order.processedAt).toDateString()}</p>
+                    </div>
+                    <div className='order-description-item'>
+                        <p>Statut</p>
+                        <p>
+                            {order.financialStatus === 'PAID'
+                                ? 'Commandé'
+                                : order.financialStatus}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </Link>
     )
 }
 

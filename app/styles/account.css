@@ -293,3 +293,121 @@
     cursor: pointer;
 }
 
+.order{
+    width: 85%;
+    margin-top: 90px;
+    display: flex;
+    border-bottom: 3px solid #FFFFFF21;
+    padding-bottom: 30px;
+}
+
+.order-head-image{
+    width: 250px;
+    height: 170px;
+}
+
+.order-head-image-item{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.order-head-image-item img{
+    width: 100%;
+    height: 100%;
+}
+
+.order-head-title{
+    margin-top: 13px;
+}
+
+.order-head-title p{
+    font-size: 15px;
+    text-transform: uppercase;
+}
+
+.order-description{
+    margin-left: 80px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.order-description-item p:first-child{
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.order-description-item p:last-child{
+    color: #fff;
+    font-size: 23px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* ORDER ITEM */
+
+.account-order-status{
+    margin-top: 50px;
+}
+
+.account-order-status h2{
+    font-size: 26px;
+}
+
+.orders-informations {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 60px
+}
+
+.order-description-item {
+    flex: 0 0 calc(25% - 60px);
+    margin-bottom: 60px;
+}
+
+@media screen and (max-width: 1430px) {
+    .orders-informations {
+        max-width: 1430px;
+        margin: 0 auto; /* Centrage du conteneur */
+    }
+}
+
+
+.order-products{
+    display: flex;
+    flex-direction: column;
+    margin-right: 80px;
+
+}
+
+.order-product {
+    display: flex;
+    margin-top: 60px;
+    border-bottom: 3px solid #FFFFFF21;
+    padding-bottom: 30px;
+}
+
+.order-products-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 30px;
+    border-bottom: 3px solid #FFFFFF21;
+}
+
+.order-products-header button {
+    padding: 0 40px;
+    height: 75px;
+    border-radius: 5px;
+    background: #fff;
+    color: #000;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+}

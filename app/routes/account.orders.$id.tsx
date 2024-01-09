@@ -2,6 +2,7 @@ import { json, redirect, type LoaderFunctionArgs } from '@shopify/remix-oxygen'
 import { Link, useLoaderData, type MetaFunction } from '@remix-run/react'
 import { Money, Image, flattenConnection } from '@shopify/hydrogen'
 import type { OrderLineItemFullFragment } from 'storefrontapi.generated'
+import React from 'react'
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
     return [{ title: `Order ${data?.order?.name}` }]
@@ -32,7 +33,6 @@ export async function loader({ params, context }: LoaderFunctionArgs) {
     const lineItems = flattenConnection(order.lineItems)
     const discountApplications = flattenConnection(order.discountApplications)
 
-    // @ts-ignore
     const firstDiscount = discountApplications[0]?.value
 
     const discountValue =
@@ -53,153 +53,119 @@ export async function loader({ params, context }: LoaderFunctionArgs) {
 export default function OrderRoute() {
     const { order, lineItems, discountValue, discountPercentage } =
         useLoaderData<typeof loader>()
-    // @ts-ignore
+    const numberOfProducts = order.lineItems.nodes.length
+    const discountCode = order.discountApplications.nodes[0]?.title || 'NON'
+
     return (
         <div className='account-order'>
-            <h2>Order {order.name}</h2>
-            <p>Placed on {new Date(order.processedAt!).toDateString()}</p>
-            <br />
-            <div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th scope='col'>Product</th>
-                            <th scope='col'>Price</th>
-                            <th scope='col'>Quantity</th>
-                            <th scope='col'>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {lineItems.map((lineItem, lineItemIndex) => (
-                            // eslint-disable-next-line react/no-array-index-key
-                            <OrderLineRow
-                                key={lineItemIndex}
-                                lineItem={lineItem}
-                            />
-                        ))}
-                    </tbody>
-                    <tfoot>
-                        {((discountValue && discountValue.amount) ||
-                            discountPercentage) && (
-                            <tr>
-                                <th scope='row' colSpan={3}>
-                                    <p>Discounts</p>
-                                </th>
-                                <th scope='row'>
-                                    <p>Discounts</p>
-                                </th>
-                                <td>
-                                    {discountPercentage ? (
-                                        <span>-{discountPercentage}% OFF</span>
-                                    ) : (
-                                        discountValue && (
-                                            <Money data={discountValue!} />
-                                        )
-                                    )}
-                                </td>
-                            </tr>
-                        )}
-                        <tr>
-                            <th scope='row' colSpan={3}>
-                                <p>Subtotal</p>
-                            </th>
-                            <th scope='row'>
-                                <p>Subtotal</p>
-                            </th>
-                            <td>
-                                <Money data={order.subtotalPriceV2!} />
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope='row' colSpan={3}>
-                                Tax
-                            </th>
-                            <th scope='row'>
-                                <p>Tax</p>
-                            </th>
-                            <td>
-                                <Money data={order.totalTaxV2!} />
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope='row' colSpan={3}>
-                                Total
-                            </th>
-                            <th scope='row'>
-                                <p>Total</p>
-                            </th>
-                            <td>
-                                <Money data={order.totalPriceV2!} />
-                            </td>
-                        </tr>
-                    </tfoot>
-                </table>
-                <div>
-                    <h3>Shipping Address</h3>
-                    {order?.shippingAddress ? (
-                        <address>
-                            <p>
-                                {order.shippingAddress.firstName &&
-                                    order.shippingAddress.firstName + ' '}
-                                {order.shippingAddress.lastName}
-                            </p>
-                            {order?.shippingAddress?.formatted ? (
-                                order.shippingAddress.formatted.map(
-                                    (line: string) => <p key={line}>{line}</p>
-                                )
-                            ) : (
-                                <></>
-                            )}
-                        </address>
-                    ) : (
-                        <p>No shipping address defined</p>
-                    )}
-                    <h3>Status</h3>
-                    <div>
-                        <p>{order.fulfillmentStatus}</p>
-                    </div>
+            <h2>commande {order.name}</h2>
+            <div className='account-order-status'>
+                <h2>Status</h2>
+                <div className='account-order-status__content'>
+                    <p>
+                        <strong>Order Status:</strong> {order.fulfillmentStatus}
+                    </p>
                 </div>
             </div>
-            <br />
+
             <p>
                 <a target='_blank' href={order.statusUrl} rel='noreferrer'>
                     View Order Status →
                 </a>
             </p>
+            <div className='orders-informations'>
+                <div className='order-description-item'>
+                    <p>Total</p>
+                    <p>{order.totalPriceV2.amount} €</p>
+                </div>
+                <div className='order-description-item'>
+                    <p>Détail</p>
+                    <p>
+                        {numberOfProducts} Article
+                        {numberOfProducts > 1 ? 's' : ''}
+                    </p>
+                </div>
+                <div className='order-description-item'>
+                    <p>Date commande</p>
+                    <p>{new Date(order.processedAt).toDateString()}</p>
+                </div>
+                <div className='order-description-item'>
+                    <p>Status</p>
+                    <p>
+                        {order.financialStatus === 'PAID'
+                            ? 'Commandé'
+                            : order.financialStatus}
+                    </p>
+                </div>
+                <div className='order-description-item'>
+                    <p>codes promo</p>
+                    <p>{discountCode}</p>
+                </div>
+                <div className='order-description-item'>
+                    <p>Adresse de livraison</p>
+                    <p>{order.shippingAddress.formatted}</p>
+                </div>
+                <div className='order-description-item'>
+                    <p>Nom de livraison</p>
+                    <p>
+                        {order.shippingAddress.firstName}{' '}
+                        {order.shippingAddress.lastName}
+                    </p>
+                </div>
+            </div>
+            <OrderLineRow lineItem={lineItems} />
         </div>
     )
 }
 
-function OrderLineRow({ lineItem }: { lineItem: OrderLineItemFullFragment }) {
+function OrderLineRow(lineItem: any) {
     return (
-        <tr key={lineItem.variant!.id}>
-            <td>
-                <div>
-                    <Link to={`/products/${lineItem.variant!.product!.handle}`}>
-                        {lineItem?.variant?.image && (
-                            <div>
-                                <Image
-                                    data={lineItem.variant.image}
-                                    width={96}
-                                    height={96}
+        <div className='order-products'>
+            <div className='order-products-header'>
+                <h2>Articles commandés</h2>
+                <button>options</button>
+            </div>
+            {lineItem.lineItem.map((item: OrderLineItemFullFragment) => {
+                return (
+                    <div className='order-product'>
+                        <div className='order-head'>
+                            <div className='order-head-image'>
+                                <img
+                                    src={item?.variant?.image?.url}
+                                    style={{
+                                        width: '100%',
+                                        height: '100%',
+                                    }}
                                 />
                             </div>
-                        )}
-                    </Link>
-                    <div>
-                        <p>{lineItem.title}</p>
-                        <small>{lineItem.variant!.title}</small>
+                            <div className='order-head-description'>
+                                <p>{item.title}</p>
+                            </div>
+                        </div>
+                        <div
+                            className='order-description'
+                            style={{
+                                justifyContent: 'unset',
+                            }}
+                        >
+                            <div className='order-description-item'>
+                                <p>Taille</p>
+                                <p>{item?.variant?.title.split('/')[0]}</p>
+                            </div>
+                            <div
+                                className='order-description-item'
+                                style={{
+                                    marginLeft: '100px',
+                                }}
+                            >
+                                <p>Prix</p>
+                                <p>{item.originalTotalPrice.amount} €</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </td>
-            <td>
-                <Money data={lineItem.variant!.price!} />
-            </td>
-            <td>{lineItem.quantity}</td>
-            <td>
-                <Money data={lineItem.discountedTotalPrice!} />
-            </td>
-        </tr>
+                )
+            })}
+        </div>
     )
 }
 
