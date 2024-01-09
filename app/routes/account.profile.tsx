@@ -1,3 +1,4 @@
+import { useState, useEffect, useMemo } from 'react'
 import type { CustomerFragment } from 'storefrontapi.generated'
 import type { CustomerUpdateInput } from '@shopify/hydrogen/storefront-api-types'
 import {
@@ -116,8 +117,54 @@ export default function AccountProfile() {
     const { state } = useNavigation()
     const action = useActionData<ActionResponse>()
     const customer = action?.customer ?? account?.customer
-    const shoesSize = ['36', '37', '38', '39', '40', '41', '42', '43', '44']
+    const shoesSize = [
+        { index: 0, size: '36' },
+        { index: 1, size: '37' },
+        { index: 2, size: '38' },
+        { index: 3, size: '39' },
+        { index: 4, size: '40' },
+        { index: 5, size: '41' },
+        { index: 6, size: '42' },
+        { index: 7, size: '43' },
+        { index: 8, size: '44' },
+    ]
     const clothesSize = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL']
+    const [selectedShoeSize, setSelectedShoeSize] = useState('')
+    const [selectedClothesSize, setSelectedClothesSize] = useState('')
+
+    useEffect(() => {
+        const storedShoeSize = localStorage.getItem('selectedShoeSize')
+        const storedClothesSize = localStorage.getItem('selectedClothesSize')
+
+        if (storedShoeSize) {
+            setSelectedShoeSize(storedShoeSize)
+        }
+
+        if (storedClothesSize) {
+            setSelectedClothesSize(storedClothesSize)
+        }
+    }, [])
+
+    const handleShoeSizeChange = (newSize: any) => {
+        setSelectedShoeSize(newSize)
+        localStorage.setItem('selectedShoeSize', newSize)
+    }
+
+    const handleClothesSizeChange = (newSize: any) => {
+        setSelectedClothesSize(newSize)
+        localStorage.setItem('selectedClothesSize', newSize)
+    }
+
+    const selectedShoeIndex = useMemo(() => {
+        if (selectedShoeSize === '') {
+            // Si la valeur n'est pas encore chargée, retourne une valeur par défaut
+            return 0 // ou -1 ou tout autre index par défaut que vous préférez
+        }
+
+        return shoesSize.findIndex((value) => value.size === selectedShoeSize)
+    }, [selectedShoeSize])
+
+    console.log(selectedShoeIndex)
 
     return (
         <>
@@ -298,9 +345,15 @@ export default function AccountProfile() {
                             slidesPerView={5}
                             grabCursor={true}
                             centeredSlides={true}
+                            onSlideChange={(swiper) =>
+                                handleShoeSizeChange(
+                                    shoesSize[swiper.activeIndex]?.size
+                                )
+                            }
+                            initialSlide={selectedShoeIndex}
                         >
                             {shoesSize.map((value: any) => (
-                                <SwiperSlide key={value}>
+                                <SwiperSlide key={value.index}>
                                     {({ isActive, isPrev, isNext }) => (
                                         <p
                                             style={{
@@ -312,7 +365,7 @@ export default function AccountProfile() {
                                                     : '15px',
                                             }}
                                         >
-                                            {value}
+                                            {value.size}
                                         </p>
                                     )}
                                 </SwiperSlide>
