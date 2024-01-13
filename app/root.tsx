@@ -16,6 +16,7 @@ import {
     ScrollRestoration,
     isRouteErrorResponse,
     type ShouldRevalidateFunction,
+    Link,
 } from '@remix-run/react'
 import type { CustomerAccessToken } from '@shopify/hydrogen/storefront-api-types'
 import favicon from '../public/favicon.svg'
@@ -167,18 +168,14 @@ export function ErrorBoundary() {
                 <Meta />
                 <Links />
             </head>
-            <body>
-                <Layout {...rootData}>
-                    <div className='route-error'>
-                        <h1>Oops</h1>
-                        <h2>{errorStatus}</h2>
-                        {errorMessage && (
-                            <fieldset>
-                                <pre>{errorMessage}</pre>
-                            </fieldset>
-                        )}
-                    </div>
-                </Layout>
+            <body className='error'>
+                <video muted autoPlay loop>
+                    <source src='/404.mp4' type='video/webm' />
+                    Chargement ...
+                </video>
+                <button>
+                    <Link to='/'>Back home</Link>
+                </button>
                 <ScrollRestoration nonce={nonce} />
                 <Scripts nonce={nonce} />
                 <LiveReload nonce={nonce} />

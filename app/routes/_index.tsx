@@ -15,6 +15,8 @@ export async function loader({ context }: LoaderFunctionArgs) {
 export default function HomePage() {
     const { products } = useLoaderData<typeof loader>()
     const productsList = products.metaobjects.nodes[0].field.references.nodes
+    console.log(productsList)
+
     const firstList = productsList.slice(0, 12)
     const secondList = productsList.slice(12, 16)
     const thirdList = productsList.slice(16, 20)

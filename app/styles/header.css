@@ -45,3 +45,56 @@
 .nav-right .nav-images {
     cursor: pointer;
 }
+
+
+/* FOOTER */
+
+.footer{
+    background-color: #0E0E0E;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    padding: 25px 0;
+}
+
+.footer img{
+    object-fit: contain;
+    cursor: pointer;
+}
+
+.footer .footer-menu{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.footer h2{
+    margin-bottom: 30px;
+}
+
+.footer .footer-media h2{
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 50px;
+}
+
+.footer h2 span{
+    color: #FF8C17;
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+.footer-media-container{
+    display: flex;
+}
+
+.footer-media-double{
+    display: flex;
+    flex-direction: column;
+    margin-top: -10px;
+}
+
+.footer-media-double img:nth-child(2) {
+    margin-left: 30px;
+}

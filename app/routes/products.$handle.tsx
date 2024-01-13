@@ -749,14 +749,38 @@ const PRODUCT_FRAGMENT = `#graphql
       description
       title
     }
-    metafield1: metafield(namespace: "custom", key: "features") {
-      key
-      value
-    }
-    metafield2: metafield(namespace: "custom", key: "nike") {
-      key
-      value
-    }
+    toothBrush: metafield(namespace: "custom", key: "toothbrush") {
+        key
+        value
+      }
+      ooo: metafield(namespace: "custom", key: "outofstock") {
+        key
+        value
+      }
+      new: metafield(namespace: "custom", key: "new") {
+        key
+        value
+      }
+      ship: metafield(namespace: "custom", key: "fastShip") {
+        key
+        value
+      }
+      release: metafield(namespace: "custom", key: "release") {
+        key
+        value
+      }
+      promotion: metafield(namespace: "custom", key: "promotion") {
+        key
+        value
+      }
+      hotDeal: metafield(namespace: "custom", key: "hotDeal") {
+        key
+        value
+      }
+      features: metafield(namespace: "custom", key: "features") {
+        key
+        value
+      }
     collections(first: 1){
         nodes{
             title
