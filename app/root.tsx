@@ -26,6 +26,7 @@ import header from './styles/header.css'
 import product from './styles/product.css'
 import swiper from './styles/swiper.css'
 import account from './styles/account.css'
+import about from './styles/about.css'
 import { Layout } from '~/components/Layout'
 
 /**
@@ -57,6 +58,7 @@ export function links() {
         { rel: 'stylesheet', href: product },
         { rel: 'stylesheet', href: swiper },
         { rel: 'stylesheet', href: account },
+        { rel: 'stylesheet', href: about },
         {
             rel: 'preconnect',
             href: 'https://cdn.shopify.com',

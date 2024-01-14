@@ -1,0 +1,106 @@
+.a-futur {
+    font-family: 'Helvetica Neue', sans-serif;
+}
+
+.a-futur p {
+    width: 80%;
+    margin: 50px auto;
+}
+
+.a-futur-double{
+    display: flex;
+    width: 100%;
+}
+
+.a-futur-double div{
+    width: 50%;
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.a-futur-double div h2{
+    position: relative;
+    z-index: 1; /* Positionner le texte au-dessus de l'image de fond */
+}
+
+.a-futur-double-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    filter: blur(10px); /* Appliquer le flou à l'image de fond */
+    transition: 0.5s ease;
+}
+
+.a-futur-double-item:hover::before {
+    filter: none; /* Supprimer le flou au survol */
+}
+
+.a-futur-double-item:nth-child(1)::before {
+    background-image: url(public/search.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.a-futur-double-item:nth-child(2)::before {
+    background-image: url(public/search.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.a-first{
+    width: 80%;
+    margin: 200px auto;
+}
+
+.a-first h1{
+    font-size: 90px;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #fff;
+    color: #000;
+    margin-top: 20px;
+}
+
+.a-first img{
+  margin: 0 auto;
+}
+
+.a-first h2{
+    font-size: 30px;
+    margin: auto;
+    text-align: center;
+}
+
+.a-third .modal-stickers-about{
+    width: 80%;
+    background: #121212;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+
+.a-third-stick {
+    margin-top: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.a-third-stick h2{
+    margin-bottom: 30px;
+}
+
+.a-third-stick-container{
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-between;
+    width: 40%;
+    margin-bottom: 100px;
+}

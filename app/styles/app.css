@@ -573,11 +573,28 @@ aside .closeSearch {
     margin: 0 20px 70px 20px;
 }
 
+.product-grid{
+    position: relative;
+
+}
+
 .panel-container .panel-products-grid .product-grid .product-img-grid {
     width: 343px;
     height: 231px;
     background-color: #fff;
 }
+
+
+.panel-container .panel-products-grid .product-grid .product-img-grid-sticker{
+    top: -35px;
+    right: -30px;
+    width: 80px;
+    height: 70px;
+    object-fit: cover;
+    position: absolute;
+    z-index: 1;
+}
+
 
 .panel-container .panel-products-grid .product-grid .product-img-grid img {
     width: 100%;
@@ -596,6 +613,94 @@ aside .closeSearch {
 .panel-container .panel-products-grid .product-grid .product-info-grid p {
     margin-top: 2px;
     text-transform: uppercase;
+}
+
+/* MODAL STICKERS */
+
+.modal-stickers-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    width: 80%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 0px 13px 1000px rgba(0,0,0,0.8);
+
+}
+
+.modal-stickers-overlay::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(54, 54, 54, 0.9); /* Semi-transparent gray background */
+    backdrop-filter: blur(10px); /* Glass effect */
+    z-index: -1; /* Derrière le contenu */
+}
+
+.modal-stickers {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1; /* Au-dessus du pseudo-élément */
+}
+
+.modal-stickers-close {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
+
+}
+
+.modal-stickers-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-stickers-header h2{
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+.modal-stickers-header p{
+    text-align: center;
+    padding-bottom: 50px;
+}
+
+.modal-stickers-body{
+    width: 100%;
+}
+
+.modal-stickers-body-item{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px 40px;
+    border-top: 1px solid #fff;
+}
+
+.modal-stickers-body-item p{
+    margin-left: 15px;
+}
+
+.modal-stickers-body-item img{
+    width: 71px;
+    height: 64px;
+    object-fit: cover;
 }
 
 .hfooter {

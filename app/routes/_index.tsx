@@ -15,7 +15,6 @@ export async function loader({ context }: LoaderFunctionArgs) {
 export default function HomePage() {
     const { products } = useLoaderData<typeof loader>()
     const productsList = products.metaobjects.nodes[0].field.references.nodes
-    console.log(productsList)
 
     const firstList = productsList.slice(0, 12)
     const secondList = productsList.slice(12, 16)
@@ -280,6 +279,38 @@ query MetaObjects {
               title
               productType
               handle
+                  toothBrush: metafield(namespace: "custom", key: "toothbrush") {
+                    key
+                    value
+                  }
+                  ooo: metafield(namespace: "custom", key: "outofstock") {
+                    key
+                    value
+                  }
+                  new: metafield(namespace: "custom", key: "new") {
+                    key
+                    value
+                  }
+                  ship: metafield(namespace: "custom", key: "fastShip") {
+                    key
+                    value
+                  }
+                  release: metafield(namespace: "custom", key: "release") {
+                    key
+                    value
+                  }
+                  promotion: metafield(namespace: "custom", key: "promotion") {
+                    key
+                    value
+                  }
+                  hotDeal: metafield(namespace: "custom", key: "hotDeal") {
+                    key
+                    value
+                  }
+                  features: metafield(namespace: "custom", key: "features") {
+                    key
+                    value
+                  }
               images(first: 1) {
                 nodes {
                   url

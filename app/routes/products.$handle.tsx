@@ -302,7 +302,6 @@ function ProductImage({ image, product }: { image: any; product: any }) {
         }
     }
 
-    console.log(productsFromCollection)
     return (
         <div className='product-image-container'>
             <div className='product-image'>
