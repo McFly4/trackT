@@ -98,6 +98,13 @@ export async function loader({ context }: LoaderFunctionArgs) {
         },
     })
 
+    const footerPromise2 = storefront.query(FOOTER_QUERY2, {
+        cache: storefront.CacheLong(),
+        variables: {
+            footerMenuHandle: 'footerincontournables', // Adjust to your footer menu handle
+        },
+    })
+
     // await the header query (above the fold)
     const headerPromise = storefront.query(HEADER_QUERY, {
         cache: storefront.CacheLong(),
@@ -110,6 +117,7 @@ export async function loader({ context }: LoaderFunctionArgs) {
         {
             cart: cartPromise,
             footer: footerPromise,
+            footer2: footerPromise2,
             header: await headerPromise,
             isLoggedIn,
             publicStoreDomain,
@@ -280,6 +288,19 @@ const HEADER_QUERY = `#graphql
 ` as const
 
 const FOOTER_QUERY = `#graphql
+  query Footer(
+    $country: CountryCode
+    $footerMenuHandle: String!
+    $language: LanguageCode
+  ) @inContext(language: $language, country: $country) {
+    menu(handle: $footerMenuHandle) {
+      ...Menu
+    }
+  }
+  ${MENU_FRAGMENT}
+` as const
+
+const FOOTER_QUERY2 = `#graphql
   query Footer(
     $country: CountryCode
     $footerMenuHandle: String!

@@ -1,6 +1,7 @@
 import { FooterQuery } from '../../storefrontapi.generated'
 
 export function Footer(menu: FooterQuery) {
+    console.log(menu)
     return (
         <footer className='footer'>
             <div>
@@ -8,13 +9,21 @@ export function Footer(menu: FooterQuery) {
             </div>
             <div className='footer-menu'>
                 <h2>liens utiles</h2>
-                <p>Saut la team</p>
-                <p>Saut la team</p>
+                <p>infos légales</p>
+                <p>RETOURS & REMBOURSEMENTS</p>
+                <p>FAQ</p>
+                <p>blog</p>
+                <p>Carrières</p>
+                <p>Plan du site</p>
             </div>
             <div className='footer-menu'>
                 <h2>incontournables</h2>
-                <p>Saut la team</p>
-                <p>Saut la team</p>
+                <p>indépendant brand</p>
+                <p>exclusive item</p>
+                <p>hot deal</p>
+                <p>nouveautés</p>
+                <p>chez vous en 24h</p>
+                <p>en promo</p>
             </div>
             <div className='footer-media'>
                 <h2>

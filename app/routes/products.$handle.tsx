@@ -440,15 +440,49 @@ function ProductMain({
     product,
     variants,
 }: {
-    product: ProductFragment
+    product: any
     selectedVariant: ProductFragment['selectedVariant']
     variants: Promise<ProductVariantsQuery>
 }) {
     const { title, descriptionHtml } = product
 
+    const mapping = {
+        hotDeal: product.hotDeal,
+        new: product.new,
+        ooo: product.ooo,
+        promotion: product.promotion,
+        release: product.release,
+        ship: product.ship,
+    } as any
+
+    const stickersData = Object.keys(mapping).reduce((acc: any, key: any) => {
+        if (mapping[key]) {
+            acc.push({ key })
+        }
+        return acc
+    }, [])
+
     return (
         <div className='product-main'>
-            <h1>{title}</h1>
+            <div
+                style={{
+                    position: 'relative',
+                    display: 'flex',
+                    justifyContent: 'flex-start',
+                    alignItems: 'center',
+                }}
+            >
+                <h1>{title}</h1>
+                <div>
+                    {stickersData.map((item: any, index: any) => (
+                        <StickerComponent
+                            key={index}
+                            keyName={item.key}
+                            offset={index * 20}
+                        />
+                    ))}
+                </div>
+            </div>
             <div className='product-main-head'>
                 <ProductPrice selectedVariant={selectedVariant} />
                 <Suspense
@@ -506,6 +540,22 @@ function ProductMain({
             {/*</p>*/}
             {/*<div dangerouslySetInnerHTML={{ __html: descriptionHtml }} />*/}
         </div>
+    )
+}
+
+function StickerComponent({ keyName, offset }: any) {
+    const stickerPath = `/product/stickers/${keyName}.png`
+
+    const style = {
+        marginRight: `-50px`,
+    }
+    return (
+        <img
+            className='product-sticker'
+            src={stickerPath}
+            alt={keyName}
+            style={style}
+        />
     )
 }
 
