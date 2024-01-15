@@ -44,13 +44,13 @@
 }
 
 .a-futur-double-item:nth-child(1)::before {
-    background-image: url(public/search.png);
+    background-image: url(public/about/experience.png);
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 .a-futur-double-item:nth-child(2)::before {
-    background-image: url(public/search.png);
+    background-image: url(public/about/2025.png);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -103,4 +103,122 @@
     justify-content: space-between;
     width: 40%;
     margin-bottom: 100px;
+}
+
+.a-third-guid{
+    width: 80%;
+    background: #121212;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 55px;
+    margin-bottom: 80px;
+    border-radius: 8px;
+}
+
+.a-third-guid p {
+text-align: center;
+}
+
+.a-third-guid-container{
+    margin-top: 60px;
+    border-top: 2px solid #222222;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.a-third-guid-container-item{
+    padding: 30px 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.a-third-guid-container-item p:first-of-type{
+    font-size: 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 30px 0;
+}
+
+.a-third-guid-container-item:not(:last-child){
+    border-right: 2px solid #222222;
+
+}
+
+.a-third-cart div p:first-of-type{
+    text-transform: uppercase;
+    font-size: 23px;
+    margin-top: 50px;
+    font-weight: 600;
+}
+
+.a-third-cart div span{
+    margin-bottom: 20px;
+}
+
+.a-third-cart div p{
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 60px;
+}
+
+.a-third-cart div p:last-of-type{
+    font-size: 15px;
+    font-weight: 400;
+    margin-bottom: unset;
+}
+
+.a-fourth-exclusive{
+    width: 70%;
+    margin: 0 auto;
+    background: #121212;
+    display: flex;
+    align-items: center;
+    padding: 40px;
+    margin-bottom: 30px;
+}
+
+.a-fourth-exclusive-text{
+    margin-left: 100px;
+}
+
+.a-fourth-exclusive-text p{
+    margin-top: 25px;
+}
+
+.a-fourth-trackt{
+    width: 100%;
+}
+
+.a-vision{
+    width: 80%;
+    margin: 75px auto 0 auto;
+}
+
+.a-vision h2{
+    font-size: 90px;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #fff;
+    color: #000;
+    margin-top: 20px;
+    margin-bottom: 100px;
+}
+
+.a-vision-container-item{
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background: #121212;
+    padding-left: 50px;
+}
+
+.a-vision-container-item p{
+    padding: 0 50px;
 }

@@ -604,6 +604,7 @@ function ProductOptions({ option }: { option: VariantOption }) {
                     grabCursor={true}
                     centeredSlides={true}
                     initialSlide={midle}
+                    className='product-swiper'
                 >
                     {sortedValues.map(
                         ({ value, isAvailable, isActive, to }) => (

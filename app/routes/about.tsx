@@ -1,5 +1,4 @@
 import { type MetaFunction } from '@remix-run/react'
-
 export const meta: MetaFunction = () => {
     return [{ title: 'About' }]
 }
@@ -188,6 +187,236 @@ export default function About() {
                         <img src='/product/size/49.5.png' alt='size' />
                         <img src='/product/size/40.png' alt='size' />
                     </div>
+                    <div className='a-third-guid'>
+                        <h2>Guide des tailles</h2>
+                        <p>
+                            Nous avons classifié nos articles en trois
+                            catégories distinctes pour mieux vous aider à
+                            choisir vos tailles : Little, Medium et Over. <br />
+                            Nous vous invitons à explorer ces différentes
+                            options pour trouver la coupe qui vous convient le
+                            mieux.
+                        </p>
+                        <div className='a-third-guid-container'>
+                            <div className='a-third-guid-container-item'>
+                                <img
+                                    src='/about/little_toothbrush.png'
+                                    alt='little_toothbrush'
+                                />
+                                <p>Little</p>
+                                <p>
+                                    Adapté à ceux qui aiment un style structuré.
+                                    Coupe sérée.
+                                </p>
+                            </div>
+                            <div className='a-third-guid-container-item'>
+                                <img
+                                    src='/about/medium_toothbrush.png'
+                                    alt='medium_toothbrush'
+                                />
+                                <p>Medium</p>
+                                <p>
+                                    Conçu pour ceux qui cherchent l’équilibre.
+                                    Sizing universel.
+                                </p>
+                            </div>
+                            <div className='a-third-guid-container-item'>
+                                <img
+                                    src='/about/over_toothbrush.png'
+                                    alt='over_toothbrush'
+                                />
+                                <p>over</p>
+                                <p>
+                                    Destiné à ceux qui privilégient l’espace et
+                                    la liberté de mouvement.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='a-third-guid'>
+                        <h2>OPTIONS DE LIVRAISON & RETOUR</h2>
+                        <p>
+                            Nous avons crée trois catégories d’achats pour
+                            nuancer les différentes options de retours et
+                            remboursement. <br />
+                            Repérez-les lors de vos achats pour comprendre les
+                            modalités de renvois/livraison et choisir ce qui
+                            vous convient le mieux.
+                        </p>
+                        <div className='a-third-guid-container a-third-cart'>
+                            <div className='a-third-guid-container-item'>
+                                <img
+                                    src='/cart/cartClassic.png'
+                                    alt='cartClassic'
+                                />
+                                <p>Pannier classique</p>
+                                <span>0 - 250€</span>
+                                <p>
+                                    LIVRAISON PAYANTE <br />
+                                    RETOURS GRATUIT <br />
+                                    BOOSTER RETOUR* 24H (10 €)
+                                </p>
+                                <p>Livraison 10€</p>
+                            </div>
+                            <div className='a-third-guid-container-item'>
+                                <img
+                                    src='/cart/cartPremium.png'
+                                    alt='cartClassic'
+                                />
+                                <p>Pannier premium</p>
+                                <span>250€ - 500€</span>
+                                <p>
+                                    LIVRAISON PAYANTE <br />
+                                    RETOURS GRATUIT <br />
+                                    BOOSTER RETOUR* 24H (20 €)
+                                </p>
+                                <p>Livraison 5€</p>
+                            </div>
+                            <div className='a-third-guid-container-item'>
+                                <img
+                                    src='/cart/cartExclusif.png'
+                                    alt='cartClassic'
+                                />
+                                <p>Pannier premium</p>
+                                <span>+500€</span>
+                                <p>
+                                    LIVRAISON GRATUITE <br />
+                                    RETOURS GRATUIT <br />
+                                    BOOSTER RETOUR* 48H (30 €)
+                                </p>
+                                <p>Livraison express</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p
+                        style={{
+                            width: '80%',
+                            margin: '0 auto',
+                            marginTop: '-50px',
+                        }}
+                    >
+                        * Les booster retours sont des codes de réductions que
+                        vous pouvez activer sur toute notre boutique. Leur
+                        montant et leur durée de vie sont variable selon le type
+                        de panier que vous avez commandé. Dès que notre équipe
+                        valide votre retour, vous pouvez délibérément activer
+                        votre booster ou le préserver pour de futurs achats.
+                    </p>
+                </div>
+            </div>
+            <div className='a-fourth'>
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        margin: '40px 0',
+                    }}
+                >
+                    <img src='/about/4.png' alt='about' />
+                    <h2
+                        style={{
+                            marginTop: '80px',
+                        }}
+                    >
+                        ARTICLES EXCLUSIFS
+                    </h2>
+                </div>
+                <div className='a-fourth-exclusive'>
+                    <img src='/about/green.png' alt='green' />
+                    <div className='a-fourth-exclusive-text'>
+                        <h2>EXCLUSIVITÉ À VOTRE PORTÉE</h2>
+                        <p>
+                            Exclusif ne signifie pas inaccessible. Sur Trackt,
+                            nous vous ouvrons les portes d’un monde où
+                            l’exclusivité et le style se rencontrent. Des
+                            éditions limitées, des collaborations uniques, et
+                            des trouvailles rares – tout est sélectionné pour
+                            vous offrir une expérience de mode streetwear hors
+                            du commun. Notre sélection est votre passeport pour
+                            un style qui se démarque, pour des pièces que tout
+                            le monde ne peut pas avoir. Avec Trackt,
+                            habillez-vous dans ce qui définit le futur du
+                            streetwear, aujourd’hui.
+                        </p>
+                    </div>
+                </div>
+                <div className='a-fourth-trackt'></div>
+            </div>
+            <div className='a-vision'>
+                <h2>Vision trackT 2025</h2>
+                <div className='a-vision-container'>
+                    <div className='a-vision-container-item'>
+                        <img src='/about/drop.png' alt='about' />
+                        <p>
+                            « Drop Reused » est le centre de la vision durable
+                            et innovante de TrackT. Nous réinventons le
+                            streetwear en donnant une seconde vie à des produits
+                            usagés, notamment des sneakers, remis à neuf et
+                            proposés à des prix accessibles. Ces ventes
+                            régulières sont une célébration de la mode
+                            responsable et un moyen d’obtenir des produits plus
+                            accessibles. Grâce à notre système de notation
+                            transparent, chaque client peut connaître l’état
+                            précis du produit. C’est une expérience d’achat
+                            travaillée et authentique, où le style rencontre la
+                            durabilité et l’accessibilité.
+                        </p>
+                    </div>
+                    <div className='a-vision-container-item'>
+                        <img src='/about/track.png' alt='about' />
+                        <p>
+                            Chez Trackt, nous savons pertinemment que la quête
+                            du parfait style peut parfois demander un petit coup
+                            de pouce. C’est pourquoi nous vous présentons
+                            « Track Item » : un service sur mesure où vos
+                            souhaits prennent vie. Vous ne trouvez pas
+                            exactement ce que vous cherchez sur notre site ?
+                            Envoyez-nous votre requête, et notre équipe se
+                            lancera dans une traque pour vous aider à trouver
+                            l’article idéal, à votre taille et à un prix qui
+                            vous convient. C’est l’authenticité Trackt à votre
+                            service, où chaque demande est un nouveau défi.
+                        </p>
+                    </div>
+                    <div className='a-vision-container-item'>
+                        <img src='/about/wanted.png' alt='about' />
+                        <p>
+                            Pour nos connaisseurs de streetwear, « Wanted Item »
+                            est votre terrain de jeu. Vous avez un œil pour les
+                            pièces rares et exclusives ? Parcourez notre liste
+                            d’items convoités et, si vous possédez ce que nous
+                            cherchons, faites-nous une proposition. C’est une
+                            collaboration moderne, et rémunératrice, où votre
+                            passion et votre connaissance du streetwear sont
+                            récompensées. Rejoignez-nous dans cette aventure
+                            unique, où chaque article que vous proposez
+                            contribue à façonner et à enrichir l’univers
+                            diversifié et dynamique de Trackt. Votre flair pour
+                            dénicher l’exceptionnel devient une partie
+                            intégrante de notre mission pour offrir le meilleur
+                            du streetwear à notre communauté.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div className='a-assets'>
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                    }}
+                >
+                    <img src='/about/jean.png' alt='asset1' />
+                </div>
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                    }}
+                >
+                    <img src='/about/sweat.png' alt='asset1' />
                 </div>
             </div>
         </>

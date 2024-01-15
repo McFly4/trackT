@@ -108,7 +108,7 @@
     font-weight: 600;
 }
 
-.swiper-slide{
+.product-swiper .swiper-slide{
     display: flex !important;
     justify-content: center;
 }

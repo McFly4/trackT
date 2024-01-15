@@ -1,6 +1,9 @@
+import React, { useRef } from 'react'
 import { json, type LoaderFunctionArgs } from '@shopify/remix-oxygen'
 import { Link, type MetaFunction, useLoaderData } from '@remix-run/react'
 import MainProduct from '~/components/Common/mainProduct'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Autoplay } from 'swiper/modules'
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
     return [{ title: `Hydrogen ` }]
@@ -19,7 +22,17 @@ export default function HomePage() {
     const firstList = productsList.slice(0, 12)
     const secondList = productsList.slice(12, 16)
     const thirdList = productsList.slice(16, 20)
+    const swiperRef = useRef(null)
 
+    const progressContent = useRef<HTMLSpanElement | null>(null)
+
+    const onAutoplayTimeLeft = (s: any, time: any, progress: any) => {
+        if (progressContent.current) {
+            progressContent.current.textContent = `${Math.ceil(time / 1000)}`
+        }
+    }
+
+    console.log(progressContent)
     return (
         <div
             style={{
@@ -27,9 +40,43 @@ export default function HomePage() {
             }}
         >
             <div className='home'>
-                <a href='#shop'>
-                    <button className='home-btn'>Shop now</button>
-                </a>
+                <Swiper
+                    ref={swiperRef}
+                    slidesPerView={1}
+                    spaceBetween={0}
+                    loop
+                    modules={[Autoplay]}
+                    autoplay={{
+                        delay: 10000,
+                    }}
+                    allowTouchMove={false}
+                    onAutoplayTimeLeft={onAutoplayTimeLeft}
+                >
+                    <SwiperSlide
+                        style={{
+                            width: '100% !important',
+                        }}
+                    >
+                        <img src='/home/home1.png' alt='home' />
+                    </SwiperSlide>
+                    <SwiperSlide
+                        style={{
+                            width: '100% !important',
+                        }}
+                    >
+                        <img src='/home/home2.png' alt='home' />
+                    </SwiperSlide>
+                    <div className='autoplay-progress' slot='container-end'>
+                        <span ref={progressContent}></span>
+                    </div>
+                </Swiper>
+                {/*<Link to='#shop'>*/}
+                {/*    <img*/}
+                {/*        src='/home/shopnow.png'*/}
+                {/*        alt='shopnow'*/}
+                {/*        className='shopnow'*/}
+                {/*    />*/}
+                {/*</Link>*/}
             </div>
             <div className='panel-trackt'>
                 <div className='filter-trackt'>

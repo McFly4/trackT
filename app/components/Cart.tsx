@@ -319,7 +319,7 @@ export function CartEmpty({
                 Pannier vide
             </h1>
             <img
-                src='/emptyCart.png'
+                src='/cart/emptyCart.png'
                 alt='panier vide'
                 style={{
                     width: 'fit-content',
