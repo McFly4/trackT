@@ -12,6 +12,14 @@ button {
     cursor: pointer;
 }
 
+/* DESIGN SYSTEM */
+
+h3{
+    font-size: 31px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
 p,
 h1,
 h2,

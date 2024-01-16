@@ -271,7 +271,6 @@ function OrderItem({ order }: { order: OrderItemFragment }) {
         gridTemplateColumns: `repeat(${numCols}, 1fr)`,
     }
 
-    console.log(images?.map((image: any) => image?.variant?.image?.url))
     return (
         <Link to={`/account/orders/${btoa(order.id)}`}>
             <div className='order'>
