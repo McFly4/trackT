@@ -67,6 +67,7 @@
     background-color: #121212;
     padding: 30px 40px;
     border-radius: 5px;
+    margin-left: 50px;
 }
 
 .product-main-features h2{
@@ -319,9 +320,8 @@
 /* TRACKT */
 
 .trackT{
-    margin: 0 80px;
-    margin-top: 50px;
-    padding: 50px 80px;
+    margin:80px;
+    padding: 50px;
     background-color: #121212;
     border-radius: 5px;
 }

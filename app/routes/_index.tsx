@@ -65,7 +65,9 @@ export default function HomePage() {
                             width: '100% !important',
                         }}
                     >
-                        <img src='/home/home2.png' alt='home' />
+                        <Link to='/about'>
+                            <img src='/home/home2.png' alt='home' />
+                        </Link>
                     </SwiperSlide>
                     <div className='autoplay-progress' slot='container-end'>
                         <span ref={progressContent}></span>
@@ -254,7 +256,6 @@ export default function HomePage() {
                     </p>
                     <button>Accéder aux filtres</button>
                 </div>
-                <TrackT products={productsList} />
                 <MarketDrag />
             </div>
         </div>
@@ -272,38 +273,39 @@ query MetaObjects {
               title
               productType
               handle
-                  toothBrush: metafield(namespace: "custom", key: "toothbrush") {
-                    key
-                    value
-                  }
-                  ooo: metafield(namespace: "custom", key: "outofstock") {
-                    key
-                    value
-                  }
-                  new: metafield(namespace: "custom", key: "new") {
-                    key
-                    value
-                  }
-                  ship: metafield(namespace: "custom", key: "fastShip") {
-                    key
-                    value
-                  }
-                  release: metafield(namespace: "custom", key: "release") {
-                    key
-                    value
-                  }
-                  promotion: metafield(namespace: "custom", key: "promotion") {
-                    key
-                    value
-                  }
-                  hotDeal: metafield(namespace: "custom", key: "hotDeal") {
-                    key
-                    value
-                  }
-                  features: metafield(namespace: "custom", key: "features") {
-                    key
-                    value
-                  }
+              vendor
+              toothBrush: metafield(namespace: "custom", key: "toothbrush") {
+                key
+                value
+              }
+              ooo: metafield(namespace: "custom", key: "outofstock") {
+                key
+                value
+              }
+              new: metafield(namespace: "custom", key: "new") {
+                key
+                value
+              }
+              ship: metafield(namespace: "custom", key: "fastShip") {
+                key
+                value
+              }
+              release: metafield(namespace: "custom", key: "release") {
+                key
+                value
+              }
+              promotion: metafield(namespace: "custom", key: "promotion") {
+                key
+                value
+              }
+              hotDeal: metafield(namespace: "custom", key: "hotDeal") {
+                key
+                value
+              }
+              features: metafield(namespace: "custom", key: "features") {
+                key
+                value
+              }
               images(first: 1) {
                 nodes {
                   url

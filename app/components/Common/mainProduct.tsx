@@ -51,8 +51,8 @@ export default function ({ product }: any) {
                 <div className='product-info-grid'>
                     <h3>
                         {product.productType.length > 30
-                            ? product.productType.slice(0, 30) + '...'
-                            : product.productType}
+                            ? product.vendor.slice(0, 30) + '...'
+                            : product.vendor}
                     </h3>
                     <p>
                         {product.title.length > 30

@@ -29,6 +29,8 @@ import type {
 import { getVariantUrl } from '~/utils'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import MainProduct from '~/components/Common/mainProduct'
+import TrackT from '~/components/Common/TrackT'
+import { Scrollbar, Grid } from 'swiper/modules'
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
     return [{ title: `Hydrogen | ${data?.product.title ?? ''}` }]
@@ -121,6 +123,9 @@ function redirectToFirstVariant({
 export default function Product() {
     const { product, variants, products } = useLoaderData<typeof loader>()
     const { selectedVariant } = product
+    const productsList =
+        products?.metaobjects?.nodes[0]?.field?.references?.nodes
+
     return (
         <>
             <div className='product'>
@@ -134,119 +139,8 @@ export default function Product() {
             <div className='productBanner'>
                 <img src='/product/banner.png' alt='banner' />
             </div>
-            <PanelTrackt products={products} />
+            <TrackT products={productsList} />
         </>
-    )
-}
-
-function PanelTrackt({ products }: { products: any }) {
-    const gridRef = useRef<HTMLDivElement>(null)
-    const [isDragging, setDragging] = useState(false)
-    const [startX, setStartX] = useState(0)
-
-    const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-        setDragging(true)
-        setStartX(e.pageX - (gridRef.current?.offsetLeft || 0))
-    }
-
-    const handleMouseUp = () => {
-        setDragging(false)
-    }
-
-    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (!isDragging) return
-        const scrollLeft = e.pageX - startX
-        if (gridRef.current) {
-            gridRef.current.scrollLeft = scrollLeft
-        }
-    }
-
-    const scrollGrid = (direction: number) => {
-        const scrollAmount = 400 // Ajustez la valeur selon votre préférence
-        if (gridRef.current) {
-            gridRef.current.scrollBy({
-                left: direction * scrollAmount,
-                behavior: 'smooth',
-            })
-        }
-    }
-
-    return (
-        <div className='trackT'>
-            <div className='trackT-header'>
-                <h2>Panel TrackT</h2>
-                <div className='navigation-buttons'>
-                    <button onClick={() => scrollGrid(-1)}>
-                        <svg
-                            xmlns='http://www.w3.org/2000/svg'
-                            width='7.574'
-                            height='13.928'
-                            viewBox='0 0 7.574 13.928'
-                        >
-                            <path
-                                id='Tracé_416'
-                                data-name='Tracé 416'
-                                d='M-20862.068-17757.791a.61.61,0,0,1-.432-.18.612.612,0,0,1,0-.861l5.924-5.924-5.924-5.924a.612.612,0,0,1,0-.861.611.611,0,0,1,.863,0l6.355,6.354a.614.614,0,0,1,0,.863l-6.355,6.354A.61.61,0,0,1-20862.068-17757.791Z'
-                                transform='translate(20862.678 17771.719)'
-                                fill='#fff'
-                            />
-                        </svg>
-                    </button>
-                    <button onClick={() => scrollGrid(1)}>
-                        <svg
-                            xmlns='http://www.w3.org/2000/svg'
-                            width='7.574'
-                            height='13.928'
-                            viewBox='0 0 7.574 13.928'
-                        >
-                            <path
-                                id='Tracé_416'
-                                data-name='Tracé 416'
-                                d='M-20862.068-17757.791a.61.61,0,0,1-.432-.18.612.612,0,0,1,0-.861l5.924-5.924-5.924-5.924a.612.612,0,0,1,0-.861.611.611,0,0,1,.863,0l6.355,6.354a.614.614,0,0,1,0,.863l-6.355,6.354A.61.61,0,0,1-20862.068-17757.791Z'
-                                transform='translate(20862.678 17771.719)'
-                                fill='#fff'
-                            />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-            <div
-                className='trackT-grid'
-                ref={gridRef}
-                onMouseDown={handleMouseDown}
-                onMouseUp={handleMouseUp}
-                onMouseMove={handleMouseMove}
-            >
-                {products?.metaobjects?.nodes[0]?.field?.references?.nodes?.map(
-                    (product: any) => (
-                        <Link
-                            key={product.title}
-                            to={`/products/${product.handle}`}
-                        >
-                            <div className='trackt-grid-product'>
-                                <img
-                                    src={product.images.nodes[0].url}
-                                    alt={product.title}
-                                />
-                            </div>
-                            <div className='product-connexe-2'>
-                                <h3>
-                                    {product.productType.length > 30
-                                        ? product.productType.slice(0, 30) +
-                                          '...'
-                                        : product.productType}
-                                </h3>
-                                <p>
-                                    {product.title.length > 30
-                                        ? product.title.slice(0, 30) + '...'
-                                        : product.title}
-                                </p>
-                            </div>
-                        </Link>
-                    )
-                )}
-            </div>
-        </div>
     )
 }
 
@@ -268,38 +162,14 @@ function ProductImage({ image, product }: { image: any; product: any }) {
 
     const [mainImage, setMainImage] = useState(firstImage || image.url)
     const productsFromCollection = product?.collections?.nodes[0].products.nodes
-    const numberOfProducts = Math.ceil(
-        (productsFromCollection?.length || 0) / 2
-    )
-    const gridRef = useRef<HTMLDivElement>(null)
-    const [isDragging, setDragging] = useState(false)
-    const [startX, setStartX] = useState(0)
+    const swiperRef = useRef<any>(null)
 
-    const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-        setDragging(true)
-        setStartX(e.pageX - (gridRef.current?.offsetLeft || 0))
+    const nexto = () => {
+        swiperRef.current?.slideNext()
     }
 
-    const handleMouseUp = () => {
-        setDragging(false)
-    }
-
-    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (!isDragging) return
-        const scrollLeft = e.pageX - startX
-        if (gridRef.current) {
-            gridRef.current.scrollLeft = scrollLeft
-        }
-    }
-
-    const scrollGrid = (direction: number) => {
-        const scrollAmount = 400 // Ajustez la valeur selon votre préférence
-        if (gridRef.current) {
-            gridRef.current.scrollBy({
-                left: direction * scrollAmount,
-                behavior: 'smooth',
-            })
-        }
+    const previo = () => {
+        swiperRef.current?.slidePrev()
     }
 
     return (
@@ -355,11 +225,17 @@ function ProductImage({ image, product }: { image: any; product: any }) {
                     ))}
                 </div>
             </div>
-            <div className='product-connexe'>
-                <div className='product-connexe-header'>
-                    <h2>Produits connexes</h2>
+            <div
+                className='trackT'
+                style={{
+                    margin: 'unset',
+                    marginTop: '50px',
+                }}
+            >
+                <div className='trackT-header'>
+                    <h2>Panel trackt</h2>
                     <div className='navigation-buttons'>
-                        <button onClick={() => scrollGrid(-1)}>
+                        <button onClick={previo}>
                             <svg
                                 xmlns='http://www.w3.org/2000/svg'
                                 width='7.574'
@@ -375,7 +251,7 @@ function ProductImage({ image, product }: { image: any; product: any }) {
                                 />
                             </svg>
                         </button>
-                        <button onClick={() => scrollGrid(1)}>
+                        <button onClick={nexto}>
                             <svg
                                 xmlns='http://www.w3.org/2000/svg'
                                 width='7.574'
@@ -393,43 +269,38 @@ function ProductImage({ image, product }: { image: any; product: any }) {
                         </button>
                     </div>
                 </div>
-                <div
-                    className='product-connexe-grid'
-                    ref={gridRef}
-                    onMouseDown={handleMouseDown}
-                    onMouseUp={handleMouseUp}
-                    onMouseMove={handleMouseMove}
-                    style={{
-                        gridTemplateColumns: `repeat(${numberOfProducts}, 1fr)`,
+                <Swiper
+                    modules={[Scrollbar, Grid]}
+                    grid={{
+                        rows: 2,
+                        fill: 'row',
                     }}
+                    scrollbar={{
+                        hide: false,
+                    }}
+                    watchSlidesProgress={true}
+                    slidesPerView={2}
+                    grabCursor={true}
+                    navigation={{
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    }}
+                    spaceBetween={40}
+                    onSwiper={(swiper) => (swiperRef.current = swiper)}
                 >
-                    {productsFromCollection?.map((product: any) => (
-                        <Link
-                            key={product.title}
-                            to={`/products/${product.handle}`}
-                        >
-                            <div className='product-connexe-1'>
-                                <img
-                                    src={product.images.nodes[0].url}
-                                    alt={product.title}
-                                />
-                            </div>
-                            <div className='product-connexe-2'>
-                                <h3>
-                                    {product.productType.length > 30
-                                        ? product.productType.slice(0, 30) +
-                                          '...'
-                                        : product.productType}
-                                </h3>
-                                <p>
-                                    {product.title.length > 30
-                                        ? product.title.slice(0, 30) + '...'
-                                        : product.title}
-                                </p>
-                            </div>
-                        </Link>
-                    ))}
-                </div>
+                    {productsFromCollection?.map(
+                        (product: any, index: number) => (
+                            <SwiperSlide
+                                key={index}
+                                style={{
+                                    padding: '40px 0',
+                                }}
+                            >
+                                <MainProduct product={product} />
+                            </SwiperSlide>
+                        )
+                    )}
+                </Swiper>
             </div>
         </div>
     )
@@ -903,6 +774,39 @@ query MetaObjects {
               title
               productType
               handle
+              vendor
+                                toothBrush: metafield(namespace: "custom", key: "toothbrush") {
+                    key
+                    value
+                  }
+                  ooo: metafield(namespace: "custom", key: "outofstock") {
+                    key
+                    value
+                  }
+                  new: metafield(namespace: "custom", key: "new") {
+                    key
+                    value
+                  }
+                  ship: metafield(namespace: "custom", key: "fastShip") {
+                    key
+                    value
+                  }
+                  release: metafield(namespace: "custom", key: "release") {
+                    key
+                    value
+                  }
+                  promotion: metafield(namespace: "custom", key: "promotion") {
+                    key
+                    value
+                  }
+                  hotDeal: metafield(namespace: "custom", key: "hotDeal") {
+                    key
+                    value
+                  }
+                  features: metafield(namespace: "custom", key: "features") {
+                    key
+                    value
+                  }
               images(first: 1) {
                 nodes {
                   url
