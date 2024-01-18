@@ -164,8 +164,11 @@
     color: #000;
 }
 
-.product-price-container div img{
+.product-price-container img{
     cursor: not-allowed;
+    width: 190px;
+    height: 210px;
+    object-fit: cover;
 }
 
 .product-price form button{

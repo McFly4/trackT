@@ -359,6 +359,7 @@ aside .closeSearch {
     border: none;
     color: #fff;
     outline: none;
+
 }
 
 .predictive-search-form button {
@@ -577,11 +578,16 @@ aside .closeSearch {
 
 .panel-trackt .filter-trackt .filter-sticky h1 {
     text-transform: uppercase;
-    color: #fff;
+    color: rgba(0, 0, 0, 0.5);
     transform: rotate(270deg);
-    font-size: 100px;
+    font-size: 210px;
     font-weight: bold;
     cursor: pointer;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: #000;
+    font-family: 'Druk', sans-serif;
+    letter-spacing: 10px;
+    text-shadow: 0 0 0px rgba(255, 255, 255, .5);
 }
 
 .panel-trackt .filter-trackt .filter-sticky p {
@@ -770,11 +776,30 @@ aside .closeSearch {
 
 }
 
-.hfooter .gofilters button {
+.hfooter .gofilters-btn {
     text-transform: uppercase;
     margin-top: 40px;
+    position: relative;
+    cursor: pointer;
+}
+
+.hfooter .gofilters-btn img{
+    opacity: 0.5;
 
 }
+
+
+.hfooter .gofilters-btn p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 17px;
+    font-family: 'HelveticaNeue500', sans-serif ;
+
+}
+
+
 
 .hfooter .hinfos {
     display: flex;

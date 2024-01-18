@@ -31,6 +31,8 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import MainProduct from '~/components/Common/mainProduct'
 import TrackT from '~/components/Common/TrackT'
 import { Scrollbar, Grid } from 'swiper/modules'
+import { Simulate } from 'react-dom/test-utils'
+import click = Simulate.click
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
     return [{ title: `Hydrogen | ${data?.product.title ?? ''}` }]
@@ -454,7 +456,13 @@ function ProductPrice({ selectedVariant }: { selectedVariant: any }) {
             ) : (
                 selectedVariant?.price && (
                     <div className='product-price-container'>
-                        <img src={`/product/size/${size}.png`} alt='price' />
+                        <img
+                            src={
+                                `/product/size/${size}.png` ??
+                                `/product/size/49.png`
+                            }
+                            alt='price'
+                        />
                         <Money data={selectedVariant?.price} />
                     </div>
                 )
@@ -516,6 +524,17 @@ function ProductOptions({ option }: { option: VariantOption }) {
 
     const midle = Math.ceil(sortedValues.length / 2)
 
+    const handleSlideChange = (swiper: any) => {
+        const activeIndex = swiper.activeIndex
+        const link = document.getElementById(`product-link-${activeIndex}`)
+
+        if (link) {
+            setTimeout(() => {
+                link.click()
+            }, 300)
+        }
+    }
+
     return (
         <div className='product-options' key={option.name}>
             <h2>Taille</h2>
@@ -526,12 +545,15 @@ function ProductOptions({ option }: { option: VariantOption }) {
                     centeredSlides={true}
                     initialSlide={midle}
                     className='product-swiper'
+                    slideToClickedSlide={true}
+                    onSlideChange={handleSlideChange}
                 >
                     {sortedValues.map(
-                        ({ value, isAvailable, isActive, to }) => (
+                        ({ value, isAvailable, isActive, to }, index) => (
                             <SwiperSlide key={option.name + value}>
                                 {({ isActive, isPrev, isNext }) => (
                                     <Link
+                                        id={`product-link-${index}`}
                                         className='product-options-item'
                                         prefetch='intent'
                                         preventScrollReset
@@ -553,6 +575,15 @@ function ProductOptions({ option }: { option: VariantOption }) {
                         )
                     )}
                 </Swiper>
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        marginTop: '20px',
+                    }}
+                >
+                    <img src='/product/sizeSelector.png' alt='size selector' />
+                </div>
             </div>
             <button className='sizes-guid'>Guide des tailles</button>
         </div>

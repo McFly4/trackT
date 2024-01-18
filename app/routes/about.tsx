@@ -1,9 +1,22 @@
-import { type MetaFunction } from '@remix-run/react'
+import { type MetaFunction, useLoaderData } from '@remix-run/react'
+import MarketDrag from '~/components/Common/MarketDrag'
+import TrackT from '~/components/Common/TrackT'
+import { json, LoaderFunctionArgs } from '@shopify/remix-oxygen'
+import React from 'react'
 export const meta: MetaFunction = () => {
     return [{ title: 'About' }]
 }
 
+export async function loader({ context }: LoaderFunctionArgs) {
+    const products = await context.storefront.query(HOME_PRODUCTS_QUERY)
+
+    return json({ products })
+}
+
 export default function About() {
+    const { products } = useLoaderData<typeof loader>()
+    const productsList =
+        products?.metaobjects?.nodes[0]?.field?.references?.nodes
     return (
         <>
             <div className='a-futur'>
@@ -77,6 +90,67 @@ export default function About() {
                         safe place
                     </h2>
                 </div>
+                <div className='a-second-container'>
+                    <div className='a-second-container-item'>
+                        <img
+                            src='/home/blue.png'
+                            alt='blue'
+                            style={{
+                                width: '600px',
+                                height: '350px',
+                            }}
+                        />
+                        <h2
+                            style={{
+                                color: '#3950D3',
+                            }}
+                        >
+                            Authenticité garantie
+                        </h2>
+                        <p>
+                            Plongez dans l’univers Trackt, où chaque pièce
+                            raconte une histoire, chaque design reflète une
+                            passion. Ici, l’authenticité n’est pas juste un mot
+                            à la mode - c’est notre essence. Nous curons
+                            méticuleusement nos collections pour vous offrir des
+                            pièces authentiques et chargées d’histoire,
+                            directement issues des créateurs les plus novateurs
+                            du streetwear. Chez Trackt, chaque article est une
+                            promesse de qualité et d’originalité. Vous ne
+                            trouverez pas juste des vêtements ici, mais des
+                            expressions de styles brut, des pièces qui parlent
+                            de créativité et d’individualité
+                        </p>
+                    </div>
+                    <div
+                        className='a-second-container-item'
+                        style={{
+                            marginLeft: '50px',
+                        }}
+                    >
+                        <img
+                            src='/home/red.png'
+                            alt='blue'
+                            style={{
+                                width: '600px',
+                                height: '350px',
+                            }}
+                        />
+                        <h2>Support client personnalisé</h2>
+                        <p>
+                            Ici chaque interaction est une expérience unique.
+                            Notre équipe dédiée au support client est le cœur
+                            battant de notre atelier. Nous sommes là pour vous
+                            guider, vous inspirer et répondre à vos questions
+                            avec une touche personnelle. Que vous cherchiez des
+                            conseils sur la dernière tendance ou des détails sur
+                            une pièce rare, notre équipe, en coulisses,
+                            travaille avec passion pour vous offrir une
+                            assistance sur-mesure. Disponible 7 / 7
+                        </p>
+                    </div>
+                </div>
+                <MarketDrag />
             </div>
             <div className='a-third'>
                 <div
@@ -342,6 +416,7 @@ export default function About() {
                         </p>
                     </div>
                 </div>
+                <TrackT products={productsList} />
                 <div className='a-fourth-trackt'></div>
             </div>
             <div className='a-vision'>
@@ -418,7 +493,91 @@ export default function About() {
                 >
                     <img src='/about/sweat.png' alt='asset1' />
                 </div>
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        marginTop: '300px',
+                    }}
+                >
+                    <img src='/about/independant1.png' alt='asset1' />
+                    <img
+                        src='/about/independant1.png'
+                        alt='asset1'
+                        style={{
+                            marginLeft: '65px',
+                        }}
+                    />
+                </div>
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'flex-end',
+                    }}
+                >
+                    <video muted autoPlay loop>
+                        <source src='/about/betaVersion.mp4' type='video/mp4' />
+                    </video>
+                </div>
             </div>
         </>
     )
 }
+
+const HOME_PRODUCTS_QUERY = `#graphql
+query MetaObjects {
+  metaobjects(first: 20, type: "home") {
+    nodes {
+      field(key: "products") {
+        references(first: 20) {
+          nodes {
+            ... on Product {
+              title
+              productType
+              handle
+              vendor
+              toothBrush: metafield(namespace: "custom", key: "toothbrush") {
+                key
+                value
+              }
+              ooo: metafield(namespace: "custom", key: "outofstock") {
+                key
+                value
+              }
+              new: metafield(namespace: "custom", key: "new") {
+                key
+                value
+              }
+              ship: metafield(namespace: "custom", key: "fastShip") {
+                key
+                value
+              }
+              release: metafield(namespace: "custom", key: "release") {
+                key
+                value
+              }
+              promotion: metafield(namespace: "custom", key: "promotion") {
+                key
+                value
+              }
+              hotDeal: metafield(namespace: "custom", key: "hotDeal") {
+                key
+                value
+              }
+              features: metafield(namespace: "custom", key: "features") {
+                key
+                value
+              }
+              images(first: 1) {
+                nodes {
+                  url
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+` as const

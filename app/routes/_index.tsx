@@ -124,7 +124,7 @@ export default function HomePage() {
                                 padding: '60px 60px 80px 60px',
                                 backgroundColor: '#1e1e1e',
                                 color: '#fff',
-                                width: '750px',
+                                width: '580px',
                             }}
                         >
                             <img
@@ -196,7 +196,7 @@ export default function HomePage() {
                                 padding: '60px 60px 80px 60px',
                                 backgroundColor: '#1e1e1e',
                                 color: '#fff',
-                                width: '750px',
+                                width: '580px',
                             }}
                         >
                             <img
@@ -254,7 +254,10 @@ export default function HomePage() {
                         voulez dans notre Panel Trackt, nous sommes là pour vous
                         aider.
                     </p>
-                    <button>Accéder aux filtres</button>
+                    <div className='gofilters-btn'>
+                        <img src='/home/btn.png' alt='btn' />
+                        <p>accéder aux filtres</p>
+                    </div>
                 </div>
                 <MarketDrag />
             </div>

@@ -78,6 +78,27 @@
     text-align: center;
 }
 
+.a-second-container{
+    width: 80%;
+    margin: 30px auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.a-second-container-item{
+    background-color: #121212;
+    display: flex;
+    flex-direction: column;
+    padding: 50px
+}
+
+.a-second-container-item h2{
+    margin-top: 100px;
+    margin-bottom: 20px;
+    color: #E51E1A;
+}
+
+
 .a-third .modal-stickers-about{
     width: 80%;
     background: #121212;
@@ -221,4 +242,8 @@ text-align: center;
 
 .a-vision-container-item p{
     padding: 0 50px;
+}
+
+.a-assets{
+    margin-top: 60px;
 }
