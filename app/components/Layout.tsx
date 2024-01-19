@@ -47,14 +47,16 @@ export function Layout({
                     />
                 )}
             <main>{children}</main>
-            {location.pathname !== '/account/login' &&
-                location.pathname !== '/account/register' && (
+            {location.pathname.startsWith('/account') !==
+                true && (
                     <Suspense>
                         <Await resolve={footer}>
                             {(footer) => <Footer menu={footer.menu} />}
                         </Await>
                     </Suspense>
-                )}
+                
+                )
+            }
         </>
     )
 }

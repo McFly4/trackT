@@ -164,8 +164,6 @@ export default function AccountProfile() {
         return shoesSize.findIndex((value) => value.size === selectedShoeSize)
     }, [selectedShoeSize])
 
-    console.log(selectedShoeIndex)
-
     return (
         <>
             <div className='account-profile'>

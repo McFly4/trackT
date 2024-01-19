@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Form, NavLink, Outlet, useLoaderData } from '@remix-run/react'
 import { json, redirect, type LoaderFunctionArgs } from '@shopify/remix-oxygen'
 import type { CustomerFragment } from 'storefrontapi.generated'
@@ -164,6 +164,9 @@ function AccountMenu(images: any) {
         images?.images?.metaobjects?.edges[0]?.node?.fields[0]?.references
             ?.nodes
 
+    const [imageURL, setImageURL] = useState('/account/nav.png')
+    const [allowChange, setAllowChange] = useState(true)
+
     function randomImage() {
         if (allImages && allImages.length > 0) {
             const randomIndex = Math.floor(Math.random() * allImages.length)
@@ -182,11 +185,24 @@ function AccountMenu(images: any) {
         }
     }
 
-    const randomImageUrl = randomImage()
-    console.log(randomImageUrl)
+    const handleClick = () => {
+        if (allowChange) {
+            const newImageURL = randomImage()
+            setImageURL(newImageURL)
+            setAllowChange(false) // Désactiver le changement d'image supplémentaire
+        }
+    }
+
+    useEffect(() => {
+        if (!allowChange) {
+            setTimeout(() => {
+                setAllowChange(true)
+            }, 100)
+        }
+    }, [allowChange])
     return (
-        <nav role='navigation' className='account-menu' onClick={randomImage}>
-            <img className='account-menu-bg' src={randomImageUrl} />
+        <nav role='navigation' className='account-menu' onClick={handleClick}>
+            <img className='account-menu-bg' src={imageURL} />
             <NavLink to='/account/profile' style={isActiveStyle}>
                 <p>Mon espace trackt</p>
             </NavLink>
@@ -196,12 +212,20 @@ function AccountMenu(images: any) {
             <NavLink to='/account/mybestitem' style={isActiveStyle}>
                 <p> My best item</p>
             </NavLink>
-            <NavLink to='/account/addresses' style={isActiveStyle}>
+            <a
+                style={{
+                    opacity: '0.3',
+                }}
+            >
                 <p>Messagerie</p>
-            </NavLink>
-            <NavLink to='/account/addresses' style={isActiveStyle}>
+            </a>
+            <a
+                style={{
+                    opacity: '0.3',
+                }}
+            >
                 <p>Fidélité</p>
-            </NavLink>
+            </a>
             {/*<Logout />*/}
         </nav>
     )

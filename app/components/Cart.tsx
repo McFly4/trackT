@@ -12,8 +12,6 @@ type CartMainProps = {
 }
 
 export function CartMain({ layout, cart }: CartMainProps) {
-    console.log(cart)
-
     const linesCount = Boolean(cart?.lines?.nodes?.length || 0)
     const withDiscount =
         cart &&
@@ -29,18 +27,58 @@ export function CartMain({ layout, cart }: CartMainProps) {
 
 function CartDetails({ layout, cart }: CartMainProps) {
     const cartHasItems = !!cart && cart.totalQuantity > 0
+    const cartTotalPrice = cart?.cost?.totalAmount?.amount as any
 
     return (
         <>
-            <h2
-                style={{
-                    textAlign: 'center',
-                    textTransform: 'uppercase',
-                    marginBottom: '50px',
-                }}
-            >
-                mes affaires
-            </h2>
+            {cartHasItems && (
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}
+                >
+                    {cartTotalPrice <= 250 ? (
+                        <img
+                            src='/cart/cartClassic.png'
+                            alt='panier classic'
+                            style={{
+                                width: 'fit-content',
+                                marginBottom: '50px',
+                            }}
+                        />
+                    ) : cartTotalPrice <= 500 ? (
+                        <img
+                            src='/cart/cartPremium.png'
+                            alt='panier premium'
+                            style={{
+                                width: 'fit-content',
+                                marginBottom: '50px',
+                            }}
+                        />
+                    ) : (
+                        <img
+                            src='/cart/cartExclusif.png'
+                            alt='panier vide'
+                            style={{
+                                width: 'fit-content',
+                                marginBottom: '50px',
+                            }}
+                        />
+                    )}
+                    <h2
+                        style={{
+                            textAlign: 'center',
+                            textTransform: 'uppercase',
+                            marginBottom: '50px',
+                        }}
+                    >
+                        mes affaires
+                    </h2>
+                </div>
+            )}
             <div className='cart-details'>
                 <CartLines lines={cart?.lines} layout={layout} />
                 {cartHasItems && (
@@ -309,8 +347,17 @@ export function CartEmpty({
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
+                height: '100%',
             }}
         >
+            <img
+                src='/cart/cartEmpty.png'
+                alt='panier vide'
+                style={{
+                    width: 'fit-content',
+                    marginBottom: '50px',
+                }}
+            />
             <h1
                 style={{
                     textTransform: 'uppercase',
@@ -318,14 +365,6 @@ export function CartEmpty({
             >
                 Pannier vide
             </h1>
-            <img
-                src='/cart/emptyCart.png'
-                alt='panier vide'
-                style={{
-                    width: 'fit-content',
-                    marginTop: '80px',
-                }}
-            />
         </div>
     )
 }

@@ -418,7 +418,6 @@ type SearchResultItemProps = Pick<SearchResultTypeProps, 'goToSearchResult'> & {
 }
 function SearchResultItem({ goToSearchResult, item }: SearchResultItemProps) {
     const type = item.__typename
-    console.log(item)
     return (
         type === 'Product' && (
             <li className='predictive-search-result-item' key={item.id}>

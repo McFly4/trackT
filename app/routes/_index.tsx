@@ -58,7 +58,13 @@ export default function HomePage() {
                             width: '100% !important',
                         }}
                     >
-                        <img src='/home/home1.png' alt='home' />
+                        <img
+                            src='/home/home1.png'
+                            alt='home'
+                            style={{
+                                width: '100%',
+                            }}
+                        />
                     </SwiperSlide>
                     <SwiperSlide
                         style={{
@@ -66,7 +72,13 @@ export default function HomePage() {
                         }}
                     >
                         <Link to='/about'>
-                            <img src='/home/home2.png' alt='home' />
+                            <img
+                                src='/home/home2.png'
+                                alt='home'
+                                style={{
+                                    width: '100%',
+                                }}
+                            />
                         </Link>
                     </SwiperSlide>
                     <div className='autoplay-progress' slot='container-end'>

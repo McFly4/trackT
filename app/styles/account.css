@@ -94,6 +94,7 @@
 .account{
     display: flex;
     justify-content: space-between;
+    margin-top: 170px;
 }
 
 .account-head{
