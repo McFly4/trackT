@@ -167,21 +167,20 @@ export function normalizePredictiveSearchResults(
     if (predictiveSearch.products.length) {
         results.push({
             type: 'products',
-            items: predictiveSearch.products.map(
-                (product: PredictiveProductFragment) => {
-                    totalResults++
-                    const trackingParams = applyTrackingParams(product)
-                    return {
-                        __typename: product.__typename,
-                        handle: product.handle,
-                        id: product.id,
-                        image: product.variants?.nodes?.[0]?.image,
-                        title: product.title,
-                        url: `${localePrefix}/products/${product.handle}${trackingParams}`,
-                        price: product.variants.nodes[0].price,
-                    }
+            items: predictiveSearch.products.map((product: any) => {
+                totalResults++
+                const trackingParams = applyTrackingParams(product)
+                return {
+                    __typename: product.__typename,
+                    handle: product.handle,
+                    id: product.id,
+                    image: product.variants?.nodes?.[0]?.image,
+                    title: product.title,
+                    url: `${localePrefix}/products/${product.handle}${trackingParams}`,
+                    price: product.variants.nodes[0].price,
+                    tags: product.tags,
                 }
-            ),
+            }),
         })
     }
 
@@ -287,6 +286,7 @@ const PREDICTIVE_SEARCH_QUERY = `#graphql
     id
     title
     handle
+    tags
     trackingParameters
     variants(first: 1) {
       nodes {

@@ -139,15 +139,19 @@ aside li {
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
-    max-width: var(--asideSearch-width);
-    min-width: var(--asideSearch-width);
+    width: 100%;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    transition: transform 200ms ease-in-out;
+    z-index: 99999;
 }
 
 .searchAside main {
     margin: 0;
 }
 
-aside .closeSearch {
+.searchAside .closeSearch {
     color: #fff;
     font-size: 30px;
     position: absolute;
@@ -199,6 +203,7 @@ aside .closeSearch {
     pointer-events: auto;
     visibility: visible;
 }
+
 
 /* reveal aside */
 .overlay:target aside {
@@ -335,8 +340,7 @@ aside .closeSearch {
 
 .predictive-search-form {
     position: sticky;
-    padding: 0 90px;
-    padding-top: 20px;
+    padding: 20px 90px 0;
 
 }
 
@@ -538,6 +542,7 @@ aside .closeSearch {
 
 .panel-trackt {
     display: flex;
+    margin-top: 170px;
 }
 
 .trackT .product-img-grid {

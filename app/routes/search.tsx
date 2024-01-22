@@ -21,6 +21,8 @@ export async function loader({ request, context }: LoaderFunctionArgs) {
         }
     }
 
+    console.log('variables', variables)
+
     const data = await context.storefront.query(SEARCH_QUERY, {
         variables: {
             query: searchTerm,
@@ -40,10 +42,10 @@ export async function loader({ request, context }: LoaderFunctionArgs) {
 }
 
 export default function SearchPage() {
-    const { searchResults } = useLoaderData<typeof loader>()
+    const { searchResults, searchTerm } = useLoaderData<typeof loader>()
     const products = searchResults?.results?.products?.nodes
+    console.log('products', products)
     const [productList, setProductList] = useState(products?.slice(0, 12))
-
     function shuffleProducts() {
         const shuffledProducts = [...products]
         shuffledProducts.sort(() => Math.random() - 0.5)
@@ -225,20 +227,6 @@ const SEARCH_QUERY = `#graphql
       }
     }
   }
-  fragment SearchPage on Page {
-     __typename
-     handle
-    id
-    title
-    trackingParameters
-  }
-  fragment SearchArticle on Article {
-    __typename
-    handle
-    id
-    title
-    trackingParameters
-  }
   query search(
     $country: CountryCode
     $endCursor: String
@@ -270,27 +258,6 @@ const SEARCH_QUERY = `#graphql
         endCursor
       }
     }
-    pages: search(
-      query: $query,
-      types: [PAGE],
-      first: 10
-    ) {
-      nodes {
-        ...on Page {
-          ...SearchPage
-        }
-      }
-    }
-    articles: search(
-      query: $query,
-      types: [ARTICLE],
-      first: 10
-    ) {
-      nodes {
-        ...on Article {
-          ...SearchArticle
-        }
-      }
-    }
+
   }
 ` as const

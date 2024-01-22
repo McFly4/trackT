@@ -334,7 +334,6 @@ function ProductMain({
         }
         return acc
     }, [])
-
     return (
         <div className='product-main'>
             <div
@@ -390,7 +389,9 @@ function ProductMain({
             >
                 <h2>Caractéristiques</h2>
                 <div className='product-main-features-list'>
-                    {product?.metafield1?.value}
+                    <p>Date de sortie : {product.daterelease.value}</p>
+                    <p>Couleurs {product.colors.value}</p>
+                    <p>{product.materials.value}</p>
                 </div>
             </div>
             <div
@@ -531,7 +532,7 @@ function ProductOptions({ option }: { option: VariantOption }) {
         if (link) {
             setTimeout(() => {
                 link.click()
-            }, 300)
+            }, 50)
         }
     }
 
@@ -730,6 +731,18 @@ const PRODUCT_FRAGMENT = `#graphql
         value
       }
       features: metafield(namespace: "custom", key: "features") {
+        key
+        value
+      }
+        materials: metafield(namespace: "custom", key: "materiaux") {
+        key
+        value
+      }
+        daterelease: metafield(namespace: "custom", key: "date") {
+        key
+        value
+      }
+      colors: metafield(namespace: "custom", key: "couleurs") {
         key
         value
       }

@@ -26,10 +26,10 @@ export function AsideSearch({
                     window.location.hash = ''
                 }}
             />
-            <aside className='searchAside'>
+            <div className='searchAside'>
                 <CloseAside />
                 <main>{children}</main>
-            </aside>
+            </div>
         </div>
     )
 }
