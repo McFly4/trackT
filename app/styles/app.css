@@ -918,3 +918,32 @@ aside li {
 .account-logout {
     display: inline-block;
 }
+
+.filters{
+    margin: 90px;
+}
+.filters-colomn{
+    display: flex;
+    align-items: flex-start;
+}
+
+.filters-input{
+    display: flex;
+    margin-bottom: 6px;
+    align-items: center;
+    width: 300px;
+
+}
+
+.filters-input input{
+    margin-right: 15px;
+    width: 21px;
+    height: 21px;
+}
+
+.filters-input p{
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 15px;
+    color: #fff;
+    text-transform: uppercase;
+}

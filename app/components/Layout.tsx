@@ -39,6 +39,7 @@ export function Layout({
             <CartAside cart={cart} />
             <SearchAside />
             {location.pathname !== '/account/login' &&
+                location.pathname !== '/filters' &&
                 location.pathname !== '/account/register' && (
                     <Header
                         header={header}
@@ -47,13 +48,14 @@ export function Layout({
                     />
                 )}
             <main>{children}</main>
-            {!location.pathname.startsWith('/account') && (
-                <Suspense>
-                    <Await resolve={footer}>
-                        {(footer) => <Footer menu={footer.menu} />}
-                    </Await>
-                </Suspense>
-            )}
+            {!location.pathname.startsWith('/account') &&
+                location.pathname !== '/filters' && (
+                    <Suspense>
+                        <Await resolve={footer}>
+                            {(footer) => <Footer menu={footer.menu} />}
+                        </Await>
+                    </Suspense>
+                )}
         </>
     )
 }
