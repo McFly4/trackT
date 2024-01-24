@@ -388,11 +388,11 @@ function ProductMain({
                 }}
             >
                 <h2>Caractéristiques</h2>
-                <div className='product-main-features-list'>
-                    <p>Date de sortie : {product.daterelease.value}</p>
-                    <p>Couleurs {product.colors.value}</p>
-                    <p>{product.materials.value}</p>
-                </div>
+                {/*<div className='product-main-features-list'>*/}
+                {/*    <p>Date de sortie : {product.daterelease.value}</p>*/}
+                {/*    <p>Couleurs {product.colors.value}</p>*/}
+                {/*    <p>{product.materials.value}</p>*/}
+                {/*</div>*/}
             </div>
             <div
                 className='product-main-features'
@@ -409,10 +409,6 @@ function ProductMain({
                 </h2>
                 <div dangerouslySetInnerHTML={{ __html: descriptionHtml }} />
             </div>
-            {/*<p>*/}
-            {/*    <strong>Description</strong>*/}
-            {/*</p>*/}
-            {/*<div dangerouslySetInnerHTML={{ __html: descriptionHtml }} />*/}
         </div>
     )
 }

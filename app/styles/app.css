@@ -921,27 +921,49 @@ aside li {
 
 .filters{
     margin: 90px;
-}
-.filters-colomn{
     display: flex;
-    align-items: flex-start;
 }
 
-.filters-input{
-    display: flex;
-    margin-bottom: 6px;
-    align-items: center;
+.filters div{
     width: 300px;
-
 }
 
-.filters-input input{
+.filters__subcategories div:not(:first-child){
+    margin-top: 40px;
+}
+
+.filters__title{
+    margin-bottom: 14px;
+}
+
+.filters__item label{
+    display: flex;
+    align-items: center;
+}
+
+.filters__item input{
     margin-right: 15px;
+    width: 21px;
+    height: 21px;
+    cursor: pointer;
+}
+
+.filters__item input[type="checkbox"] {
+    appearance: none;
+    border: 2px solid white;
+    background-color: black;
     width: 21px;
     height: 21px;
 }
 
-.filters-input p{
+.filters__item input[type="checkbox"]:checked {
+    background-color: white;
+    background-image: url(public/filters/checkbox.png);
+    border: none;
+    image-rendering: pixelated;
+}
+
+.filters__item label{
     font-family: "Helvetica Neue", sans-serif;
     font-size: 15px;
     color: #fff;
