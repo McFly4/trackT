@@ -44,7 +44,6 @@ export async function loader({ request, context }: LoaderFunctionArgs) {
 export default function SearchPage() {
     const { searchResults, searchTerm } = useLoaderData<typeof loader>()
     const products = searchResults?.results?.products?.nodes
-    console.log('products', products)
     const [productList, setProductList] = useState(products?.slice(0, 12))
     function shuffleProducts() {
         const shuffledProducts = [...products]

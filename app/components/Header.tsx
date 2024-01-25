@@ -31,10 +31,20 @@ export function Header({ header, isLoggedIn, cart }: HeaderProps) {
             <div className='nav-left'>
                 <div className='logo'>
                     <NavLink prefetch='intent' to='/' end>
-                        <img
-                            src={header?.shop?.brand?.logo?.image?.url}
-                            alt='logo'
-                        />
+                        {/*<img*/}
+                        {/*    src={header?.shop?.brand?.logo?.image?.url}*/}
+                        {/*    alt='logo'*/}
+                        {/*/>*/}
+                        <video
+                            style={{
+                                width: '150px',
+                            }}
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            src='/logo.mp4'
+                        ></video>
                     </NavLink>
                 </div>
                 <div className='nav-icons'>

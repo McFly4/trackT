@@ -919,13 +919,26 @@ aside li {
     display: inline-block;
 }
 
+/*
+* --------------------------------------------------
+* routes/filters
+* --------------------------------------------------
+*/
+
 .filters{
     margin: 90px;
     display: flex;
 }
 
+.filters-close {
+    position: fixed;
+    top: 50px;
+    right: 50px;
+    cursor: pointer;
+}
+
 .filters div{
-    width: 300px;
+    width: 250px;
 }
 
 .filters__subcategories div:not(:first-child){
@@ -968,4 +981,93 @@ aside li {
     font-size: 15px;
     color: #fff;
     text-transform: uppercase;
+}
+
+.filters-footer{
+    position: fixed;
+    bottom: 0;
+    width: 100% !important;
+    height: 120px;
+}
+
+.filters-footer .filters-footer-bg{
+    position: absolute;
+}
+
+.filters-footer-container{
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    justify-content: space-between;
+    padding: 0 90px;
+}
+
+.filter-footer-container-search{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+
+}
+
+.filter-footer-container-search span{
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-left: 20px;
+}
+
+.filter-footer-container-reset{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.filter-footer-container-reset span{
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-left: 20px;
+}
+
+.filters-tvs{
+    position: fixed;
+    right: 0;
+    bottom: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.filters-tvs img{
+    object-fit: scale-down;
+}
+
+.filters-tvs-full img{
+    scale: 0.9;
+}
+
+.filters-tvs-full .filters-tvs-bottom {
+    margin-bottom: -90px;
+}
+
+.filters-tvs-full .filters-tvs-top{
+    margin-bottom: -90px;
+}
+
+.filters-tvs-full .filters-tvs-bottom-left{
+    margin-right: -70px;
+}
+
+.filters-tvs-full .filters-tvs-top-left{
+    margin-right: -70px;
+}
+
+.filters-tvs-full .filters-tvs-blue{
+    margin-bottom: -70px;
 }

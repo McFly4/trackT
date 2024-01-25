@@ -1,4 +1,4 @@
-import { type MetaFunction } from '@remix-run/react'
+import { Link, type MetaFunction } from '@remix-run/react'
 import React, { useState } from 'react'
 
 export const meta: MetaFunction = () => {
@@ -6,13 +6,16 @@ export const meta: MetaFunction = () => {
 }
 
 interface Category {
-    name: string
-    title?: string // Ajout du titre ici
+    name?: string
+    title?: string
     subcategories?: Category[]
     value?: string
 }
 
 const categories: Category[] = [
+    {
+        name: 'Genre',
+    },
     {
         name: 'Textile',
         subcategories: [
@@ -79,6 +82,86 @@ const categories: Category[] = [
             },
         ],
     },
+    {
+        name: 'Accessoires',
+        value: 'accessories',
+        subcategories: [
+            { name: 'Tout', value: 'all' },
+            { name: 'Casquettes', value: 'caps' },
+            { name: 'Ceinture', value: 'belt' },
+            { name: 'Figurine', value: 'figurine' },
+            { name: 'peluche', value: 'peluche' },
+            { name: 'Coussins', value: 'pillow' },
+            { name: 'Sous vêtements', value: 'underwear' },
+            { name: 'Scarf', value: 'scarf' },
+            { name: 'glove', value: 'gloves' },
+        ],
+    },
+]
+
+const sizes: any[] = [
+    {
+        name: 'Sneakers',
+        subcategories: [
+            { name: 'Tout', value: 'all' },
+            { name: '36', value: 36 },
+            { name: '36.5', value: 36.5 },
+            { name: '37', value: 37 },
+            { name: '37.5', value: 37.5 },
+            { name: '38', value: 38 },
+            { name: '38.5', value: 38.5 },
+            { name: '39', value: 39 },
+            { name: '39.5', value: 39.5 },
+            { name: '40', value: 40 },
+            { name: '40.5', value: 40.5 },
+            { name: '41', value: 41 },
+            { name: '41.5', value: 41.5 },
+            { name: '42', value: 42 },
+            { name: '42.5', value: 42.5 },
+            { name: '43', value: 43 },
+            { name: '43.5', value: 43.5 },
+            { name: '44', value: 44 },
+            { name: '44.5', value: 44.5 },
+            { name: '45', value: 45 },
+            { name: '45.5', value: 45.5 },
+            { name: '46', value: 46 },
+            { name: '46.5', value: 46.5 },
+            { name: '47', value: 47 },
+            { name: '47.5', value: 47.5 },
+            { name: '48', value: 48 },
+            { name: '48.5', value: 48.5 },
+            { name: '49', value: 49 },
+            { name: '49.5', value: 49.5 },
+        ],
+    },
+    {
+        name: 'Textile',
+        subcategories: [
+            { name: 'Tout', value: 'all' },
+            { name: 'XS', value: 'xs' },
+            { name: 'S', value: 's' },
+            { name: 'M', value: 'm' },
+            { name: 'L', value: 'l' },
+            { name: 'XL', value: 'xl' },
+            { name: '2L', value: 'xxl' },
+            { name: '3XL', value: 'xxxl' },
+        ],
+    },
+]
+
+const price: any[] = [
+    {
+        name: 'Prix',
+        subcategories: [
+            { name: 'Tout', value: 'all' },
+            { name: '0 - 200€', value: '0-200' },
+            { name: '200 - 350€', value: '200-350' },
+            { name: '350 - 500€', value: '350-500' },
+            { name: '500 - 750€', value: '500-750' },
+            { name: '750 - 1000€', value: '750-1000' },
+            { name: '1000€ +', value: '1000+' },
+        ],
+    },
 ]
 
 export default function Filters() {
@@ -87,9 +170,11 @@ export default function Filters() {
         Category[]
     >([])
     const [selectedSubsubcategories, setSelectedSubsubcategories] = useState<
-        Category[]
+        any[]
     >([])
-
+    const [selectedShoes, setSelectedShoes] = useState<any[]>([])
+    const [selectedSizes, setSelectedSizes] = useState<any[]>([])
+    const [selectedPrices, setSelectedPrices] = useState<any[]>([])
     const handleCategoryCheckboxChange = (category: Category) => {
         setSelectedCategories((prevCategories) =>
             prevCategories.includes(category)
@@ -114,113 +199,209 @@ export default function Filters() {
         )
     }
 
+    const handleSelectedShoesCheckboxChange = (shoe: any) => {
+        setSelectedShoes((prevShoes) =>
+            prevShoes.includes(shoe)
+                ? prevShoes.filter((s) => s !== shoe)
+                : [...prevShoes, shoe]
+        )
+    }
+
+    const handleSizeCheckboxChange = (size: any) => {
+        setSelectedSizes((prevSizes) =>
+            prevSizes.includes(size)
+                ? prevSizes.filter((s) => s !== size)
+                : [...prevSizes, size]
+        )
+    }
+
+    const handlePriceCheckboxChange = (price: any) => {
+        setSelectedPrices((prevPrices) =>
+            prevPrices.includes(price)
+                ? prevPrices.filter((p) => p !== price)
+                : [...prevPrices, price]
+        )
+    }
+
+    function resetAll() {
+        setSelectedCategories([])
+        setSelectedSubcategories([])
+        setSelectedSubsubcategories([])
+        setSelectedShoes([])
+        setSelectedSizes([])
+        setSelectedPrices([])
+    }
+
     console.log(
-        selectedCategories?.flatMap((category) => category.subcategories)
+        'premier',
+        selectedCategories,
+        'deuxieme',
+        selectedSubcategories,
+        'troisieme',
+        selectedSubsubcategories,
+        'quatrieme',
+        selectedShoes,
+        'cinquieme',
+        selectedSizes,
+        'sixieme',
+        selectedPrices
     )
 
     return (
-        <div className='filters'>
-            <div className='filters__categories'>
-                <h3 className='filters__title'>Catégories</h3>
-                <ul className='filters__list'>
-                    {categories.map((category) => (
-                        <li className='filters__item' key={category.name}>
-                            <label>
-                                <input
-                                    type='checkbox'
-                                    checked={selectedCategories.includes(
-                                        category
-                                    )}
-                                    onChange={() =>
-                                        handleCategoryCheckboxChange(category)
-                                    }
-                                />
-                                {category.name}
-                            </label>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-            {selectedCategories.length > 0 && (
-                <div className='filters__subcategories'>
-                    {selectedCategories?.map((category: Category) => (
-                        <div>
-                            <h3 className='filters__title'>{category.name}</h3>
-                            <ul className='filters__list'>
-                                {category.subcategories?.map(
-                                    (subcategory: any) => (
-                                        <li
-                                            className='filters__item'
-                                            key={subcategory.name}
-                                        >
-                                            <label>
-                                                <input
-                                                    type='checkbox'
-                                                    checked={selectedSubcategories.includes(
-                                                        subcategory
-                                                    )}
-                                                    onChange={() =>
-                                                        handleSubcategoryCheckboxChange(
-                                                            subcategory
-                                                        )
-                                                    }
-                                                />
-                                                {subcategory.name}
-                                            </label>
-                                        </li>
-                                    )
-                                )}
-                            </ul>
-                        </div>
-                    ))}
+        <>
+            <div className='filters'>
+                <div className='filters__categories'>
+                    <h3 className='filters__title'>Catégories</h3>
+                    <ul className='filters__list'>
+                        {categories.map((category) => (
+                            <li className='filters__item' key={category.name}>
+                                <label>
+                                    <input
+                                        type='checkbox'
+                                        checked={selectedCategories.includes(
+                                            category
+                                        )}
+                                        onChange={() =>
+                                            handleCategoryCheckboxChange(
+                                                category
+                                            )
+                                        }
+                                    />
+                                    {category.name}
+                                </label>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
-            )}
-            {selectedSubcategories.length > 0 && (
-                <div className='filters__subcategories'>
-                    {selectedSubcategories?.map((subcategory: Category) => (
-                        <div>
-                            <h3 className='filters__title'>
-                                {subcategory.name}
-                            </h3>
-                            <ul className='filters__list'>
-                                {subcategory.subcategories?.map(
-                                    (subsubcategory: any) => (
-                                        <li
-                                            className='filters__item'
-                                            key={subsubcategory.name}
-                                        >
-                                            <label>
-                                                <input
-                                                    type='checkbox'
-                                                    checked={selectedSubsubcategories.includes(
-                                                        subsubcategory
-                                                    )}
-                                                    onChange={() =>
-                                                        handleSubsubcategoryCheckboxChange(
-                                                            subsubcategory
-                                                        )
-                                                    }
-                                                />
-                                                {subsubcategory.name}
-                                            </label>
-                                        </li>
-                                    )
+                {selectedCategories.length > 0 && (
+                    <div className='filters__subcategories'>
+                        {selectedCategories?.map((category: any) => (
+                            <div>
+                                {category?.subcategories?.length > 0 && (
+                                    <h3 className='filters__title'>
+                                        {category.name}
+                                    </h3>
                                 )}
-                            </ul>
-                        </div>
-                    ))}
-                </div>
-            )}
-            {selectedSubsubcategories.length > 0 && (
-                <div className='filters__subcategories'>
-                    {selectedSubsubcategories?.map(
-                        (subsubcategory: Category) => (
-                            <>
-                                <h3 className='filters__title'>
-                                    {subsubcategory.name}
-                                </h3>
                                 <ul className='filters__list'>
-                                    {subsubcategory.subcategories?.map(
+                                    {category.subcategories?.map(
+                                        (subcategory: any) => (
+                                            <li
+                                                className='filters__item'
+                                                key={subcategory.name}
+                                            >
+                                                <label>
+                                                    <input
+                                                        type='checkbox'
+                                                        checked={selectedSubcategories.includes(
+                                                            subcategory
+                                                        )}
+                                                        onChange={() =>
+                                                            handleSubcategoryCheckboxChange(
+                                                                subcategory
+                                                            )
+                                                        }
+                                                    />
+                                                    {subcategory.name}
+                                                </label>
+                                            </li>
+                                        )
+                                    )}
+                                </ul>
+                            </div>
+                        ))}
+                    </div>
+                )}
+                {selectedSubcategories.length > 0 && (
+                    <div className='filters__subcategories'>
+                        {selectedSubcategories?.map((subcategory: any) => (
+                            <div>
+                                {subcategory?.subcategories?.length > 0 && (
+                                    <h3 className='filters__title'>
+                                        {subcategory.name}
+                                    </h3>
+                                )}
+                                <ul className='filters__list'>
+                                    {subcategory.subcategories?.map(
+                                        (subsubcategory: any) => (
+                                            <li
+                                                className='filters__item'
+                                                key={subsubcategory.name}
+                                            >
+                                                <label>
+                                                    <input
+                                                        type='checkbox'
+                                                        checked={selectedSubsubcategories.includes(
+                                                            subsubcategory
+                                                        )}
+                                                        onChange={() =>
+                                                            handleSubsubcategoryCheckboxChange(
+                                                                subsubcategory
+                                                            )
+                                                        }
+                                                    />
+                                                    {subsubcategory.name}
+                                                </label>
+                                            </li>
+                                        )
+                                    )}
+                                </ul>
+                            </div>
+                        ))}
+                    </div>
+                )}
+                {selectedSubsubcategories.length > 0 && (
+                    <div className='filters__subcategories'>
+                        {selectedSubsubcategories?.map(
+                            (subsubcategory: any) => (
+                                <>
+                                    {subsubcategory?.subcategories?.length >
+                                        0 && (
+                                        <h3 className='filters__title'>
+                                            {subsubcategory.name}
+                                        </h3>
+                                    )}
+                                    <ul className='filters__list'>
+                                        {subsubcategory.subcategories?.map(
+                                            (subsubsubcategory: any) => (
+                                                <li
+                                                    className='filters__item'
+                                                    key={subsubsubcategory.name}
+                                                >
+                                                    <label>
+                                                        <input
+                                                            type='checkbox'
+                                                            checked={selectedShoes.includes(
+                                                                subsubsubcategory
+                                                            )}
+                                                            onChange={() =>
+                                                                handleSelectedShoesCheckboxChange(
+                                                                    subsubsubcategory
+                                                                )
+                                                            }
+                                                        />
+                                                        {subsubsubcategory.name}
+                                                    </label>
+                                                </li>
+                                            )
+                                        )}
+                                    </ul>
+                                </>
+                            )
+                        )}
+                    </div>
+                )}
+                {selectedShoes.length > 0 && (
+                    <div className='filters__subcategories'>
+                        {sizes?.map((subCategory: any) => (
+                            <>
+                                {subCategory?.subcategories?.length > 0 && (
+                                    <h3 className='filters__title'>
+                                        {/*{subCategory.name}*/}
+                                        tailles
+                                    </h3>
+                                )}
+                                <ul className='filters__list'>
+                                    {subCategory.subcategories?.map(
                                         (subsubsubcategory: any) => (
                                             <li
                                                 className='filters__item'
@@ -229,11 +410,11 @@ export default function Filters() {
                                                 <label>
                                                     <input
                                                         type='checkbox'
-                                                        checked={selectedSubsubcategories.includes(
+                                                        checked={selectedSizes.includes(
                                                             subsubsubcategory
                                                         )}
                                                         onChange={() =>
-                                                            handleSubsubcategoryCheckboxChange(
+                                                            handleSizeCheckboxChange(
                                                                 subsubsubcategory
                                                             )
                                                         }
@@ -245,10 +426,136 @@ export default function Filters() {
                                     )}
                                 </ul>
                             </>
-                        )
-                    )}
+                        ))}
+                    </div>
+                )}
+                {selectedSizes?.length > 0 && (
+                    <div className='filters__subcategories'>
+                        {price?.map((subCategory: any) => (
+                            <>
+                                {subCategory?.subcategories?.length > 0 && (
+                                    <h3 className='filters__title'>
+                                        {/*{subCategory.name}*/}
+                                        prix
+                                    </h3>
+                                )}
+                                <ul className='filters__list'>
+                                    {subCategory.subcategories?.map(
+                                        (subsubsubcategory: any) => (
+                                            <li
+                                                className='filters__item'
+                                                key={subsubsubcategory.name}
+                                            >
+                                                <label>
+                                                    <input
+                                                        type='checkbox'
+                                                        checked={selectedPrices.includes(
+                                                            subsubsubcategory
+                                                        )}
+                                                        onChange={() =>
+                                                            handlePriceCheckboxChange(
+                                                                subsubsubcategory
+                                                            )
+                                                        }
+                                                    />
+                                                    {subsubsubcategory.name}
+                                                </label>
+                                            </li>
+                                        )
+                                    )}
+                                </ul>
+                            </>
+                        ))}
+                    </div>
+                )}
+            </div>
+            <div
+                className={`filters-tvs ${
+                    selectedShoes.length > 0 ? 'filters-tvs-full' : ''
+                }`}
+            >
+                {selectedShoes.length > 0 && (
+                    <img
+                        src='/filters/blueTV.png'
+                        alt='blue tv'
+                        className='filters-tvs-blue'
+                    />
+                )}
+                {selectedSubcategories.length > 0 && (
+                    <div
+                        style={{
+                            display: 'flex',
+                        }}
+                        className='filters-tvs-top'
+                    >
+                        {selectedSubsubcategories.length > 0 && (
+                            <img
+                                src='/filters/orangeTV.png'
+                                alt='blue tv'
+                                className='filters-tvs-top-left'
+                            />
+                        )}
+                        <img src='/filters/yellowTV.png' alt='yellow tv' />
+                    </div>
+                )}
+                {selectedCategories.length > 0 && (
+                    <div
+                        style={{
+                            display: 'flex',
+                        }}
+                        className='filters-tvs-bottom'
+                    >
+                        <img
+                            src='/filters/lightBlueTV.png'
+                            alt='yellow tv'
+                            className='filters-tvs-bottom-left'
+                        />
+                        <img src='/filters/greenTV.png' alt='blue tv' />
+                    </div>
+                )}
+                <img src='/filters/redTV.png' alt='red tv' />
+            </div>
+            <div className='filters-footer'>
+                <img
+                    className='filters-footer-bg'
+                    src='/filters/footer.png'
+                    alt='footer'
+                />
+                <div className='filters-footer-container'>
+                    <div
+                        style={{
+                            display: 'flex',
+                        }}
+                    >
+                        <a
+                            href='#search-aside'
+                            style={{
+                                color: '#fff',
+                            }}
+                        >
+                            <div className='filter-footer-container-search'>
+                                <img src='/icons/search.svg' alt='search' />
+                                <span>recherche manuelle</span>
+                            </div>
+                        </a>
+                        <div
+                            className='filter-footer-container-reset'
+                            onClick={resetAll}
+                        >
+                            <img src='/icons/close.svg' alt='reset' />
+                            <span>réinitialiser</span>
+                        </div>
+                    </div>
+                    <div className='filter-footer-container-search'>
+                        <span>Afficher les resultats</span>
+                    </div>
                 </div>
-            )}
-        </div>
+            </div>
+            <div className='filters-close'>
+                <Link to='/'>
+                    <img src='/icons/close.svg' alt='close' />
+                </Link>
+            </div>
+        </>
     )
 }
