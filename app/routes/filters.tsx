@@ -1,5 +1,6 @@
 import { Link, type MetaFunction } from '@remix-run/react'
 import React, { useState } from 'react'
+import { handle } from 'mdast-util-to-markdown/lib/handle'
 
 export const meta: MetaFunction = () => {
     return [{ title: 'Filters' }]
@@ -13,9 +14,6 @@ interface Category {
 }
 
 const categories: Category[] = [
-    {
-        name: 'Genre',
-    },
     {
         name: 'Textile',
         subcategories: [
@@ -164,8 +162,21 @@ const price: any[] = [
     },
 ]
 
+const genre: any[] = [
+    {
+        name: 'Mixte',
+    },
+    {
+        name: 'Homme',
+    },
+    {
+        name: 'Femme',
+    },
+]
+
 export default function Filters() {
     const [selectedCategories, setSelectedCategories] = useState<Category[]>([])
+    const [selectedGenres, setSelectedGenres] = useState<Category[]>([])
     const [selectedSubcategories, setSelectedSubcategories] = useState<
         Category[]
     >([])
@@ -175,11 +186,20 @@ export default function Filters() {
     const [selectedShoes, setSelectedShoes] = useState<any[]>([])
     const [selectedSizes, setSelectedSizes] = useState<any[]>([])
     const [selectedPrices, setSelectedPrices] = useState<any[]>([])
+
     const handleCategoryCheckboxChange = (category: Category) => {
         setSelectedCategories((prevCategories) =>
             prevCategories.includes(category)
                 ? prevCategories.filter((c) => c !== category)
                 : [...prevCategories, category]
+        )
+    }
+
+    const handleGenreCheckboxChange = (genre: Category) => {
+        setSelectedGenres((prevGenres) =>
+            prevGenres.includes(genre)
+                ? prevGenres.filter((g) => g !== genre)
+                : [...prevGenres, genre]
         )
     }
 
@@ -232,7 +252,66 @@ export default function Filters() {
         setSelectedPrices([])
     }
 
+    function handleSearch() {
+        const queryParams = []
+
+        if (selectedGenres && selectedGenres.length > 0) {
+            const genreObjects = selectedGenres.map((genre) => ({
+                genre: genre?.name,
+            }))
+            queryParams.push(...genreObjects)
+        }
+
+        if (selectedCategories && selectedCategories.length > 0) {
+            const categoryObjects = selectedCategories.map((category) => ({
+                productType: category?.name,
+            }))
+            queryParams.push(...categoryObjects)
+        }
+
+        if (selectedSubsubcategories && selectedSubsubcategories.length > 0) {
+            const subcategoryObjects = selectedSubsubcategories.map(
+                (subcategory) => ({
+                    productVendor: subcategory?.name,
+                })
+            )
+            queryParams.push(...subcategoryObjects)
+        }
+
+        if (selectedShoes && selectedShoes.length > 0) {
+            const shoeObjects = selectedShoes.map((shoe) => ({
+                collection: shoe?.value,
+            }))
+            queryParams.push(...shoeObjects)
+        }
+
+        if (selectedSizes && selectedSizes.length > 0) {
+            const sizeObjects = selectedSizes.map((size) => ({
+                size: size?.name,
+            }))
+            queryParams.push(...sizeObjects)
+        }
+
+        if (queryParams.length > 0) {
+            const queryString = queryParams
+                .map((param) =>
+                    Object.entries(param)
+                        .map(([key, value]) => `${key}=${value}`)
+                        .join('&')
+                )
+                .join('&')
+
+            return `?${queryString}`
+        }
+
+        return ''
+    }
+
+    console.log(handleSearch())
+
     console.log(
+        'genre',
+        selectedGenres,
         'premier',
         selectedCategories,
         'deuxieme',
@@ -251,27 +330,62 @@ export default function Filters() {
         <>
             <div className='filters'>
                 <div className='filters__categories'>
-                    <h3 className='filters__title'>Catégories</h3>
-                    <ul className='filters__list'>
-                        {categories.map((category) => (
-                            <li className='filters__item' key={category.name}>
-                                <label>
-                                    <input
-                                        type='checkbox'
-                                        checked={selectedCategories.includes(
-                                            category
-                                        )}
-                                        onChange={() =>
-                                            handleCategoryCheckboxChange(
+                    <div>
+                        <div
+                            style={{
+                                marginBottom: '50px',
+                            }}
+                        >
+                            <h3 className='filters__title'>Genre</h3>
+                            <ul className='filters__list'>
+                                {genre.map((genre) => (
+                                    <li
+                                        className='filters__item'
+                                        key={genre.name}
+                                    >
+                                        <label>
+                                            <input
+                                                type='checkbox'
+                                                checked={selectedGenres.includes(
+                                                    genre
+                                                )}
+                                                onChange={() =>
+                                                    handleGenreCheckboxChange(
+                                                        genre
+                                                    )
+                                                }
+                                            />
+                                            {genre.name}
+                                        </label>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        <h3 className='filters__title'>Catégories</h3>
+                        <ul className='filters__list'>
+                            {categories.map((category) => (
+                                <li
+                                    className='filters__item'
+                                    key={category.name}
+                                >
+                                    <label>
+                                        <input
+                                            type='checkbox'
+                                            checked={selectedCategories.includes(
                                                 category
-                                            )
-                                        }
-                                    />
-                                    {category.name}
-                                </label>
-                            </li>
-                        ))}
-                    </ul>
+                                            )}
+                                            onChange={() =>
+                                                handleCategoryCheckboxChange(
+                                                    category
+                                                )
+                                            }
+                                        />
+                                        {category.name}
+                                    </label>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                 </div>
                 {selectedCategories.length > 0 && (
                     <div className='filters__subcategories'>
@@ -546,8 +660,13 @@ export default function Filters() {
                             <span>réinitialiser</span>
                         </div>
                     </div>
-                    <div className='filter-footer-container-search'>
-                        <span>Afficher les resultats</span>
+                    <div
+                        className='filter-footer-container-search'
+                        onClick={handleSearch}
+                    >
+                        <Link to={`/filtered${handleSearch()}`}>
+                            <span>Afficher les resultats</span>
+                        </Link>
                     </div>
                 </div>
             </div>

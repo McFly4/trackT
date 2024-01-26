@@ -97,7 +97,9 @@ export default function HomePage() {
                 <div className='filter-trackt'>
                     {/* <img src="/home/bg-filters.png" alt="filter" /> */}
                     <div className='filter-sticky'>
-                        <h1>filtres</h1>
+                        <Link to='/filters'>
+                            <h1>filtres</h1>
+                        </Link>
                         {/* <p>Modifier vos filtres</p> */}
                     </div>
                 </div>

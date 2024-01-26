@@ -974,6 +974,7 @@ aside li {
     background-image: url(public/filters/checkbox.png);
     border: none;
     image-rendering: pixelated;
+    background-size: contain;
 }
 
 .filters__item label{

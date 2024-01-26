@@ -7,27 +7,61 @@ export const meta: MetaFunction = () => {
     return [{ title: 'filtered' }]
 }
 
-export async function loader({ context }: LoaderFunctionArgs) {
-    const tags = ['test', 'yeslife'] as string[]
+export async function loader({ context, request }: LoaderFunctionArgs) {
+    const url = new URL(request.url)
+    const searchParams = new URLSearchParams(url.search)
+    // 3 metafields
+    const genre = searchParams.getAll('genre')
+    const colors = searchParams.getAll('colors')
+    const materials = searchParams.getAll('materials')
+
+    // tags 2
+    const textiles = searchParams.getAll('textiles')
+    const accessories = searchParams.getAll('accessories')
+
+    // variants 2
+    const size = searchParams.getAll('size')
+    const price = searchParams.getAll('price')
+
+    // normal 2
+    const productType = searchParams.getAll('productType')
+    const brand = searchParams.getAll('productVendor')
+
+    // collection
+
+    const collection = searchParams.getAll('collection')
+
+    const formatProductType = productType.map((category: any) => ({
+        productType: category,
+    }))
+
+    const formatBrandType = brand.map((brand: any) => ({
+        brand: brand,
+    }))
+
+    const formatTextiles = textiles.map((textile: any) => ({
+        tags: textile,
+    }))
+
+    const formatAccessories = accessories.map((accessory: any) => ({
+        tags: accessory,
+    }))
+
     const products = await context.storefront.query(FILTERS_QUERY, {
         variables: {
             first: 50,
-            filters: [{ tag: 'test' }, { tag: 'Skateboard' }],
+            filters: formatProductType,
         },
     })
 
-    return defer({ products })
+    return defer({ products, formatProductType, formatBrandType })
 }
 
 export default function filtered() {
     const { products } = useLoaderData<typeof loader>()
-    // function shuffleProducts() {
-    //     const shuffledProducts = [...products]
-    //     shuffledProducts.sort(() => Math.random() - 0.5)
-    //     setProductList(shuffledProducts?.slice(0, 12))
-    // }
-
-    console.log(products)
+    const { formatProductType, formatBrandType } =
+        useLoaderData<typeof loader>()
+    console.log(formatProductType.concat(formatBrandType))
 
     return (
         <>
