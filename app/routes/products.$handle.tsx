@@ -371,6 +371,7 @@ function ProductMain({
     }, [])
 
     // @ts-ignore
+    // @ts-ignore
     return (
         <div className='product-main'>
             <div
