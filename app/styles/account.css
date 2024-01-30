@@ -1,5 +1,60 @@
 /*
 * --------------------------------------------------
+* routes/account/recover
+* --------------------------------------------------
+*/
+
+
+.account-recover{
+    background-image: url("public/account/recover.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+
+.account-recover-success{
+    background-image: url("public/account/recoverSuccess.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 150px;
+}
+
+.account-recover-success input{
+    width: 400px;
+    height: 50px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, .1);
+    backdrop-filter: blur(10px);
+    border: none;
+    outline: none;
+    padding-left: 30px;
+    font-size: 18px;
+    color: #fff;
+    margin-top: 50px;
+}
+
+.account-recover-success button {
+    padding: 0 40px;
+    height: 50px;
+    border-radius: 5px;
+    background: #fff;
+    color: #000;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: "Helvetica Neue", sans-serif;
+    margin: auto;
+}
+
+/*
+* --------------------------------------------------
 * routes/account/login
 * --------------------------------------------------
 */
@@ -69,6 +124,8 @@
     font-weight: 700;
     text-transform: uppercase;
     cursor: pointer;
+    font-family: "Helvetica Neue", sans-serif;
+
 }
 
 .login-form-field p{

@@ -100,7 +100,6 @@ export default function HomePage() {
                         <Link to='/filters'>
                             <h1>filtres</h1>
                         </Link>
-                        {/* <p>Modifier vos filtres</p> */}
                     </div>
                 </div>
 

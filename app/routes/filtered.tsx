@@ -1,7 +1,9 @@
-import { useLoaderData, type MetaFunction } from '@remix-run/react'
+import { useLoaderData, type MetaFunction, Link } from '@remix-run/react'
 import { defer, LoaderFunctionArgs } from '@shopify/remix-oxygen'
+import { getPaginationVariables, Pagination } from '@shopify/hydrogen'
 import MainProduct from '~/components/Common/mainProduct'
 import React from 'react'
+import MarketDrag from '~/components/Common/MarketDrag'
 
 export const meta: MetaFunction = () => {
     return [{ title: 'filtered' }]
@@ -10,67 +12,124 @@ export const meta: MetaFunction = () => {
 export async function loader({ context, request }: LoaderFunctionArgs) {
     const url = new URL(request.url)
     const searchParams = new URLSearchParams(url.search)
-    // 3 metafields
-    const genre = searchParams.getAll('genre')
-    const colors = searchParams.getAll('colors')
-    const materials = searchParams.getAll('materials')
 
-    // tags 2
-    const textiles = searchParams.getAll('textiles')
-    const accessories = searchParams.getAll('accessories')
-
-    // variants 2
-    const size = searchParams.getAll('size')
-    const price = searchParams.getAll('price')
-
-    // normal 2
-    const productType = searchParams.getAll('productType')
-    const brand = searchParams.getAll('productVendor')
+    const getcollection = searchParams.getAll('collection')
+    const genre = searchParams.getAll('manwoman')
+    const getColors = searchParams.getAll('colors')
+    const getMaterials = searchParams.getAll('materials')
+    const getTags = searchParams.getAll('tags')
+    const getSize = searchParams.getAll('size')
+    const getPrice = searchParams.getAll('price')
+    const getProductType = searchParams.getAll('productType')
+    const getProductVendor = searchParams.getAll('productVendor')
 
     // collection
 
-    const collection = searchParams.getAll('collection')
+    function formatCollection(titles: any) {
+        let titleString = ''
 
-    const formatProductType = productType.map((category: any) => ({
+        if (titles?.length === 0) {
+            titleString = 'title:all'
+        } else if (titles?.length === 1) {
+            titleString = `title:${titles[0]}`
+        } else {
+            titleString = titles
+                .map((title: any) => `title:${title}`)
+                .join(' OR ')
+        }
+
+        return titleString
+    }
+
+    const collections = formatCollection(getcollection)
+
+    const manwoman = genre.map((manwoman: any) => ({
+        productMetafield: {
+            namespace: 'custom',
+            key: 'manwoman',
+            value: manwoman,
+        },
+    }))
+
+    const productType = getProductType.map((category: any) => ({
         productType: category,
     }))
 
-    const formatBrandType = brand.map((brand: any) => ({
-        brand: brand,
+    const tags = getTags.map((tag: any) => ({
+        tags: tag,
     }))
 
-    const formatTextiles = textiles.map((textile: any) => ({
-        tags: textile,
+    const colors = getColors.map((color: any) => ({
+        productMetafield: {
+            namespace: 'custom',
+            key: 'palette',
+            value: color,
+        },
     }))
 
-    const formatAccessories = accessories.map((accessory: any) => ({
-        tags: accessory,
+    const materials = getMaterials.map((material: any) => ({
+        productMetafield: {
+            namespace: 'custom',
+            key: 'materiaux',
+            value: material,
+        },
     }))
+
+    const productVendor = getProductVendor.map((brand: any) => ({
+        productVendor: brand,
+    }))
+
+    // const size = getSize.map((size: any) => ({
+    //     size: size,
+    // }))
+
+    const price = getPrice.map((price: any) => ({
+        price: price,
+    }))
+
+    // format to send to shopify
+
+    const allFitlers = [
+        ...manwoman,
+        ...productType,
+        ...tags,
+        ...colors,
+        ...materials,
+        ...productVendor,
+        ...price,
+    ]
+
+    const pagination = getPaginationVariables(request, {
+        pageBy: 24,
+    })
 
     const products = await context.storefront.query(FILTERS_QUERY, {
         variables: {
-            first: 50,
-            filters: formatProductType,
+            first: 250,
+            filters: allFitlers,
+            collections: collections,
+            ...pagination,
         },
     })
 
-    return defer({ products, formatProductType, formatBrandType })
+    return defer({ products, allFitlers })
 }
 
 export default function filtered() {
-    const { products } = useLoaderData<typeof loader>()
-    const { formatProductType, formatBrandType } =
-        useLoaderData<typeof loader>()
-    console.log(formatProductType.concat(formatBrandType))
+    const { products, allFitlers } = useLoaderData<typeof loader>()
+
+    const productList = products.collections.nodes[0].products
+
+    console.log(allFitlers)
 
     return (
         <>
             <div className='panel-trackt'>
                 <div className='filter-trackt'>
-                    {/* <img src="/home/bg-filters.png" alt="filter" /> */}
                     <div className='filter-sticky'>
-                        <h1>filtres</h1>
-                        {/* <p>Modifier vos filtres</p> */}
+                        <Link to='/filters'>
+                            <h1>filtres</h1>
+                        </Link>
                     </div>
                 </div>
                 <div className='search'>
@@ -105,10 +164,9 @@ export default function filtered() {
                         className='panel-container'
                     >
                         <div className='panel-products-grid'>
-                            {/*{productList.map((product: any) => (*/}
-                            {/*    <MainProduct product={product} />*/}
-                            {/*))}*/}
-                            no products yet
+                            {productList.nodes.map((product: any) => (
+                                <MainProduct product={product} />
+                            ))}
                         </div>
                     </div>
                 </div>
@@ -136,65 +194,12 @@ export default function filtered() {
                         voulez dans notre Panel Trackt, nous sommes là pour vous
                         aider.
                     </p>
-                    <button>Accéder aux filtres</button>
-                </div>
-                <div className='hinfos'>
-                    <div className='hbox'>
-                        <div
-                            style={{
-                                backgroundColor: 'green',
-                                width: '150px',
-                                height: '260px',
-                            }}
-                        ></div>
-                        <div className='htext'>
-                            <h1>EXCLUSIVITÉ À VOTRE PORTÉE</h1>
-                            <p>
-                                « Exclusif ne signifie pas inaccessible. Sur
-                                Trackt, nous vous ouvrons les portes d’un monde
-                                où l’exclusivité et le style se rencontrent. Des
-                                éditions limitées, des collaborations uniques,
-                                et des trouvailles rares – tout est sélectionné
-                                pour vous offrir une expérience de mode
-                                streetwear hors du commun. Notre sélection est
-                                votre passeport pour un style qui se démarque,
-                                pour des pièces que tout le monde ne peut pas
-                                avoir. Avec Trackt, habillez-vous dans ce qui
-                                définit le futur du streetwear, aujourd’hui. »
-                            </p>
-                        </div>
-                    </div>
-                    <div
-                        className='hbox'
-                        style={{
-                            marginLeft: '35px',
-                        }}
-                    >
-                        <div
-                            style={{
-                                backgroundColor: 'green',
-                                width: '150px',
-                                height: '260px',
-                            }}
-                        ></div>
-                        <div className='htext'>
-                            <h1>EXCLUSIVITÉ À VOTRE PORTÉE</h1>
-                            <p>
-                                « Exclusif ne signifie pas inaccessible. Sur
-                                Trackt, nous vous ouvrons les portes d’un monde
-                                où l’exclusivité et le style se rencontrent. Des
-                                éditions limitées, des collaborations uniques,
-                                et des trouvailles rares – tout est sélectionné
-                                pour vous offrir une expérience de mode
-                                streetwear hors du commun. Notre sélection est
-                                votre passeport pour un style qui se démarque,
-                                pour des pièces que tout le monde ne peut pas
-                                avoir. Avec Trackt, habillez-vous dans ce qui
-                                définit le futur du streetwear, aujourd’hui. »
-                            </p>
-                        </div>
+                    <div className='gofilters-btn'>
+                        <img src='/home/btn.png' alt='btn' />
+                        <p>accéder aux filtres</p>
                     </div>
                 </div>
+                <MarketDrag />
             </div>
         </>
     )
@@ -204,8 +209,62 @@ const FILTERS_QUERY = `#graphql
 fragment ProductFragment on Product {
   id
   title
+  vendor
   handle
-  tags
+  description
+  options {
+    name
+    values
+  }
+  images(first: 1) {
+    nodes {
+      url
+    }
+  }
+  toothBrush: metafield(namespace: "custom", key: "toothbrush") {
+    key
+    value
+  }
+  ooo: metafield(namespace: "custom", key: "outofstock") {
+    key
+    value
+  }
+  new: metafield(namespace: "custom", key: "new") {
+    key
+    value
+  }
+  ship: metafield(namespace: "custom", key: "fastShip") {
+    key
+    value
+  }
+  release: metafield(namespace: "custom", key: "release") {
+    key
+    value
+  }
+  promotion: metafield(namespace: "custom", key: "promotion") {
+    key
+    value
+  }
+  hotDeal: metafield(namespace: "custom", key: "hotDeal") {
+    key
+    value
+  }
+  features: metafield(namespace: "custom", key: "features") {
+    key
+    value
+  }
+  materials: metafield(namespace: "custom", key: "materiaux") {
+    key
+    value
+  }
+  daterelease: metafield(namespace: "custom", key: "date") {
+    key
+    value
+  }
+  colors: metafield(namespace: "custom", key: "couleurs") {
+    key
+    value
+  }
   priceRange {
     minVariantPrice {
       amount
@@ -214,16 +273,27 @@ fragment ProductFragment on Product {
   }
 }
 
-query FiltersQuery($first: Int!, $filters: [ProductFilter!]) {
-  collection(handle: "all") {
-    products(first: $first, filters: $filters) {
-      edges {
-        node {
-          ...ProductFragment
-        }
+query FiltersQuery($first: Int!, $filters: [ProductFilter!], $collections: String, $startCursor: String, $endCursor: String) {
+  collections(query: $collections, first: 10) {
+  nodes {
+    products(
+      first: $first
+      filters: $filters
+      before: $startCursor
+      after: $endCursor
+    ) {
+      nodes {
+        ...ProductFragment
+      }
+      pageInfo {
+        hasPreviousPage
+        hasNextPage
+        startCursor
+        endCursor
       }
     }
   }
+}
 }
 
 `

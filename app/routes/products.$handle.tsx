@@ -32,7 +32,6 @@ import MainProduct from '~/components/Common/mainProduct'
 import TrackT from '~/components/Common/TrackT'
 import { Scrollbar, Grid } from 'swiper/modules'
 import { Simulate } from 'react-dom/test-utils'
-import click = Simulate.click
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
     return [{ title: `Hydrogen | ${data?.product.title ?? ''}` }]
@@ -139,8 +138,12 @@ export default function Product() {
                 />
             </div>
             <div className='productBanner'>
-                <img src='/product/banner.png' alt='banner' />
+                <video width='100%' height='auto' autoPlay muted loop>
+                    <source src='/product/banner.mp4' type='video/mp4' />
+                    <img src='/product/banner.png' alt='banner' />
+                </video>
             </div>
+
             <TrackT products={productsList} />
         </>
     )
@@ -177,9 +180,14 @@ function ProductImage({ image, product }: { image: any; product: any }) {
     return (
         <div className='product-image-container'>
             <div className='product-image'>
+                <button>add wishlist</button>
                 <div className='product-image-title'>
                     <h1>{product.vendor}</h1>
-                    <h2>{product.collections?.nodes[0].title}</h2>
+                    <h2>
+                        {product.collections?.nodes[0].title === 'All'
+                            ? ''
+                            : product.collections?.nodes[0].title}
+                    </h2>
                 </div>
                 <div className='product-image-main'>
                     <img
@@ -334,6 +342,7 @@ function ProductMain({
         }
         return acc
     }, [])
+
     return (
         <div className='product-main'>
             <div
@@ -388,11 +397,13 @@ function ProductMain({
                 }}
             >
                 <h2>Caractéristiques</h2>
-                {/*<div className='product-main-features-list'>*/}
-                {/*    <p>Date de sortie : {product.daterelease.value}</p>*/}
-                {/*    <p>Couleurs {product.colors.value}</p>*/}
-                {/*    <p>{product.materials.value}</p>*/}
-                {/*</div>*/}
+                <div className='product-main-features-list'>
+                    {product?.daterelease && (
+                        <p>Date de sortie : {product?.daterelease?.value}</p>
+                    )}
+
+                    {product?.materials && <p>{product?.materials?.value}</p>}
+                </div>
             </div>
             <div
                 className='product-main-features'
@@ -738,7 +749,7 @@ const PRODUCT_FRAGMENT = `#graphql
         key
         value
       }
-      colors: metafield(namespace: "custom", key: "couleurs") {
+      colors: metafield(namespace: "custom", key: "palette") {
         key
         value
       }

@@ -1,8 +1,9 @@
 import { defer, type LoaderFunctionArgs } from '@shopify/remix-oxygen'
-import { useLoaderData, type MetaFunction } from '@remix-run/react'
+import { useLoaderData, type MetaFunction, Link } from '@remix-run/react'
 import { getPaginationVariables } from '@shopify/hydrogen'
 import MainProduct from '~/components/Common/mainProduct'
 import React, { useState } from 'react'
+import MarketDrag from '~/components/Common/MarketDrag'
 
 export const meta: MetaFunction = () => {
     return [{ title: `Hydrogen | Search` }]
@@ -55,10 +56,10 @@ export default function SearchPage() {
         <>
             <div className='panel-trackt'>
                 <div className='filter-trackt'>
-                    {/* <img src="/home/bg-filters.png" alt="filter" /> */}
                     <div className='filter-sticky'>
-                        <h1>filtres</h1>
-                        {/* <p>Modifier vos filtres</p> */}
+                        <Link to='/filters'>
+                            <h1>filtres</h1>
+                        </Link>
                     </div>
                 </div>
                 <div className='search'>
@@ -123,65 +124,13 @@ export default function SearchPage() {
                         voulez dans notre Panel Trackt, nous sommes là pour vous
                         aider.
                     </p>
-                    <button>Accéder aux filtres</button>
-                </div>
-                <div className='hinfos'>
-                    <div className='hbox'>
-                        <div
-                            style={{
-                                backgroundColor: 'green',
-                                width: '150px',
-                                height: '260px',
-                            }}
-                        ></div>
-                        <div className='htext'>
-                            <h1>EXCLUSIVITÉ À VOTRE PORTÉE</h1>
-                            <p>
-                                « Exclusif ne signifie pas inaccessible. Sur
-                                Trackt, nous vous ouvrons les portes d’un monde
-                                où l’exclusivité et le style se rencontrent. Des
-                                éditions limitées, des collaborations uniques,
-                                et des trouvailles rares – tout est sélectionné
-                                pour vous offrir une expérience de mode
-                                streetwear hors du commun. Notre sélection est
-                                votre passeport pour un style qui se démarque,
-                                pour des pièces que tout le monde ne peut pas
-                                avoir. Avec Trackt, habillez-vous dans ce qui
-                                définit le futur du streetwear, aujourd’hui. »
-                            </p>
-                        </div>
-                    </div>
-                    <div
-                        className='hbox'
-                        style={{
-                            marginLeft: '35px',
-                        }}
-                    >
-                        <div
-                            style={{
-                                backgroundColor: 'green',
-                                width: '150px',
-                                height: '260px',
-                            }}
-                        ></div>
-                        <div className='htext'>
-                            <h1>EXCLUSIVITÉ À VOTRE PORTÉE</h1>
-                            <p>
-                                « Exclusif ne signifie pas inaccessible. Sur
-                                Trackt, nous vous ouvrons les portes d’un monde
-                                où l’exclusivité et le style se rencontrent. Des
-                                éditions limitées, des collaborations uniques,
-                                et des trouvailles rares – tout est sélectionné
-                                pour vous offrir une expérience de mode
-                                streetwear hors du commun. Notre sélection est
-                                votre passeport pour un style qui se démarque,
-                                pour des pièces que tout le monde ne peut pas
-                                avoir. Avec Trackt, habillez-vous dans ce qui
-                                définit le futur du streetwear, aujourd’hui. »
-                            </p>
-                        </div>
+                    <div className='gofilters-btn'>
+                        <img src='/home/btn.png' alt='btn' />
+                        <p>accéder aux filtres</p>
                     </div>
                 </div>
+
+                <MarketDrag />
             </div>
         </>
     )

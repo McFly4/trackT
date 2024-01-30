@@ -43,20 +43,20 @@ export default function ({ product }: any) {
                         to={`/products/${product.handle}`}
                     >
                         <img
-                            src={product.images.nodes[0].url}
+                            src={product.images?.nodes[0].url}
                             alt={product.title}
                         />
                     </Link>
                 </div>
                 <div className='product-info-grid'>
                     <h3>
-                        {product.productType.length > 30
-                            ? product.vendor.slice(0, 30) + '...'
+                        {product.productType?.length > 25
+                            ? product.vendor.slice(0, 25) + '...'
                             : product.vendor}
                     </h3>
                     <p>
-                        {product.title.length > 30
-                            ? product.title.slice(0, 30) + '...'
+                        {product.title?.length > 25
+                            ? product.title.slice(0, 25) + '...'
                             : product.title}
                     </p>
                 </div>

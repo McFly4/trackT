@@ -13,158 +13,12 @@ interface Category {
     value?: string
 }
 
-const categories: Category[] = [
-    {
-        name: 'Textile',
-        subcategories: [
-            { name: 'Tout', value: 'textile' },
-            { name: 'Hoodie', value: 'hoodie' },
-            { name: 'Crewneck', value: 'crewneck' },
-            { name: 'Pants', value: 'pants' },
-            { name: 'Short', value: 'short' },
-            { name: 'Chemise', value: 'chemise' },
-            { name: 'Jacket', value: 'jacket' },
-            { name: 'Sous vêtement', value: 'underwear' },
-        ],
-    },
-    {
-        name: 'Sneakers',
-        subcategories: [
-            {
-                name: 'Marques',
-                value: 'brands',
-                subcategories: [
-                    {
-                        name: 'Nike',
-                        value: 'nike',
-                        subcategories: [
-                            {
-                                name: 'Dunk high',
-                                value: 'dunk-high',
-                            },
-                            {
-                                name: 'Jordan 1',
-                                value: 'jordan-1',
-                            },
-                        ],
-                    },
-                    { name: 'Adidas', value: 'adidas' },
-                    { name: 'Jordan', value: 'jordan' },
-                    { name: 'New Balance', value: 'new-balance' },
-                    { name: 'Asics', value: 'asics' },
-                    { name: 'Reebok', value: 'reebok' },
-                    { name: 'Puma', value: 'puma' },
-                    { name: 'Vans', value: 'vans' },
-                    { name: 'Converse', value: 'converse' },
-                    { name: 'Autres', value: 'others' },
-                ],
-            },
-            {
-                name: 'Couleurs',
-                value: 'colors',
-                subcategories: [
-                    { name: 'Noir', value: 'black' },
-                    { name: 'Blanc', value: 'white' },
-                    { name: 'Gris', value: 'grey' },
-                    { name: 'Bleu', value: 'blue' },
-                    { name: 'Vert', value: 'green' },
-                    { name: 'Jaune', value: 'yellow' },
-                    { name: 'Orange', value: 'orange' },
-                    { name: 'Rouge', value: 'red' },
-                    { name: 'Rose', value: 'pink' },
-                    { name: 'Violet', value: 'purple' },
-                    { name: 'Marron', value: 'brown' },
-                    { name: 'Beige', value: 'beige' },
-                    { name: 'Autres', value: 'others' },
-                ],
-            },
-        ],
-    },
-    {
-        name: 'Accessoires',
-        value: 'accessories',
-        subcategories: [
-            { name: 'Tout', value: 'all' },
-            { name: 'Casquettes', value: 'caps' },
-            { name: 'Ceinture', value: 'belt' },
-            { name: 'Figurine', value: 'figurine' },
-            { name: 'peluche', value: 'peluche' },
-            { name: 'Coussins', value: 'pillow' },
-            { name: 'Sous vêtements', value: 'underwear' },
-            { name: 'Scarf', value: 'scarf' },
-            { name: 'glove', value: 'gloves' },
-        ],
-    },
-]
+// First column
 
-const sizes: any[] = [
-    {
-        name: 'Sneakers',
-        subcategories: [
-            { name: 'Tout', value: 'all' },
-            { name: '36', value: 36 },
-            { name: '36.5', value: 36.5 },
-            { name: '37', value: 37 },
-            { name: '37.5', value: 37.5 },
-            { name: '38', value: 38 },
-            { name: '38.5', value: 38.5 },
-            { name: '39', value: 39 },
-            { name: '39.5', value: 39.5 },
-            { name: '40', value: 40 },
-            { name: '40.5', value: 40.5 },
-            { name: '41', value: 41 },
-            { name: '41.5', value: 41.5 },
-            { name: '42', value: 42 },
-            { name: '42.5', value: 42.5 },
-            { name: '43', value: 43 },
-            { name: '43.5', value: 43.5 },
-            { name: '44', value: 44 },
-            { name: '44.5', value: 44.5 },
-            { name: '45', value: 45 },
-            { name: '45.5', value: 45.5 },
-            { name: '46', value: 46 },
-            { name: '46.5', value: 46.5 },
-            { name: '47', value: 47 },
-            { name: '47.5', value: 47.5 },
-            { name: '48', value: 48 },
-            { name: '48.5', value: 48.5 },
-            { name: '49', value: 49 },
-            { name: '49.5', value: 49.5 },
-        ],
-    },
-    {
-        name: 'Textile',
-        subcategories: [
-            { name: 'Tout', value: 'all' },
-            { name: 'XS', value: 'xs' },
-            { name: 'S', value: 's' },
-            { name: 'M', value: 'm' },
-            { name: 'L', value: 'l' },
-            { name: 'XL', value: 'xl' },
-            { name: '2L', value: 'xxl' },
-            { name: '3XL', value: 'xxxl' },
-        ],
-    },
-]
-
-const price: any[] = [
-    {
-        name: 'Prix',
-        subcategories: [
-            { name: 'Tout', value: 'all' },
-            { name: '0 - 200€', value: '0-200' },
-            { name: '200 - 350€', value: '200-350' },
-            { name: '350 - 500€', value: '350-500' },
-            { name: '500 - 750€', value: '500-750' },
-            { name: '750 - 1000€', value: '750-1000' },
-            { name: '1000€ +', value: '1000+' },
-        ],
-    },
-]
-
-const genre: any[] = [
+const genre = [
     {
         name: 'Mixte',
+        value: 'mixte',
     },
     {
         name: 'Homme',
@@ -174,122 +28,399 @@ const genre: any[] = [
     },
 ]
 
+const category = [
+    {
+        name: 'Tout',
+        value: 'all',
+    },
+    {
+        name: 'Textile',
+        value: 'textile',
+    },
+    {
+        name: 'Sneakers',
+        value: 'sneakers',
+    },
+    {
+        name: 'Accessories',
+        value: 'Accessories',
+    },
+]
+
+// second column
+
+const sneakers = [
+    {
+        name: 'Tout',
+        value: 'all',
+    },
+    {
+        name: 'Marques',
+        value: 'brands',
+    },
+    {
+        name: 'Couleurs',
+        value: 'colorsList',
+    },
+    {
+        name: 'Matière',
+        value: 'materials',
+    },
+]
+
+const textile = [
+    { name: 'Tout', value: 'textile' },
+    { name: 'Hoodie', value: 'hoodie' },
+    { name: 'Crewneck', value: 'crewneck' },
+    { name: 'Pants', value: 'pants' },
+    { name: 'Short', value: 'short' },
+    { name: 'Chemise', value: 'chemise' },
+    { name: 'Jacket', value: 'jacket' },
+    { name: 'Sous vêtement', value: 'underwear' },
+]
+
+const accessories = [
+    { name: 'Tout', value: 'all' },
+    { name: 'Casquettes', value: 'caps' },
+    { name: 'Ceinture', value: 'belt' },
+    { name: 'Figurine', value: 'figurine' },
+    { name: 'peluche', value: 'peluche' },
+    { name: 'Coussins', value: 'pillow' },
+    { name: 'Sous vêtements', value: 'underwear' },
+    { name: 'Scarf', value: 'scarf' },
+    { name: 'glove', value: 'gloves' },
+]
+
+// third column
+
+const brands = [
+    { name: 'Tout', value: 'all' },
+    { name: 'Nike', value: 'nike' },
+    { name: 'Adidas', value: 'adidas' },
+]
+
+const colorsList = [
+    { name: 'Tout', value: 'all' },
+    { name: 'Blanc', value: 'blanc' },
+    { name: 'Rouge', value: 'rouge' },
+    { name: 'Rose', value: 'rose' },
+    { name: 'Violet', value: 'violet' },
+    { name: 'Bleu navy', value: 'bleu-navy' },
+    { name: 'Bleu clair', value: 'bleu-clair' },
+    { name: 'vert', value: 'vert' },
+    { name: 'jaune', value: 'jaune' },
+    { name: 'orange', value: 'orange' },
+    { name: 'marron', value: 'marron' },
+    { name: 'kaki', value: 'kaki' },
+    { name: 'gris', value: 'gris' },
+    { name: 'Noir', value: 'noir' },
+]
+
+const matiere = [
+    { name: 'Tout', value: 'all' },
+    { name: 'Daim', value: 'daim' },
+    { name: 'Cuir', value: 'cuir' },
+    { name: 'velours', value: 'velours' },
+    { name: 'tissu', value: 'tissu' },
+]
+
+// fourth column
+
+const nike = [
+    { name: 'Dunk high', value: 'dunk-high' },
+    { name: 'Jordan 1', value: 'jordan-1' },
+    { name: 'Sb Low', value: 'sb-low' },
+]
+
+const adidas = [
+    { name: 'Campus', value: 'campus' },
+    { name: 'Gazelle', value: 'gazelle' },
+    { name: 'Stan smith', value: 'stan-smith' },
+]
+
+const clothes = [
+    { name: 'supreme', value: 'supreme' },
+    { name: 'palace', value: 'palace' },
+    { name: 'bape', value: 'bape' },
+    { name: 'cactus jack', value: 'cactus-jack' },
+]
+
+// fifth column
+
+const sneakersSize = [
+    { name: 'Tout', value: 'all' },
+    { name: '36', value: 36 },
+    { name: '36.5', value: 36.5 },
+    { name: '37', value: 37 },
+    { name: '37.5', value: 37.5 },
+    { name: '38', value: 38 },
+    { name: '38.5', value: 38.5 },
+    { name: '39', value: 39 },
+    { name: '39.5', value: 39.5 },
+    { name: '40', value: 40 },
+    { name: '40.5', value: 40.5 },
+    { name: '41', value: 41 },
+    { name: '41.5', value: 41.5 },
+    { name: '42', value: 42 },
+    { name: '42.5', value: 42.5 },
+    { name: '43', value: 43 },
+    { name: '43.5', value: 43.5 },
+    { name: '44', value: 44 },
+    { name: '44.5', value: 44.5 },
+    { name: '45', value: 45 },
+    { name: '45.5', value: 45.5 },
+    { name: '46', value: 46 },
+    { name: '46.5', value: 46.5 },
+    { name: '47', value: 47 },
+    { name: '47.5', value: 47.5 },
+    { name: '48', value: 48 },
+    { name: '48.5', value: 48.5 },
+    { name: '49', value: 49 },
+    { name: '49.5', value: 49.5 },
+]
+
+const clothesSize = [
+    { name: 'Tout', value: 'all' },
+    { name: 'XS', value: 'xs' },
+    { name: 'S', value: 's' },
+    { name: 'M', value: 'm' },
+    { name: 'L', value: 'l' },
+    { name: 'XL', value: 'xl' },
+    { name: '2L', value: 'xxl' },
+    { name: '3XL', value: 'xxxl' },
+]
+
+// last column
+
+const price = [
+    { name: 'Tout', value: 'all' },
+    { name: '0 - 200€', value: '0-200' },
+    { name: '200 - 350€', value: '200-350' },
+    { name: '350 - 500€', value: '350-500' },
+    { name: '500 - 750€', value: '500-750' },
+    { name: '750 - 1000€', value: '750-1000' },
+    { name: '1000€ +', value: '1000+' },
+]
+
 export default function Filters() {
-    const [selectedCategories, setSelectedCategories] = useState<Category[]>([])
-    const [selectedGenres, setSelectedGenres] = useState<Category[]>([])
-    const [selectedSubcategories, setSelectedSubcategories] = useState<
-        Category[]
-    >([])
-    const [selectedSubsubcategories, setSelectedSubsubcategories] = useState<
-        any[]
-    >([])
-    const [selectedShoes, setSelectedShoes] = useState<any[]>([])
-    const [selectedSizes, setSelectedSizes] = useState<any[]>([])
-    const [selectedPrices, setSelectedPrices] = useState<any[]>([])
+    const [manwoman, setManWoman] = useState<any>([])
+    const [productType, setProductType] = useState<any>([])
+    const [tags, setTags] = useState<any>([])
+    const [productVendor, setProductVendor] = useState<any>([])
+    const [colors, setColors] = useState<any>([])
+    const [materials, setMaterials] = useState<any>([])
+    const [collections, setCollections] = useState<any>([])
+    const [sizes, setSizes] = useState<any>([])
+    const [prices, setPrices] = useState<any>([])
 
-    const handleCategoryCheckboxChange = (category: Category) => {
-        setSelectedCategories((prevCategories) =>
-            prevCategories.includes(category)
-                ? prevCategories.filter((c) => c !== category)
-                : [...prevCategories, category]
+    // params
+    const [sneakersParams, setSneakersParams] = useState<any>([])
+
+    const handleSneakersParams = (sneakersParam: any) => {
+        setSneakersParams((prevSneakersParam: any) =>
+            prevSneakersParam.includes(sneakersParam)
+                ? prevSneakersParam.filter((s: any) => s !== sneakersParam)
+                : [...prevSneakersParam, sneakersParam]
         )
     }
 
-    const handleGenreCheckboxChange = (genre: Category) => {
-        setSelectedGenres((prevGenres) =>
-            prevGenres.includes(genre)
-                ? prevGenres.filter((g) => g !== genre)
-                : [...prevGenres, genre]
+    const handleGenre = (genre: any) => {
+        setManWoman((prevGenre: any) =>
+            prevGenre.includes(genre)
+                ? prevGenre.filter((g: any) => g !== genre)
+                : [...prevGenre, genre]
         )
     }
 
-    const handleSubcategoryCheckboxChange = (subcategory: Category) => {
-        setSelectedSubcategories((prevSubcategories) =>
-            prevSubcategories.includes(subcategory)
-                ? prevSubcategories.filter((s) => s !== subcategory)
-                : [...prevSubcategories, subcategory]
+    const handleProductType = (productType: any) => {
+        setProductType((prevProductType: any) =>
+            prevProductType.includes(productType)
+                ? prevProductType.filter((p: any) => p !== productType)
+                : [...prevProductType, productType]
         )
     }
 
-    const handleSubsubcategoryCheckboxChange = (subsubcategory: Category) => {
-        setSelectedSubsubcategories((prevSubsubcategories) =>
-            prevSubsubcategories.includes(subsubcategory)
-                ? prevSubsubcategories.filter((s) => s !== subsubcategory)
-                : [...prevSubsubcategories, subsubcategory]
+    const handleTags = (tag: any) => {
+        setTags((prevTag: any) =>
+            prevTag.includes(tag)
+                ? prevTag.filter((t: any) => t !== tag)
+                : [...prevTag, tag]
         )
     }
 
-    const handleSelectedShoesCheckboxChange = (shoe: any) => {
-        setSelectedShoes((prevShoes) =>
-            prevShoes.includes(shoe)
-                ? prevShoes.filter((s) => s !== shoe)
-                : [...prevShoes, shoe]
+    const handleMaterials = (material: any) => {
+        setMaterials((prevMaterial: any) =>
+            prevMaterial.includes(material)
+                ? prevMaterial.filter((m: any) => m !== material)
+                : [...prevMaterial, material]
         )
     }
 
-    const handleSizeCheckboxChange = (size: any) => {
-        setSelectedSizes((prevSizes) =>
-            prevSizes.includes(size)
-                ? prevSizes.filter((s) => s !== size)
-                : [...prevSizes, size]
+    const handleProductVendor = (productVendor: any) => {
+        setProductVendor((prevProductVendor: any) =>
+            prevProductVendor.includes(productVendor)
+                ? prevProductVendor.filter((p: any) => p !== productVendor)
+                : [...prevProductVendor, productVendor]
         )
     }
 
-    const handlePriceCheckboxChange = (price: any) => {
-        setSelectedPrices((prevPrices) =>
-            prevPrices.includes(price)
-                ? prevPrices.filter((p) => p !== price)
-                : [...prevPrices, price]
+    const handleColors = (color: any) => {
+        setColors((prevColor: any) =>
+            prevColor.includes(color)
+                ? prevColor.filter((c: any) => c !== color)
+                : [...prevColor, color]
+        )
+    }
+
+    const handleCollections = (collection: any) => {
+        setCollections((prevCollection: any) =>
+            prevCollection.includes(collection)
+                ? prevCollection.filter((c: any) => c !== collection)
+                : [...prevCollection, collection]
+        )
+    }
+
+    const handleSizes = (size: any) => {
+        setSizes((prevSize: any) =>
+            prevSize.includes(size)
+                ? prevSize.filter((s: any) => s !== size)
+                : [...prevSize, size]
+        )
+    }
+
+    const handlePrices = (price: any) => {
+        setPrices((prevPrice: any) =>
+            prevPrice.includes(price)
+                ? prevPrice.filter((p: any) => p !== price)
+                : [...prevPrice, price]
         )
     }
 
     function resetAll() {
-        setSelectedCategories([])
-        setSelectedSubcategories([])
-        setSelectedSubsubcategories([])
-        setSelectedShoes([])
-        setSelectedSizes([])
-        setSelectedPrices([])
+        setManWoman([])
+        setProductType([])
+        setTags([])
+        setProductVendor([])
+        setColors([])
+        setMaterials([])
+        setCollections([])
+        setSizes([])
+        setPrices([])
+        setSneakersParams([])
     }
 
     function handleSearch() {
         const queryParams = []
 
-        if (selectedGenres && selectedGenres.length > 0) {
-            const genreObjects = selectedGenres.map((genre) => ({
-                genre: genre?.name,
-            }))
-            queryParams.push(...genreObjects)
+        if (manwoman && manwoman.length > 0) {
+            const genreObjects = manwoman.map((genre: any) => {
+                const name = genre?.name
+
+                if (name === 'Homme') {
+                    return {
+                        manwoman: 'false',
+                    }
+                } else if (name === 'Femme') {
+                    return {
+                        manwoman: 'true',
+                    }
+                } else if (name === 'Mixte') {
+                }
+
+                return /*valeur par défaut*/
+            })
+
+            const filteredGenreObjects = genreObjects.filter(
+                (item: any) => item !== undefined
+            )
+
+            queryParams.push(...filteredGenreObjects)
         }
 
-        if (selectedCategories && selectedCategories.length > 0) {
-            const categoryObjects = selectedCategories.map((category) => ({
+        if (
+            productType &&
+            productType.length > 0 &&
+            !productType.some((category: any) => category?.name === 'Tout')
+        ) {
+            const categoryObjects = productType.map((category: any) => ({
                 productType: category?.name,
             }))
+
             queryParams.push(...categoryObjects)
         }
 
-        if (selectedSubsubcategories && selectedSubsubcategories.length > 0) {
-            const subcategoryObjects = selectedSubsubcategories.map(
-                (subcategory) => ({
+        if (
+            tags &&
+            tags.length > 0 &&
+            !tags.some((tag: any) => tag?.name === 'Tout')
+        ) {
+            const tagsObjects = tags.map((tag: any) => ({
+                tags: tag?.name,
+            }))
+            queryParams.push(...tagsObjects)
+        }
+
+        if (colors && colors.length > 0) {
+            const colorsObjects = colors.map((color: any) => ({
+                colors: color?.name,
+            }))
+            queryParams.push(...colorsObjects)
+        }
+
+        if (materials && materials.length > 0) {
+            const materialsObjects = materials.map((material: any) => ({
+                materials: material?.name,
+            }))
+            queryParams.push(...materialsObjects)
+        }
+
+        if (
+            productVendor &&
+            productVendor.length > 0 &&
+            !productVendor.some((vendor: any) => vendor?.name === 'Tout')
+        ) {
+            const subcategoryObjects = productVendor.map(
+                (subcategory: any) => ({
                     productVendor: subcategory?.name,
                 })
             )
             queryParams.push(...subcategoryObjects)
         }
 
-        if (selectedShoes && selectedShoes.length > 0) {
-            const shoeObjects = selectedShoes.map((shoe) => ({
+        if (
+            collections &&
+            collections.length > 0 &&
+            !collections.some((collection: any) => collection?.name === 'Tout')
+        ) {
+            const shoeObjects = collections.map((shoe: any) => ({
                 collection: shoe?.value,
             }))
             queryParams.push(...shoeObjects)
+        } else {
+            // Si 'Tout' est check ou si la collection est vide, ajoute 'All' par défaut
+            queryParams.push({ collection: 'All' })
         }
 
-        if (selectedSizes && selectedSizes.length > 0) {
-            const sizeObjects = selectedSizes.map((size) => ({
+        if (
+            sizes &&
+            sizes.length > 0 &&
+            !sizes.some((size: any) => size === 'Tout')
+        ) {
+            const sizeObjects = sizes.map((size: any) => ({
                 size: size?.name,
             }))
             queryParams.push(...sizeObjects)
+        }
+
+        if (
+            prices &&
+            prices.length > 0 &&
+            !prices.some((price: any) => price === 'Tout')
+        ) {
+            const priceObjects = prices.map((price: any) => ({
+                price: price?.value,
+            }))
+            queryParams.push(...priceObjects)
         }
 
         if (queryParams.length > 0) {
@@ -307,327 +438,409 @@ export default function Filters() {
         return ''
     }
 
-    console.log(handleSearch())
+    const goBack = () => {
+        window.history.go(-1)
+    }
 
-    console.log(
-        'genre',
-        selectedGenres,
-        'premier',
-        selectedCategories,
-        'deuxieme',
-        selectedSubcategories,
-        'troisieme',
-        selectedSubsubcategories,
-        'quatrieme',
-        selectedShoes,
-        'cinquieme',
-        selectedSizes,
-        'sixieme',
-        selectedPrices
-    )
+    console.log(handleSearch())
 
     return (
         <>
             <div className='filters'>
-                <div className='filters__categories'>
-                    <div>
-                        <div
-                            style={{
-                                marginBottom: '50px',
-                            }}
-                        >
-                            <h3 className='filters__title'>Genre</h3>
-                            <ul className='filters__list'>
-                                {genre.map((genre) => (
-                                    <li
-                                        className='filters__item'
-                                        key={genre.name}
-                                    >
-                                        <label>
-                                            <input
-                                                type='checkbox'
-                                                checked={selectedGenres.includes(
-                                                    genre
-                                                )}
-                                                onChange={() =>
-                                                    handleGenreCheckboxChange(
-                                                        genre
-                                                    )
-                                                }
-                                            />
-                                            {genre.name}
-                                        </label>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                        <h3 className='filters__title'>Catégories</h3>
+                <div>
+                    <div
+                        style={{
+                            marginBottom: '50px',
+                        }}
+                    >
+                        <h3 className='filters__title'>Genre</h3>
                         <ul className='filters__list'>
-                            {categories.map((category) => (
-                                <li
-                                    className='filters__item'
-                                    key={category.name}
-                                >
+                            {genre.map((genre) => (
+                                <li className='filters__item' key={genre.name}>
                                     <label>
                                         <input
                                             type='checkbox'
-                                            checked={selectedCategories.includes(
-                                                category
-                                            )}
-                                            onChange={() =>
-                                                handleCategoryCheckboxChange(
-                                                    category
-                                                )
-                                            }
+                                            checked={manwoman.includes(genre)}
+                                            onChange={() => handleGenre(genre)}
                                         />
-                                        {category.name}
+                                        {genre.name}
                                     </label>
                                 </li>
                             ))}
                         </ul>
                     </div>
+                    <h3 className='filters__title'>Catégorie</h3>
+                    <ul className='filters__list'>
+                        {category.map((category: any) => (
+                            <li className='filters__item' key={category.name}>
+                                <label>
+                                    <input
+                                        type='checkbox'
+                                        checked={productType.includes(category)}
+                                        onChange={() =>
+                                            handleProductType(category)
+                                        }
+                                    />
+                                    {category.name}
+                                </label>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
-                {selectedCategories.length > 0 && (
-                    <div className='filters__subcategories'>
-                        {selectedCategories?.map((category: any) => (
-                            <div>
-                                {category?.subcategories?.length > 0 && (
-                                    <h3 className='filters__title'>
-                                        {category.name}
-                                    </h3>
-                                )}
+
+                <div>
+                    {productType.some(
+                        (sneakers: any) => sneakers.value === 'sneakers'
+                    ) && (
+                        <div className='filters__categories'>
+                            <h3 className='filters__title'>Sneakers</h3>
+                            <ul className='filters__list'>
+                                {sneakers.map((sneakers: any) => (
+                                    <li
+                                        className='filters__item'
+                                        key={sneakers.name}
+                                    >
+                                        <label>
+                                            <input
+                                                type='checkbox'
+                                                checked={sneakersParams.includes(
+                                                    sneakers
+                                                )}
+                                                onChange={() =>
+                                                    handleSneakersParams(
+                                                        sneakers
+                                                    )
+                                                }
+                                            />
+                                            {sneakers.name}
+                                        </label>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                    {productType.some(
+                        (textile: any) => textile.value === 'textile'
+                    ) && (
+                        <div className='filters__categories'>
+                            <h3 className='filters__title'>Textile</h3>
+                            <ul className='filters__list'>
+                                {textile.map((textile: any) => (
+                                    <li
+                                        className='filters__item'
+                                        key={textile.name}
+                                    >
+                                        <label>
+                                            <input
+                                                type='checkbox'
+                                                checked={tags.includes(textile)}
+                                                onChange={() =>
+                                                    handleTags(textile)
+                                                }
+                                            />
+                                            {textile.name}
+                                        </label>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                    {productType.some(
+                        (accessories: any) =>
+                            accessories.value === 'accessories'
+                    ) && (
+                        <div className='filters__categories'>
+                            <h3 className='filters__title'>Accessoires</h3>
+                            <ul className='filters__list'>
+                                {accessories.map((accessories: any) => (
+                                    <li
+                                        className='filters__item'
+                                        key={accessories.name}
+                                    >
+                                        <label>
+                                            <input
+                                                type='checkbox'
+                                                checked={tags.includes(
+                                                    accessories
+                                                )}
+                                                onChange={() =>
+                                                    handleTags(accessories)
+                                                }
+                                            />
+                                            {accessories.name}
+                                        </label>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                </div>
+                <div>
+                    {sneakersParams.some(
+                        (brands: any) => brands.value === 'brands'
+                    ) && (
+                        <div className='filters__categories'>
+                            <h3 className='filters__title'>Marques</h3>
+                            <ul className='filters__list'>
+                                {brands.map((brands: any) => (
+                                    <li
+                                        className='filters__item'
+                                        key={brands.name}
+                                    >
+                                        <label>
+                                            <input
+                                                type='checkbox'
+                                                checked={productVendor.includes(
+                                                    brands
+                                                )}
+                                                onChange={() =>
+                                                    handleProductVendor(brands)
+                                                }
+                                            />
+                                            {brands.name}
+                                        </label>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                    {sneakersParams.some(
+                        (colors: any) => colors.value === 'colorsList'
+                    ) && (
+                        <div className='filters__categories'>
+                            <h3 className='filters__title'>Couleurs</h3>
+                            <ul className='filters__list'>
+                                {colorsList.map((c: any) => (
+                                    <li className='filters__item' key={c.name}>
+                                        <label>
+                                            <input
+                                                type='checkbox'
+                                                checked={colors.includes(c)}
+                                                onChange={() => handleColors(c)}
+                                            />
+                                            {c.name}
+                                        </label>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                    {sneakersParams.some(
+                        (materials: any) => materials.value === 'materials'
+                    ) && (
+                        <div className='filters__categories'>
+                            <h3 className='filters__title'>Matière</h3>
+                            <ul className='filters__list'>
+                                {matiere.map((matiere: any) => (
+                                    <li
+                                        className='filters__item'
+                                        key={matiere.name}
+                                    >
+                                        <label>
+                                            <input
+                                                type='checkbox'
+                                                checked={materials.includes(
+                                                    matiere
+                                                )}
+                                                onChange={() =>
+                                                    handleMaterials(matiere)
+                                                }
+                                            />
+                                            {matiere.name}
+                                        </label>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                </div>
+                <div>
+                    {productVendor.some(
+                        (nike: any) => nike.value === 'nike'
+                    ) && (
+                        <div className='filters__categories'>
+                            <h3 className='filters__title'>Nike</h3>
+                            <ul className='filters__list'>
+                                {nike.map((nike: any) => (
+                                    <li
+                                        className='filters__item'
+                                        key={nike.name}
+                                    >
+                                        <label>
+                                            <input
+                                                type='checkbox'
+                                                checked={collections.includes(
+                                                    nike
+                                                )}
+                                                onChange={() =>
+                                                    handleCollections(nike)
+                                                }
+                                            />
+                                            {nike.name}
+                                        </label>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                    {productVendor.some(
+                        (adidas: any) => adidas.value === 'adidas'
+                    ) && (
+                        <div className='filters__categories'>
+                            <h3 className='filters__title'>Adidas</h3>
+                            <ul className='filters__list'>
+                                {adidas.map((adidas: any) => (
+                                    <li
+                                        className='filters__item'
+                                        key={adidas.name}
+                                    >
+                                        <label>
+                                            <input
+                                                type='checkbox'
+                                                checked={collections.includes(
+                                                    adidas
+                                                )}
+                                                onChange={() =>
+                                                    handleCollections(adidas)
+                                                }
+                                            />
+                                            {adidas.name}
+                                        </label>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                    {productVendor.some(
+                        (clothes: any) => clothes.value === 'clothes'
+                    ) && (
+                        <div className='filters__categories'>
+                            <h3 className='filters__title'>Clothes</h3>
+                            <ul className='filters__list'>
+                                {clothes.map((clothes: any) => (
+                                    <li
+                                        className='filters__item'
+                                        key={clothes.name}
+                                    >
+                                        <label>
+                                            <input
+                                                type='checkbox'
+                                                checked={collections.includes(
+                                                    clothes
+                                                )}
+                                                onChange={() =>
+                                                    handleCollections(clothes)
+                                                }
+                                            />
+                                            {clothes.name}
+                                        </label>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                </div>
+                <div>
+                    {collections.length > 0 && (
+                        // SIZES
+                        <>
+                            {' '}
+                            <div className='filters__categories'>
+                                <h3 className='filters__title'>Tailles</h3>
                                 <ul className='filters__list'>
-                                    {category.subcategories?.map(
-                                        (subcategory: any) => (
-                                            <li
-                                                className='filters__item'
-                                                key={subcategory.name}
-                                            >
-                                                <label>
-                                                    <input
-                                                        type='checkbox'
-                                                        checked={selectedSubcategories.includes(
-                                                            subcategory
-                                                        )}
-                                                        onChange={() =>
-                                                            handleSubcategoryCheckboxChange(
-                                                                subcategory
-                                                            )
-                                                        }
-                                                    />
-                                                    {subcategory.name}
-                                                </label>
-                                            </li>
-                                        )
+                                    {collections.length > 0 && (
+                                        <div>
+                                            {sneakersSize.map(
+                                                (sneakersSize: any) => (
+                                                    <li
+                                                        className='filters__item'
+                                                        key={sneakersSize.name}
+                                                    >
+                                                        <label>
+                                                            <input
+                                                                type='checkbox'
+                                                                checked={sizes.includes(
+                                                                    sneakersSize
+                                                                )}
+                                                                onChange={() =>
+                                                                    handleSizes(
+                                                                        sneakersSize
+                                                                    )
+                                                                }
+                                                            />
+                                                            {sneakersSize.name}
+                                                        </label>
+                                                    </li>
+                                                )
+                                            )}
+                                        </div>
                                     )}
                                 </ul>
                             </div>
-                        ))}
-                    </div>
-                )}
-                {selectedSubcategories.length > 0 && (
-                    <div className='filters__subcategories'>
-                        {selectedSubcategories?.map((subcategory: any) => (
-                            <div>
-                                {subcategory?.subcategories?.length > 0 && (
-                                    <h3 className='filters__title'>
-                                        {subcategory.name}
-                                    </h3>
-                                )}
+                            <div className='filters__categories'>
+                                <h3 className='filters__title'>Tailles</h3>
                                 <ul className='filters__list'>
-                                    {subcategory.subcategories?.map(
-                                        (subsubcategory: any) => (
-                                            <li
-                                                className='filters__item'
-                                                key={subsubcategory.name}
-                                            >
-                                                <label>
-                                                    <input
-                                                        type='checkbox'
-                                                        checked={selectedSubsubcategories.includes(
-                                                            subsubcategory
-                                                        )}
-                                                        onChange={() =>
-                                                            handleSubsubcategoryCheckboxChange(
-                                                                subsubcategory
-                                                            )
-                                                        }
-                                                    />
-                                                    {subsubcategory.name}
-                                                </label>
-                                            </li>
-                                        )
+                                    {productType.some(
+                                        (textile: any) =>
+                                            textile.value === 'textile'
+                                    ) && (
+                                        <div>
+                                            {clothesSize.map(
+                                                (clothesSize: any) => (
+                                                    <li
+                                                        className='filters__item'
+                                                        key={clothesSize.name}
+                                                    >
+                                                        <label>
+                                                            <input
+                                                                type='checkbox'
+                                                                checked={sizes.includes(
+                                                                    clothesSize
+                                                                )}
+                                                                onChange={() =>
+                                                                    handleSizes(
+                                                                        clothesSize
+                                                                    )
+                                                                }
+                                                            />
+                                                            {clothesSize.name}
+                                                        </label>
+                                                    </li>
+                                                )
+                                            )}
+                                        </div>
                                     )}
                                 </ul>
                             </div>
-                        ))}
-                    </div>
-                )}
-                {selectedSubsubcategories.length > 0 && (
-                    <div className='filters__subcategories'>
-                        {selectedSubsubcategories?.map(
-                            (subsubcategory: any) => (
-                                <>
-                                    {subsubcategory?.subcategories?.length >
-                                        0 && (
-                                        <h3 className='filters__title'>
-                                            {subsubcategory.name}
-                                        </h3>
-                                    )}
-                                    <ul className='filters__list'>
-                                        {subsubcategory.subcategories?.map(
-                                            (subsubsubcategory: any) => (
-                                                <li
-                                                    className='filters__item'
-                                                    key={subsubsubcategory.name}
-                                                >
-                                                    <label>
-                                                        <input
-                                                            type='checkbox'
-                                                            checked={selectedShoes.includes(
-                                                                subsubsubcategory
-                                                            )}
-                                                            onChange={() =>
-                                                                handleSelectedShoesCheckboxChange(
-                                                                    subsubsubcategory
-                                                                )
-                                                            }
-                                                        />
-                                                        {subsubsubcategory.name}
-                                                    </label>
-                                                </li>
-                                            )
-                                        )}
-                                    </ul>
-                                </>
-                            )
-                        )}
-                    </div>
-                )}
-                {selectedShoes.length > 0 && (
-                    <div className='filters__subcategories'>
-                        {sizes?.map((subCategory: any) => (
-                            <>
-                                {subCategory?.subcategories?.length > 0 && (
-                                    <h3 className='filters__title'>
-                                        {/*{subCategory.name}*/}
-                                        tailles
-                                    </h3>
-                                )}
-                                <ul className='filters__list'>
-                                    {subCategory.subcategories?.map(
-                                        (subsubsubcategory: any) => (
-                                            <li
-                                                className='filters__item'
-                                                key={subsubsubcategory.name}
-                                            >
-                                                <label>
-                                                    <input
-                                                        type='checkbox'
-                                                        checked={selectedSizes.includes(
-                                                            subsubsubcategory
-                                                        )}
-                                                        onChange={() =>
-                                                            handleSizeCheckboxChange(
-                                                                subsubsubcategory
-                                                            )
-                                                        }
-                                                    />
-                                                    {subsubsubcategory.name}
-                                                </label>
-                                            </li>
-                                        )
-                                    )}
-                                </ul>
-                            </>
-                        ))}
-                    </div>
-                )}
-                {selectedSizes?.length > 0 && (
-                    <div className='filters__subcategories'>
-                        {price?.map((subCategory: any) => (
-                            <>
-                                {subCategory?.subcategories?.length > 0 && (
-                                    <h3 className='filters__title'>
-                                        {/*{subCategory.name}*/}
-                                        prix
-                                    </h3>
-                                )}
-                                <ul className='filters__list'>
-                                    {subCategory.subcategories?.map(
-                                        (subsubsubcategory: any) => (
-                                            <li
-                                                className='filters__item'
-                                                key={subsubsubcategory.name}
-                                            >
-                                                <label>
-                                                    <input
-                                                        type='checkbox'
-                                                        checked={selectedPrices.includes(
-                                                            subsubsubcategory
-                                                        )}
-                                                        onChange={() =>
-                                                            handlePriceCheckboxChange(
-                                                                subsubsubcategory
-                                                            )
-                                                        }
-                                                    />
-                                                    {subsubsubcategory.name}
-                                                </label>
-                                            </li>
-                                        )
-                                    )}
-                                </ul>
-                            </>
-                        ))}
-                    </div>
-                )}
-            </div>
-            <div
-                className={`filters-tvs ${
-                    selectedShoes.length > 0 ? 'filters-tvs-full' : ''
-                }`}
-            >
-                {selectedShoes.length > 0 && (
-                    <img
-                        src='/filters/blueTV.png'
-                        alt='blue tv'
-                        className='filters-tvs-blue'
-                    />
-                )}
-                {selectedSubcategories.length > 0 && (
-                    <div
-                        style={{
-                            display: 'flex',
-                        }}
-                        className='filters-tvs-top'
-                    >
-                        {selectedSubsubcategories.length > 0 && (
-                            <img
-                                src='/filters/orangeTV.png'
-                                alt='blue tv'
-                                className='filters-tvs-top-left'
-                            />
-                        )}
-                        <img src='/filters/yellowTV.png' alt='yellow tv' />
-                    </div>
-                )}
-                {selectedCategories.length > 0 && (
-                    <div
-                        style={{
-                            display: 'flex',
-                        }}
-                        className='filters-tvs-bottom'
-                    >
-                        <img
-                            src='/filters/lightBlueTV.png'
-                            alt='yellow tv'
-                            className='filters-tvs-bottom-left'
-                        />
-                        <img src='/filters/greenTV.png' alt='blue tv' />
-                    </div>
-                )}
-                <img src='/filters/redTV.png' alt='red tv' />
+                        </>
+                    )}
+                </div>
+                <div>
+                    {sizes.length > 0 && (
+                        <div className='filters__categories'>
+                            <h3 className='filters__title'>Prix</h3>
+                            <ul className='filters__list'>
+                                {price.map((price: any) => (
+                                    <li
+                                        className='filters__item'
+                                        key={price.name}
+                                    >
+                                        <label>
+                                            <input
+                                                type='checkbox'
+                                                checked={prices.includes(price)}
+                                                onChange={() =>
+                                                    handlePrices(price)
+                                                }
+                                            />
+                                            {price.name}
+                                        </label>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                </div>
             </div>
             <div className='filters-footer'>
                 <img
@@ -661,19 +874,70 @@ export default function Filters() {
                         </div>
                     </div>
                     <div
-                        className='filter-footer-container-search'
-                        onClick={handleSearch}
+                        className={`filters-tvs ${
+                            collections?.length > 0 ? 'filters-tvs-full' : ''
+                        }`}
                     >
+                        {collections.length > 0 && (
+                            <img
+                                src='/filters/blueTV.png'
+                                alt='blue tv'
+                                className='filters-tvs-blue'
+                            />
+                        )}
+                        {(sneakersParams.length > 0 || tags?.length > 0) && (
+                            <div
+                                style={{
+                                    display: 'flex',
+                                }}
+                                className='filters-tvs-top'
+                            >
+                                {(productVendor?.length > 0 ||
+                                    colors?.length > 0 ||
+                                    materials?.length > 0) && (
+                                    <img
+                                        src='/filters/orangeTV.png'
+                                        alt='blue tv'
+                                        className='filters-tvs-top-left'
+                                    />
+                                )}
+                                <img
+                                    src='/filters/yellowTV.png'
+                                    alt='yellow tv'
+                                />
+                            </div>
+                        )}
+                        {(manwoman.length > 0 || productType?.length > 0) && (
+                            <div
+                                style={{
+                                    display: 'flex',
+                                }}
+                                className='filters-tvs-bottom'
+                            >
+                                <img
+                                    src='/filters/lightBlueTV.png'
+                                    alt='yellow tv'
+                                    className='filters-tvs-bottom-left'
+                                />
+                                <img src='/filters/greenTV.png' alt='blue tv' />
+                            </div>
+                        )}
+
+                        <img
+                            src='/filters/redTV.png'
+                            alt='pink tv'
+                            className='filters-tvs-right'
+                        />
+                    </div>
+                    <div className='filter-footer-container-search'>
                         <Link to={`/filtered${handleSearch()}`}>
                             <span>Afficher les resultats</span>
                         </Link>
                     </div>
                 </div>
             </div>
-            <div className='filters-close'>
-                <Link to='/'>
-                    <img src='/icons/close.svg' alt='close' />
-                </Link>
+            <div className='filters-close' onClick={goBack}>
+                <img src='/icons/close.svg' alt='close' />
             </div>
         </>
     )

@@ -40,7 +40,8 @@ export function Layout({
             <SearchAside />
             {location.pathname !== '/account/login' &&
                 location.pathname !== '/filters' &&
-                location.pathname !== '/account/register' && (
+                location.pathname !== '/account/register' &&
+                location.pathname !== '/account/recover' && (
                     <Header
                         header={header}
                         cart={cart}

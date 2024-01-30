@@ -1,114 +1,131 @@
 import {
-  json,
-  redirect,
-  type LoaderFunctionArgs,
-  type ActionFunctionArgs,
-} from '@shopify/remix-oxygen';
-import {Form, Link, useActionData} from '@remix-run/react';
+    json,
+    redirect,
+    type LoaderFunctionArgs,
+    type ActionFunctionArgs,
+} from '@shopify/remix-oxygen'
+import { Form, Link, useActionData } from '@remix-run/react'
+import React, { useState } from 'react'
 
 type ActionResponse = {
-  error?: string;
-  resetRequested?: boolean;
-};
-
-export async function loader({context}: LoaderFunctionArgs) {
-  const customerAccessToken = await context.session.get('customerAccessToken');
-  if (customerAccessToken) {
-    return redirect('/account');
-  }
-
-  return json({});
+    error?: string
+    resetRequested?: boolean
 }
 
-export async function action({request, context}: ActionFunctionArgs) {
-  const {storefront} = context;
-  const form = await request.formData();
-  const email = form.has('email') ? String(form.get('email')) : null;
-
-  if (request.method !== 'POST') {
-    return json({error: 'Method not allowed'}, {status: 405});
-  }
-
-  try {
-    if (!email) {
-      throw new Error('Please provide an email.');
+export async function loader({ context }: LoaderFunctionArgs) {
+    const customerAccessToken = await context.session.get('customerAccessToken')
+    if (customerAccessToken) {
+        return redirect('/account')
     }
-    await storefront.mutate(CUSTOMER_RECOVER_MUTATION, {
-      variables: {email},
-    });
 
-    return json({resetRequested: true});
-  } catch (error: unknown) {
-    const resetRequested = false;
-    if (error instanceof Error) {
-      return json({error: error.message, resetRequested}, {status: 400});
+    return json({})
+}
+
+export async function action({ request, context }: ActionFunctionArgs) {
+    const { storefront } = context
+    const form = await request.formData()
+    const email = form.has('email') ? String(form.get('email')) : null
+
+    if (request.method !== 'POST') {
+        return json({ error: 'Method not allowed' }, { status: 405 })
     }
-    return json({error, resetRequested}, {status: 400});
-  }
+
+    try {
+        if (!email) {
+            throw new Error('Please provide an email.')
+        }
+        await storefront.mutate(CUSTOMER_RECOVER_MUTATION, {
+            variables: { email },
+        })
+
+        return json({ resetRequested: true })
+    } catch (error: unknown) {
+        const resetRequested = false
+        if (error instanceof Error) {
+            return json(
+                { error: error.message, resetRequested },
+                { status: 400 }
+            )
+        }
+        return json({ error, resetRequested }, { status: 400 })
+    }
 }
 
 export default function Recover() {
-  const action = useActionData<ActionResponse>();
+    const action = useActionData<ActionResponse>()
+    const [mail, setMail] = useState('')
 
-  return (
-    <div className="account-recover">
-      <div>
-        {action?.resetRequested ? (
-          <>
-            <h1>Request Sent.</h1>
-            <p>
-              If that email address is in our system, you will receive an email
-              with instructions about how to reset your password in a few
-              minutes.
-            </p>
-            <br />
-            <Link to="/account/login">Return to Login</Link>
-          </>
-        ) : (
-          <>
-            <h1>Forgot Password.</h1>
-            <p>
-              Enter the email address associated with your account to receive a
-              link to reset your password.
-            </p>
-            <br />
-            <Form method="POST">
-              <fieldset>
-                <label htmlFor="email">Email</label>
-                <input
-                  aria-label="Email address"
-                  autoComplete="email"
-                  // eslint-disable-next-line jsx-a11y/no-autofocus
-                  autoFocus
-                  id="email"
-                  name="email"
-                  placeholder="Email address"
-                  required
-                  type="email"
-                />
-              </fieldset>
-              {action?.error ? (
-                <p>
-                  <mark>
-                    <small>{action.error}</small>
-                  </mark>
-                </p>
-              ) : (
-                <br />
-              )}
-              <button type="submit">Request Reset Link</button>
-            </Form>
-            <div>
-              <br />
-              <p>
-                <Link to="/account/login">Login →</Link>
-              </p>
-            </div>
-          </>
-        )}
-      </div>
-    </div>
-  );
+    return (
+        <div>
+            {action?.resetRequested ? (
+                <div className='account-recover-success'>
+                    <h1>Votre nouveau mot de passe se trouve ici</h1>
+                    <input
+                        aria-label='Email address'
+                        autoComplete='email'
+                        autoFocus
+                        id='email'
+                        name='email'
+                        placeholder='Email address'
+                        required
+                        type='email'
+                        value={mail}
+                        disabled
+                    />
+                    <br />
+                    <Link to='/'>
+                        <button>Retourner sur trackt</button>
+                    </Link>
+                </div>
+            ) : (
+                <div className='account-recover'>
+                    <br />
+                    <Form method='POST' className='login-form'>
+                        <div
+                            className='login-form-field'
+                            style={{
+                                marginLeft: '200px',
+                                marginTop: '20vh',
+                            }}
+                        >
+                            <label htmlFor='email'>Adresse e-mail</label>
+                            <input
+                                aria-label='Email address'
+                                autoComplete='email'
+                                // eslint-disable-next-line jsx-a11y/no-autofocus
+                                autoFocus
+                                id='email'
+                                name='email'
+                                placeholder='Email address'
+                                required
+                                type='email'
+                                onChange={(e) => setMail(e.target.value)}
+                            />
+                            {action?.error ? (
+                                <p>
+                                    <mark>
+                                        <small>{action.error}</small>
+                                    </mark>
+                                </p>
+                            ) : (
+                                <br />
+                            )}
+                            <button
+                                type='submit'
+                                style={{
+                                    marginTop: '50px',
+                                    marginLeft: '10px',
+                                    width: '400px',
+                                }}
+                            >
+                                Changer votre mot de passe
+                            </button>
+                        </div>
+                    </Form>
+                </div>
+            )}
+        </div>
+    )
 }
 
 // NOTE: https://shopify.dev/docs/api/storefront/latest/mutations/customerrecover
@@ -126,4 +143,4 @@ const CUSTOMER_RECOVER_MUTATION = `#graphql
       }
     }
   }
-` as const;
+` as const

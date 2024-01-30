@@ -640,19 +640,18 @@ aside li {
 .product-grid{
     position: relative;
     overflow: visible !important;
-
 }
 
 .product-grid .product-img-grid {
-    width: 343px;
-    height: 231px;
+    width: 300px;
+    height: 200px;
     background-color: #fff;
 }
 
 
 .product-grid .product-img-grid-sticker{
     top: -35px;
-    right: -30px;
+    right: 0;
     width: 80px;
     height: 70px;
     object-fit: cover;
@@ -782,7 +781,7 @@ aside li {
 
 }
 
-.hfooter .gofilters-btn {
+.gofilters-btn {
     text-transform: uppercase;
     margin-top: 40px;
     position: relative;
@@ -941,6 +940,10 @@ aside li {
     width: 250px;
 }
 
+.filters__categories{
+    margin-bottom: 50px;
+}
+
 .filters__subcategories div:not(:first-child){
     margin-top: 40px;
 }
@@ -1020,6 +1023,8 @@ aside li {
     font-size: 18px;
     text-transform: uppercase;
     margin-left: 20px;
+    color: #fff;
+
 }
 
 .filter-footer-container-reset{

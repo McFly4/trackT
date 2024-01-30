@@ -1,4 +1,4 @@
-import { NavLink } from '@remix-run/react'
+import { NavLink, Link } from '@remix-run/react'
 import type { LayoutProps } from './Layout'
 import React, { useState } from 'react'
 
@@ -31,10 +31,6 @@ export function Header({ header, isLoggedIn, cart }: HeaderProps) {
             <div className='nav-left'>
                 <div className='logo'>
                     <NavLink prefetch='intent' to='/' end>
-                        {/*<img*/}
-                        {/*    src={header?.shop?.brand?.logo?.image?.url}*/}
-                        {/*    alt='logo'*/}
-                        {/*/>*/}
                         <video
                             style={{
                                 width: '150px',
@@ -44,7 +40,12 @@ export function Header({ header, isLoggedIn, cart }: HeaderProps) {
                             muted
                             playsInline
                             src='/logo.mp4'
-                        ></video>
+                        >
+                            <img
+                                src={header?.shop?.brand?.logo?.image?.url}
+                                alt='logo'
+                            />
+                        </video>
                     </NavLink>
                 </div>
                 <div className='nav-icons'>
@@ -59,9 +60,9 @@ export function Header({ header, isLoggedIn, cart }: HeaderProps) {
                         </a>
                     </div>
                     <div className='icon'>
-                        <a href='#search-aside'>
+                        <Link to='/filters'>
                             <img src='/icons/search.svg' alt='search' />
-                        </a>
+                        </Link>
                     </div>
                     <div className='icon'>
                         <img src='/icons/heart.svg' alt='heart' />
