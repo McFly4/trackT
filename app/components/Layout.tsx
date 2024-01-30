@@ -41,7 +41,8 @@ export function Layout({
             {location.pathname !== '/account/login' &&
                 location.pathname !== '/filters' &&
                 location.pathname !== '/account/register' &&
-                location.pathname !== '/account/recover' && (
+                location.pathname !== '/account/recover' &&
+                !location.pathname.startsWith('/account/reset') && (
                     <Header
                         header={header}
                         cart={cart}

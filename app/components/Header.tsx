@@ -50,7 +50,7 @@ export function Header({ header, isLoggedIn, cart }: HeaderProps) {
                 </div>
                 <div className='nav-icons'>
                     <div className='icon'>
-                        <NavLink prefetch='intent' to='/account'>
+                        <NavLink prefetch='intent' to='/account/profile'>
                             <img src='/icons/person.svg' alt='person' />
                         </NavLink>
                     </div>

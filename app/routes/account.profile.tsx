@@ -3,9 +3,10 @@ import type { CustomerFragment } from 'storefrontapi.generated'
 import type { CustomerUpdateInput } from '@shopify/hydrogen/storefront-api-types'
 import {
     json,
+    defer,
     redirect,
     type ActionFunctionArgs,
-    type LoaderFunctionArgs,
+    LoaderFunctionArgs,
 } from '@shopify/remix-oxygen'
 import {
     Form,
@@ -14,10 +15,13 @@ import {
     useOutletContext,
     type MetaFunction,
     Link,
+    useLoaderData,
+    useBeforeUnload,
 } from '@remix-run/react'
 import Adresses from './account.addresses'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import React from 'react'
+import cliSpinners from 'cli-spinners'
 
 export type ActionResponse = {
     error: string | null
@@ -28,11 +32,19 @@ export const meta: MetaFunction = () => {
     return [{ title: 'Profile' }]
 }
 
-export async function loader({ context }: LoaderFunctionArgs) {
+export async function loader({ context, params }: LoaderFunctionArgs) {
     const customerAccessToken = await context.session.get('customerAccessToken')
     if (!customerAccessToken) {
         return redirect('/account/login')
     }
+
+    // const getProductViewed =
+    //     typeof window !== 'undefined' && localStorage.getItem('productList')
+    //         ? localStorage.getItem('productList')
+    //         : []
+    //
+    // const test = await context.storefront.query(GET_PRODUCTS_VIEWED)
+
     return json({})
 }
 
@@ -168,7 +180,6 @@ export default function AccountProfile() {
         <>
             <div className='account-profile'>
                 <h2>Informations personnelles</h2>
-
                 <br />
                 <br />
                 <Form method='PUT'>
@@ -235,19 +246,19 @@ export default function AccountProfile() {
                             </div>
                         </div>
                     </div>
-                    {/*<div className='account-profile-marketing'>*/}
-                    {/*    <input*/}
-                    {/*        id='acceptsMarketing'*/}
-                    {/*        name='acceptsMarketing'*/}
-                    {/*        type='checkbox'*/}
-                    {/*        placeholder='Accept marketing'*/}
-                    {/*        aria-label='Accept marketing'*/}
-                    {/*        defaultChecked={customer.acceptsMarketing}*/}
-                    {/*    />*/}
-                    {/*    <label htmlFor='acceptsMarketing'>*/}
-                    {/*        &nbsp; Subscribed to marketing communications*/}
-                    {/*    </label>*/}
-                    {/*</div>*/}
+                    <div className='account-profile-marketing'>
+                        <input
+                            id='acceptsMarketing'
+                            name='acceptsMarketing'
+                            type='checkbox'
+                            placeholder='Accept marketing'
+                            aria-label='Accept marketing'
+                            defaultChecked={customer.acceptsMarketing}
+                        />
+                        <label htmlFor='acceptsMarketing'>
+                            &nbsp; Subscribed to marketing communications
+                        </label>
+                    </div>
                     <br />
                     <div
                         style={{
@@ -404,7 +415,31 @@ export default function AccountProfile() {
                     </div>
                 </div>
             </div>
-            <div className='foryou'></div>
+            <div className='foryou'>
+                <h2>Articles pour vous</h2>
+                <div className='foryou-container'>
+                    <div className='foryou-container-item'>
+                        <img src='/images/for-you-1.png' alt='' />
+                        <p>TrackT x Nike Air Force 1</p>
+                        <p>€ 150</p>
+                    </div>
+                    <div className='foryou-container-item'>
+                        <img src='/images/for-you-2.png' alt='' />
+                        <p>TrackT x Nike Air Force 1</p>
+                        <p>€ 150</p>
+                    </div>
+                    <div className='foryou-container-item'>
+                        <img src='/images/for-you-3.png' alt='' />
+                        <p>TrackT x Nike Air Force 1</p>
+                        <p>€ 150</p>
+                    </div>
+                    <div className='foryou-container-item'>
+                        <img src='/images/for-you-4.png' alt='' />
+                        <p>TrackT x Nike Air Force 1</p>
+                        <p>€ 150</p>
+                    </div>
+                </div>
+            </div>
         </>
     )
 }
@@ -467,3 +502,26 @@ const CUSTOMER_UPDATE_MUTATION = `#graphql
     }
   }
 ` as const
+
+// const productListString =
+//     typeof window !== 'undefined' ? localStorage.getItem('productList') : null
+// const getProductViewed = productListString ? JSON.parse(productListString) : []
+//
+// const GET_PRODUCTS_VIEWED = `#graphql
+// query Products {
+//   nodes(
+//     ids: [
+//     "gid://shopify/Product/7485655253172",
+//     "gid://shopify/Product/7495728562356",
+//     "gid://shopify/Product/7494155796660",
+//     "gid://shopify/Product/7486018027700",
+//     "gid://shopify/Product/7486804197556"
+//   ]
+//   ) {
+//     ... on Product {
+//       id
+//       title
+//     }
+//   }
+// }
+// ` as const

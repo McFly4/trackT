@@ -13,14 +13,14 @@ export async function loader({ context }: LoaderFunctionArgs) {
 
     const { accessToken } = customerAccessToken
 
-    const wishlist = await context.storefront.mutate(UPDATE, {
-        variables: {
-            customerAccessToken: accessToken,
-            customer: {
-                firstName: 'AZZZZZ',
-            },
-        },
-    })
+    // const wishlist = await context.storefront.mutate(UPDATE, {
+    //     variables: {
+    //         customerAccessToken: accessToken,
+    //         customer: {
+    //             firstName: 'AZZZZZ',
+    //         },
+    //     },
+    // })
 
     return json({})
 }

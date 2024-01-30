@@ -162,7 +162,7 @@
     opacity: 0.5;
     position: absolute;
     left: 50%;
-    bottom: 20%;
+    bottom: 30%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     font-size: 40px;
@@ -171,7 +171,7 @@
 
 .product-price-container img{
     cursor: not-allowed;
-    width: 190px;
+    width: 210px;
     height: 210px;
     object-fit: cover;
 }

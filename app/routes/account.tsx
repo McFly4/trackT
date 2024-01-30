@@ -138,6 +138,18 @@ function AccountLayout({
                             rendez-la aussi unique que votre style.
                         </p>
                         <br />
+                        <div className='logout'>
+                            <Form method='POST' action='/account/logout'>
+                                <button
+                                    type='submit'
+                                    style={{
+                                        background: 'none',
+                                    }}
+                                >
+                                    <img src='/account/exit.png' alt='logout' />
+                                </button>
+                            </Form>
+                        </div>
                     </>
                 )}
 

@@ -25,8 +25,73 @@
     padding-top: 150px;
 }
 
-.account-recover-success input{
-    width: 400px;
+.account-reset{
+    background-image: url("public/account/accountReset.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.account-reset h1{
+    padding-top: 150px;
+
+}
+
+.account-reset form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+}
+
+.account-reset .btn-fields{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.account-reset .btn-fields a{
+    color: #fff;
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+
+.account-reset form button{
+    padding: 0 40px;
+    height: 50px;
+    border-radius: 5px;
+    background: #fff;
+    color: #000;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: "Helvetica Neue", sans-serif;
+}
+
+.input-field{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+}
+
+.input-field label{
+    font-size: 17px;
+    text-transform: uppercase;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    color: #fff;
+    font-family: "Helvetica Neue", sans-serif;
+}
+
+.account-reset .input-field input{
     height: 50px;
     border-radius: 5px;
     background: rgba(255, 255, 255, .1);
@@ -36,7 +101,6 @@
     padding-left: 30px;
     font-size: 18px;
     color: #fff;
-    margin-top: 50px;
 }
 
 .account-recover-success button {
@@ -152,6 +216,15 @@
     display: flex;
     justify-content: space-between;
     margin-top: 170px;
+    position: relative;
+
+}
+
+.account .logout{
+    position: fixed;
+    top: 200px;
+    right: -20px;
+    z-index: 999;
 }
 
 .account-head{
@@ -208,6 +281,7 @@
 .account-profile{
     width: fit-content;
 }
+
 
 .addresses{
     display: flex;
@@ -340,6 +414,9 @@
     margin-bottom: 50px;
 }
 
+.foryou{
+    margin-top: 70px;
+}
 
 
 /* ORDERS */

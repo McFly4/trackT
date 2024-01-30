@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { Suspense } from 'react'
 import { defer, redirect, type LoaderFunctionArgs } from '@shopify/remix-oxygen'
 import {
@@ -31,7 +31,6 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import MainProduct from '~/components/Common/mainProduct'
 import TrackT from '~/components/Common/TrackT'
 import { Scrollbar, Grid } from 'swiper/modules'
-import { Simulate } from 'react-dom/test-utils'
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
     return [{ title: `Hydrogen | ${data?.product.title ?? ''}` }]
@@ -95,7 +94,11 @@ export async function loader({ params, request, context }: LoaderFunctionArgs) {
 
     const products = await context.storefront.query(TRACKT)
 
-    return defer({ product, variants, products })
+    return defer({
+        product,
+        variants,
+        products,
+    })
 }
 
 function redirectToFirstVariant({
@@ -126,6 +129,31 @@ export default function Product() {
     const { selectedVariant } = product
     const productsList =
         products?.metaobjects?.nodes[0]?.field?.references?.nodes
+
+    // useEffect(() => {
+    //     if (typeof window === 'undefined') {
+    //         return
+    //     }
+    //
+    //     const MAX_ITEMS = 15
+    //
+    //     const productList = localStorage.getItem('productList') as any
+    //
+    //     const productListArray = productList
+    //         ? JSON.parse(productList)
+    //         : ([] as any)
+    //
+    //     if (productListArray.includes(product.id)) {
+    //         return
+    //     }
+    //
+    //     const updatedProductList = [
+    //         product.id,
+    //         ...productListArray.slice(0, MAX_ITEMS - 1),
+    //     ]
+    //
+    //     localStorage.setItem('productList', JSON.stringify(updatedProductList))
+    // }, [product.id])
 
     return (
         <>
@@ -180,7 +208,6 @@ function ProductImage({ image, product }: { image: any; product: any }) {
     return (
         <div className='product-image-container'>
             <div className='product-image'>
-                <button>add wishlist</button>
                 <div className='product-image-title'>
                     <h1>{product.vendor}</h1>
                     <h2>
@@ -343,6 +370,7 @@ function ProductMain({
         return acc
     }, [])
 
+    // @ts-ignore
     return (
         <div className='product-main'>
             <div
@@ -402,6 +430,17 @@ function ProductMain({
                         <p>Date de sortie : {product?.daterelease?.value}</p>
                     )}
 
+                    {product?.colors && (
+                        <p>
+                            Palette de couleurs :{' '}
+                            {
+                                JSON.parse(product?.colors?.value).map(
+                                    (color: any) => color + ' '
+                                ) as any
+                            }
+                        </p>
+                    )}
+
                     {product?.materials && <p>{product?.materials?.value}</p>}
                 </div>
             </div>
@@ -448,32 +487,45 @@ function ProductPrice({ selectedVariant }: { selectedVariant: any }) {
     return (
         <div className='product-price'>
             <h2>Price</h2>
-            {selectedVariant?.compareAtPrice ? (
-                <>
-                    <p>Sale</p>
-                    <br />
-                    <div className='product-price-on-sale'>
-                        {selectedVariant ? (
-                            <Money data={selectedVariant.price} />
-                        ) : null}
-                        <s>
-                            <Money data={selectedVariant.compareAtPrice} />
-                        </s>
-                    </div>
-                </>
-            ) : (
-                selectedVariant?.price && (
-                    <div className='product-price-container'>
-                        <img
-                            src={
-                                `/product/size/${size}.png` ??
-                                `/product/size/49.png`
-                            }
-                            alt='price'
-                        />
-                        <Money data={selectedVariant?.price} />
-                    </div>
+            {selectedVariant?.availableForSale ? (
+                selectedVariant?.compareAtPrice ? (
+                    <>
+                        <p>Sale</p>
+                        <br />
+                        <div className='product-price-on-sale'>
+                            {selectedVariant ? (
+                                <Money data={selectedVariant.price} />
+                            ) : null}
+                            <s>
+                                <Money data={selectedVariant.compareAtPrice} />
+                            </s>
+                        </div>
+                    </>
+                ) : (
+                    selectedVariant?.price && (
+                        <div className='product-price-container'>
+                            {size === undefined ? (
+                                <img src='/product/size/os.png' alt='price' />
+                            ) : size == 'UNIVERSEL' ? (
+                                <img src={`/product/size/os.png`} alt='price' />
+                            ) : (
+                                <img
+                                    src={
+                                        `/product/size/${size}.png` ??
+                                        `/product/size/49.png`
+                                    }
+                                    alt='price'
+                                />
+                            )}
+
+                            <Money data={selectedVariant?.price} />
+                        </div>
+                    )
                 )
+            ) : (
+                <div className='product-price-container'>
+                    <img src='/product/stickers/ooo.png' alt='out of stock' />
+                </div>
             )}
             <AddToCartButton
                 disabled={!selectedVariant || !selectedVariant.availableForSale}
@@ -693,6 +745,7 @@ const PRODUCT_FRAGMENT = `#graphql
     handle
     descriptionHtml
     description
+    productType
     options {
       name
       values
