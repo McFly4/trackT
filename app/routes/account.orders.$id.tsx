@@ -3,6 +3,7 @@ import { Link, useLoaderData, type MetaFunction } from '@remix-run/react'
 import { Money, Image, flattenConnection } from '@shopify/hydrogen'
 import type { OrderLineItemFullFragment } from 'storefrontapi.generated'
 import React from 'react'
+import dayjs from 'dayjs'
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
     return [{ title: `Order ${data?.order?.name}` }]
@@ -61,6 +62,7 @@ export default function OrderRoute() {
             <h2>commande {order.name}</h2>
             <div className='account-order-status'>
                 <h2>Status</h2>
+                <div className='account-order'>status des commandes</div>
                 <div className='account-order-status__content'>
                     <p>
                         <strong>Order Status:</strong> {order.fulfillmentStatus}
@@ -87,7 +89,7 @@ export default function OrderRoute() {
                 </div>
                 <div className='order-description-item'>
                     <p>Date commande</p>
-                    <p>{new Date(order.processedAt).toDateString()}</p>
+                    <p>{dayjs(order.processedAt).format('DD/MM/YYYY')}</p>
                 </div>
                 <div className='order-description-item'>
                     <p>Status</p>
@@ -103,17 +105,30 @@ export default function OrderRoute() {
                 </div>
                 <div className='order-description-item'>
                     <p>Adresse de livraison</p>
-                    <p>{order.shippingAddress.formatted}</p>
+                    <p>{order?.shippingAddress?.formatted}</p>
                 </div>
                 <div className='order-description-item'>
                     <p>Nom de livraison</p>
                     <p>
-                        {order.shippingAddress.firstName}{' '}
-                        {order.shippingAddress.lastName}
+                        {order?.shippingAddress?.firstName}{' '}
+                        {order?.shippingAddress?.lastName}
                     </p>
                 </div>
             </div>
             <OrderLineRow lineItem={lineItems} />
+            <div className='order-problem'>
+                <h2>Un problème ?</h2>
+                <p>
+                    Nous savons que parfois, les plans changent. Si vous avez
+                    besoin de modifier votre commande ou si vous rencontrez le
+                    moindre souci, n’hésitez pas à nous contacter. Notre équipe
+                    est à votre disposition pour s’assurer que votre expérience
+                    d’achat chez Trackt soit aussi fluide et satisfaisante que
+                    possible. Adressez-nous votre problème au mail ci-dessous,
+                    et nous nous occuperons du reste !
+                </p>
+                <span>[Hotline Trackt]</span>
+            </div>
         </div>
     )
 }
@@ -125,7 +140,7 @@ function OrderLineRow(lineItem: any) {
                 <h2>Articles commandés</h2>
                 <button>options</button>
             </div>
-            {lineItem.lineItem.map((item: OrderLineItemFullFragment) => {
+            {lineItem.lineItem.map((item: any) => {
                 return (
                     <div className='order-product'>
                         <div className='order-head'>
@@ -139,6 +154,7 @@ function OrderLineRow(lineItem: any) {
                                 />
                             </div>
                             <div className='order-head-description'>
+                                <h5>{item.variant?.product?.vendor}</h5>
                                 <p>{item.title}</p>
                             </div>
                         </div>
@@ -217,6 +233,7 @@ const CUSTOMER_ORDER_QUERY = `#graphql
     }
     product {
       handle
+      vendor
     }
     sku
     title

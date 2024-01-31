@@ -354,6 +354,11 @@ function ProductMain({
 }) {
     const { title, descriptionHtml } = product
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const [isModalOpenToothbrush, setIsModalOpenToothbrush] = useState(false)
+
+    function toggleModalToothbrush() {
+        setIsModalOpenToothbrush(!isModalOpenToothbrush)
+    }
 
     function toggleModal() {
         setIsModalOpen(!isModalOpen)
@@ -378,6 +383,9 @@ function ProductMain({
     return (
         <div className='product-main'>
             {isModalOpen && <ToggleModal toggle={toggleModal} />}
+            {isModalOpenToothbrush && (
+                <ToggleModalToothbrush toggle={toggleModalToothbrush} />
+            )}
 
             <div
                 style={{
@@ -400,25 +408,27 @@ function ProductMain({
                             </div>
                         </>
                     ))}
-                    {product.toothBrush.value === 'Small' ? (
-                        <img
-                            src='/about/little_toothbrush.png'
-                            alt='little toothbrush'
-                            className='toothbrush'
-                        />
-                    ) : product.toothBrush.value === 'Medium' ? (
-                        <img
-                            src='/about/medium_toothbrush.png'
-                            alt='medium toothbrush'
-                            className='toothbrush'
-                        />
-                    ) : (
-                        <img
-                            src='/about/large_toothbrush.png'
-                            alt='big toothbrush'
-                            className='toothbrush'
-                        />
-                    )}
+                    <div onClick={toggleModalToothbrush}>
+                        {product.toothBrush.value === 'Small' ? (
+                            <img
+                                src='/about/little_toothbrush.png'
+                                alt='little toothbrush'
+                                className='toothbrush'
+                            />
+                        ) : product.toothBrush.value === 'Medium' ? (
+                            <img
+                                src='/about/medium_toothbrush.png'
+                                alt='medium toothbrush'
+                                className='toothbrush'
+                            />
+                        ) : (
+                            <img
+                                src='/about/large_toothbrush.png'
+                                alt='big toothbrush'
+                                className='toothbrush'
+                            />
+                        )}
+                    </div>
                 </div>
             </div>
             <div className='product-main-head'>
@@ -507,6 +517,93 @@ function StickerComponent({ keyName, offset }: any) {
                 style={style}
             />
         </>
+    )
+}
+
+function ToggleModalToothbrush(toggle: any) {
+    const { product } = useLoaderData<typeof loader>()
+
+    const value = product.toothBrush.value
+
+    return (
+        <div className='modal-stickers-overlay'>
+            <div className='modal-stickers'>
+                <div className='modal-stickers-close' onClick={toggle.toggle}>
+                    <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        width='16'
+                        height='16'
+                        viewBox='0 0 16 16'
+                    >
+                        <path
+                            id='Tracé_243'
+                            data-name='Tracé 243'
+                            d='M16841.295-8037.292l-6.295-6.294-6.295,6.294a.988.988,0,0,1-.705.292.988.988,0,0,1-.705-.292,1,1,0,0,1,0-1.417l6.291-6.292-6.291-6.292a1,1,0,0,1,0-1.416,1,1,0,0,1,1.41,0l6.295,6.294,6.295-6.294a1,1,0,0,1,1.41,0,1,1,0,0,1,0,1.416l-6.291,6.292,6.291,6.292a1,1,0,0,1,0,1.417.988.988,0,0,1-.705.292A.988.988,0,0,1,16841.295-8037.292Z'
+                            transform='translate(-16827 8053)'
+                            fill='#fff'
+                        />
+                    </svg>
+                </div>
+                <div className='modal-stickers-header'>
+                    <h2>Guide des tailles</h2>
+                    <p
+                        style={{
+                            width: '80%',
+                            margin: 'auto',
+                        }}
+                    >
+                        Nous avons classifié nos articles en trois catégories
+                        distinctes pour mieux vous aider à choisir vos tailles :
+                        Little, Medium et Over. Repérez ces différentes options
+                        pour trouver la coupe qui vous convient le mieux.
+                    </p>
+                </div>
+                <div className='modal-stickers-body modal-toothbrush'>
+                    <div
+                        className='modal-stickers-body-item '
+                        style={{
+                            filter:
+                                value === 'Small' ? 'none' : 'brightness(0.4)',
+                        }}
+                    >
+                        <img src='/about/little_toothbrush.png' alt='little' />
+                        <h4>Little</h4>
+                        <p>
+                            Adapté à ceux qui aiment un style structuré. Coupe
+                            sérée.
+                        </p>
+                    </div>
+                    <div
+                        className='modal-stickers-body-item'
+                        style={{
+                            filter:
+                                value === 'Medium' ? 'none' : 'brightness(0.4)',
+                        }}
+                    >
+                        <img src='/about/medium_toothbrush.png' alt='medium' />
+                        <h4>Medium</h4>
+                        <p>
+                            Conçu pour ceux qui cherchent l’équilibre. Sizing
+                            universel.
+                        </p>
+                    </div>
+                    <div
+                        className='modal-stickers-body-item'
+                        style={{
+                            filter:
+                                value === 'Over' ? 'none' : 'brightness(0.4)',
+                        }}
+                    >
+                        <img src='/about/over_toothbrush.png' alt='over' />
+                        <h4>Over</h4>
+                        <p>
+                            Destiné à ceux qui privilégient l’espace et la
+                            liberté de mouvement.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     )
 }
 

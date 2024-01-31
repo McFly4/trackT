@@ -270,7 +270,6 @@ function OrderItem({ order }: { order: OrderItemFragment }) {
         gridTemplateRows: `repeat(${numRows}, 1fr)`,
         gridTemplateColumns: `repeat(${numCols}, 1fr)`,
     }
-
     return (
         <Link to={`/account/orders/${btoa(order.id)}`}>
             <div className='order'>
@@ -308,9 +307,12 @@ function OrderItem({ order }: { order: OrderItemFragment }) {
                     <div className='order-description-item'>
                         <p>Statut</p>
                         <p>
-                            {order.financialStatus === 'PAID'
-                                ? 'Commandé'
-                                : order.financialStatus}
+                            {order.fulfillmentStatus === 'UNFULFILLED' &&
+                            order.financialStatus === 'PAID' ? (
+                                <p>Payé</p>
+                            ) : (
+                                <p>Commandé</p>
+                            )}
                         </p>
                     </div>
                 </div>

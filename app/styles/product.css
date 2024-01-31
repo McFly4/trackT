@@ -393,3 +393,34 @@
 .trackT-grid::-webkit-scrollbar-track {
     background-color: #313131; /* Couleur du fond de la barre de défilement */
 }
+
+
+/* Modal */
+
+.modal-toothbrush{
+    display: flex;
+}
+
+.modal-toothbrush div{
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-toothbrush div:not(:last-child){
+    border-right: 1px solid;
+}
+
+.modal-toothbrush div img{
+    width: 80px;
+    height: 140px;
+    margin: 50px 0;
+}
+
+.modal-toothbrush div h4{
+    margin-bottom: 15px;
+}
+
+.modal-toothbrush div p{
+    margin-bottom: 50px;
+    text-align: center;
+}
