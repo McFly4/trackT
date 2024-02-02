@@ -380,6 +380,14 @@ function ProductMain({
         return acc
     }, [])
 
+    const splitText = (text: string, chunkSize: number): string[] =>
+        text.split(' ').reduce((result: string[], word) => {
+            const currentChunk = result[result.length - 1] || ''
+            return currentChunk.length + word.length <= chunkSize
+                ? [...result.slice(0, -1), `${currentChunk} ${word}`.trim()]
+                : [...result, word]
+        }, [])
+
     return (
         <div className='product-main'>
             {isModalOpen && <ToggleModal toggle={toggleModal} />}
@@ -395,38 +403,49 @@ function ProductMain({
                     alignItems: 'center',
                 }}
             >
-                <h1>{title}</h1>
-                <div className='product-main-stickers'>
-                    {stickersData.map((item: any, index: any) => (
-                        <>
-                            <div onClick={toggleModal}>
-                                <StickerComponent
-                                    key={index}
-                                    keyName={item.key}
-                                    offset={index * 20}
-                                />
+                <div className='product-main-title'>
+                    <h1>
+                        {splitText(title, 15).map((chunk, index) => (
+                            <React.Fragment key={index}>
+                                {chunk}
+                                <br />
+                            </React.Fragment>
+                        ))}
+                    </h1>
+                    <div className='product-main-stickers'>
+                        {stickersData.map((item: any, index: any) => (
+                            <>
+                                <div onClick={toggleModal}>
+                                    <StickerComponent
+                                        key={index}
+                                        keyName={item.key}
+                                        offset={index * 20}
+                                    />
+                                </div>
+                            </>
+                        ))}
+                        {product?.toothBrush?.value && (
+                            <div onClick={toggleModalToothbrush}>
+                                {product?.toothBrush?.value === 'Small' ? (
+                                    <img
+                                        src='/about/little_toothbrush.png'
+                                        alt='little toothbrush'
+                                        className='toothbrush'
+                                    />
+                                ) : product?.toothBrush?.value === 'Medium' ? (
+                                    <img
+                                        src='/about/medium_toothbrush.png'
+                                        alt='medium toothbrush'
+                                        className='toothbrush'
+                                    />
+                                ) : (
+                                    <img
+                                        src='/about/large_toothbrush.png'
+                                        alt='big toothbrush'
+                                        className='toothbrush'
+                                    />
+                                )}
                             </div>
-                        </>
-                    ))}
-                    <div onClick={toggleModalToothbrush}>
-                        {product.toothBrush.value === 'Small' ? (
-                            <img
-                                src='/about/little_toothbrush.png'
-                                alt='little toothbrush'
-                                className='toothbrush'
-                            />
-                        ) : product.toothBrush.value === 'Medium' ? (
-                            <img
-                                src='/about/medium_toothbrush.png'
-                                alt='medium toothbrush'
-                                className='toothbrush'
-                            />
-                        ) : (
-                            <img
-                                src='/about/large_toothbrush.png'
-                                alt='big toothbrush'
-                                className='toothbrush'
-                            />
                         )}
                     </div>
                 </div>
@@ -471,7 +490,7 @@ function ProductMain({
 
                     {product?.colors && (
                         <p>
-                            Palette de couleurs :{' '}
+                            couleurs :{' '}
                             {
                                 JSON.parse(product?.colors?.value).map(
                                     (color: any) => color + ' '
@@ -523,7 +542,7 @@ function StickerComponent({ keyName, offset }: any) {
 function ToggleModalToothbrush(toggle: any) {
     const { product } = useLoaderData<typeof loader>()
 
-    const value = product.toothBrush.value
+    const value = product?.toothBrush?.value
 
     return (
         <div className='modal-stickers-overlay'>
@@ -561,10 +580,14 @@ function ToggleModalToothbrush(toggle: any) {
                 <div className='modal-stickers-body modal-toothbrush'>
                     <div
                         className='modal-stickers-body-item '
-                        style={{
-                            filter:
-                                value === 'Small' ? 'none' : 'brightness(0.4)',
-                        }}
+                        style={
+                            value && {
+                                filter:
+                                    value === 'Small'
+                                        ? 'none'
+                                        : 'brightness(0.4)',
+                            }
+                        }
                     >
                         <img src='/about/little_toothbrush.png' alt='little' />
                         <h4>Little</h4>
@@ -575,10 +598,14 @@ function ToggleModalToothbrush(toggle: any) {
                     </div>
                     <div
                         className='modal-stickers-body-item'
-                        style={{
-                            filter:
-                                value === 'Medium' ? 'none' : 'brightness(0.4)',
-                        }}
+                        style={
+                            value && {
+                                filter:
+                                    value === 'Medium'
+                                        ? 'none'
+                                        : 'brightness(0.4)',
+                            }
+                        }
                     >
                         <img src='/about/medium_toothbrush.png' alt='medium' />
                         <h4>Medium</h4>
@@ -589,10 +616,14 @@ function ToggleModalToothbrush(toggle: any) {
                     </div>
                     <div
                         className='modal-stickers-body-item'
-                        style={{
-                            filter:
-                                value === 'Over' ? 'none' : 'brightness(0.4)',
-                        }}
+                        style={
+                            value && {
+                                filter:
+                                    value === 'Over'
+                                        ? 'none'
+                                        : 'brightness(0.4)',
+                            }
+                        }
                     >
                         <img src='/about/over_toothbrush.png' alt='over' />
                         <h4>Over</h4>
@@ -770,6 +801,8 @@ function ProductPrice({ selectedVariant }: { selectedVariant: any }) {
         (option: any) => option.name === 'Size'
     )?.value
 
+    console.log()
+
     return (
         <div className='product-price'>
             <h2>Price</h2>
@@ -797,8 +830,9 @@ function ProductPrice({ selectedVariant }: { selectedVariant: any }) {
                             ) : (
                                 <img
                                     src={
-                                        `/product/size/${size}.png` ??
-                                        `/product/size/49.png`
+                                        `/product/size/${
+                                            size.split(' ')[0]
+                                        }.png` ?? `/product/size/49.png`
                                     }
                                     alt='price'
                                 />
@@ -914,7 +948,26 @@ function ProductOptions({ option }: { option: VariantOption }) {
                                                 : '15px',
                                         }}
                                     >
-                                        {value}
+                                        {value.split(' ') ? (
+                                            <div
+                                                style={{
+                                                    position: 'relative',
+                                                }}
+                                            >
+                                                {value.split(' ')[0]}
+                                                <span
+                                                    style={{
+                                                        fontSize: '12px',
+                                                        position: 'absolute',
+                                                        top: '0',
+                                                    }}
+                                                >
+                                                    {value.split(' ')[1]}
+                                                </span>
+                                            </div>
+                                        ) : (
+                                            value
+                                        )}
                                     </Link>
                                 )}
                             </SwiperSlide>

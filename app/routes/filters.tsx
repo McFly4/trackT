@@ -442,8 +442,6 @@ export default function Filters() {
         window.history.go(-1)
     }
 
-    console.log(handleSearch())
-
     return (
         <>
             <div className='filters'>
@@ -873,62 +871,77 @@ export default function Filters() {
                             <span>réinitialiser</span>
                         </div>
                     </div>
-                    <div
-                        className={`filters-tvs ${
-                            collections?.length > 0 ? 'filters-tvs-full' : ''
-                        }`}
-                    >
-                        {collections.length > 0 && (
-                            <img
-                                src='/filters/blueTV.png'
-                                alt='blue tv'
-                                className='filters-tvs-blue'
-                            />
-                        )}
-                        {(sneakersParams.length > 0 || tags?.length > 0) && (
-                            <div
-                                style={{
-                                    display: 'flex',
-                                }}
-                                className='filters-tvs-top'
-                            >
-                                {(productVendor?.length > 0 ||
-                                    colors?.length > 0 ||
-                                    materials?.length > 0) && (
-                                    <img
-                                        src='/filters/orangeTV.png'
-                                        alt='blue tv'
-                                        className='filters-tvs-top-left'
-                                    />
-                                )}
-                                <img
-                                    src='/filters/yellowTV.png'
-                                    alt='yellow tv'
-                                />
-                            </div>
-                        )}
-                        {(manwoman.length > 0 || productType?.length > 0) && (
-                            <div
-                                style={{
-                                    display: 'flex',
-                                }}
-                                className='filters-tvs-bottom'
-                            >
-                                <img
-                                    src='/filters/lightBlueTV.png'
-                                    alt='yellow tv'
-                                    className='filters-tvs-bottom-left'
-                                />
-                                <img src='/filters/greenTV.png' alt='blue tv' />
-                            </div>
-                        )}
-
+                    {sizes?.length > 0 ? (
                         <img
-                            src='/filters/redTV.png'
-                            alt='pink tv'
-                            className='filters-tvs-right'
+                            className='filters-all-tvs'
+                            src='/filters/allTvs.png'
+                            alt='all tv'
                         />
-                    </div>
+                    ) : (
+                        <div
+                            className={`filters-tvs ${
+                                collections?.length > 0
+                                    ? 'filters-tvs-full'
+                                    : ''
+                            }`}
+                        >
+                            {collections.length > 0 && (
+                                <img
+                                    src='/filters/blueTV.png'
+                                    alt='blue tv'
+                                    className='filters-tvs-blue'
+                                />
+                            )}
+                            {(sneakersParams.length > 0 ||
+                                tags?.length > 0) && (
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                    }}
+                                    className='filters-tvs-top'
+                                >
+                                    {(productVendor?.length > 0 ||
+                                        colors?.length > 0 ||
+                                        materials?.length > 0) && (
+                                        <img
+                                            src='/filters/orangeTV.png'
+                                            alt='blue tv'
+                                            className='filters-tvs-top-left'
+                                        />
+                                    )}
+                                    <img
+                                        src='/filters/yellowTV.png'
+                                        alt='yellow tv'
+                                    />
+                                </div>
+                            )}
+                            {(manwoman.length > 0 ||
+                                productType?.length > 0) && (
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                    }}
+                                    className='filters-tvs-bottom'
+                                >
+                                    <img
+                                        src='/filters/lightBlueTV.png'
+                                        alt='yellow tv'
+                                        className='filters-tvs-bottom-left'
+                                    />
+                                    <img
+                                        src='/filters/greenTV.png'
+                                        alt='blue tv'
+                                    />
+                                </div>
+                            )}
+
+                            <img
+                                src='/filters/redTV.png'
+                                alt='pink tv'
+                                className='filters-tvs-right'
+                            />
+                        </div>
+                    )}
                     <div className='filter-footer-container-search'>
                         <Link to={`/filtered${handleSearch()}`}>
                             <span>Afficher les resultats</span>

@@ -363,7 +363,7 @@ export function CartEmpty({
                     textTransform: 'uppercase',
                 }}
             >
-                Pannier vide
+                Panier vide
             </h1>
         </div>
     )

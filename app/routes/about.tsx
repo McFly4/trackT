@@ -323,7 +323,7 @@ export default function About() {
                                     src='/cart/cartClassic.png'
                                     alt='cartClassic'
                                 />
-                                <p>Pannier classique</p>
+                                <p>Panier classique</p>
                                 <span>0 - 250€</span>
                                 <p>
                                     LIVRAISON PAYANTE <br />
@@ -337,7 +337,7 @@ export default function About() {
                                     src='/cart/cartPremium.png'
                                     alt='cartClassic'
                                 />
-                                <p>Pannier premium</p>
+                                <p>Panier premium</p>
                                 <span>250€ - 500€</span>
                                 <p>
                                     LIVRAISON PAYANTE <br />
@@ -351,7 +351,7 @@ export default function About() {
                                     src='/cart/cartExclusif.png'
                                     alt='cartClassic'
                                 />
-                                <p>Pannier premium</p>
+                                <p>Panier premium</p>
                                 <span>+500€</span>
                                 <p>
                                     LIVRAISON GRATUITE <br />

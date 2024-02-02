@@ -753,7 +753,7 @@ aside li {
     justify-content: flex-start;
     align-items: center;
     padding: 20px 40px;
-    border-top: 1px solid #fff;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .modal-stickers-body-item p{
@@ -1076,4 +1076,26 @@ aside li {
 
 .filters-tvs-full .filters-tvs-blue{
     margin-bottom: -70px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.pagination button{
+    background-color: #fff;
+    border-radius: 10px;
+    text-transform: uppercase;
+    padding: 20px 30px;
+    font-size: 25px;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+.filters-all-tvs{
+    position: absolute;
+    left: 0;
+    bottom: 95px;
 }

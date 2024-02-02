@@ -120,8 +120,6 @@ export default function filtered() {
 
     const productList = products.collections.nodes[0].products
 
-    console.log(allFitlers)
-
     return (
         <>
             <div className='panel-trackt'>
@@ -163,11 +161,40 @@ export default function filtered() {
                         }}
                         className='panel-container'
                     >
-                        <div className='panel-products-grid'>
-                            {productList.nodes.map((product: any) => (
-                                <MainProduct product={product} />
-                            ))}
-                        </div>
+                        <Pagination connection={productList}>
+                            {({ nodes, NextLink, PreviousLink, isLoading }) => (
+                                <>
+                                    <PreviousLink>
+                                        <div>
+                                            <button>
+                                                {isLoading
+                                                    ? 'Chargement...'
+                                                    : 'Charger les produits précédents'}
+                                            </button>
+                                        </div>
+                                    </PreviousLink>
+                                    <div className='panel-products-grid'>
+                                        {nodes.map((product) => (
+                                            <MainProduct product={product} />
+                                        ))}
+                                    </div>
+                                    <div className='pagination'>
+                                        <NextLink>
+                                            <button>
+                                                {isLoading
+                                                    ? 'Chargement...'
+                                                    : 'Plus de produits'}
+                                            </button>
+                                        </NextLink>
+                                    </div>
+                                </>
+                            )}
+                        </Pagination>
+                        {/*<div className='panel-products-grid'>*/}
+                        {/*    {productList.nodes.map((product: any) => (*/}
+                        {/*        <MainProduct product={product} />*/}
+                        {/*    ))}*/}
+                        {/*</div>*/}
                     </div>
                 </div>
             </div>
