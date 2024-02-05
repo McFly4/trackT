@@ -267,10 +267,12 @@ export default function HomePage() {
                         voulez dans notre Panel Trackt, nous sommes là pour vous
                         aider.
                     </p>
-                    <div className='gofilters-btn'>
-                        <img src='/home/btn.png' alt='btn' />
-                        <p>accéder aux filtres</p>
-                    </div>
+                    <Link to='/filters'>
+                        <div className='gofilters-btn'>
+                            <img src='/home/btn.png' alt='btn' />
+                            <p>accéder aux filtres</p>
+                        </div>
+                    </Link>
                 </div>
                 <MarketDrag />
             </div>

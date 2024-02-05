@@ -10,14 +10,26 @@ export function Footer(menu: FooterQuery) {
                 <h2>liens utiles</h2>
                 <p>infos légales</p>
                 <p>RETOURS & REMBOURSEMENTS</p>
-                <p>FAQ</p>
-                <p>blog</p>
-                <p>Carrières</p>
+                <p>
+                    FAQ
+                    <img src='/coming.png' alt='coming soon' />
+                </p>
+                <p>
+                    blog
+                    <img src='/coming.png' alt='coming soon' />
+                </p>
+                <p>
+                    Carrières
+                    <img src='/coming.png' alt='coming soon' />
+                </p>
                 <p>Plan du site</p>
             </div>
             <div className='footer-menu'>
                 <h2>incontournables</h2>
-                <p>indépendant brand</p>
+                <p>
+                    indépendant brand
+                    <img src='/coming.png' alt='coming soon' />
+                </p>
                 <p>exclusive item</p>
                 <p>hot deal</p>
                 <p>nouveautés</p>

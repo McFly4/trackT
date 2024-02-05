@@ -438,10 +438,6 @@ export default function Filters() {
         return ''
     }
 
-    const goBack = () => {
-        window.history.go(-1)
-    }
-
     return (
         <>
             <div className='filters'>
@@ -949,9 +945,11 @@ export default function Filters() {
                     </div>
                 </div>
             </div>
-            <div className='filters-close' onClick={goBack}>
-                <img src='/icons/close.svg' alt='close' />
-            </div>
+            <Link to='/'>
+                <div className='filters-close'>
+                    <img src='/icons/close.svg' alt='close' />
+                </div>
+            </Link>
         </>
     )
 }

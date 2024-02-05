@@ -1,3 +1,4 @@
+import React, { useEffect, useRef } from 'react'
 import { Await } from '@remix-run/react'
 import { Suspense } from 'react'
 import type {
@@ -77,11 +78,30 @@ function CartAside({ cart }: { cart: LayoutProps['cart'] }) {
 }
 
 function SearchAside() {
+    // Déclarez une référence pour l'élément input
+    const inputRef = useRef<HTMLInputElement | null>(null)
+
+    useEffect(() => {
+        const handleHashChange = () => {
+            if (window.location.hash === '#search-aside' && inputRef.current) {
+                inputRef.current.focus()
+            }
+        }
+
+        window.addEventListener('hashchange', handleHashChange)
+
+        handleHashChange()
+
+        return () => {
+            window.removeEventListener('hashchange', handleHashChange)
+        }
+    }, [inputRef])
+
     return (
         <AsideSearch id='search-aside' heading='SEARCH'>
             <div className='predictive-search'>
                 <PredictiveSearchForm>
-                    {({ fetchResults, inputRef }) => (
+                    {({ fetchResults }) => (
                         <div>
                             <input
                                 name='q'

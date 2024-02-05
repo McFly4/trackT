@@ -130,40 +130,18 @@ export default function Product() {
     const productsList =
         products?.metaobjects?.nodes[0]?.field?.references?.nodes
 
-    // useEffect(() => {
-    //     if (typeof window === 'undefined') {
-    //         return
-    //     }
-    //
-    //     const MAX_ITEMS = 15
-    //
-    //     const productList = localStorage.getItem('productList') as any
-    //
-    //     const productListArray = productList
-    //         ? JSON.parse(productList)
-    //         : ([] as any)
-    //
-    //     if (productListArray.includes(product.id)) {
-    //         return
-    //     }
-    //
-    //     const updatedProductList = [
-    //         product.id,
-    //         ...productListArray.slice(0, MAX_ITEMS - 1),
-    //     ]
-    //
-    //     localStorage.setItem('productList', JSON.stringify(updatedProductList))
-    // }, [product.id])
-
     return (
         <>
-            <div className='product'>
-                <ProductImage image={selectedVariant} product={product} />
-                <ProductMain
-                    selectedVariant={selectedVariant}
-                    product={product}
-                    variants={variants}
-                />
+            <div>
+                <BreadCrumb product={product} />
+                <div className='product'>
+                    <ProductImage image={selectedVariant} product={product} />
+                    <ProductMain
+                        selectedVariant={selectedVariant}
+                        product={product}
+                        variants={variants}
+                    />
+                </div>
             </div>
             <div className='productBanner'>
                 <video width='100%' height='auto' autoPlay muted loop>
@@ -174,6 +152,53 @@ export default function Product() {
 
             <TrackT products={productsList} />
         </>
+    )
+}
+
+function BreadCrumb({ product }: { product: any }) {
+    const isMixte = product.manwoman?.value ?? 'Mixte'
+    const type = product?.productType
+    const vendor = product?.vendor
+    const collection = product?.collections?.nodes[0].title
+    const productName = product?.title
+    const colors = JSON.parse(product?.colors?.value) as any
+    const firstColor = colors?.[0] ?? 'white'
+    return (
+        <div
+            className='breadcrumb'
+            style={{
+                backgroundColor: firstColor,
+            }}
+        >
+            <div
+                style={{
+                    display: 'flex',
+                }}
+            >
+                <p>
+                    {isMixte} &gt; {type} &gt; {vendor} &gt; {collection} &gt;{' '}
+                    {productName}
+                </p>
+                <div className='breadcrumb-colors'>
+                    {colors?.map((color: any, index: number) => (
+                        <div
+                            key={index}
+                            className='breadcrumb-color'
+                            style={{
+                                backgroundColor: color,
+                            }}
+                        ></div>
+                    ))}
+                </div>
+            </div>
+            <div
+                style={{
+                    paddingRight: '50px',
+                }}
+            >
+                <p>Ajouter aux favoris</p>
+            </div>
+        </div>
     )
 }
 
@@ -413,17 +438,46 @@ function ProductMain({
                         ))}
                     </h1>
                     <div className='product-main-stickers'>
-                        {stickersData.map((item: any, index: any) => (
-                            <>
-                                <div onClick={toggleModal}>
-                                    <StickerComponent
-                                        key={index}
-                                        keyName={item.key}
-                                        offset={index * 20}
-                                    />
-                                </div>
-                            </>
-                        ))}
+                        <div className='stickers-container'>
+                            {stickersData &&
+                                stickersData
+                                    .reduce(
+                                        (acc: any, item: any, index: any) => {
+                                            if (index % 2 === 0) {
+                                                acc.push([item])
+                                            } else {
+                                                acc[acc.length - 1].push(item)
+                                            }
+                                            return acc
+                                        },
+                                        []
+                                    )
+                                    .map((pair: any, pairIndex: any) => (
+                                        <div
+                                            key={pairIndex}
+                                            className='pair-container'
+                                        >
+                                            {pair.map(
+                                                (item: any, index: any) => (
+                                                    <div
+                                                        key={index}
+                                                        onClick={toggleModal}
+                                                    >
+                                                        <img
+                                                            src={`/product/stickers/${item.key}.png`}
+                                                            alt={item.key}
+                                                            style={{
+                                                                width: '70px',
+                                                                height: '60px',
+                                                            }}
+                                                        />
+                                                    </div>
+                                                )
+                                            )}
+                                        </div>
+                                    ))}
+                        </div>
+
                         {product?.toothBrush?.value && (
                             <div onClick={toggleModalToothbrush}>
                                 {product?.toothBrush?.value === 'Small' ? (
@@ -798,11 +852,8 @@ function ToggleModal(toggle: any) {
 
 function ProductPrice({ selectedVariant }: { selectedVariant: any }) {
     const size = selectedVariant?.selectedOptions?.find(
-        (option: any) => option.name === 'Size'
+        (option: any) => option.name === 'Taille'
     )?.value
-
-    console.log()
-
     return (
         <div className='product-price'>
             <h2>Price</h2>
@@ -823,10 +874,10 @@ function ProductPrice({ selectedVariant }: { selectedVariant: any }) {
                 ) : (
                     selectedVariant?.price && (
                         <div className='product-price-container'>
-                            {size === undefined ? (
+                            {size == undefined ? (
                                 <img src='/product/size/os.png' alt='price' />
                             ) : size == 'UNIVERSEL' ? (
-                                <img src={`/product/size/os.png`} alt='price' />
+                                <img src='/product/size/os.png' alt='price' />
                             ) : (
                                 <img
                                     src={
@@ -897,6 +948,11 @@ function ProductForm({
 }
 
 function ProductOptions({ option }: { option: VariantOption }) {
+    const [isModalOpenToothbrush, setIsModalOpenToothbrush] = useState(false)
+
+    function toggleModalToothbrush() {
+        setIsModalOpenToothbrush(!isModalOpenToothbrush)
+    }
     // Tri alphabétique des valeurs
     const sortedValues = option.values
         .slice()
@@ -917,6 +973,9 @@ function ProductOptions({ option }: { option: VariantOption }) {
 
     return (
         <div className='product-options' key={option.name}>
+            {isModalOpenToothbrush && (
+                <ToggleModalToothbrush toggle={toggleModalToothbrush} />
+            )}
             <h2>Taille</h2>
             <div className='product-options-grid'>
                 <Swiper
@@ -984,7 +1043,9 @@ function ProductOptions({ option }: { option: VariantOption }) {
                     <img src='/product/sizeSelector.png' alt='size selector' />
                 </div>
             </div>
-            <button className='sizes-guid'>Guide des tailles</button>
+            <button onClick={toggleModalToothbrush} className='sizes-guid'>
+                Guide des tailles
+            </button>
         </div>
     )
 }
@@ -1077,94 +1138,98 @@ const PRODUCT_VARIANT_FRAGMENT = `#graphql
 ` as const
 
 const PRODUCT_FRAGMENT = `#graphql
-  fragment Product on Product {
-    id
-    title
-    vendor
-    handle
-    descriptionHtml
-    description
-    productType
-    options {
-      name
-      values
-    }
-    selectedVariant: variantBySelectedOptions(selectedOptions: $selectedOptions) {
+fragment Product on Product {
+  id
+  title
+  vendor
+  handle
+  descriptionHtml
+  description
+  productType
+  options {
+    name
+    values
+  }
+  selectedVariant: variantBySelectedOptions(selectedOptions: $selectedOptions) {
+    ...ProductVariant
+  }
+  variants(first: 1) {
+    nodes {
       ...ProductVariant
     }
-    variants(first: 1) {
-      nodes {
-        ...ProductVariant
-      }
-    }
-    seo {
-      description
+  }
+  seo {
+    description
+    title
+  }
+  toothBrush: metafield(namespace: "custom", key: "toothbrush") {
+    key
+    value
+  }
+  ooo: metafield(namespace: "custom", key: "outofstock") {
+    key
+    value
+  }
+  new: metafield(namespace: "custom", key: "new") {
+    key
+    value
+  }
+  ship: metafield(namespace: "custom", key: "fastShip") {
+    key
+    value
+  }
+  release: metafield(namespace: "custom", key: "release") {
+    key
+    value
+  }
+  promotion: metafield(namespace: "custom", key: "promotion") {
+    key
+    value
+  }
+  hotDeal: metafield(namespace: "custom", key: "hotDeal") {
+    key
+    value
+  }
+  features: metafield(namespace: "custom", key: "features") {
+    key
+    value
+  }
+  materials: metafield(namespace: "custom", key: "materiaux") {
+    key
+    value
+  }
+  daterelease: metafield(namespace: "custom", key: "date") {
+    key
+    value
+  }
+  colors: metafield(namespace: "custom", key: "palette") {
+    key
+    value
+  }
+  manwoman: metafield(namespace: "custom", key: "manwoman") {
+    key
+    value
+  }
+  collections(first: 1) {
+    nodes {
       title
-    }
-    toothBrush: metafield(namespace: "custom", key: "toothbrush") {
-        key
-        value
-      }
-      ooo: metafield(namespace: "custom", key: "outofstock") {
-        key
-        value
-      }
-      new: metafield(namespace: "custom", key: "new") {
-        key
-        value
-      }
-      ship: metafield(namespace: "custom", key: "fastShip") {
-        key
-        value
-      }
-      release: metafield(namespace: "custom", key: "release") {
-        key
-        value
-      }
-      promotion: metafield(namespace: "custom", key: "promotion") {
-        key
-        value
-      }
-      hotDeal: metafield(namespace: "custom", key: "hotDeal") {
-        key
-        value
-      }
-      features: metafield(namespace: "custom", key: "features") {
-        key
-        value
-      }
-        materials: metafield(namespace: "custom", key: "materiaux") {
-        key
-        value
-      }
-        daterelease: metafield(namespace: "custom", key: "date") {
-        key
-        value
-      }
-      colors: metafield(namespace: "custom", key: "palette") {
-        key
-        value
-      }
-    collections(first: 1){
-        nodes{
-            title
-            id
-              products(first: 25){
-                nodes{
-                  title
-                  handle
-                  productType
-                  vendor
-                  images(first: 1){
-                    nodes{
-                      url
-                    }
-                  }
-                }
-              }
+      id
+      products(first: 25) {
+        nodes {
+          title
+          handle
+          productType
+          vendor
+          images(first: 1) {
+            nodes {
+              url
+            }
+          }
         }
+      }
     }
   }
+}
   ${PRODUCT_VARIANT_FRAGMENT}
 ` as const
 
@@ -1218,38 +1283,42 @@ query MetaObjects {
               productType
               handle
               vendor
-                                toothBrush: metafield(namespace: "custom", key: "toothbrush") {
-                    key
-                    value
-                  }
-                  ooo: metafield(namespace: "custom", key: "outofstock") {
-                    key
-                    value
-                  }
-                  new: metafield(namespace: "custom", key: "new") {
-                    key
-                    value
-                  }
-                  ship: metafield(namespace: "custom", key: "fastShip") {
-                    key
-                    value
-                  }
-                  release: metafield(namespace: "custom", key: "release") {
-                    key
-                    value
-                  }
-                  promotion: metafield(namespace: "custom", key: "promotion") {
-                    key
-                    value
-                  }
-                  hotDeal: metafield(namespace: "custom", key: "hotDeal") {
-                    key
-                    value
-                  }
-                  features: metafield(namespace: "custom", key: "features") {
-                    key
-                    value
-                  }
+              toothBrush: metafield(namespace: "custom", key: "toothbrush") {
+                key
+                value
+              }
+              ooo: metafield(namespace: "custom", key: "outofstock") {
+                key
+                value
+              }
+              new: metafield(namespace: "custom", key: "new") {
+                key
+                value
+              }
+              ship: metafield(namespace: "custom", key: "fastShip") {
+                key
+                value
+              }
+              release: metafield(namespace: "custom", key: "release") {
+                key
+                value
+              }
+              promotion: metafield(namespace: "custom", key: "promotion") {
+                key
+                value
+              }
+              hotDeal: metafield(namespace: "custom", key: "hotDeal") {
+                key
+                value
+              }
+              features: metafield(namespace: "custom", key: "features") {
+                key
+                value
+              }
+              manwoman: metafield(namespace: "custom", key: "manwoman") {
+                key
+                value
+              }
               images(first: 1) {
                 nodes {
                   url
