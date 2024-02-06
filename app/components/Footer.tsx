@@ -41,10 +41,25 @@ export function Footer(menu: FooterQuery) {
                     it's time to follow<span>(please)</span>
                 </h2>
                 <div className='footer-media-container'>
-                    <img src='/footer/insta.png' />
+                    <a
+                        href='https://www.instagram.com/tracktonline/'
+                        target='_blank'
+                    >
+                        <img src='/footer/insta.png' />
+                    </a>
                     <div className='footer-media-double'>
-                        <img src='/footer/twitter.png' />
-                        <img src='/footer/tiktok.png' />
+                        <a
+                            href='https://twitter.com/tracktonline'
+                            target='_blank'
+                        >
+                            <img src='/footer/twitter.png' />
+                        </a>
+                        <a
+                            href='https://www.tiktok.com/@tracktonline'
+                            target='_blank'
+                        >
+                            <img src='/footer/tiktok.png' />
+                        </a>
                     </div>
                 </div>
             </div>

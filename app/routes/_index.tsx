@@ -52,6 +52,9 @@ export default function HomePage() {
                     }}
                     allowTouchMove={false}
                     onAutoplayTimeLeft={onAutoplayTimeLeft}
+                    style={{
+                        maxHeight: '100vh',
+                    }}
                 >
                     <SwiperSlide
                         style={{

@@ -40,6 +40,15 @@
     font-style: italic;
 }
 
+/* DS font */
+
+@font-face {
+    font-family: 'DS-Digital';
+    src: url('../fonts/DS/DS-DIGI.TTF') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 
 
 /* Ajoutez d'autres règles @font-face pour les différentes graisses */
@@ -487,7 +496,6 @@ aside li {
 */
 
 .home {
-    height: 100vh ;
     width: 100%;
     margin-bottom: 200px;
 }
@@ -508,7 +516,7 @@ aside li {
 .autoplay-progress {
     position: absolute;
     right: 16px;
-    top: 270px;
+    top: 190px;
     z-index: 10;
     width: 70px;
     height: 70px;
@@ -523,6 +531,7 @@ aside li {
 
 .autoplay-progress span{
     font-size: 40px;
+    font-family: "DS-Digital", sans-serif;
 }
 
 

@@ -175,7 +175,13 @@ function BreadCrumb({ product }: { product: any }) {
                     display: 'flex',
                 }}
             >
-                <p>
+                <p
+                    style={
+                        firstColor === 'black'
+                            ? { color: 'white' }
+                            : { color: 'black' }
+                    }
+                >
                     {isMixte} &gt; {type} &gt; {vendor} &gt; {collection} &gt;{' '}
                     {productName}
                 </p>
@@ -756,7 +762,7 @@ function ToggleModal(toggle: any) {
                     <div
                         className='modal-stickers-body-item'
                         style={{
-                            backgroundColor: isHotDeal ? '#FF0000' : '#000000',
+                            opacity: isHotDeal ? '1' : '0.2',
                         }}
                     >
                         <img
@@ -773,7 +779,7 @@ function ToggleModal(toggle: any) {
                     <div
                         className='modal-stickers-body-item'
                         style={{
-                            backgroundColor: isNew ? '#FF0000' : '#000000',
+                            opacity: isNew ? '1' : '0.2',
                         }}
                     >
                         <img src='/product/stickers/new.png' alt='new' />
@@ -787,7 +793,7 @@ function ToggleModal(toggle: any) {
                     <div
                         className='modal-stickers-body-item'
                         style={{
-                            backgroundColor: isOoo ? '#FF0000' : '#000000',
+                            opacity: isOoo ? '1' : '0.2',
                         }}
                     >
                         <img src='/product/stickers/ooo.png' alt='ooo' />
@@ -800,9 +806,7 @@ function ToggleModal(toggle: any) {
                     <div
                         className='modal-stickers-body-item'
                         style={{
-                            backgroundColor: isPromotion
-                                ? '#FF0000'
-                                : '#000000',
+                            opacity: isPromotion ? '1' : '0.2',
                         }}
                     >
                         <img
@@ -818,7 +822,7 @@ function ToggleModal(toggle: any) {
                     <div
                         className='modal-stickers-body-item'
                         style={{
-                            backgroundColor: isRelease ? '#FF0000' : '#000000',
+                            opacity: isRelease ? '1' : '0.2',
                         }}
                     >
                         <img
@@ -834,7 +838,7 @@ function ToggleModal(toggle: any) {
                     <div
                         className='modal-stickers-body-item'
                         style={{
-                            backgroundColor: isShip ? '#FF0000' : '#000000',
+                            opacity: isShip ? '1' : '0.2',
                         }}
                     >
                         <img src='/product/stickers/ship.png' alt='ship' />
@@ -852,7 +856,7 @@ function ToggleModal(toggle: any) {
 
 function ProductPrice({ selectedVariant }: { selectedVariant: any }) {
     const size = selectedVariant?.selectedOptions?.find(
-        (option: any) => option.name === 'Taille'
+        (option: any) => option.name === 'Size'
     )?.value
     return (
         <div className='product-price'>
@@ -874,9 +878,9 @@ function ProductPrice({ selectedVariant }: { selectedVariant: any }) {
                 ) : (
                     selectedVariant?.price && (
                         <div className='product-price-container'>
-                            {size == undefined ? (
+                            {size === undefined || /[a-zA-Z%]/.test(size) ? (
                                 <img src='/product/size/os.png' alt='price' />
-                            ) : size == 'UNIVERSEL' ? (
+                            ) : size === 'UNIVERSEL' ? (
                                 <img src='/product/size/os.png' alt='price' />
                             ) : (
                                 <img
@@ -931,6 +935,7 @@ function ProductForm({
     selectedVariant: ProductFragment['selectedVariant']
     variants: Array<ProductVariantFragment>
 }) {
+    const variantName = selectedVariant?.selectedOptions[0].value
     return (
         <div className='product-form'>
             <VariantSelector
@@ -942,7 +947,30 @@ function ProductForm({
                     <ProductOptions key={option.name} option={option} />
                 )}
             </VariantSelector>
-            <br />
+            {variants?.length <= 1 && (
+                <div
+                    className='product-options'
+                    style={{
+                        alignItems: 'center',
+                    }}
+                >
+                    <h2
+                        style={{
+                            marginBottom: 'unset',
+                        }}
+                    >
+                        Taille
+                    </h2>
+                    <div>
+                        {variantName ? (
+                            <h4>{variantName}</h4>
+                        ) : (
+                            <h4>UNIVERSEL</h4>
+                        )}
+                    </div>
+                    <button className='sizes-guid'>Guide des tailles</button>
+                </div>
+            )}
         </div>
     )
 }
@@ -988,7 +1016,10 @@ function ProductOptions({ option }: { option: VariantOption }) {
                     onSlideChange={handleSlideChange}
                 >
                     {sortedValues.map(
-                        ({ value, isAvailable, isActive, to }, index) => (
+                        (
+                            { value, isAvailable, isActive, to, search },
+                            index
+                        ) => (
                             <SwiperSlide key={option.name + value}>
                                 {({ isActive, isPrev, isNext }) => (
                                     <Link
@@ -1005,8 +1036,10 @@ function ProductOptions({ option }: { option: VariantOption }) {
                                                 : isPrev || isNext
                                                 ? '24px'
                                                 : '15px',
+                                            opacity: isAvailable ? 1 : 0.2,
                                         }}
                                     >
+                                        {console.log(isAvailable)}
                                         {value.split(' ') ? (
                                             <div
                                                 style={{
