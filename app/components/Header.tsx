@@ -60,9 +60,9 @@ export function Header({ header, isLoggedIn, cart }: HeaderProps) {
                         </a>
                     </div>
                     <div className='icon'>
-                        <Link to='/filters'>
+                        <a href='#search-aside'>
                             <img src='/icons/search.svg' alt='search' />
-                        </Link>
+                        </a>
                     </div>
                     <div className='icon'>
                         <img src='/icons/heart.svg' alt='heart' />

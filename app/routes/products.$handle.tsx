@@ -108,7 +108,7 @@ function redirectToFirstVariant({
     product: ProductFragment
     request: Request
 }) {
-    const url = new URL(request.url)
+    const url = new URL(request?.url)
     const firstVariant = product.variants.nodes[0]
 
     return redirect(
@@ -116,7 +116,7 @@ function redirectToFirstVariant({
             pathname: url.pathname,
             handle: product.handle,
             selectedOptions: firstVariant.selectedOptions,
-            searchParams: new URLSearchParams(url.search),
+            searchParams: new URLSearchParams(url?.search),
         }),
         {
             status: 302,
@@ -213,7 +213,7 @@ function ProductImage({ image, product }: { image: any; product: any }) {
         return <div className='product-image' />
     }
 
-    const firstImage = image?.product?.images.nodes[0].url
+    const firstImage = image?.product?.images.nodes[0]?.url
     const images = image?.product?.images.nodes
     const codeBar = [
         { id: 0, url: '/product/code1.png' },
@@ -224,7 +224,7 @@ function ProductImage({ image, product }: { image: any; product: any }) {
 
     // Maintenant, codeBar est une liste d'objets avec des propriétés id et url.
 
-    const [mainImage, setMainImage] = useState(firstImage || image.url)
+    const [mainImage, setMainImage] = useState(firstImage || image?.url)
     const productsFromCollection = product?.collections?.nodes[0].products.nodes
     const swiperRef = useRef<any>(null)
 
@@ -274,18 +274,29 @@ function ProductImage({ image, product }: { image: any; product: any }) {
                         height={image.height as any}
                         src={mainImage}
                         width={image.width as any}
+                        style={{
+                            backgroundColor: '#fff',
+                        }}
                     />
                 </div>
                 <div className='product-image-list'>
                     {images.map((image: any, index: number) => (
                         <div
-                            key={image.id}
+                            key={image?.id}
                             className='product-image-list-item'
-                            onClick={() => setMainImage(image.url)}
+                            onClick={() => setMainImage(image?.url)}
                         >
-                            <img src={image.url} alt={image.altText} />
+                            <div
+                                style={{
+                                    width: '100%',
+                                    height: '230px',
+                                    backgroundColor: '#fff',
+                                }}
+                            >
+                                <img src={image?.url} alt={image.altText} />
+                            </div>
                             <img
-                                src={codeBar[index].url}
+                                src={codeBar[index]?.url}
                                 alt='code bar'
                                 className='product-image-list-item-code'
                             />
@@ -551,11 +562,9 @@ function ProductMain({
                     {product?.colors && (
                         <p>
                             couleurs :{' '}
-                            {
-                                JSON.parse(product?.colors?.value).map(
-                                    (color: any) => color + ' '
-                                ) as any
-                            }
+                            {JSON.parse(product?.colors?.value).map(
+                                (color: any) => color + ' '
+                            )}
                         </p>
                     )}
 
@@ -962,10 +971,11 @@ function ProductForm({
                         Taille
                     </h2>
                     <div>
-                        {variantName ? (
-                            <h4>{variantName}</h4>
+                        {variantName === 'Default Title' ||
+                        variantName === 'UNIVERSEL' ? (
+                            <h4>universel</h4>
                         ) : (
-                            <h4>UNIVERSEL</h4>
+                            <h4>{variantName}</h4>
                         )}
                     </div>
                     <button className='sizes-guid'>Guide des tailles</button>
@@ -1039,7 +1049,6 @@ function ProductOptions({ option }: { option: VariantOption }) {
                                             opacity: isAvailable ? 1 : 0.2,
                                         }}
                                     >
-                                        {console.log(isAvailable)}
                                         {value.split(' ') ? (
                                             <div
                                                 style={{
@@ -1240,6 +1249,10 @@ fragment Product on Product {
     value
   }
   manwoman: metafield(namespace: "custom", key: "manwoman") {
+    key
+    value
+  }
+  box_sizing: metafield(namespace: "custom", key: "box_sizing") {
     key
     value
   }

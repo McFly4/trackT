@@ -1,6 +1,6 @@
 import { defer, type LoaderFunctionArgs } from '@shopify/remix-oxygen'
 import { useLoaderData, type MetaFunction, Link } from '@remix-run/react'
-import { getPaginationVariables } from '@shopify/hydrogen'
+import { getPaginationVariables, Pagination } from '@shopify/hydrogen'
 import MainProduct from '~/components/Common/mainProduct'
 import React, { useState } from 'react'
 import MarketDrag from '~/components/Common/MarketDrag'
@@ -12,7 +12,10 @@ export const meta: MetaFunction = () => {
 export async function loader({ request, context }: LoaderFunctionArgs) {
     const url = new URL(request.url)
     const searchParams = new URLSearchParams(url.search)
-    const variables = getPaginationVariables(request, { pageBy: 50 })
+    const pagination = getPaginationVariables(request, {
+        pageBy: 24,
+    })
+
     const searchTerm = String(searchParams.get('q') || '')
 
     if (!searchTerm) {
@@ -22,12 +25,11 @@ export async function loader({ request, context }: LoaderFunctionArgs) {
         }
     }
 
-    console.log('variables', variables)
-
     const data = await context.storefront.query(SEARCH_QUERY, {
         variables: {
             query: searchTerm,
-            ...variables,
+            first: 250,
+            ...pagination,
         },
     })
 
@@ -44,13 +46,7 @@ export async function loader({ request, context }: LoaderFunctionArgs) {
 
 export default function SearchPage() {
     const { searchResults, searchTerm } = useLoaderData<typeof loader>()
-    const products = searchResults?.results?.products?.nodes
-    const [productList, setProductList] = useState(products?.slice(0, 12))
-    function shuffleProducts() {
-        const shuffledProducts = [...products]
-        shuffledProducts.sort(() => Math.random() - 0.5)
-        setProductList(shuffledProducts?.slice(0, 12))
-    }
+    const products = searchResults?.results?.products
 
     return (
         <>
@@ -82,7 +78,7 @@ export default function SearchPage() {
                                 <button>Nouvelle recherche</button>
                             </a>
                         </div>
-                        <div className='search-img' onClick={shuffleProducts}>
+                        <div className='search-img'>
                             <img src='/randomItem.png' alt='search' />
                         </div>
                     </div>
@@ -94,9 +90,42 @@ export default function SearchPage() {
                         className='panel-container'
                     >
                         <div className='panel-products-grid'>
-                            {productList.map((product: any) => (
-                                <MainProduct product={product} />
-                            ))}
+                            <Pagination connection={products}>
+                                {({
+                                    nodes,
+                                    NextLink,
+                                    PreviousLink,
+                                    isLoading,
+                                }) => (
+                                    <>
+                                        <PreviousLink>
+                                            <div>
+                                                <button>
+                                                    {isLoading
+                                                        ? 'Chargement...'
+                                                        : 'Charger les produits précédents'}
+                                                </button>
+                                            </div>
+                                        </PreviousLink>
+                                        <div className='panel-products-grid'>
+                                            {nodes.map((product) => (
+                                                <MainProduct
+                                                    product={product}
+                                                />
+                                            ))}
+                                        </div>
+                                        <div className='pagination'>
+                                            <NextLink>
+                                                <button>
+                                                    {isLoading
+                                                        ? 'Chargement...'
+                                                        : 'Plus de produits'}
+                                                </button>
+                                            </NextLink>
+                                        </div>
+                                    </>
+                                )}
+                            </Pagination>
                         </div>
                     </div>
                 </div>
@@ -137,107 +166,99 @@ export default function SearchPage() {
 }
 
 const SEARCH_QUERY = `#graphql
-  fragment SearchProduct on Product {
-    __typename
-      title
-      productType
-      handle
-      images(first: 1) {
-        nodes {
-          url
-        }
+fragment SearchProduct on Product {
+  __typename
+  title
+  productType
+  handle
+  images(first: 1) {
+    nodes {
+      url
+    }
+  }
+  toothBrush: metafield(namespace: "custom", key: "toothbrush") {
+    key
+    value
+  }
+  ooo: metafield(namespace: "custom", key: "outofstock") {
+    key
+    value
+  }
+  new: metafield(namespace: "custom", key: "new") {
+    key
+    value
+  }
+  ship: metafield(namespace: "custom", key: "fastShip") {
+    key
+    value
+  }
+  release: metafield(namespace: "custom", key: "release") {
+    key
+    value
+  }
+  promotion: metafield(namespace: "custom", key: "promotion") {
+    key
+    value
+  }
+  hotDeal: metafield(namespace: "custom", key: "hotDeal") {
+    key
+    value
+  }
+  features: metafield(namespace: "custom", key: "features") {
+    key
+    value
+  }
+  variants(first: 1) {
+    nodes {
+      id
+      image {
+        url
+        altText
+        width
+        height
       }
-                                      toothBrush: metafield(namespace: "custom", key: "toothbrush") {
-                    key
-                    value
-                  }
-                  ooo: metafield(namespace: "custom", key: "outofstock") {
-                    key
-                    value
-                  }
-                  new: metafield(namespace: "custom", key: "new") {
-                    key
-                    value
-                  }
-                  ship: metafield(namespace: "custom", key: "fastShip") {
-                    key
-                    value
-                  }
-                  release: metafield(namespace: "custom", key: "release") {
-                    key
-                    value
-                  }
-                  promotion: metafield(namespace: "custom", key: "promotion") {
-                    key
-                    value
-                  }
-                  hotDeal: metafield(namespace: "custom", key: "hotDeal") {
-                    key
-                    value
-                  }
-                  features: metafield(namespace: "custom", key: "features") {
-                    key
-                    value
-                  }
-    variants(first: 1) {
-      nodes {
-        id
-        image {
-          url
-          altText
-          width
-          height
-        }
-        price {
-          amount
-          currencyCode
-        }
-        compareAtPrice {
-          amount
-          currencyCode
-        }
-        selectedOptions {
-          name
-          value
-        }
-        product {
-          handle
-          title
-        }
+      price {
+        amount
+        currencyCode
+      }
+      compareAtPrice {
+        amount
+        currencyCode
+      }
+      selectedOptions {
+        name
+        value
+      }
+      product {
+        handle
+        title
       }
     }
   }
-  query search(
-    $country: CountryCode
-    $endCursor: String
-    $first: Int
-    $language: LanguageCode
-    $last: Int
-    $query: String!
-    $startCursor: String
-  ) @inContext(country: $country, language: $language) {
-    products: search(
-      query: $query,
-      unavailableProducts: HIDE,
-      types: [PRODUCT],
-      first: $first,
-      sortKey: RELEVANCE,
-      last: $last,
-      before: $startCursor,
-      after: $endCursor
-    ) {
-      nodes {
-        ...on Product {
-          ...SearchProduct
-        }
-      }
-      pageInfo {
-        hasNextPage
-        hasPreviousPage
-        startCursor
-        endCursor
-      }
-    }
+}
 
+query search($country: CountryCode, $endCursor: String, $first: Int, $language: LanguageCode, $last: Int, $query: String!, $startCursor: String) @inContext(country: $country, language: $language) {
+  products: search(
+    query: $query
+    unavailableProducts: HIDE
+    types: [PRODUCT]
+    first: $first
+    sortKey: RELEVANCE
+    last: $last
+    before: $startCursor
+    after: $endCursor
+  ) {
+    nodes {
+      ... on Product {
+        ...SearchProduct
+      }
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
   }
+}
 ` as const
