@@ -156,6 +156,25 @@
 
 }
 
+.login-form-field select{
+    border: none;
+    font-size: 18px;
+    height: 50px;
+    border-radius: 5px;
+    outline: none;
+    padding-left: 30px;
+    background: rgba(255, 255, 255, .1);
+    backdrop-filter: blur(10px);
+    color: #fff;
+}
+
+.login-form-field select option{
+    background: #000000;
+    backdrop-filter: blur(10px);
+    color: #fff;
+}
+
+
 .login-form-field label{
     padding-left: 30px;
     padding-bottom: 10px;
@@ -322,6 +341,11 @@
     z-index: 10;
 }
 
+.popup-content h3{
+    text-align: center;
+    margin: 50px 0;
+}
+
 .overlay {
     position: fixed;
     top: 0;
@@ -334,11 +358,16 @@
 
 .address-input{
     display: flex;
+    padding: 0 40px;
 
 }
 
-.address-input .login-form-field{
-    width: 250px !important;
+.adress-only{
+    width: 100%;
+}
+
+.adress-only .login-form-field{
+    width: 100%;
 }
 
 .address-input input{
@@ -575,4 +604,20 @@
     font-weight: 700;
     text-transform: uppercase;
     cursor: pointer;
+}
+
+.account-profile-marketing input[type="checkbox"] {
+    appearance: none;
+    border: 2px solid white;
+    background-color: black;
+    width: 21px;
+    height: 21px;
+}
+
+.account-profile-marketing input[type="checkbox"]:checked {
+    background-color: white;
+    background-image: url(public/filters/checkbox.png);
+    border: none;
+    image-rendering: pixelated;
+    background-size: contain;
 }

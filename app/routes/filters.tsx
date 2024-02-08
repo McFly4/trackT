@@ -97,6 +97,28 @@ const brands = [
     { name: 'Tout', value: 'all' },
     { name: 'Nike', value: 'nike' },
     { name: 'Adidas', value: 'adidas' },
+    { name: 'Jordan', value: 'jordan' },
+    {
+        name: 'Audemars piguet X Cactus Jack',
+        value: 'audemars-piguet-x-cactus-jack',
+    },
+    { name: 'BearBrick', value: 'bearbrick' },
+    { name: 'Birkenstock X Stussy', value: 'birkenstock-x-stussy' },
+    { name: 'Bravest Studios', value: 'bravest-studios' },
+    { name: 'Casio', value: 'casio' },
+    { name: 'Chrome Hearts', value: 'Chrome Hearts' },
+    { name: 'KAWS', value: 'kaws' },
+    { name: 'Laarvee', value: 'laarvee' },
+    { name: 'New Balance', value: 'new-balance' },
+    { name: 'Nike X Dior', value: 'nike-x-dior' },
+    { name: 'Nike X Supreme', value: 'nike-x-supreme' },
+    { name: 'Nike X Travis Scott', value: 'nike-x-travis-scott' },
+    { name: 'Palace', value: 'palace' },
+    { name: 'Stone Island X Supreme', value: 'stone-island-x-supreme' },
+    { name: 'Stussy', value: 'stussy' },
+    { name: 'Super 7', value: 'super-7' },
+    { name: 'Supreme', value: 'supreme' },
+    { name: 'Yeezy', value: 'yeezy' },
 ]
 
 const colorsList = [
@@ -381,7 +403,7 @@ export default function Filters() {
         ) {
             const subcategoryObjects = productVendor.map(
                 (subcategory: any) => ({
-                    productVendor: subcategory?.name,
+                    productVendor: subcategory?.value,
                 })
             )
             queryParams.push(...subcategoryObjects)
@@ -463,23 +485,32 @@ export default function Filters() {
                             ))}
                         </ul>
                     </div>
-                    <h3 className='filters__title'>Catégorie</h3>
-                    <ul className='filters__list'>
-                        {category.map((category: any) => (
-                            <li className='filters__item' key={category.name}>
-                                <label>
-                                    <input
-                                        type='checkbox'
-                                        checked={productType.includes(category)}
-                                        onChange={() =>
-                                            handleProductType(category)
-                                        }
-                                    />
-                                    {category.name}
-                                </label>
-                            </li>
-                        ))}
-                    </ul>
+                    {manwoman?.length >= 1 && (
+                        <>
+                            <h3 className='filters__title'>Catégorie</h3>
+                            <ul className='filters__list'>
+                                {category.map((category: any) => (
+                                    <li
+                                        className='filters__item'
+                                        key={category.name}
+                                    >
+                                        <label>
+                                            <input
+                                                type='checkbox'
+                                                checked={productType.includes(
+                                                    category
+                                                )}
+                                                onChange={() =>
+                                                    handleProductType(category)
+                                                }
+                                            />
+                                            {category.name}
+                                        </label>
+                                    </li>
+                                ))}
+                            </ul>
+                        </>
+                    )}
                 </div>
 
                 <div>
@@ -623,7 +654,10 @@ export default function Filters() {
                         (materials: any) => materials.value === 'materials'
                     ) && (
                         <div className='filters__categories'>
-                            <h3 className='filters__title'>Matière</h3>
+                            <h3 className='filters__title'>
+                                Matière
+                                <span>Sneakers</span>
+                            </h3>
                             <ul className='filters__list'>
                                 {matiere.map((matiere: any) => (
                                     <li
@@ -911,8 +945,7 @@ export default function Filters() {
                                     />
                                 </div>
                             )}
-                            {(manwoman.length > 0 ||
-                                productType?.length > 0) && (
+                            {productType?.length > 0 && (
                                 <div
                                     style={{
                                         display: 'flex',
@@ -931,11 +964,13 @@ export default function Filters() {
                                 </div>
                             )}
 
-                            <img
-                                src='/filters/redTV.png'
-                                alt='pink tv'
-                                className='filters-tvs-right'
-                            />
+                            {manwoman?.length > 0 && (
+                                <img
+                                    src='/filters/redTV.png'
+                                    alt='pink tv'
+                                    className='filters-tvs-right'
+                                />
+                            )}
                         </div>
                     )}
                     <div className='filter-footer-container-search'>

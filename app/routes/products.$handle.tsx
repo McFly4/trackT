@@ -235,7 +235,7 @@ function ProductImage({ image, product }: { image: any; product: any }) {
     const previo = () => {
         swiperRef.current?.slidePrev()
     }
-
+    console.log(product)
     return (
         <div className='product-image-container'>
             <div className='product-image'>

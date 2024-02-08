@@ -13,6 +13,9 @@
     },
     "dependencies": {
         "@apollo/client": "^3.8.7",
+        "@emotion/react": "^11.11.3",
+        "@emotion/styled": "^11.11.0",
+        "@mui/material": "^5.15.9",
         "@remix-run/react": "2.1.0",
         "@shopify/cli": "3.50.0",
         "@shopify/cli-hydrogen": "^6.0.0",
