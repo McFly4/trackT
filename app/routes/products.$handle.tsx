@@ -178,12 +178,44 @@ function BreadCrumb({ product }: { product: any }) {
                 <p
                     style={
                         firstColor === 'black'
-                            ? { color: 'white' }
-                            : { color: 'black' }
+                            ? { color: 'white !important' }
+                            : { color: 'black !important' }
                     }
                 >
-                    {isMixte} &gt; {type} &gt; {vendor} &gt; {collection} &gt;{' '}
-                    {productName}
+                    {isMixte == 'true' ? 'Femme' : 'Homme'} &gt;{' '}
+                    <Link
+                        style={
+                            firstColor === 'black'
+                                ? { color: 'white !important' }
+                                : { color: 'black !important' }
+                        }
+                        to={'/search?q=' + type}
+                    >
+                        {type}
+                    </Link>{' '}
+                    &gt;{' '}
+                    <Link
+                        style={
+                            firstColor === 'black'
+                                ? { color: 'white !important' }
+                                : { color: 'black !important' }
+                        }
+                        to={'/search?q=' + vendor}
+                    >
+                        {vendor}
+                    </Link>{' '}
+                    &gt;{' '}
+                    <Link
+                        style={
+                            firstColor === 'black'
+                                ? { color: 'white !important' }
+                                : { color: 'black !important' }
+                        }
+                        to={'/search?q=' + collection}
+                    >
+                        {collection}
+                    </Link>{' '}
+                    &gt; {productName}
                 </p>
                 <div className='breadcrumb-colors'>
                     {colors?.map((color: any, index: number) => (

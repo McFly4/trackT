@@ -503,7 +503,6 @@ aside li {
 
 .home {
     width: 100%;
-    margin-bottom: 200px;
 }
 
 /*.home img {*/
@@ -557,7 +556,6 @@ aside li {
 
 .panel-trackt {
     display: flex;
-    margin-top: 170px;
 }
 
 .trackT .product-img-grid {
@@ -587,14 +585,14 @@ aside li {
 
 .panel-trackt .filter-trackt .filter-sticky {
     position: sticky;
-    top: 415px;
+    top: 350px;
     z-index: 1;
     height: fit-content;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    margin-top: 400px;
+    margin-top: 160px;
 }
 
 .panel-trackt .filter-trackt .filter-sticky h1 {
@@ -618,7 +616,7 @@ aside li {
 }
 
 .panel-container {
-    margin-left: 75px;
+    margin: 0 75px;
 }
 
 .second-panel {
@@ -628,11 +626,26 @@ aside li {
 
 }
 
+.panel-container-box{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 75px;
+}
+
+.panel-container-box-item{
+    display: flex;
+    flex-direction: column;
+    background: #212121;
+    padding: 40px;
+    width: 40%;
+}
+
 .panel-container .header {
     display: flex;
     flex-direction: column;
     width: 90%;
     margin-bottom: 100px;
+    padding-top: 50px;
 }
 
 .panel-container .header h1 {
@@ -644,13 +657,9 @@ aside li {
 .panel-container .panel-products-grid {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
-    margin-left: -20px;
+    justify-content: space-between;
 }
 
-.panel-container .panel-products-grid > * {
-    margin: 0 20px 70px 20px;
-}
 
 .product-grid{
     position: relative;

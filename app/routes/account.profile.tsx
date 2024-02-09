@@ -182,6 +182,160 @@ export default function AccountProfile() {
                 <h2>Informations personnelles</h2>
                 <br />
                 <br />
+                <Form method='PUT'>
+                    <div className='register-form'>
+                        <div>
+                            <div className='login-form-field'>
+                                <div className='login-form-field'>
+                                    <label htmlFor='lastName'>Nom</label>
+                                    <input
+                                        id='lastName'
+                                        name='lastName'
+                                        type='text'
+                                        autoComplete='family-name'
+                                        placeholder='Nom'
+                                        aria-label='Last name'
+                                        defaultValue={customer.lastName ?? ''}
+                                        minLength={2}
+                                    />
+                                </div>
+                                <label htmlFor='email'>Adresse Email</label>
+                                <input
+                                    id='email'
+                                    name='email'
+                                    type='email'
+                                    autoComplete='email'
+                                    required
+                                    placeholder='Email'
+                                    aria-label='Email address'
+                                    defaultValue={customer.email ?? ''}
+                                />
+                            </div>
+                        </div>
+                        <div
+                            style={{
+                                marginLeft: '50px',
+                            }}
+                        >
+                            <div className='login-form-field'>
+                                <label htmlFor='firstName'>Prénom</label>
+                                <input
+                                    id='firstName'
+                                    name='firstName'
+                                    type='text'
+                                    autoComplete='given-name'
+                                    placeholder='Prénom'
+                                    aria-label='First name'
+                                    defaultValue={customer.firstName ?? ''}
+                                    minLength={2}
+                                />
+                            </div>
+                            <div className='login-form-field'>
+                                <label htmlFor='phone'>
+                                    Numéro de téléphone
+                                </label>
+                                <input
+                                    id='phone'
+                                    name='phone'
+                                    type='tel'
+                                    autoComplete='tel'
+                                    placeholder='Numéro'
+                                    aria-label='Mobile'
+                                    defaultValue={customer.phone ?? ''}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div className='account-profile-marketing'>
+                        <input
+                            id='acceptsMarketing'
+                            name='acceptsMarketing'
+                            type='checkbox'
+                            placeholder='Accept marketing'
+                            aria-label='Accept marketing'
+                            defaultChecked={customer.acceptsMarketing}
+                        />
+                        <label htmlFor='acceptsMarketing'>
+                            &nbsp; Subscribed to marketing communications
+                        </label>
+                    </div>
+                    <br />
+                    <div
+                        style={{
+                            display: 'flex',
+                        }}
+                    >
+                        <div className='login-form-field'>
+                            <label htmlFor='currentPassword'>
+                                Ancient mot de passe
+                            </label>
+                            <input
+                                id='currentPassword'
+                                name='currentPassword'
+                                type='password'
+                                autoComplete='current-password'
+                                placeholder='Current password'
+                                aria-label='Current password'
+                                minLength={8}
+                            />
+                        </div>
+                        <div
+                            className='login-form-field'
+                            style={{
+                                marginLeft: '50px',
+                            }}
+                        >
+                            <label htmlFor='newPassword'>
+                                Nouveau mot de passe
+                            </label>
+                            <input
+                                id='newPassword'
+                                name='newPassword'
+                                type='password'
+                                placeholder='New password'
+                                aria-label='New password'
+                                minLength={8}
+                            />
+                        </div>
+                    </div>
+                    {/*<label htmlFor='newPasswordConfirm'>*/}
+                    {/*    New password (confirm)*/}
+                    {/*</label>*/}
+                    {/*<input*/}
+                    {/*    id='newPasswordConfirm'*/}
+                    {/*    name='newPasswordConfirm'*/}
+                    {/*    type='password'*/}
+                    {/*    placeholder='New password (confirm)'*/}
+                    {/*    aria-label='New password confirm'*/}
+                    {/*    minLength={8}*/}
+                    {/*/>*/}
+                    {action?.error ? (
+                        <p>
+                            <mark>
+                                <small>{action.error}</small>
+                            </mark>
+                        </p>
+                    ) : (
+                        <br />
+                    )}
+                    <div
+                        style={{
+                            width: '100%',
+                            display: 'flex',
+                            justifyContent: 'flex-end',
+                        }}
+                    >
+                        <button
+                            type='submit'
+                            disabled={state !== 'idle'}
+                            className='btn-update'
+                        >
+                            {state !== 'idle'
+                                ? 'Validation...'
+                                : 'Valider les informations'}
+                        </button>
+                    </div>
+                </Form>
             </div>
             <Adresses />
             <div className='trackT-size'>
