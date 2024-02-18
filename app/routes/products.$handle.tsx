@@ -438,6 +438,13 @@ function ProductMain({
         setIsModalOpen(!isModalOpen)
     }
 
+    const handleOutsideClick = (event: any) => {
+        if (event.target === event.currentTarget) {
+            toggleModal()
+            toggleModalToothbrush()
+        }
+    }
+
     const mapping = {
         hotDeal: product.hotDeal,
         new: product.new,
@@ -464,9 +471,19 @@ function ProductMain({
 
     return (
         <div className='product-main'>
-            {isModalOpen && <ToggleModal toggle={toggleModal} />}
+            {isModalOpen && (
+                <div className='dialog-overlay' onClick={handleOutsideClick}>
+                    <div className='dialog'>
+                        <ToggleModal toggle={toggleModal} />
+                    </div>
+                </div>
+            )}
             {isModalOpenToothbrush && (
-                <ToggleModalToothbrush toggle={toggleModalToothbrush} />
+                <div className='dialog-overlay' onClick={handleOutsideClick}>
+                    <div className='dialog'>
+                        <ToggleModalToothbrush toggle={toggleModalToothbrush} />
+                    </div>
+                </div>
             )}
 
             <div

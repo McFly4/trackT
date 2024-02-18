@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper/modules'
 import MarketDrag from '~/components/Common/MarketDrag'
 import TrackT from '~/components/Common/TrackT'
+import Modal from '~/components/Common/Modal'
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
     return [{ title: `Hydrogen ` }]
@@ -21,9 +22,6 @@ export default function HomePage() {
     const { products } = useLoaderData<typeof loader>()
     const productsList = products.metaobjects.nodes[0].field.references.nodes
 
-    const firstList = productsList.slice(0, 12)
-    const secondList = productsList.slice(12, 16)
-    const thirdList = productsList.slice(16, 20)
     const swiperRef = useRef(null)
 
     const progressContent = useRef<HTMLSpanElement | null>(null)
@@ -61,13 +59,26 @@ export default function HomePage() {
                             width: '100% !important',
                         }}
                     >
-                        <img
-                            src='/home/home1.png'
-                            alt='home'
+                        <div
                             style={{
-                                width: '100%',
+                                display: 'flex',
+                                justifyContent: 'center',
                             }}
-                        />
+                        >
+                            <img
+                                src='/home/home1.png'
+                                alt='home'
+                                style={{
+                                    width: '100%',
+                                }}
+                            />
+                            <div
+                                className='autoplay-progress'
+                                slot='container-end'
+                            >
+                                <span ref={progressContent}></span>
+                            </div>
+                        </div>
                     </SwiperSlide>
                     <SwiperSlide
                         style={{
@@ -75,18 +86,28 @@ export default function HomePage() {
                         }}
                     >
                         <Link to='/about'>
-                            <img
-                                src='/home/home2.png'
-                                alt='home'
+                            <div
                                 style={{
-                                    width: '100%',
+                                    display: 'flex',
+                                    justifyContent: 'center',
                                 }}
-                            />
+                            >
+                                <img
+                                    src='/home/home2.png'
+                                    alt='home'
+                                    style={{
+                                        width: '100%',
+                                    }}
+                                />
+                                <div
+                                    className='autoplay-progress'
+                                    slot='container-end'
+                                >
+                                    <span ref={progressContent}></span>
+                                </div>
+                            </div>
                         </Link>
                     </SwiperSlide>
-                    <div className='autoplay-progress' slot='container-end'>
-                        <span ref={progressContent}></span>
-                    </div>
                 </Swiper>
                 {/*<Link to='#shop'>*/}
                 {/*    <img*/}
@@ -129,20 +150,48 @@ export default function HomePage() {
                             </p>
                         </div>
                         <div className='panel-products-grid'>
-                            {firstList.map((product: any) => (
+                            {productsList.map((product: any) => (
                                 <MainProduct product={product} />
                             ))}
                         </div>
                     </div>
-                    <div className='panel-container second-panel'>
-                        <div
-                            style={{
-                                padding: '60px 60px 80px 60px',
-                                backgroundColor: '#1e1e1e',
-                                color: '#fff',
-                                width: '580px',
-                            }}
-                        >
+                    <div className='panel-container-box'>
+                        <div className='panel-container-box-item'>
+                            <img
+                                src='/home/red.png'
+                                alt='red'
+                                style={{
+                                    width: '580px',
+                                    height: '340px',
+                                }}
+                            />
+                            <h2
+                                style={{
+                                    color: '#E51E1A',
+                                    marginTop: '80px',
+                                    marginBottom: '10px',
+                                }}
+                            >
+                                support client personnalisé
+                            </h2>
+                            <p>
+                                Entrez dans l’univers Trackt, où chaque
+                                interaction est une expérience unique. Notre
+                                équipe dédiée au support client est le cœur
+                                battant de notre atelier mystérieux. Nous sommes
+                                là pour vous guider, vous inspirer et répondre à
+                                vos questions avec une touche personnelle.{' '}
+                                <br /> <br />
+                                Que vous cherchiez des conseils sur la dernière
+                                tendance ou des détails sur une pièce rare,
+                                notre équipe, en coulisses, travaille avec
+                                passion pour vous offrir une assistance
+                                sur-mesure. C’est le conseil d’un connaisseur,
+                                le soutien d’un ami, le secret d’un atelier où
+                                chaque question trouve sa réponse.
+                            </p>
+                        </div>
+                        <div className='panel-container-box-item'>
                             <img
                                 src='/home/blue.png'
                                 alt='blue'
@@ -174,79 +223,6 @@ export default function HomePage() {
                                 vêtements ici, mais des expressions de l’art de
                                 la rue, des pièces qui parlent de créativité et
                                 d’individualité. »
-                            </p>
-                        </div>
-                        <div
-                            className='panel-products-grid'
-                            style={{
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                            }}
-                        >
-                            {secondList.map((product: any) => (
-                                <MainProduct product={product} />
-                            ))}
-                        </div>
-                    </div>{' '}
-                    <div
-                        className='panel-container second-panel'
-                        style={{
-                            marginTop: '125px',
-                            marginLeft: 'unset !important',
-                            marginRight: '60px',
-                        }}
-                    >
-                        <div
-                            className='panel-products-grid'
-                            style={{
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                            }}
-                        >
-                            {thirdList.map((product: any) => (
-                                <MainProduct product={product} />
-                            ))}
-                        </div>
-                        <div
-                            style={{
-                                padding: '60px 60px 80px 60px',
-                                backgroundColor: '#1e1e1e',
-                                color: '#fff',
-                                width: '580px',
-                            }}
-                        >
-                            <img
-                                src='/home/red.png'
-                                alt='red'
-                                style={{
-                                    width: '580px',
-                                    height: '340px',
-                                }}
-                            />
-                            <h2
-                                style={{
-                                    color: '#E51E1A',
-                                    marginTop: '80px',
-                                    marginBottom: '10px',
-                                }}
-                            >
-                                AUTHENTICITÉ GARANTIE
-                            </h2>
-                            <p>
-                                Entrez dans l’univers Trackt, où chaque
-                                interaction est une expérience unique. Notre
-                                équipe dédiée au support client est le cœur
-                                battant de notre atelier mystérieux. Nous sommes
-                                là pour vous guider, vous inspirer et répondre à
-                                vos questions avec une touche personnelle.{' '}
-                                <br /> <br />
-                                Que vous cherchiez des conseils sur la dernière
-                                tendance ou des détails sur une pièce rare,
-                                notre équipe, en coulisses, travaille avec
-                                passion pour vous offrir une assistance
-                                sur-mesure. C’est le conseil d’un connaisseur,
-                                le soutien d’un ami, le secret d’un atelier où
-                                chaque question trouve sa réponse.
                             </p>
                         </div>
                     </div>

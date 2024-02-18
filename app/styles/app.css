@@ -505,10 +505,15 @@ aside li {
     width: 100%;
 }
 
-/*.home img {*/
-/*    width: 100%;*/
-/*    height: auto; !* Ajustez la hauteur en fonction de vos besoins *!*/
-/*}*/
+.home img {
+    width: 100%; /* Largeur totale de la container */
+    max-width: 1920px; /* Limite maximale de largeur pour l'image */
+    height: 100vh; /* Hauteur de la container */
+    background-size: cover; /* Ajuste la taille de l'image pour couvrir la container */
+    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+    background-position: center; /* Centre l'image horizontalement et verticalement */
+    background-color: black;
+}
 
 /*.home .shopnow {*/
 /*    position: absolute;*/
@@ -521,7 +526,6 @@ aside li {
 .autoplay-progress {
     position: absolute;
     right: 16px;
-    top: 190px;
     z-index: 10;
     width: 70px;
     height: 70px;
@@ -532,6 +536,7 @@ aside li {
     justify-content: center;
     align-items: center;
     border-radius: 5px;
+    transform: translate(-50%, -50%);
 }
 
 .autoplay-progress span{
@@ -616,7 +621,7 @@ aside li {
 }
 
 .panel-container {
-    margin: 0 75px;
+    padding-left: 50px;
 }
 
 .second-panel {
@@ -629,7 +634,7 @@ aside li {
 .panel-container-box{
     display: flex;
     justify-content: space-between;
-    margin: 0 75px;
+    margin:50px;
 }
 
 .panel-container-box-item{
@@ -639,6 +644,12 @@ aside li {
     padding: 40px;
     width: 40%;
 }
+
+.panel-container-box-item p{
+    font-size: 19px;
+    font-family: 'HelveticaNeue300', sans-serif;
+}
+
 
 .panel-container .header {
     display: flex;
@@ -655,8 +666,9 @@ aside li {
 }
 
 .panel-container .panel-products-grid {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 50px;
     justify-content: space-between;
 }
 
@@ -664,6 +676,7 @@ aside li {
 .product-grid{
     position: relative;
     overflow: visible !important;
+    max-width: 300px;
 }
 
 .product-grid .product-img-grid {
@@ -675,9 +688,9 @@ aside li {
 
 .product-grid .product-img-grid-sticker{
     top: -35px;
-    right: 0;
+    right: -40px;
     width: 80px;
-    height: 70px;
+    height: 72px;
     object-fit: cover;
     position: absolute;
     z-index: 1;
@@ -705,42 +718,6 @@ aside li {
 
 /* MODAL STICKERS */
 
-.modal-stickers-overlay {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 9999;
-    width: 80%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0px 0px 13px 1000px rgba(0,0,0,0.8);
-
-}
-
-.modal-stickers-overlay::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(54, 54, 54, 0.9); /* Semi-transparent gray background */
-    backdrop-filter: blur(10px); /* Glass effect */
-    z-index: -1; /* Derrière le contenu */
-}
-
-.modal-stickers {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    height: 100%;
-    position: relative;
-    z-index: 1; /* Au-dessus du pseudo-élément */
-}
 
 .modal-stickers-close {
     position: absolute;
@@ -1124,4 +1101,43 @@ aside li {
     position: absolute;
     left: 0;
     bottom: 95px;
+}
+
+.dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(5px); /* Ajoute un flou */
+    background-color: rgba(0, 0, 0, 0.8); /* Ajoute un fond semi-transparent */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+
+}
+
+
+.dialog {
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.3);
+    width: 80%;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease; /* Animation d'ouverture */
+    z-index: 999999;
+
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
