@@ -119,8 +119,14 @@ export default function Register() {
     const error = data?.error || null
     return (
         <div className='register login'>
-            <h1>Créer mon compte trackt</h1>
-            <Form method='POST' className='login-form'>
+            <h1
+                style={{
+                    marginTop: '100px',
+                }}
+            >
+                Créer mon compte trackt
+            </h1>
+            <Form method='POST' className='login-form register2'>
                 <div className='register-form'>
                     <div>
                         <div className='login-form-field'>
@@ -167,19 +173,6 @@ export default function Register() {
                                 required
                             />
                         </div>
-                        {/*<div className='login-form-field'>*/}
-                        {/*    <label htmlFor='birthday'>date de naissance</label>*/}
-                        {/*    <input*/}
-                        {/*        id='passwordConfirm'*/}
-                        {/*        name='passwordConfirm'*/}
-                        {/*        type='password'*/}
-                        {/*        autoComplete='current-password'*/}
-                        {/*        placeholder='Confirmer mot de passe'*/}
-                        {/*        aria-label='Re-enter password'*/}
-                        {/*        minLength={8}*/}
-                        {/*        required*/}
-                        {/*    />*/}
-                        {/*</div>*/}
                     </div>
                     <div
                         style={{
@@ -210,17 +203,6 @@ export default function Register() {
                                 required
                             />
                         </div>
-                        {/*<div className='login-form-field'>*/}
-                        {/*    <label htmlFor='phone'>Numéro de téléphone</label>*/}
-                        {/*    <input*/}
-                        {/*        id='phone'*/}
-                        {/*        name='phone'*/}
-                        {/*        type='text'*/}
-                        {/*        autoComplete='phone'*/}
-                        {/*        placeholder='Téléphone'*/}
-                        {/*        aria-label='phone'*/}
-                        {/*    />*/}
-                        {/*</div>*/}
                     </div>
                 </div>
 
@@ -233,7 +215,18 @@ export default function Register() {
                 ) : (
                     <br />
                 )}
-                <button type='submit'>Register</button>
+
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        marginTop: '20px',
+                    }}
+                >
+                    <button type='submit'>
+                        S'inscrire et vivre l'experience trackt
+                    </button>
+                </div>
             </Form>
         </div>
     )

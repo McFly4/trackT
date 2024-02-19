@@ -132,7 +132,11 @@ export default function Product() {
 
     return (
         <>
-            <div>
+            <div
+                style={{
+                    marginTop: '300px',
+                }}
+            >
                 <BreadCrumb product={product} />
                 <div className='product'>
                     <ProductImage image={selectedVariant} product={product} />
@@ -173,6 +177,7 @@ function BreadCrumb({ product }: { product: any }) {
             <div
                 style={{
                     display: 'flex',
+                    paddingLeft: '80px',
                 }}
             >
                 <p
@@ -215,7 +220,10 @@ function BreadCrumb({ product }: { product: any }) {
                     >
                         {collection}
                     </Link>{' '}
-                    &gt; {productName}
+                    &gt;{' '}
+                    <Link to={'/products/' + product.handle}>
+                        {productName}
+                    </Link>
                 </p>
                 <div className='breadcrumb-colors'>
                     {colors?.map((color: any, index: number) => (
@@ -267,17 +275,26 @@ function ProductImage({ image, product }: { image: any; product: any }) {
     const previo = () => {
         swiperRef.current?.slidePrev()
     }
-    console.log(product)
+
+    useEffect(() => {
+        setMainImage(firstImage)
+    }, [firstImage])
     return (
         <div className='product-image-container'>
             <div className='product-image'>
                 <div className='product-image-title'>
-                    <h1>{product.vendor}</h1>
-                    <h2>
-                        {product.collections?.nodes[0].title === 'All'
-                            ? ''
-                            : product.collections?.nodes[0].title}
-                    </h2>
+                    <Link to={'/search?q=' + product.vendor}>
+                        <h1>{product.vendor}</h1>
+                    </Link>
+                    <Link
+                        to={'/search?q=' + product.collections?.nodes[0].title}
+                    >
+                        <h2>
+                            {product.collections?.nodes[0].title === 'All'
+                                ? ''
+                                : product.collections?.nodes[0].title}
+                        </h2>
+                    </Link>
                 </div>
                 <div className='product-image-main'>
                     <img
@@ -301,13 +318,12 @@ function ProductImage({ image, product }: { image: any; product: any }) {
                         src='/product/br.png'
                     />
 
-                    <Image
+                    <img
                         alt={image.altText as any}
-                        height={image.height as any}
                         src={mainImage}
-                        width={image.width as any}
                         style={{
-                            backgroundColor: '#fff',
+                            maxWidth: '100%',
+                            maxHeight: '100%',
                         }}
                     />
                 </div>
@@ -321,7 +337,7 @@ function ProductImage({ image, product }: { image: any; product: any }) {
                             <div
                                 style={{
                                     width: '100%',
-                                    height: '230px',
+                                    height: '100%',
                                     backgroundColor: '#fff',
                                 }}
                             >
@@ -344,7 +360,7 @@ function ProductImage({ image, product }: { image: any; product: any }) {
                 }}
             >
                 <div className='trackT-header'>
-                    <h2>Panel trackt</h2>
+                    <h2>Produits connexe</h2>
                     <div className='navigation-buttons'>
                         <button onClick={previo}>
                             <svg
@@ -390,7 +406,20 @@ function ProductImage({ image, product }: { image: any; product: any }) {
                         hide: false,
                     }}
                     watchSlidesProgress={true}
-                    slidesPerView={2}
+                    breakpoints={
+                        {
+                            0: {
+                                slidesPerView: 1,
+                            },
+                            768: {
+                                slidesPerView: 2,
+                            },
+                            1800: {
+                                slidesPerView: 3,
+                            },
+                        } as any
+                    }
+                    slidesPerView={3}
                     grabCursor={true}
                     navigation={{
                         nextEl: '.swiper-button-next',
@@ -401,12 +430,7 @@ function ProductImage({ image, product }: { image: any; product: any }) {
                 >
                     {productsFromCollection?.map(
                         (product: any, index: number) => (
-                            <SwiperSlide
-                                key={index}
-                                style={{
-                                    padding: '40px 0',
-                                }}
-                            >
+                            <SwiperSlide key={index}>
                                 <MainProduct product={product} />
                             </SwiperSlide>
                         )
@@ -805,7 +829,12 @@ function ToggleModal(toggle: any) {
                 </div>
                 <div className='modal-stickers-header'>
                     <h2>Labels trackt</h2>
-                    <p>
+                    <p
+                        style={{
+                            width: '90%',
+                            margin: 'auto',
+                        }}
+                    >
                         Nos pastilles sont là pour vous guider en un clin d’œil
                         ! Chacune d’elles est un repère visuel qui révèle une
                         caractéristique clé du produit,. Utilisez ces
@@ -976,9 +1005,7 @@ function ProductPrice({ selectedVariant }: { selectedVariant: any }) {
                         : []
                 }
             >
-                {selectedVariant?.availableForSale
-                    ? 'Ajouter au panier'
-                    : 'Sold out'}
+                Ajouter au panier
             </AddToCartButton>
         </div>
     )
@@ -1073,6 +1100,7 @@ function ProductOptions({ option }: { option: VariantOption }) {
                     className='product-swiper'
                     slideToClickedSlide={true}
                     onSlideChange={handleSlideChange}
+                    spaceBetween={-40}
                 >
                     {sortedValues.map(
                         (

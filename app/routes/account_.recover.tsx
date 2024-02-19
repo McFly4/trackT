@@ -118,7 +118,7 @@ export default function Recover() {
                                     width: '400px',
                                 }}
                             >
-                                Changer votre mot de passe
+                                Changer de mot de passe
                             </button>
                         </div>
                     </Form>

@@ -1,5 +1,5 @@
 import { FooterQuery } from '../../storefrontapi.generated'
-
+import { Link } from '@remix-run/react'
 export function Footer(menu: FooterQuery) {
     return (
         <footer className='footer'>
@@ -8,7 +8,9 @@ export function Footer(menu: FooterQuery) {
             </div>
             <div className='footer-menu'>
                 <h2>liens utiles</h2>
-                <p>infos légales</p>
+                <Link to='/politics/legals'>
+                    <p>mentions légales</p>
+                </Link>
                 <p>RETOURS & REMBOURSEMENTS</p>
                 <p>
                     FAQ
@@ -22,19 +24,30 @@ export function Footer(menu: FooterQuery) {
                     Carrières
                     <img src='/coming.png' alt='coming soon' />
                 </p>
-                <p>Plan du site</p>
+                <Link to='/sitemap'>
+                    <p>Plan du site</p>
+                </Link>
             </div>
             <div className='footer-menu'>
-                <h2>incontournables</h2>
                 <p>
                     indépendant brand
                     <img src='/coming.png' alt='coming soon' />
                 </p>
-                <p>exclusive item</p>
-                <p>hot deal</p>
-                <p>nouveautés</p>
-                <p>chez vous en 24h</p>
-                <p>en promo</p>
+                <Link to='/filtered?release=true'>
+                    <p>exclusive item</p>
+                </Link>
+                <Link to='/filtered?hotdeal=true'>
+                    <p>hot deal</p>
+                </Link>
+                <Link to='/filtered?new=true'>
+                    <p>nouveautés</p>
+                </Link>
+                <Link to='/filtered?fast=true'>
+                    <p>chez vous en 24h</p>
+                </Link>
+                <Link to='/filtered?promotion=true'>
+                    <p>en promo</p>
+                </Link>
             </div>
             <div className='footer-media'>
                 <h2>

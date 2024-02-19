@@ -89,24 +89,19 @@ export default function SearchPage() {
                         }}
                         className='panel-container'
                     >
-                        <div className='panel-products-grid'>
-                            <Pagination connection={products}>
-                                {({
-                                    nodes,
-                                    NextLink,
-                                    PreviousLink,
-                                    isLoading,
-                                }) => (
-                                    <>
-                                        <PreviousLink>
-                                            <div>
-                                                <button>
-                                                    {isLoading
-                                                        ? 'Chargement...'
-                                                        : 'Charger les produits précédents'}
-                                                </button>
-                                            </div>
-                                        </PreviousLink>
+                        <Pagination connection={products}>
+                            {({ nodes, NextLink, PreviousLink, isLoading }) => (
+                                <>
+                                    <PreviousLink>
+                                        <div>
+                                            <button>
+                                                {isLoading
+                                                    ? 'Chargement...'
+                                                    : 'Charger les produits précédents'}
+                                            </button>
+                                        </div>
+                                    </PreviousLink>
+                                    <div className='panel-products-grid'>
                                         <div className='panel-products-grid'>
                                             {nodes.map((product) => (
                                                 <MainProduct
@@ -114,19 +109,19 @@ export default function SearchPage() {
                                                 />
                                             ))}
                                         </div>
-                                        <div className='pagination'>
-                                            <NextLink>
-                                                <button>
-                                                    {isLoading
-                                                        ? 'Chargement...'
-                                                        : 'Plus de produits'}
-                                                </button>
-                                            </NextLink>
-                                        </div>
-                                    </>
-                                )}
-                            </Pagination>
-                        </div>
+                                    </div>
+                                    <div className='pagination'>
+                                        <NextLink>
+                                            <button>
+                                                {isLoading
+                                                    ? 'Chargement...'
+                                                    : 'Plus de produits'}
+                                            </button>
+                                        </NextLink>
+                                    </div>
+                                </>
+                            )}
+                        </Pagination>
                     </div>
                 </div>
             </div>

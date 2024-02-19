@@ -60,8 +60,7 @@
     display: flex;
     justify-content: space-evenly;
     align-items: flex-start;
-    padding: 25px 0;
-    margin-bottom: 50px;
+    padding: 70px 25px;
 }
 
 .footer img{

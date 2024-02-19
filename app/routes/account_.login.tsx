@@ -92,7 +92,12 @@ export default function Login() {
                         autoFocus
                     />
                 </div>
-                <div className='login-form-field'>
+                <div
+                    className='login-form-field'
+                    style={{
+                        marginBottom: 'unset',
+                    }}
+                >
                     <label htmlFor='password'>Mot de passe</label>
                     <input
                         id='password'

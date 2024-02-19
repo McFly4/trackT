@@ -648,6 +648,7 @@ aside li {
 .panel-container-box-item p{
     font-size: 19px;
     font-family: 'HelveticaNeue300', sans-serif;
+    line-height: 1.1;
 }
 
 
@@ -680,9 +681,49 @@ aside li {
 }
 
 .product-grid .product-img-grid {
-    width: 300px;
-    height: 200px;
+    width: 300px !important;
+    height: 200px !important;
     background-color: #fff;
+    transition: 0.2s;
+    position: relative;
+}
+
+.product-grid .product-img-grid img{
+    transition: 0.2s ease-in-out;
+}
+
+.product-grid .product-img-grid:hover .product-img{
+    filter: blur(8px);
+}
+
+.product-grid .product-img-grid:hover .product-img-grid-overlay{
+    opacity: 1;
+}
+
+.product-img-grid-overlay{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: 0.2s ease-in-out;
+}
+
+.product-basket{
+    background-color: #fff;
+    border-radius: 5px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.product-basket img{
+    width: 27px !important;
+    height: 25px !important;
+
 }
 
 
@@ -767,8 +808,8 @@ aside li {
     object-fit: cover;
 }
 
-.hfooter {
-    padding: 200px 0;
+.hfooter{
+    padding-bottom: 70px;
 }
 
 .hfooter .gofilters {
@@ -1109,7 +1150,7 @@ aside li {
     left: 0;
     width: 100%;
     height: 100%;
-    backdrop-filter: blur(5px); /* Ajoute un flou */
+    backdrop-filter: blur(7px); /* Ajoute un flou */
     background-color: rgba(0, 0, 0, 0.8); /* Ajoute un fond semi-transparent */
     display: flex;
     justify-content: center;

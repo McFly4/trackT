@@ -22,6 +22,11 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
     const getPrice = searchParams.getAll('price')
     const getProductType = searchParams.getAll('productType')
     const getProductVendor = searchParams.getAll('productVendor')
+    const getNew = searchParams.getAll('new')
+    const hotDeal = searchParams.getAll('hotdeal')
+    const promotion = searchParams.getAll('promotion')
+    const fast = searchParams.getAll('fast')
+    const release = searchParams.getAll('release')
 
     // collection
 
@@ -75,6 +80,46 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
         },
     }))
 
+    const stickerNew = getNew.map((newItem: any) => ({
+        productMetafield: {
+            namespace: 'custom',
+            key: 'new',
+            value: newItem,
+        },
+    }))
+
+    const stickerHotDeal = hotDeal.map((hotdeal: any) => ({
+        productMetafield: {
+            namespace: 'custom',
+            key: 'hotDeal',
+            value: hotdeal,
+        },
+    }))
+
+    const stickerPromotion = promotion.map((promotion: any) => ({
+        productMetafield: {
+            namespace: 'custom',
+            key: 'promotion',
+            value: promotion,
+        },
+    }))
+
+    const stickerFast = fast.map((fast: any) => ({
+        productMetafield: {
+            namespace: 'custom',
+            key: 'fastShip',
+            value: fast,
+        },
+    }))
+
+    const stickerRelease = release.map((release: any) => ({
+        productMetafield: {
+            namespace: 'custom',
+            key: 'release',
+            value: release,
+        },
+    }))
+
     const productVendor = getProductVendor.map((brand: any) => ({
         productVendor: brand,
     }))
@@ -97,6 +142,11 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
         ...materials,
         ...productVendor,
         ...price,
+        ...stickerNew,
+        ...stickerHotDeal,
+        ...stickerPromotion,
+        ...stickerFast,
+        ...stickerRelease,
     ]
 
     const pagination = getPaginationVariables(request, {

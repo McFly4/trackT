@@ -129,6 +129,14 @@
 
 .register-form{
     display: flex;
+    width: fit-content;
+}
+
+.register2{
+    height: 100%;
+    overflow-y: hidden;
+
+
 }
 
 .login{
@@ -146,6 +154,7 @@
 
 .login-form{
     margin-top: 120px;
+    width: fit-content;
 }
 
 .login-form-field{
@@ -223,12 +232,10 @@
     font-size: 18px;
     text-transform: uppercase;
     font-weight: 700;
-    height: 75px;
     cursor: pointer;
     border-radius: 5px;
-    padding: 0 40px;
-    background: rgb(181,112,70);
-    background: linear-gradient(90deg, rgba(181,112,70,1) 0%, rgba(160,101,65,1) 100%, rgba(32,32,32,1) 100%);
+    background: #FF9147;
+    padding: 20px 40px
 }
 
 .account{
@@ -277,7 +284,14 @@
     width: 320px;
     padding: 50px 0;
     z-index: 5;
+    transition: 0.2s ease-in-out;
 }
+
+.account-menu a:hover{
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
 
 .account-menu a p{
     font-size: 20px;

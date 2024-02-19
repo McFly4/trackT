@@ -172,12 +172,14 @@ function AccountMenu(images: any) {
             backdropFilter: isActive ? 'blur(10px)' : undefined,
         }
     }
+
+    const location = useLocation()
+
     const allImages =
         images?.images?.metaobjects?.edges[0]?.node?.fields[0]?.references
             ?.nodes
 
     const [imageURL, setImageURL] = useState('/account/nav.png')
-    const [allowChange, setAllowChange] = useState(true)
 
     function randomImage() {
         if (allImages && allImages.length > 0) {
@@ -197,23 +199,12 @@ function AccountMenu(images: any) {
         }
     }
 
-    const handleClick = () => {
-        if (allowChange) {
-            const newImageURL = randomImage()
-            setImageURL(newImageURL)
-            setAllowChange(false) // Désactiver le changement d'image supplémentaire
-        }
-    }
-
     useEffect(() => {
-        if (!allowChange) {
-            setTimeout(() => {
-                setAllowChange(true)
-            }, 100)
-        }
-    }, [allowChange])
+        setImageURL(randomImage())
+    }, [location])
+
     return (
-        <nav role='navigation' className='account-menu' onClick={handleClick}>
+        <nav role='navigation' className='account-menu'>
             <img className='account-menu-bg' src={imageURL} />
             <NavLink to='/account/profile' style={isActiveStyle}>
                 <p>Mon espace trackt</p>

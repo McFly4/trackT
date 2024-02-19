@@ -26,6 +26,7 @@ export default function TrackT(products: any) {
                     hide: false,
                 }}
                 watchSlidesProgress={true}
+                slidesPerGroup={2}
                 slidesPerView={4}
                 grabCursor={true}
                 navigation={{

@@ -28,7 +28,6 @@ export default function ({ product }: any) {
         }
         return acc
     }, [])
-
     return (
         <>
             {isOpen && (
@@ -56,7 +55,12 @@ export default function ({ product }: any) {
                             </div>
                             <div className='modal-stickers-header'>
                                 <h2>Labels trackt</h2>
-                                <p>
+                                <p
+                                    style={{
+                                        width: '90%',
+                                        margin: 'auto',
+                                    }}
+                                >
                                     Nos pastilles sont là pour vous guider en un
                                     clin d’œil ! Chacune d’elles est un repère
                                     visuel qui révèle une caractéristique clé du
@@ -148,7 +152,16 @@ export default function ({ product }: any) {
                     </div>
                 </div>
             )}
-            <div className='product-grid'>
+            <div
+                className='product-grid'
+                style={
+                    product.ooo?.value == 'true'
+                        ? {
+                              filter: 'opacity(0.5)',
+                          }
+                        : {}
+                }
+            >
                 <div onClick={toggleDialog}>
                     {stickersData.map((item: any, index: any, array: any[]) => (
                         <ImageComponent
@@ -167,8 +180,14 @@ export default function ({ product }: any) {
                         <img
                             src={product.images?.nodes[0].url}
                             alt={product.title}
+                            className='product-img'
                         />
                     </Link>
+                    <div className='product-img-grid-overlay'>
+                        <div className='product-basket'>
+                            <img src='/icons/basket.svg' alt='basket' />
+                        </div>
+                    </div>
                 </div>
                 <div className='product-info-grid'>
                     <h3>
@@ -202,8 +221,4 @@ function ImageComponent({ keyName, offset, zIdx }: any) {
             style={style}
         />
     )
-}
-
-function ToggleModal(toggle: any) {
-    return <div className='modal-stickers-overlay'></div>
 }
