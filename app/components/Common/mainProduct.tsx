@@ -54,7 +54,7 @@ export default function ({ product }: any) {
                                 </svg>
                             </div>
                             <div className='modal-stickers-header'>
-                                <h2>Labels trackt</h2>
+                                <h3>Labels trackt</h3>
                                 <p
                                     style={{
                                         width: '90%',

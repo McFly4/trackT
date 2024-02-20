@@ -153,7 +153,6 @@ export default function Product() {
                     <img src='/product/banner.png' alt='banner' />
                 </video>
             </div>
-
             <TrackT products={productsList} />
         </>
     )
@@ -171,7 +170,10 @@ function BreadCrumb({ product }: { product: any }) {
         <div
             className='breadcrumb'
             style={{
-                backgroundColor: firstColor,
+                backgroundColor:
+                    firstColor === 'blue-clair' || firstColor === 'blue-cyan'
+                        ? '#ADD8E6 '
+                        : firstColor,
             }}
         >
             <div
@@ -279,6 +281,7 @@ function ProductImage({ image, product }: { image: any; product: any }) {
     useEffect(() => {
         setMainImage(firstImage)
     }, [firstImage])
+
     return (
         <div className='product-image-container'>
             <div className='product-image'>
@@ -327,7 +330,13 @@ function ProductImage({ image, product }: { image: any; product: any }) {
                         }}
                     />
                 </div>
-                <div className='product-image-list'>
+                <div
+                    className='product-image-list'
+                    style={{
+                        justifyContent:
+                            images.length <= 2 ? 'flex-start' : 'space-between',
+                    }}
+                >
                     {images.map((image: any, index: number) => (
                         <div
                             key={image?.id}
@@ -336,8 +345,10 @@ function ProductImage({ image, product }: { image: any; product: any }) {
                         >
                             <div
                                 style={{
-                                    width: '100%',
-                                    height: '100%',
+                                    width:
+                                        images.length <= 2 ? '170px' : '100%',
+                                    height:
+                                        images.length <= 2 ? '110px' : '100%',
                                     backgroundColor: '#fff',
                                 }}
                             >
@@ -813,7 +824,7 @@ function ToggleModal(toggle: any) {
                     </svg>
                 </div>
                 <div className='modal-stickers-header'>
-                    <h2>Labels trackt</h2>
+                    <h3>Labels trackt</h3>
                     <p
                         style={{
                             width: '90%',
@@ -931,7 +942,6 @@ function ProductPrice({ selectedVariant }: { selectedVariant: any }) {
         (option: any) => option.name === 'Size'
     )?.value
 
-    console.log(selectedVariant)
     return (
         <div className='product-price'>
             <h2>Price</h2>

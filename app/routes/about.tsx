@@ -173,7 +173,7 @@ export default function About() {
                 </div>
                 <div className='modal-stickers modal-stickers-about'>
                     <div className='modal-stickers-header'>
-                        <h2>Labels trackt</h2>
+                        <h3>Labels trackt</h3>
                         <p>
                             Nos pastilles sont là pour vous guider en un clin
                             d’œil ! Chacune d’elles est un repère visuel qui

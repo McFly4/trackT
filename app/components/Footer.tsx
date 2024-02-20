@@ -14,18 +14,24 @@ export function Footer(menu: FooterQuery) {
                     <p>mentions légales</p>
                 </Link>
                 <p>RETOURS & REMBOURSEMENTS</p>
-                <p>
-                    FAQ
-                    <img src='/coming.png' alt='coming soon' />
-                </p>
-                <p>
-                    blog
-                    <img src='/coming.png' alt='coming soon' />
-                </p>
-                <p>
-                    Carrières
-                    <img src='/coming.png' alt='coming soon' />
-                </p>
+                <Link to='/about'>
+                    <p>
+                        FAQ
+                        <img src='/coming.png' alt='coming soon' />
+                    </p>
+                </Link>
+                <Link to='/about'>
+                    <p>
+                        blog
+                        <img src='/coming.png' alt='coming soon' />
+                    </p>
+                </Link>
+                <Link to='/about'>
+                    <p>
+                        Carrières
+                        <img src='/coming.png' alt='coming soon' />
+                    </p>
+                </Link>
                 <Link to='/sitemap'>
                     <p>Plan du site</p>
                 </Link>

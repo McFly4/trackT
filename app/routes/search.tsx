@@ -48,7 +48,6 @@ export default function SearchPage() {
     const { searchResults, searchTerm } = useLoaderData<typeof loader>()
     const products = searchResults?.results?.products
 
-    console.log(products)
     return (
         <>
             <div

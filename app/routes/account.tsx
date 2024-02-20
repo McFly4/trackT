@@ -269,7 +269,7 @@ function AccountMenu(images: any) {
             <NavLink to='/account/mybestitem' style={isActiveStyle}>
                 <p> My best item</p>
             </NavLink>
-            <a>
+            <a href='/about'>
                 <p
                     style={{
                         opacity: 0.3,
@@ -279,7 +279,7 @@ function AccountMenu(images: any) {
                 </p>
                 <img src='/coming.png' alt='coming soon' />
             </a>
-            <a>
+            <a href='/about'>
                 <p
                     style={{
                         opacity: 0.3,

@@ -835,7 +835,7 @@ input[type="search"]::-webkit-search-results-decoration {
     align-items: center;
 }
 
-.modal-stickers-header h2{
+.modal-stickers-header h3{
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -1099,6 +1099,7 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .filters-footer .filters-footer-bg{
     position: absolute;
+    opacity: 0.5;
 }
 
 .filters-footer-container{
