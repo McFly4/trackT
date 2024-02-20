@@ -4,7 +4,9 @@ export function Footer(menu: FooterQuery) {
     return (
         <footer className='footer'>
             <div>
-                <img src='/footer/trackt.png' />
+                <Link to='/'>
+                    <img src='/footer/trackt.png' />
+                </Link>
             </div>
             <div className='footer-menu'>
                 <h2>liens utiles</h2>

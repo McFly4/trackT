@@ -179,6 +179,11 @@ export function normalizePredictiveSearchResults(
                     url: `${localePrefix}/products/${product.handle}${trackingParams}`,
                     price: product.variants.nodes[0].price,
                     tags: product.tags,
+                    new: product.new,
+                    ship: product.ship,
+                    release: product.release,
+                    hotDeal: product.hotDeal,
+                    promotion: product.promotion,
                 }
             }),
         })
@@ -288,6 +293,30 @@ const PREDICTIVE_SEARCH_QUERY = `#graphql
     handle
     tags
     trackingParameters
+    ooo: metafield(namespace: "custom", key: "outofstock") {
+      key
+      value
+    }
+    new: metafield(namespace: "custom", key: "new") {
+      key
+      value
+    }
+    ship: metafield(namespace: "custom", key: "fastShip") {
+      key
+      value
+    }
+    release: metafield(namespace: "custom", key: "release") {
+      key
+      value
+    }
+    promotion: metafield(namespace: "custom", key: "promotion") {
+      key
+      value
+    }
+    hotDeal: metafield(namespace: "custom", key: "hotDeal") {
+      key
+      value
+    }
     variants(first: 1) {
       nodes {
         id

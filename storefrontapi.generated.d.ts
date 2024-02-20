@@ -1877,10 +1877,7 @@ export type CartApiQueryFragment = Pick<
                             'id' | 'url' | 'altText' | 'width' | 'height'
                         >
                     >
-                    product: Pick<
-                        StorefrontAPI.Product,
-                        'handle' | 'title' | 'id' | 'vendor'
-                    >
+                    product: Pick<StorefrontAPI.Product>
                     selectedOptions: Array<
                         Pick<StorefrontAPI.SelectedOption, 'name' | 'value'>
                     >

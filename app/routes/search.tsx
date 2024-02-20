@@ -48,9 +48,15 @@ export default function SearchPage() {
     const { searchResults, searchTerm } = useLoaderData<typeof loader>()
     const products = searchResults?.results?.products
 
+    console.log(products)
     return (
         <>
-            <div className='panel-trackt'>
+            <div
+                className='panel-trackt'
+                style={{
+                    marginTop: '200px',
+                }}
+            >
                 <div className='filter-trackt'>
                     <div className='filter-sticky'>
                         <Link to='/filters'>
@@ -166,6 +172,7 @@ fragment SearchProduct on Product {
   title
   productType
   handle
+  vendor
   images(first: 1) {
     nodes {
       url

@@ -6,6 +6,7 @@ import type {
     OrderItemFragment,
 } from 'storefrontapi.generated'
 import React, { useRef, useState } from 'react'
+import TrackT from '~/components/Common/TrackT'
 
 export const meta: MetaFunction = () => {
     return [{ title: 'Orders' }]
@@ -116,35 +117,9 @@ function EmptyOrders() {
     const { products } = useLoaderData<{
         products: any
     }>()
-    const gridRef = useRef<HTMLDivElement>(null)
-    const [isDragging, setDragging] = useState(false)
-    const [startX, setStartX] = useState(0)
-    const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-        setDragging(true)
-        setStartX(e.pageX - (gridRef.current?.offsetLeft || 0))
-    }
 
-    const handleMouseUp = () => {
-        setDragging(false)
-    }
-
-    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (!isDragging) return
-        const scrollLeft = e.pageX - startX
-        if (gridRef.current) {
-            gridRef.current.scrollLeft = scrollLeft
-        }
-    }
-
-    const scrollGrid = (direction: number) => {
-        const scrollAmount = 400 // Ajustez la valeur selon votre préférence
-        if (gridRef.current) {
-            gridRef.current.scrollBy({
-                left: direction * scrollAmount,
-                behavior: 'smooth',
-            })
-        }
-    }
+    const productList =
+        products?.metaobjects?.nodes[0]?.field?.references?.nodes
     return (
         <div>
             <div>
@@ -175,86 +150,7 @@ function EmptyOrders() {
                     du shopping streetwear!
                 </p>
             </div>
-            <div
-                className='trackT'
-                style={{
-                    margin: '50px 60px 0 0',
-                }}
-            >
-                <div className='trackT-header'>
-                    <h2>Panel TrackT</h2>
-                    <div className='navigation-buttons'>
-                        <button onClick={() => scrollGrid(-1)}>
-                            <svg
-                                xmlns='http://www.w3.org/2000/svg'
-                                width='7.574'
-                                height='13.928'
-                                viewBox='0 0 7.574 13.928'
-                            >
-                                <path
-                                    id='Tracé_416'
-                                    data-name='Tracé 416'
-                                    d='M-20862.068-17757.791a.61.61,0,0,1-.432-.18.612.612,0,0,1,0-.861l5.924-5.924-5.924-5.924a.612.612,0,0,1,0-.861.611.611,0,0,1,.863,0l6.355,6.354a.614.614,0,0,1,0,.863l-6.355,6.354A.61.61,0,0,1-20862.068-17757.791Z'
-                                    transform='translate(20862.678 17771.719)'
-                                    fill='#fff'
-                                />
-                            </svg>
-                        </button>
-                        <button onClick={() => scrollGrid(1)}>
-                            <svg
-                                xmlns='http://www.w3.org/2000/svg'
-                                width='7.574'
-                                height='13.928'
-                                viewBox='0 0 7.574 13.928'
-                            >
-                                <path
-                                    id='Tracé_416'
-                                    data-name='Tracé 416'
-                                    d='M-20862.068-17757.791a.61.61,0,0,1-.432-.18.612.612,0,0,1,0-.861l5.924-5.924-5.924-5.924a.612.612,0,0,1,0-.861.611.611,0,0,1,.863,0l6.355,6.354a.614.614,0,0,1,0,.863l-6.355,6.354A.61.61,0,0,1-20862.068-17757.791Z'
-                                    transform='translate(20862.678 17771.719)'
-                                    fill='#fff'
-                                />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-                <div
-                    className='trackT-grid'
-                    ref={gridRef}
-                    onMouseDown={handleMouseDown}
-                    onMouseUp={handleMouseUp}
-                    onMouseMove={handleMouseMove}
-                >
-                    {products?.metaobjects?.nodes[0]?.field?.references?.nodes?.map(
-                        (product: any) => (
-                            <Link
-                                key={product.title}
-                                to={`/products/${product.handle}`}
-                            >
-                                <div className='trackt-grid-product'>
-                                    <img
-                                        src={product.images.nodes[0].url}
-                                        alt={product.title}
-                                    />
-                                </div>
-                                <div className='product-connexe-2'>
-                                    <h3>
-                                        {product.productType.length > 30
-                                            ? product.productType.slice(0, 30) +
-                                              '...'
-                                            : product.productType}
-                                    </h3>
-                                    <p>
-                                        {product.title.length > 30
-                                            ? product.title.slice(0, 30) + '...'
-                                            : product.title}
-                                    </p>
-                                </div>
-                            </Link>
-                        )
-                    )}
-                </div>
-            </div>
+            <TrackT products={productList} />
         </div>
     )
 }

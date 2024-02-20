@@ -117,6 +117,17 @@ function AccountLayout({
         : 'Account Details'
 
     const location = useLocation()
+    const [isOpen, setIsOpen] = useState(false)
+
+    const toggleDialog = () => {
+        setIsOpen(!isOpen)
+    }
+
+    const handleOutsideClick = (event: any) => {
+        if (event.target === event.currentTarget) {
+            toggleDialog()
+        }
+    }
 
     return (
         <div className='account'>
@@ -138,18 +149,61 @@ function AccountLayout({
                             rendez-la aussi unique que votre style.
                         </p>
                         <br />
-                        <div className='logout'>
-                            <Form method='POST' action='/account/logout'>
-                                <button
-                                    type='submit'
-                                    style={{
-                                        background: 'none',
-                                    }}
-                                >
-                                    <img src='/account/exit.png' alt='logout' />
-                                </button>
-                            </Form>
+                        <div className='logout' onClick={toggleDialog}>
+                            <img src='/account/exit.png' alt='logout' />
                         </div>
+                        {isOpen && (
+                            <div
+                                className='dialog-overlay'
+                                onClick={handleOutsideClick}
+                            >
+                                <div className='dialog'>
+                                    <div className='modal-stickers'>
+                                        <div
+                                            className='modal-stickers-close'
+                                            onClick={toggleDialog}
+                                        >
+                                            <svg
+                                                xmlns='http://www.w3.org/2000/svg'
+                                                width='16'
+                                                height='16'
+                                                viewBox='0 0 16 16'
+                                            >
+                                                <path
+                                                    id='Tracé_243'
+                                                    data-name='Tracé 243'
+                                                    d='M16841.295-8037.292l-6.295-6.294-6.295,6.294a.988.988,0,0,1-.705.292.988.988,0,0,1-.705-.292,1,1,0,0,1,0-1.417l6.291-6.292-6.291-6.292a1,1,0,0,1,0-1.416,1,1,0,0,1,1.41,0l6.295,6.294,6.295-6.294a1,1,0,0,1,1.41,0,1,1,0,0,1,0,1.416l-6.291,6.292,6.291,6.292a1,1,0,0,1,0,1.417.988.988,0,0,1-.705.292A.988.988,0,0,1,16841.295-8037.292Z'
+                                                    transform='translate(-16827 8053)'
+                                                    fill='#fff'
+                                                />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div className='logout-modal'>
+                                        <h2>
+                                            VOUS ALLEZ VOUS DÉCONNECTER DE
+                                            TRACKT
+                                        </h2>
+                                        <p>
+                                            Merci de votre visite sur TrackT !
+                                            Vous pourrez retrouver votre espace
+                                            perso lors de votre connexion sur
+                                            TrackT.
+                                        </p>
+                                        <div className='modal-content-buttons'>
+                                            <Form
+                                                method='POST'
+                                                action='/account/logout'
+                                            >
+                                                <button type='submit'>
+                                                    se déconnecter
+                                                </button>
+                                            </Form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </>
                 )}
 
@@ -215,30 +269,33 @@ function AccountMenu(images: any) {
             <NavLink to='/account/mybestitem' style={isActiveStyle}>
                 <p> My best item</p>
             </NavLink>
-            <a
-                style={{
-                    opacity: '0.3',
-                }}
-            >
-                <p>Messagerie</p>
+            <a>
+                <p
+                    style={{
+                        opacity: 0.3,
+                    }}
+                >
+                    Messagerie
+                </p>
+                <img src='/coming.png' alt='coming soon' />
             </a>
-            <a
-                style={{
-                    opacity: '0.3',
-                }}
-            >
-                <p>Fidélité</p>
+            <a>
+                <p
+                    style={{
+                        opacity: 0.3,
+                    }}
+                >
+                    Fidélité
+                </p>
+                <img
+                    src='/coming.png'
+                    alt='coming soon'
+                    style={{
+                        right: '75px',
+                    }}
+                />
             </a>
-            {/*<Logout />*/}
         </nav>
-    )
-}
-
-function Logout() {
-    return (
-        <Form className='account-logout' method='POST' action='/account/logout'>
-            &nbsp;<button type='submit'>Sign out</button>
-        </Form>
     )
 }
 

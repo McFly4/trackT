@@ -1,8 +1,8 @@
 import { CartForm, Image, Money } from '@shopify/hydrogen'
 import type { CartLineUpdateInput } from '@shopify/hydrogen/storefront-api-types'
-import { Link } from '@remix-run/react'
 import type { CartApiQueryFragment } from 'storefrontapi.generated'
 import { useVariantUrl } from '~/utils'
+import React from 'react'
 
 type CartLine = CartApiQueryFragment['lines']['nodes'][0]
 
@@ -17,6 +17,7 @@ export function CartMain({ layout, cart }: CartMainProps) {
         cart &&
         Boolean(cart.discountCodes.filter((code) => code.applicable).length)
     const className = `cart-main ${withDiscount ? 'with-discount' : ''}`
+
     return (
         <div className={className}>
             <CartEmpty hidden={linesCount} layout={layout} />
@@ -28,11 +29,30 @@ export function CartMain({ layout, cart }: CartMainProps) {
 function CartDetails({ layout, cart }: CartMainProps) {
     const cartHasItems = !!cart && cart.totalQuantity > 0
     const cartTotalPrice = cart?.cost?.totalAmount?.amount as any
+    const [isModalOpen, setIsModalOpen] = React.useState(false)
+
+    const toggleModal = () => {
+        setIsModalOpen(!isModalOpen)
+    }
+
+    const handleOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (e.target === e.currentTarget) {
+            setIsModalOpen(false)
+        }
+    }
 
     return (
         <>
+            {isModalOpen && (
+                <div className='dialog-overlay' onClick={handleOutsideClick}>
+                    <div className='dialog'>
+                        <ToggleModal toggle={toggleModal} />
+                    </div>
+                </div>
+            )}
             {cartHasItems && (
                 <div
+                    onClick={toggleModal}
                     style={{
                         display: 'flex',
                         flexDirection: 'column',
@@ -68,7 +88,7 @@ function CartDetails({ layout, cart }: CartMainProps) {
                             }}
                         />
                     )}
-                    <h2
+                    <h4
                         style={{
                             textAlign: 'center',
                             textTransform: 'uppercase',
@@ -76,7 +96,7 @@ function CartDetails({ layout, cart }: CartMainProps) {
                         }}
                     >
                         mes affaires
-                    </h2>
+                    </h4>
                 </div>
             )}
             <div className='cart-details'>
@@ -92,6 +112,60 @@ function CartDetails({ layout, cart }: CartMainProps) {
     )
 }
 
+function ToggleModal(toggle: any) {
+    return (
+        <div
+            className='a-third-guid'
+            style={{
+                backgroundColor: 'unset',
+            }}
+        >
+            <h2>OPTIONS DE LIVRAISON & RETOUR</h2>
+            <p>
+                Nous avons crée trois catégories d’achats pour nuancer les
+                différentes options de retours et remboursement. <br />
+                Repérez-les lors de vos achats pour comprendre les modalités de
+                renvois/livraison et choisir ce qui vous convient le mieux.
+            </p>
+            <div className='a-third-guid-container a-third-cart'>
+                <div className='a-third-guid-container-item'>
+                    <img src='/cart/cartClassic.png' alt='cartClassic' />
+                    <p>Panier classique</p>
+                    <span>0 - 250€</span>
+                    <p>
+                        LIVRAISON PAYANTE <br />
+                        RETOURS GRATUIT <br />
+                        BOOSTER RETOUR* 24H (10 €)
+                    </p>
+                    <p>Livraison 10€</p>
+                </div>
+                <div className='a-third-guid-container-item'>
+                    <img src='/cart/cartPremium.png' alt='cartClassic' />
+                    <p>Panier premium</p>
+                    <span>250€ - 500€</span>
+                    <p>
+                        LIVRAISON PAYANTE <br />
+                        RETOURS GRATUIT <br />
+                        BOOSTER RETOUR* 24H (20 €)
+                    </p>
+                    <p>Livraison 5€</p>
+                </div>
+                <div className='a-third-guid-container-item'>
+                    <img src='/cart/cartExclusif.png' alt='cartClassic' />
+                    <p>Panier premium</p>
+                    <span>+500€</span>
+                    <p>
+                        LIVRAISON GRATUITE <br />
+                        RETOURS GRATUIT <br />
+                        BOOSTER RETOUR* 48H (30 €)
+                    </p>
+                    <p>Livraison express</p>
+                </div>
+            </div>
+        </div>
+    )
+}
+
 function CartLines({
     lines,
     layout,
@@ -100,7 +174,6 @@ function CartLines({
     lines: CartApiQueryFragment['lines'] | undefined
 }) {
     if (!lines) return null
-
     return (
         <div aria-labelledby='cart-lines'>
             <ul>
@@ -122,7 +195,6 @@ function CartLineItem({
     const { id, merchandise } = line
     const { product, title, image, selectedOptions } = merchandise
     const lineItemUrl = useVariantUrl(product.handle, selectedOptions)
-
     return (
         <div className='cart-line'>
             <div className='cart-line-top'>
@@ -138,23 +210,23 @@ function CartLineItem({
                             marginBottom: '20px',
                         }}
                     >
-                        <h4>Taille</h4>
-                        <p>
+                        <h6>Taille</h6>
+                        <h4>
                             {
                                 selectedOptions?.filter(
                                     (option) => option.name === 'Size'
                                 )?.[0]?.value
                             }
-                        </p>
+                        </h4>
                     </div>
                     <div>
-                        <h4>Prix</h4>
+                        <h6>Prix</h6>
                         <CartLinePrice line={line} as='p' />
                     </div>
                 </div>
             </div>
             <div className='cart-line-bottom'>
-                <h3>{product.title}</h3>
+                <h6>{product.title}</h6>
                 <CartLineQuantity line={line} />
             </div>
             <div
@@ -176,7 +248,7 @@ function CartCheckoutActions({ checkoutUrl }: { checkoutUrl: string }) {
     return (
         <div className='cart-checkout'>
             <a href={checkoutUrl} target='_self'>
-                <p>Passer à la caisse</p>
+                <h6>Passer à la caisse</h6>
             </a>
             <br />
         </div>
@@ -198,26 +270,21 @@ export function CartSummary({
     return (
         <div aria-labelledby='cart-summary' className={className}>
             <dl className='cart-subtotal'>
-                <dt
+                <h5
                     style={{
                         fontSize: '18px',
                         textTransform: 'uppercase',
                     }}
                 >
                     Sous-total
-                </dt>
-                <dd
-                    style={{
-                        fontSize: '32px',
-                        fontWeight: 'bold',
-                    }}
-                >
+                </h5>
+                <h3>
                     {cost?.subtotalAmount?.amount ? (
                         <Money data={cost?.subtotalAmount} />
                     ) : (
                         '-'
                     )}
-                </dd>
+                </h3>
             </dl>
             {children}
         </div>
@@ -242,9 +309,9 @@ function CartLineRemoveButton({ lineIds }: { lineIds: string[] }) {
             >
                 <p
                     style={{
-                        fontSize: '12px',
+                        fontSize: '11px',
                         textTransform: 'uppercase',
-                        fontWeight: 'bold',
+                        fontWeight: '600',
                         color: 'red',
                     }}
                 >
@@ -316,6 +383,7 @@ function CartLinePrice({
 
     return (
         <div
+            className='cart-line-price'
             style={{
                 display: 'flex',
                 alignItems: 'center',

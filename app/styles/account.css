@@ -285,7 +285,18 @@
     padding: 50px 0;
     z-index: 5;
     transition: 0.2s ease-in-out;
+    position: relative;
+
 }
+
+.account-menu a img{
+    width: 110px;
+    height: 80px;
+    position: absolute;
+    right: 30px;
+    top: 0;
+}
+
 
 .account-menu a:hover{
     background-color: rgba(255, 255, 255, 0.1);
@@ -634,4 +645,27 @@
     border: none;
     image-rendering: pixelated;
     background-size: contain;
+}
+
+.logout-modal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.logout-modal p{
+    margin-top: 40px;
+}
+
+.logout-modal button{
+    padding: 25px 40px;
+    border-radius: 5px;
+    background: #fff;
+    color: #000;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 75px;
 }

@@ -15,7 +15,6 @@ import {
     PredictiveSearchResults,
 } from '~/components/Search'
 import { AsideSearch } from './AsideSearch'
-import { Link } from '@remix-run/react'
 import { useLocation } from '@remix-run/react'
 
 export type LayoutProps = {
@@ -107,9 +106,9 @@ function SearchAside() {
                                 name='q'
                                 onChange={fetchResults}
                                 onFocus={fetchResults}
-                                placeholder='Search'
                                 ref={inputRef}
                                 type='search'
+                                autoComplete='off'
                             />
                             &nbsp;
                             <button
@@ -117,8 +116,44 @@ function SearchAside() {
                                     history.go(-1)
                                     window.location.href = `/search?q=${inputRef?.current?.value}`
                                 }}
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    width: '500px',
+                                }}
                             >
-                                <p>Rechercher</p>
+                                <svg
+                                    xmlns='http://www.w3.org/2000/svg'
+                                    width='21.798'
+                                    height='21.797'
+                                    viewBox='0 0 21.798 21.797'
+                                >
+                                    <g id='icon' transform='translate(0 0)'>
+                                        <path
+                                            id='Tracé_219'
+                                            data-name='Tracé 219'
+                                            d='M988.286,241.616a8.174,8.174,0,1,1,8.174-8.174A8.183,8.183,0,0,1,988.286,241.616Zm0-13.623a5.449,5.449,0,1,0,5.449,5.449A5.456,5.456,0,0,0,988.286,227.993Z'
+                                            transform='translate(-980.112 -225.268)'
+                                            fill='#fff'
+                                        />
+                                        <path
+                                            id='Tracé_220'
+                                            data-name='Tracé 220'
+                                            d='M997.286,243.8a1.352,1.352,0,0,1-.963-.4l-6.812-6.812a1.362,1.362,0,0,1,1.926-1.926l6.812,6.812a1.362,1.362,0,0,1-.963,2.325Z'
+                                            transform='translate(-976.851 -222.007)'
+                                            fill='#fff'
+                                        />
+                                    </g>
+                                </svg>
+
+                                <h5
+                                    style={{
+                                        marginLeft: '20px',
+                                    }}
+                                >
+                                    afficher tout les resultats
+                                </h5>
                             </button>
                         </div>
                     )}

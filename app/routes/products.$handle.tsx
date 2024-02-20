@@ -464,8 +464,8 @@ function ProductMain({
 
     const handleOutsideClick = (event: any) => {
         if (event.target === event.currentTarget) {
-            toggleModal()
-            toggleModalToothbrush()
+            setIsModalOpen(false)
+            setIsModalOpenToothbrush(false)
         }
     }
 
@@ -484,14 +484,6 @@ function ProductMain({
         }
         return acc
     }, [])
-
-    const splitText = (text: string, chunkSize: number): string[] =>
-        text.split(' ').reduce((result: string[], word) => {
-            const currentChunk = result[result.length - 1] || ''
-            return currentChunk.length + word.length <= chunkSize
-                ? [...result.slice(0, -1), `${currentChunk} ${word}`.trim()]
-                : [...result, word]
-        }, [])
 
     return (
         <div className='product-main'>
@@ -519,14 +511,7 @@ function ProductMain({
                 }}
             >
                 <div className='product-main-title'>
-                    <h1>
-                        {splitText(title, 15).map((chunk, index) => (
-                            <React.Fragment key={index}>
-                                {chunk}
-                                <br />
-                            </React.Fragment>
-                        ))}
-                    </h1>
+                    <h1>{title}</h1>
                     <div className='product-main-stickers'>
                         <div className='stickers-container'>
                             {stickersData &&
@@ -945,6 +930,8 @@ function ProductPrice({ selectedVariant }: { selectedVariant: any }) {
     const size = selectedVariant?.selectedOptions?.find(
         (option: any) => option.name === 'Size'
     )?.value
+
+    console.log(selectedVariant)
     return (
         <div className='product-price'>
             <h2>Price</h2>
@@ -1067,6 +1054,12 @@ function ProductOptions({ option }: { option: VariantOption }) {
     function toggleModalToothbrush() {
         setIsModalOpenToothbrush(!isModalOpenToothbrush)
     }
+
+    function handleOutsideClick(event: any) {
+        if (event.target === event.currentTarget) {
+            setIsModalOpenToothbrush(false)
+        }
+    }
     // Tri alphabétique des valeurs
     const sortedValues = option.values
         .slice()
@@ -1088,7 +1081,11 @@ function ProductOptions({ option }: { option: VariantOption }) {
     return (
         <div className='product-options' key={option.name}>
             {isModalOpenToothbrush && (
-                <ToggleModalToothbrush toggle={toggleModalToothbrush} />
+                <div className='dialog-overlay' onClick={handleOutsideClick}>
+                    <div className='dialog'>
+                        <ToggleModalToothbrush toggle={toggleModalToothbrush} />
+                    </div>
+                </div>
             )}
             <h2>Taille</h2>
             <div className='product-options-grid'>

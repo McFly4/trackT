@@ -5,8 +5,6 @@ import MainProduct from '~/components/Common/mainProduct'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper/modules'
 import MarketDrag from '~/components/Common/MarketDrag'
-import TrackT from '~/components/Common/TrackT'
-import Modal from '~/components/Common/Modal'
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
     return [{ title: `Hydrogen ` }]

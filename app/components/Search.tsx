@@ -7,7 +7,7 @@ import {
     type FormProps,
 } from '@remix-run/react'
 import { Image, Money, Pagination } from '@shopify/hydrogen'
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 
 import type {
     PredictiveProductFragment,
@@ -99,7 +99,6 @@ export function SearchForm({ searchTerm }: { searchTerm: string }) {
             <input
                 defaultValue={searchTerm}
                 name='q'
-                placeholder='Search…'
                 ref={inputRef}
                 type='search'
             />
@@ -371,9 +370,19 @@ function NoPredictiveSearchResults({
         return null
     }
     return (
-        <p>
-            No results found for <q>{searchTerm.current}</q>
-        </p>
+        <div className='no-results'>
+            <div className='no-results-found'>
+                <p>Aucun resultat pour</p>
+                <p>'{searchTerm.current}'</p>
+                <button
+                    onClick={() => {
+                        window.location.reload()
+                    }}
+                >
+                    Recommencer la recherche
+                </button>
+            </div>
+        </div>
     )
 }
 
@@ -394,20 +403,21 @@ function PredictiveSearchResult({
     const categoryUrl = `/search?q=${
         searchTerm.current
     }&type=${pluralToSingularSearchType(type)}`
-
     return (
         <div className='predictive-search-result' key={type}>
             {/*<Link prefetch='intent' to={categoryUrl} onClick={goToSearchResult}>*/}
             {/*    <h5>{isSuggestions ? 'Suggestions' : type}</h5>*/}
             {/*</Link>*/}
             <ul>
-                {items.map((item: NormalizedPredictiveSearchResultItem) => (
-                    <SearchResultItem
-                        goToSearchResult={goToSearchResult}
-                        item={item}
-                        key={item.id}
-                    />
-                ))}
+                {items.map(
+                    (item: NormalizedPredictiveSearchResultItem, index) => (
+                        <SearchResultItem
+                            goToSearchResult={goToSearchResult}
+                            item={item}
+                            key={item.id}
+                        />
+                    )
+                )}
             </ul>
         </div>
     )
@@ -416,38 +426,108 @@ function PredictiveSearchResult({
 type SearchResultItemProps = Pick<SearchResultTypeProps, 'goToSearchResult'> & {
     item: NormalizedPredictiveSearchResultItem
 }
-function SearchResultItem({ goToSearchResult, item }: SearchResultItemProps) {
+function SearchResultItem({ goToSearchResult, item }: any) {
     const type = item.__typename
+
+    const mapping = {
+        release: item.release,
+        new: item.new,
+        hotDeal: item.hotDeal,
+        ship: item.ship,
+        promotion: item.promotion,
+        ooo: item.ooo,
+    } as any
+
+    const stickersData = Object.keys(mapping).reduce((acc: any, key: any) => {
+        if (mapping[key]) {
+            acc.push({ key })
+        }
+        return acc
+    }, [])
+
+    const [hoveredIndex, setHoveredIndex] = useState(null)
+
+    const handleMouseEnter = (index: any) => {
+        setHoveredIndex(index)
+    }
+
+    const handleMouseLeave = () => {
+        setHoveredIndex(null)
+    }
+
     return (
         type === 'Product' && (
-            <li className='predictive-search-result-item' key={item.id}>
+            <li
+                className='predictive-search-result-item'
+                key={item.id}
+                onMouseEnter={() => handleMouseEnter(item.id)}
+                onMouseLeave={handleMouseLeave}
+                style={{
+                    opacity:
+                        hoveredIndex == null || hoveredIndex == item.id
+                            ? 1
+                            : 0.5,
+                }}
+            >
                 <Link onClick={goToSearchResult} to={item.url}>
-                    {item.image?.url && (
-                        <Image
-                            alt={item.image.altText ?? ''}
-                            src={item.image.url}
-                        />
-                    )}
-                    <div>
-                        {item.styledTitle ? (
-                            <div
-                                dangerouslySetInnerHTML={{
-                                    __html: item.styledTitle,
-                                }}
+                    <div
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                        }}
+                        className='search-result-box-img'
+                    >
+                        {item.image?.url && (
+                            <Image
+                                alt={item.image.altText ?? ''}
+                                src={item.image.url}
+                                style={{}}
                             />
-                        ) : (
-                            <span>{item.title}</span>
                         )}
-                        {/*{item?.price && (*/}
-                        {/*    <small>*/}
-                        {/*        <Money data={item.price} />*/}
-                        {/*    </small>*/}
-                        {/*)}*/}
+                        <div>
+                            {item.styledTitle ? (
+                                <div
+                                    dangerouslySetInnerHTML={{
+                                        __html: item.styledTitle,
+                                    }}
+                                />
+                            ) : (
+                                <h5>{item.title}</h5>
+                            )}
+                        </div>
+                    </div>
+                    <div
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                        }}
+                    >
+                        {stickersData.map(
+                            (item: any, index: any, array: any[]) => (
+                                <ImageComponent
+                                    key={index}
+                                    keyName={item.key}
+                                    offset={index * 30}
+                                    zIdx={1 + array.length - index - 1}
+                                />
+                            )
+                        )}
                     </div>
                 </Link>
             </li>
         )
     )
+}
+
+function ImageComponent({ keyName, offset, zIdx }: any) {
+    const stickerPath = `/product/stickers/${keyName}.png`
+
+    const style = {
+        zIndex: zIdx,
+        height: '70px',
+        width: '75px',
+    }
+    return <img src={stickerPath} alt={keyName} style={style} />
 }
 
 type UseSearchReturn = NormalizedPredictiveSearch & {
