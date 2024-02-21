@@ -1,4 +1,4 @@
-import { defer, type LoaderFunctionArgs } from '@shopify/remix-oxygen'
+import { defer, json, type LoaderFunctionArgs } from '@shopify/remix-oxygen'
 import { useLoaderData, type MetaFunction, Link } from '@remix-run/react'
 import { getPaginationVariables, Pagination } from '@shopify/hydrogen'
 import MainProduct from '~/components/Common/mainProduct'
@@ -10,6 +10,8 @@ export const meta: MetaFunction = () => {
 }
 
 export async function loader({ request, context }: LoaderFunctionArgs) {
+    const allProducts = await context.storefront.query(RANDOM_ITEM)
+
     const url = new URL(request.url)
     const searchParams = new URLSearchParams(url.search)
     const pagination = getPaginationVariables(request, {
@@ -41,12 +43,29 @@ export async function loader({ request, context }: LoaderFunctionArgs) {
         results: data,
     }
 
-    return defer({ searchTerm, searchResults })
+    return defer({ searchTerm, searchResults, allProducts })
 }
 
 export default function SearchPage() {
-    const { searchResults, searchTerm } = useLoaderData<typeof loader>()
+    const { searchResults, searchTerm, allProducts } = useLoaderData<
+        typeof loader
+    >() as any
+    const all = allProducts?.collection?.products?.nodes
     const products = searchResults?.results?.products
+    const [randomProducts, setRandomProducts] = useState([]) as any
+    const [isRandom, setIsRandom] = useState(false)
+
+    const handleRandomizeProducts = () => {
+        if (all && all.length > 0) {
+            const copiedProducts = [...all]
+            const shuffledProducts = copiedProducts.sort(
+                () => Math.random() - 0.5
+            )
+            const selectedProducts = shuffledProducts.slice(0, 20)
+            setRandomProducts(selectedProducts)
+            setIsRandom(true)
+        }
+    }
 
     return (
         <>
@@ -83,7 +102,10 @@ export default function SearchPage() {
                                 <button>Nouvelle recherche</button>
                             </a>
                         </div>
-                        <div className='search-img'>
+                        <div
+                            className='search-img'
+                            onClick={handleRandomizeProducts}
+                        >
                             <img src='/randomItem.png' alt='search' />
                         </div>
                     </div>
@@ -94,39 +116,61 @@ export default function SearchPage() {
                         }}
                         className='panel-container'
                     >
-                        <Pagination connection={products}>
-                            {({ nodes, NextLink, PreviousLink, isLoading }) => (
-                                <>
-                                    <PreviousLink>
-                                        <div>
-                                            <button>
-                                                {isLoading
-                                                    ? 'Chargement...'
-                                                    : 'Charger les produits précédents'}
-                                            </button>
-                                        </div>
-                                    </PreviousLink>
-                                    <div className='panel-products-grid'>
-                                        <div className='panel-products-grid'>
-                                            {nodes.map((product) => (
+                        {isRandom ? (
+                            <div className='panel-products-grid'>
+                                <div className='panel-products-grid'>
+                                    {randomProducts.map(
+                                        (product: any, index: number) => {
+                                            return (
                                                 <MainProduct
+                                                    key={index}
                                                     product={product}
                                                 />
-                                            ))}
+                                            )
+                                        }
+                                    )}
+                                </div>
+                            </div>
+                        ) : (
+                            <Pagination connection={products}>
+                                {({
+                                    nodes,
+                                    NextLink,
+                                    PreviousLink,
+                                    isLoading,
+                                }) => (
+                                    <>
+                                        <PreviousLink>
+                                            <div>
+                                                <button>
+                                                    {isLoading
+                                                        ? 'Chargement...'
+                                                        : 'Charger les produits précédents'}
+                                                </button>
+                                            </div>
+                                        </PreviousLink>
+                                        <div className='panel-products-grid'>
+                                            <div className='panel-products-grid'>
+                                                {nodes.map((product) => (
+                                                    <MainProduct
+                                                        product={product}
+                                                    />
+                                                ))}
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className='pagination'>
-                                        <NextLink>
-                                            <button>
-                                                {isLoading
-                                                    ? 'Chargement...'
-                                                    : 'Plus de produits'}
-                                            </button>
-                                        </NextLink>
-                                    </div>
-                                </>
-                            )}
-                        </Pagination>
+                                        <div className='pagination'>
+                                            <NextLink>
+                                                <button>
+                                                    {isLoading
+                                                        ? 'Chargement...'
+                                                        : 'Plus de produits'}
+                                                </button>
+                                            </NextLink>
+                                        </div>
+                                    </>
+                                )}
+                            </Pagination>
+                        )}
                     </div>
                 </div>
             </div>
@@ -259,6 +303,58 @@ query search($country: CountryCode, $endCursor: String, $first: Int, $language: 
       hasPreviousPage
       startCursor
       endCursor
+    }
+  }
+}
+` as const
+
+const RANDOM_ITEM = `#graphql
+query Collection {
+  collection(handle: "all") {
+    products(first: 250) {
+      nodes {
+        title
+          productType
+          handle
+          vendor
+          toothBrush: metafield(namespace: "custom", key: "toothbrush") {
+            key
+            value
+          }
+          ooo: metafield(namespace: "custom", key: "outofstock") {
+            key
+            value
+          }
+          new: metafield(namespace: "custom", key: "new") {
+            key
+            value
+          }
+          ship: metafield(namespace: "custom", key: "fastShip") {
+            key
+            value
+          }
+          release: metafield(namespace: "custom", key: "release") {
+            key
+            value
+          }
+          promotion: metafield(namespace: "custom", key: "promotion") {
+            key
+            value
+          }
+          hotDeal: metafield(namespace: "custom", key: "hotDeal") {
+            key
+            value
+          }
+          features: metafield(namespace: "custom", key: "features") {
+            key
+            value
+          }
+          images(first: 1) {
+            nodes {
+              url
+            }
+          }
+      }
     }
   }
 }

@@ -173,6 +173,8 @@ function BreadCrumb({ product }: { product: any }) {
                 backgroundColor:
                     firstColor === 'blue-clair' || firstColor === 'blue-cyan'
                         ? '#ADD8E6 '
+                        : firstColor === 'black'
+                        ? '#fff'
                         : firstColor,
             }}
         >
@@ -229,13 +231,15 @@ function BreadCrumb({ product }: { product: any }) {
                 </p>
                 <div className='breadcrumb-colors'>
                     {colors?.map((color: any, index: number) => (
-                        <div
-                            key={index}
-                            className='breadcrumb-color'
-                            style={{
-                                backgroundColor: color,
-                            }}
-                        ></div>
+                        <Link to={'/search?q=' + color} key={index}>
+                            <div
+                                key={index}
+                                className='breadcrumb-color'
+                                style={{
+                                    backgroundColor: color,
+                                }}
+                            ></div>
+                        </Link>
                     ))}
                 </div>
             </div>
@@ -1046,7 +1050,7 @@ function ProductForm({
                     <div>
                         {variantName === 'Default Title' ||
                         variantName === 'UNIVERSEL' ? (
-                            <h4>universel</h4>
+                            <h4>OS</h4>
                         ) : (
                             <h4>{variantName}</h4>
                         )}
@@ -1110,10 +1114,7 @@ function ProductOptions({ option }: { option: VariantOption }) {
                     spaceBetween={-40}
                 >
                     {sortedValues.map(
-                        (
-                            { value, isAvailable, isActive, to, search },
-                            index
-                        ) => (
+                        ({ value, isAvailable, isActive, to }, index) => (
                             <SwiperSlide key={option.name + value}>
                                 {({ isActive, isPrev, isNext }) => (
                                     <Link

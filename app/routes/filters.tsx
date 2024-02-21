@@ -893,13 +893,15 @@ export default function Filters() {
                                 <span>recherche manuelle</span>
                             </div>
                         </a>
-                        <div
-                            className='filter-footer-container-reset'
-                            onClick={resetAll}
-                        >
-                            <img src='/icons/close.svg' alt='reset' />
-                            <span>réinitialiser</span>
-                        </div>
+                        {manwoman.length > 0 && (
+                            <div
+                                className='filter-footer-container-reset'
+                                onClick={resetAll}
+                            >
+                                <img src='/icons/close.svg' alt='reset' />
+                                <span>réinitialiser</span>
+                            </div>
+                        )}
                     </div>
                     {sizes?.length > 0 ? (
                         <img
@@ -973,7 +975,13 @@ export default function Filters() {
                             )}
                         </div>
                     )}
-                    <div className='filter-footer-container-search'>
+                    <div
+                        className='filter-footer-container-search'
+                        style={{
+                            opacity: manwoman.length > 0 ? 1 : 0.5,
+                            transition: 'opacity 0.s ease-in-out',
+                        }}
+                    >
                         <Link to={`/filtered${handleSearch()}`}>
                             <span>Afficher les resultats</span>
                         </Link>
