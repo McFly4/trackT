@@ -2,7 +2,7 @@ import { CartForm, Image, Money } from '@shopify/hydrogen'
 import type { CartLineUpdateInput } from '@shopify/hydrogen/storefront-api-types'
 import type { CartApiQueryFragment } from 'storefrontapi.generated'
 import { useVariantUrl } from '~/utils'
-import React from 'react'
+import React, { useState } from 'react'
 
 type CartLine = CartApiQueryFragment['lines']['nodes'][0]
 
@@ -11,45 +11,26 @@ type CartMainProps = {
     layout: 'page' | 'aside'
 }
 
-export function CartMain({ layout, cart }: CartMainProps) {
+export function CartMain({ layout, cart, onToggle }: any) {
     const linesCount = Boolean(cart?.lines?.nodes?.length || 0)
     const withDiscount =
         cart &&
-        Boolean(cart.discountCodes.filter((code) => code.applicable).length)
+        Boolean(
+            cart.discountCodes.filter((code: any) => code.applicable).length
+        )
     const className = `cart-main ${withDiscount ? 'with-discount' : ''}`
+    const cartHasItems = !!cart && cart.totalQuantity > 0
+    const cartTotalPrice = cart?.cost?.totalAmount?.amount as any
+    const [isModalOpen, setIsModalOpen] = useState(false)
+
+    const toggleModal = () => {
+        setIsModalOpen(!isModalOpen)
+        onToggle(isModalOpen)
+    }
 
     return (
         <div className={className}>
             <CartEmpty hidden={linesCount} layout={layout} />
-            <CartDetails cart={cart} layout={layout} />
-        </div>
-    )
-}
-
-function CartDetails({ layout, cart }: CartMainProps) {
-    const cartHasItems = !!cart && cart.totalQuantity > 0
-    const cartTotalPrice = cart?.cost?.totalAmount?.amount as any
-    const [isModalOpen, setIsModalOpen] = React.useState(false)
-
-    const toggleModal = () => {
-        setIsModalOpen(!isModalOpen)
-    }
-
-    const handleOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (e.target === e.currentTarget) {
-            setIsModalOpen(false)
-        }
-    }
-
-    return (
-        <>
-            {isModalOpen && (
-                <div className='dialog-overlay' onClick={handleOutsideClick}>
-                    <div className='dialog'>
-                        <ToggleModal toggle={toggleModal} />
-                    </div>
-                </div>
-            )}
             {cartHasItems && (
                 <div
                     onClick={toggleModal}
@@ -107,60 +88,6 @@ function CartDetails({ layout, cart }: CartMainProps) {
                         <CartCheckoutActions checkoutUrl={cart.checkoutUrl} />
                     </CartSummary>
                 )}
-            </div>
-        </>
-    )
-}
-
-function ToggleModal(toggle: any) {
-    return (
-        <div
-            className='a-third-guid'
-            style={{
-                backgroundColor: 'unset',
-            }}
-        >
-            <h2>OPTIONS DE LIVRAISON & RETOUR</h2>
-            <p>
-                Nous avons crée trois catégories d’achats pour nuancer les
-                différentes options de retours et remboursement. <br />
-                Repérez-les lors de vos achats pour comprendre les modalités de
-                renvois/livraison et choisir ce qui vous convient le mieux.
-            </p>
-            <div className='a-third-guid-container a-third-cart'>
-                <div className='a-third-guid-container-item'>
-                    <img src='/cart/cartClassic.png' alt='cartClassic' />
-                    <p>Panier classique</p>
-                    <span>0 - 250€</span>
-                    <p>
-                        LIVRAISON PAYANTE <br />
-                        RETOURS GRATUIT <br />
-                        BOOSTER RETOUR* 24H (10 €)
-                    </p>
-                    <p>Livraison 10€</p>
-                </div>
-                <div className='a-third-guid-container-item'>
-                    <img src='/cart/cartPremium.png' alt='cartClassic' />
-                    <p>Panier premium</p>
-                    <span>250€ - 500€</span>
-                    <p>
-                        LIVRAISON PAYANTE <br />
-                        RETOURS GRATUIT <br />
-                        BOOSTER RETOUR* 24H (20 €)
-                    </p>
-                    <p>Livraison 5€</p>
-                </div>
-                <div className='a-third-guid-container-item'>
-                    <img src='/cart/cartExclusif.png' alt='cartClassic' />
-                    <p>Panier premium</p>
-                    <span>+500€</span>
-                    <p>
-                        LIVRAISON GRATUITE <br />
-                        RETOURS GRATUIT <br />
-                        BOOSTER RETOUR* 48H (30 €)
-                    </p>
-                    <p>Livraison express</p>
-                </div>
             </div>
         </div>
     )

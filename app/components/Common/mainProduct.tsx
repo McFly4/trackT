@@ -28,6 +28,7 @@ export default function ({ product }: any) {
         }
         return acc
     }, [])
+
     return (
         <>
             {isOpen && (
@@ -181,6 +182,13 @@ export default function ({ product }: any) {
                             src={product.images?.nodes[0].url}
                             alt={product.title}
                             className='product-img'
+                            style={{
+                                objectFit:
+                                    product?.box?.value == '4:5' ||
+                                    product?.box?.value == '1:1'
+                                        ? 'contain'
+                                        : 'cover',
+                            }}
                         />
                     </Link>
                     <div className='product-img-grid-overlay'>

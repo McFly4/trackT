@@ -1030,7 +1030,11 @@ function ProductForm({
                 variants={variants}
             >
                 {({ option }) => (
-                    <ProductOptions key={option.name} option={option} />
+                    <ProductOptions
+                        key={option.name}
+                        option={option}
+                        variants={variants}
+                    />
                 )}
             </VariantSelector>
             {variants?.length <= 1 && (
@@ -1062,7 +1066,7 @@ function ProductForm({
     )
 }
 
-function ProductOptions({ option }: { option: VariantOption }) {
+function ProductOptions({ option, variants }: any) {
     const [isModalOpenToothbrush, setIsModalOpenToothbrush] = useState(false)
 
     function toggleModalToothbrush() {
@@ -1077,7 +1081,7 @@ function ProductOptions({ option }: { option: VariantOption }) {
     // Tri alphabétique des valeurs
     const sortedValues = option.values
         .slice()
-        .sort((a, b) => a.value.localeCompare(b.value))
+        .sort((a: any, b: any) => a.value.localeCompare(b.value))
 
     const midle = Math.ceil(sortedValues.length / 2)
 
@@ -1092,6 +1096,15 @@ function ProductOptions({ option }: { option: VariantOption }) {
         }
     }
 
+    const color = variants[0]?.selectedOptions.find(
+        (option: any) => option.name === 'Size'
+    )
+
+    console.log(
+        variants?.find(
+            (variant: any) => variant.selectedOptions[0]?.value === '40'
+        )?.weight
+    )
     return (
         <div className='product-options' key={option.name}>
             {isModalOpenToothbrush && (
@@ -1114,7 +1127,10 @@ function ProductOptions({ option }: { option: VariantOption }) {
                     spaceBetween={-40}
                 >
                     {sortedValues.map(
-                        ({ value, isAvailable, isActive, to }, index) => (
+                        (
+                            { value, isAvailable, isActive, to }: any,
+                            index: any
+                        ) => (
                             <SwiperSlide key={option.name + value}>
                                 {({ isActive, isPrev, isNext }) => (
                                     <Link
@@ -1138,6 +1154,16 @@ function ProductOptions({ option }: { option: VariantOption }) {
                                             <div
                                                 style={{
                                                     position: 'relative',
+                                                    color:
+                                                        variants?.find(
+                                                            (variant: any) =>
+                                                                variant
+                                                                    .selectedOptions[0]
+                                                                    ?.value ===
+                                                                value
+                                                        )?.weight === 1
+                                                            ? 'violet'
+                                                            : '#fff',
                                                 }}
                                             >
                                                 {value.split(' ')[0]}
@@ -1146,6 +1172,15 @@ function ProductOptions({ option }: { option: VariantOption }) {
                                                         fontSize: '12px',
                                                         position: 'absolute',
                                                         top: '0',
+                                                        color: variants?.find(
+                                                            (variant: any) =>
+                                                                variant
+                                                                    .selectedOptions[0]
+                                                                    ?.value ===
+                                                                value
+                                                        )?.availableForSale
+                                                            ? 'green'
+                                                            : 'red',
                                                     }}
                                                 >
                                                     {value.split(' ')[1]}
@@ -1218,6 +1253,7 @@ function AddToCartButton({
 
 const PRODUCT_VARIANT_FRAGMENT = `#graphql
   fragment ProductVariant on ProductVariant {
+    weight
     availableForSale
     compareAtPrice {
       amount

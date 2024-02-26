@@ -37,6 +37,7 @@ export function Footer(menu: FooterQuery) {
                 </Link>
             </div>
             <div className='footer-menu'>
+                <h2>incontournables</h2>
                 <p>
                     indépendant brand
                     <img src='/coming.png' alt='coming soon' />

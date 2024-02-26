@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Await } from '@remix-run/react'
 import { Suspense } from 'react'
 import type {
@@ -62,17 +62,44 @@ export function Layout({
     )
 }
 
-function CartAside({ cart }: { cart: LayoutProps['cart'] }) {
+function CartAside({ cart }: any) {
+    const [isModalOpen, setIsModalOpen] = useState(false)
+
+    const toggleModal = (data: any) => {
+        setIsModalOpen(data)
+    }
+
+    const handleOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (e.target === e.currentTarget) {
+            setIsModalOpen(false)
+        }
+    }
+
     return (
-        <Aside id='cart-aside' heading=''>
-            <Suspense fallback={<p>Loading cart ...</p>}>
-                <Await resolve={cart}>
-                    {(cart) => {
-                        return <CartMain cart={cart} layout='aside' />
-                    }}
-                </Await>
-            </Suspense>
-        </Aside>
+        <>
+            {isModalOpen && (
+                <div className='dialog-overlay' onClick={handleOutsideClick}>
+                    <div className='dialog'>
+                        <ToggleModal toggle={toggleModal} />
+                    </div>
+                </div>
+            )}
+            <Aside id='cart-aside' heading=''>
+                <Suspense fallback={<p>Loading cart ...</p>}>
+                    <Await resolve={cart}>
+                        {(cart: any) => {
+                            return (
+                                <CartMain
+                                    cart={cart}
+                                    layout='aside'
+                                    onToggle={toggleModal}
+                                />
+                            )
+                        }}
+                    </Await>
+                </Suspense>
+            </Aside>
+        </>
     )
 }
 
@@ -109,6 +136,7 @@ function SearchAside() {
                                 ref={inputRef}
                                 type='search'
                                 autoComplete='off'
+                                id='search'
                             />
                             &nbsp;
                             <button
@@ -161,5 +189,60 @@ function SearchAside() {
                 <PredictiveSearchResults />
             </div>
         </AsideSearch>
+    )
+}
+
+function ToggleModal(toggle: any) {
+    return (
+        <div
+            className='a-third-guid'
+            style={{
+                backgroundColor: 'unset',
+                width: 'unset',
+            }}
+        >
+            <h2>OPTIONS DE LIVRAISON & RETOUR</h2>
+            <p>
+                Nous avons crée trois catégories d’achats pour nuancer les
+                différentes options de retours et remboursement. <br />
+                Repérez-les lors de vos achats pour comprendre les modalités de
+                renvois/livraison et choisir ce qui vous convient le mieux.
+            </p>
+            <div className='a-third-guid-container a-third-cart'>
+                <div className='a-third-guid-container-item'>
+                    <img src='/cart/cartClassic.png' alt='cartClassic' />
+                    <p>Panier classique</p>
+                    <span>0 - 250€</span>
+                    <p>
+                        LIVRAISON PAYANTE <br />
+                        RETOURS GRATUIT <br />
+                        BOOSTER RETOUR* 24H (10 €)
+                    </p>
+                    <p>Livraison 10€</p>
+                </div>
+                <div className='a-third-guid-container-item'>
+                    <img src='/cart/cartPremium.png' alt='cartClassic' />
+                    <p>Panier premium</p>
+                    <span>250€ - 500€</span>
+                    <p>
+                        LIVRAISON PAYANTE <br />
+                        RETOURS GRATUIT <br />
+                        BOOSTER RETOUR* 24H (20 €)
+                    </p>
+                    <p>Livraison 5€</p>
+                </div>
+                <div className='a-third-guid-container-item'>
+                    <img src='/cart/cartExclusif.png' alt='cartClassic' />
+                    <p>Panier premium</p>
+                    <span>+500€</span>
+                    <p>
+                        LIVRAISON GRATUITE <br />
+                        RETOURS GRATUIT <br />
+                        BOOSTER RETOUR* 48H (30 €)
+                    </p>
+                    <p>Livraison express</p>
+                </div>
+            </div>
+        </div>
     )
 }

@@ -426,6 +426,7 @@ function PredictiveSearchResult({
 type SearchResultItemProps = Pick<SearchResultTypeProps, 'goToSearchResult'> & {
     item: NormalizedPredictiveSearchResultItem
 }
+
 function SearchResultItem({ goToSearchResult, item }: any) {
     const type = item.__typename
 
@@ -464,7 +465,7 @@ function SearchResultItem({ goToSearchResult, item }: any) {
                 onMouseLeave={handleMouseLeave}
                 style={{
                     opacity:
-                        hoveredIndex == null || hoveredIndex == item.id
+                        hoveredIndex == null || hoveredIndex === item.id
                             ? 1
                             : 0.5,
                 }}

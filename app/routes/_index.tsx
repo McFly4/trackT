@@ -301,6 +301,10 @@ query MetaObjects {
                 key
                 value
               }
+              box: metafield(namespace: "custom", key: "box_sizing") {
+                key
+                value
+              }
               images(first: 1) {
                 nodes {
                   url
