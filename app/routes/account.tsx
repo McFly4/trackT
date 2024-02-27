@@ -222,8 +222,9 @@ function AccountMenu(images: any) {
         isPending: boolean
     }) {
         return {
-            backgroundColor: isActive ? 'rgba(255, 255, 255, 0.1)' : undefined,
-            backdropFilter: isActive ? 'blur(10px)' : undefined,
+            backgroundColor:
+                isActive && !isHovered ? 'rgba(255, 255, 255, 0.1)' : undefined,
+            backdropFilter: isActive && !isHovered ? 'blur(10px)' : undefined,
         }
     }
 
@@ -234,7 +235,15 @@ function AccountMenu(images: any) {
             ?.nodes
 
     const [imageURL, setImageURL] = useState('/account/nav.png')
+    const [isHovered, setIsHovered] = useState(false)
 
+    const handleMouseEnter = () => {
+        setIsHovered(true)
+    }
+
+    const handleMouseLeave = () => {
+        setIsHovered(false)
+    }
     function randomImage() {
         if (allImages && allImages.length > 0) {
             const randomIndex = Math.floor(Math.random() * allImages.length)
@@ -258,7 +267,12 @@ function AccountMenu(images: any) {
     }, [location])
 
     return (
-        <nav role='navigation' className='account-menu'>
+        <nav
+            role='navigation'
+            className='account-menu'
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+        >
             <img className='account-menu-bg' src={imageURL} />
             <NavLink to='/account/profile' style={isActiveStyle}>
                 <p>Mon espace trackt</p>

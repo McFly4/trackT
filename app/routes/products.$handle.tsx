@@ -166,15 +166,18 @@ function BreadCrumb({ product }: { product: any }) {
     const productName = product?.title
     const colors = JSON.parse(product?.colors?.value) as any
     const firstColor = colors?.[0] ?? 'white'
+    console.log('firstColor', firstColor)
     return (
         <div
             className='breadcrumb'
             style={{
                 backgroundColor:
-                    firstColor === 'blue-clair' || firstColor === 'blue-cyan'
+                    firstColor === 'blue-navy' || firstColor === 'blue-cyan'
                         ? '#ADD8E6 '
                         : firstColor === 'black'
                         ? '#fff'
+                        : firstColor === 'brown'
+                        ? '#582900'
                         : firstColor,
             }}
         >
@@ -231,7 +234,10 @@ function BreadCrumb({ product }: { product: any }) {
                 </p>
                 <div className='breadcrumb-colors'>
                     {colors?.map((color: any, index: number) => (
-                        <Link to={'/search?q=' + color} key={index}>
+                        <Link
+                            to={'/search?q=' + color?.split('-')[0]}
+                            key={index}
+                        >
                             <div
                                 key={index}
                                 className='breadcrumb-color'
@@ -350,9 +356,9 @@ function ProductImage({ image, product }: { image: any; product: any }) {
                             <div
                                 style={{
                                     width:
-                                        images.length <= 2 ? '170px' : '100%',
+                                        images.length === 3 ? '240px' : '100%',
                                     height:
-                                        images.length <= 2 ? '110px' : '100%',
+                                        images.length === 3 ? '160px' : '115px',
                                     backgroundColor: '#fff',
                                 }}
                             >
@@ -442,6 +448,7 @@ function ProductImage({ image, product }: { image: any; product: any }) {
                     }}
                     spaceBetween={40}
                     onSwiper={(swiper) => (swiperRef.current = swiper)}
+                    className='trackT-swiper'
                 >
                     {productsFromCollection?.map(
                         (product: any, index: number) => (
@@ -1387,6 +1394,58 @@ fragment Product on Product {
           handle
           productType
           vendor
+            toothBrush: metafield(namespace: "custom", key: "toothbrush") {
+            key
+            value
+          }
+          ooo: metafield(namespace: "custom", key: "outofstock") {
+            key
+            value
+          }
+          new: metafield(namespace: "custom", key: "new") {
+            key
+            value
+          }
+          ship: metafield(namespace: "custom", key: "fastShip") {
+            key
+            value
+          }
+          release: metafield(namespace: "custom", key: "release") {
+            key
+            value
+          }
+          promotion: metafield(namespace: "custom", key: "promotion") {
+            key
+            value
+          }
+          hotDeal: metafield(namespace: "custom", key: "hotDeal") {
+            key
+            value
+          }
+          features: metafield(namespace: "custom", key: "features") {
+            key
+            value
+          }
+          materials: metafield(namespace: "custom", key: "materiaux") {
+            key
+            value
+          }
+          daterelease: metafield(namespace: "custom", key: "date") {
+            key
+            value
+          }
+          colors: metafield(namespace: "custom", key: "palette") {
+            key
+            value
+          }
+          manwoman: metafield(namespace: "custom", key: "manwoman") {
+            key
+            value
+          }
+          box_sizing: metafield(namespace: "custom", key: "box_sizing") {
+            key
+            value
+          }
           images(first: 1) {
             nodes {
               url

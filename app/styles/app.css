@@ -468,13 +468,19 @@ aside li {
 
 
 .predictive-search-result-item:hover {
-    outline: 1px solid rgba(255, 255, 255, 0.5);
+    -webkit-box-shadow: 0px 0px 0px 3px #515451;
+    box-shadow: 0px 0px 0px 3px #515451;
+}
+
+.predictive-search-result-item:hover a{
+    margin-right: 20px;
 }
 
 .predictive-search-result-item a {
     align-items: center;
     display: flex;
     height: 100%;
+    transition: .3s ease-in-out;
     justify-content: space-between;
 }
 
@@ -649,7 +655,7 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .panel-trackt .filter-trackt .filter-sticky {
     position: sticky;
-    top: 350px;
+    top: 50vh;
     z-index: 1;
     height: fit-content;
     width: 100%;
@@ -740,11 +746,15 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .product-grid .product-img-grid {
-    width: 300px !important;
+    width: 300px;
     height: 200px !important;
     background-color: #fff;
     transition: 0.2s;
     position: relative;
+}
+
+.trackT-swiper .swiper-wrapper{
+    padding-bottom: 40px;
 }
 
 .product-grid .product-img-grid img{
