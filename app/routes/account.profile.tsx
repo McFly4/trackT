@@ -337,7 +337,6 @@ export default function AccountProfile() {
                     </div>
                 </Form>
             </div>
-            <Adresses />
             <div className='trackT-size'>
                 <h2>Ajuster TrackT à votre taille</h2>
                 <p>

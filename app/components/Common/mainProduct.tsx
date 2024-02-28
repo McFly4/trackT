@@ -13,6 +13,7 @@ export default function ({ product }: any) {
             toggleDialog()
         }
     }
+
     const mapping = {
         release: product.release,
         new: product.new,

@@ -283,6 +283,9 @@ function AccountMenu(images: any) {
             <NavLink to='/account/mybestitem' style={isActiveStyle}>
                 <p> My best item</p>
             </NavLink>
+            <NavLink to='/account/addresses' style={isActiveStyle}>
+                <p>Adresses</p>
+            </NavLink>
             <a href='/about'>
                 <p
                     style={{

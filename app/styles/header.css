@@ -61,6 +61,7 @@
     justify-content: space-evenly;
     align-items: flex-start;
     padding: 70px 25px;
+    z-index: 10;
 }
 
 .footer img{

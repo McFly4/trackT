@@ -76,6 +76,19 @@ body {
     scroll-behavior: smooth;
 }
 
+.loading-video{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999999;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /*
 * --------------------------------------------------
 * components/Aside
@@ -1252,3 +1265,67 @@ input[type="search"]::-webkit-search-results-decoration {
         transform: scale(1);
     }
 }
+
+/*
+* --------------------------------------------------
+* routes/politics*
+* --------------------------------------------------
+*/
+
+.legals{
+    margin-left: 450px;
+    width: 50%;
+}
+
+.legals h1{
+    font-size: 77px;
+}
+
+.legals h2{
+    font-size: 45px;
+    margin-top: 35px;
+}
+
+.legals p{
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 19px;
+    font-weight: 300;
+}
+
+.legals span.separator{
+    display: flex;
+    width: 100%;
+    height: 2px;
+    background-color: #FFFFFF1F;
+    margin: 100px 0;
+}
+
+/*
+* --------------------------------------------------
+* routes/sitemap
+* --------------------------------------------------
+*/
+
+
+.sitemap{
+    margin:0 5%;
+}
+
+.sitemap h1{
+    font-size: 72px;
+    margin-bottom: 70px;
+}
+
+.sitemap .sitemap-container{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.sitemap .sitemap-content p{
+    text-transform: uppercase;
+    font-size: 14px;
+    font-family: "Helvetica Neue", sans-serif;
+    margin-bottom: 11px;
+}
+

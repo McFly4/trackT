@@ -108,6 +108,7 @@ export default function Login() {
                         aria-label='Password'
                         minLength={8}
                         required
+                        className={error ? 'input-error' : ''}
                     />
                     <Link to='/account/recover'>
                         <p>J'ai encore oublié...</p>
@@ -116,9 +117,11 @@ export default function Login() {
 
                 {error ? (
                     <p>
-                        <mark>
-                            <small>{error}</small>
-                        </mark>
+                        <small>
+                            {error === 'Unidentified customer'
+                                ? 'Email ou mot de passe incorrect'
+                                : error}
+                        </small>
                     </p>
                 ) : (
                     <br />

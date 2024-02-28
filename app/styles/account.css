@@ -277,6 +277,7 @@
 
 .account-menu .account-menu-bg{
     width: 320px;
+    height: 100%;
     position: absolute;
 }
 
@@ -336,9 +337,9 @@
 
 .addresses .addresses-list{
     border-radius: 10px;
-    background: rgba(255, 255, 255, 0.1);
+    background: #262626;
     backdrop-filter: blur(10px);
-    padding: 10px 30px;
+    padding: 20px 40px;
 }
 
 .popup-container {
@@ -428,7 +429,7 @@
 
 .new-address .new-address-title{
     border-radius: 5px;
-    background: rgba(255, 255, 255, 0.1);
+    background: #262626;
     backdrop-filter: blur(10px);
     height: 80px;
     display: flex;
