@@ -32,51 +32,34 @@ export function Layout({
     header,
     isLoggedIn,
 }: LayoutProps) {
-    // const [showLoading, setShowLoading] = useState(true) // État pour contrôler l'affichage de la vidéo de chargement
-    // const location = useLocation()
-    //
-    // useEffect(() => {
-    //     const timer = setTimeout(() => {
-    //         setShowLoading(false) // Après 0.5 seconde, masquez la vidéo de chargement
-    //     }, 1000)
-    //
-    //     return () => clearTimeout(timer) // Nettoyer le timer lors du démontage du composant
-    // }, [])
-
-    const [isLoading, setIsLoading] = useState(true) // État pour contrôler l'affichage de la vidéo de chargement
+    const [isLoading, setIsLoading] = useState(true)
     const location = useLocation()
 
     useEffect(() => {
         const handleLoad = () => {
-            setIsLoading(false) // Lorsque la page est complètement chargée, masquez la vidéo de chargement
+            setIsLoading(false)
         }
 
         const handleUnload = () => {
-            setIsLoading(true) // Lorsque la page est en cours de chargement, affichez la vidéo de chargement
+            setIsLoading(true)
         }
 
-        window.addEventListener('load', handleLoad) // Écouteur d'événement de chargement de la page
-        window.addEventListener('unload', handleUnload) // Écouteur d'événement de déchargement de la page
+        window.addEventListener('load', handleLoad)
+        window.addEventListener('unload', handleUnload)
+
+        const timeoutId = setTimeout(() => {
+            setIsLoading(false)
+        }, 2000)
 
         return () => {
-            window.removeEventListener('load', handleLoad) // Nettoyage des écouteurs d'événement lors du démontage du composant
+            clearTimeout(timeoutId)
+            window.removeEventListener('load', handleLoad)
             window.removeEventListener('unload', handleUnload)
         }
     }, [])
 
     return (
         <>
-            {/*{showLoading && (*/}
-            {/*    <div className='loading-video'>*/}
-            {/*        <video*/}
-            {/*            autoPlay*/}
-            {/*            loop*/}
-            {/*            muted*/}
-            {/*            playsInline*/}
-            {/*            src='/loading.mp4'*/}
-            {/*        ></video>*/}
-            {/*    </div>*/}
-            {/*)}*/}
             {isLoading && (
                 <div className='loading-video'>
                     <video
@@ -88,8 +71,6 @@ export function Layout({
                     ></video>
                 </div>
             )}
-            {/* Affichage de la vidéo de chargement si isLoading est true */}
-            {/* Affichage de la vidéo de chargement */}
             <CartAside cart={cart} />
             <SearchAside />
             {location.pathname !== '/account/login' &&

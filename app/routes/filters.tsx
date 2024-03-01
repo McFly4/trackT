@@ -512,7 +512,6 @@ export default function Filters() {
                         </>
                     )}
                 </div>
-
                 <div>
                     {productType.some(
                         (sneakers: any) => sneakers.value === 'sneakers'
@@ -772,7 +771,6 @@ export default function Filters() {
                     {collections.length > 0 && (
                         // SIZES
                         <>
-                            {' '}
                             <div className='filters__categories'>
                                 <h3 className='filters__title'>Tailles</h3>
                                 <ul className='filters__list'>

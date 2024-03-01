@@ -166,18 +166,21 @@ function BreadCrumb({ product }: { product: any }) {
     const productName = product?.title
     const colors = JSON.parse(product?.colors?.value) as any
     const firstColor = colors?.[0] ?? 'white'
-    console.log('firstColor', firstColor)
     return (
         <div
             className='breadcrumb'
             style={{
                 backgroundColor:
-                    firstColor === 'blue-navy' || firstColor === 'blue-cyan'
+                    firstColor === 'blue-cyan'
                         ? '#ADD8E6 '
                         : firstColor === 'black'
                         ? '#fff'
                         : firstColor === 'brown'
                         ? '#582900'
+                        : firstColor === 'kaki'
+                        ? '#4d5832'
+                        : firstColor === 'blue-navy'
+                        ? '#1d3047'
                         : firstColor,
             }}
         >
@@ -242,7 +245,16 @@ function BreadCrumb({ product }: { product: any }) {
                                 key={index}
                                 className='breadcrumb-color'
                                 style={{
-                                    backgroundColor: color,
+                                    backgroundColor:
+                                        color === 'brown'
+                                            ? '#582900'
+                                            : color === 'blue-navy'
+                                            ? '#1d3047'
+                                            : color === 'kaki'
+                                            ? '#4d5832'
+                                            : color === 'blue-cyan'
+                                            ? '#ADD8E6'
+                                            : color,
                                 }}
                             ></div>
                         </Link>
@@ -498,6 +510,7 @@ function ProductMain({
         promotion: product.promotion,
         release: product.release,
         ship: product.ship,
+        soon: product.soon,
     } as any
 
     const stickersData = Object.keys(mapping).reduce((acc: any, key: any) => {
@@ -591,7 +604,7 @@ function ProductMain({
                                     />
                                 ) : (
                                     <img
-                                        src='/about/large_toothbrush.png'
+                                        src='/about/over_toothbrush.png'
                                         alt='big toothbrush'
                                         className='toothbrush'
                                     />
@@ -667,24 +680,6 @@ function ProductMain({
                 <div dangerouslySetInnerHTML={{ __html: descriptionHtml }} />
             </div>
         </div>
-    )
-}
-
-function StickerComponent({ keyName, offset }: any) {
-    const stickerPath = `/product/stickers/${keyName}.png`
-
-    const style = {
-        marginRight: `-50px`,
-    }
-    return (
-        <>
-            <img
-                className='product-sticker'
-                src={stickerPath}
-                alt={keyName}
-                style={style}
-            />
-        </>
     )
 }
 
@@ -950,7 +945,10 @@ function ToggleModal(toggle: any) {
 
 function ProductPrice({ selectedVariant }: { selectedVariant: any }) {
     const size = selectedVariant?.selectedOptions?.find(
-        (option: any) => option.name === 'Size'
+        (option: any) =>
+            option.name === 'Size' ||
+            option.name === 'Taille' ||
+            option.name === 'Title'
     )?.value
 
     return (
@@ -973,7 +971,7 @@ function ProductPrice({ selectedVariant }: { selectedVariant: any }) {
                 ) : (
                     selectedVariant?.price && (
                         <div className='product-price-container'>
-                            {size === undefined || /[a-zA-Z%]/.test(size) ? (
+                            {size == undefined ? (
                                 <img src='/product/size/os.png' alt='price' />
                             ) : size === 'UNIVERSEL' ? (
                                 <img src='/product/size/os.png' alt='price' />
@@ -987,7 +985,6 @@ function ProductPrice({ selectedVariant }: { selectedVariant: any }) {
                                     alt='price'
                                 />
                             )}
-
                             <Money data={selectedVariant?.price} />
                         </div>
                     )
@@ -995,6 +992,7 @@ function ProductPrice({ selectedVariant }: { selectedVariant: any }) {
             ) : (
                 <div className='product-price-container'>
                     <img src='/product/stickers/ooo.png' alt='out of stock' />
+                    <span>sold out</span>
                 </div>
             )}
             <AddToCartButton
@@ -1086,9 +1084,7 @@ function ProductOptions({ option, variants }: any) {
         }
     }
     // Tri alphabétique des valeurs
-    const sortedValues = option.values
-        .slice()
-        .sort((a: any, b: any) => a.value.localeCompare(b.value))
+    const sortedValues = option.values.slice()
 
     const midle = Math.ceil(sortedValues.length / 2)
 
@@ -1103,15 +1099,6 @@ function ProductOptions({ option, variants }: any) {
         }
     }
 
-    const color = variants[0]?.selectedOptions.find(
-        (option: any) => option.name === 'Size'
-    )
-
-    console.log(
-        variants?.find(
-            (variant: any) => variant.selectedOptions[0]?.value === '40'
-        )?.weight
-    )
     return (
         <div className='product-options' key={option.name}>
             {isModalOpenToothbrush && (
@@ -1173,7 +1160,10 @@ function ProductOptions({ option, variants }: any) {
                                                             : '#fff',
                                                 }}
                                             >
-                                                {value.split(' ')[0]}
+                                                {/^\d+(\.\d+)?$/.test(value)
+                                                    ? value
+                                                    : value.charAt(0)}
+
                                                 <span
                                                     style={{
                                                         fontSize: '12px',
@@ -1446,6 +1436,10 @@ fragment Product on Product {
             key
             value
           }
+            soon: metafield(namespace: "custom", key: "soon") {
+            key
+            value
+          }
           images(first: 1) {
             nodes {
               url
@@ -1545,6 +1539,10 @@ query MetaObjects {
                 key
                 value
               }
+                        soon: metafield(namespace: "custom", key: "soon") {
+            key
+            value
+          }
               images(first: 1) {
                 nodes {
                   url

@@ -7,7 +7,7 @@ import { Autoplay } from 'swiper/modules'
 import MarketDrag from '~/components/Common/MarketDrag'
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
-    return [{ title: `Hydrogen ` }]
+    return [{ title: `TrackT ` }]
 }
 
 export async function loader({ context }: LoaderFunctionArgs) {
@@ -302,6 +302,10 @@ query MetaObjects {
                 value
               }
               box: metafield(namespace: "custom", key: "box_sizing") {
+                key
+                value
+              }
+              soon: metafield(namespace: "custom", key: "soon") {
                 key
                 value
               }

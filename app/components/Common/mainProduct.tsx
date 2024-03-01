@@ -21,6 +21,7 @@ export default function ({ product }: any) {
         ship: product.ship,
         promotion: product.promotion,
         ooo: product.ooo,
+        soon: product.soon,
     } as any
 
     const stickersData = Object.keys(mapping).reduce((acc: any, key: any) => {
@@ -154,16 +155,7 @@ export default function ({ product }: any) {
                     </div>
                 </div>
             )}
-            <div
-                className='product-grid'
-                style={
-                    product.ooo?.value == 'true'
-                        ? {
-                              filter: 'opacity(0.5)',
-                          }
-                        : {}
-                }
-            >
+            <div className='product-grid'>
                 <div onClick={toggleDialog}>
                     {stickersData.map((item: any, index: any, array: any[]) => (
                         <ImageComponent
@@ -171,10 +163,21 @@ export default function ({ product }: any) {
                             keyName={item.key}
                             offset={index * 30}
                             zIdx={1 + array.length - index - 1}
+                            ooo={product.ooo?.value}
                         />
                     ))}
                 </div>
-                <div className='product-img-grid'>
+                {product.ooo?.value && <span>sold out</span>}
+
+                <div
+                    className='product-img-grid'
+                    style={{
+                        filter:
+                            product.ooo?.value == 'true'
+                                ? 'opacity(0.2)'
+                                : 'none',
+                    }}
+                >
                     <Link
                         key={product.title}
                         to={`/products/${product.handle}`}
@@ -182,7 +185,11 @@ export default function ({ product }: any) {
                         <img
                             src={product.images?.nodes[0].url}
                             alt={product.title}
-                            className='product-img'
+                            className={
+                                product.ooo?.value == 'true'
+                                    ? 'product-img product-ooo'
+                                    : 'product-img'
+                            }
                             style={{
                                 objectFit:
                                     product?.box?.value == '4:5' ||
