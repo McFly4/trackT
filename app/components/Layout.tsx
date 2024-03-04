@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Await } from '@remix-run/react'
+import { Await, FetcherWithComponents } from '@remix-run/react'
 import { Suspense } from 'react'
 import type {
     CartApiQueryFragment,
@@ -16,6 +16,11 @@ import {
 } from '~/components/Search'
 import { AsideSearch } from './AsideSearch'
 import { useLocation } from '@remix-run/react'
+import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
+import { Scrollbar } from 'swiper/modules'
+import MainProduct from '~/components/Common/mainProduct'
+import type { CartLineInput } from '@shopify/hydrogen/storefront-api-types'
+import { CartForm } from '@shopify/hydrogen'
 
 export type LayoutProps = {
     cart: Promise<CartApiQueryFragment | null>
@@ -23,6 +28,7 @@ export type LayoutProps = {
     footer: Promise<FooterQuery>
     header: HeaderQuery
     isLoggedIn: boolean
+    pocketItems: any
 }
 
 export function Layout({
@@ -31,6 +37,7 @@ export function Layout({
     footer,
     header,
     isLoggedIn,
+    pocketItems,
 }: LayoutProps) {
     const [isLoading, setIsLoading] = useState(true)
     const location = useLocation()
@@ -71,7 +78,7 @@ export function Layout({
                     ></video>
                 </div>
             )}
-            <CartAside cart={cart} />
+            <CartAside cart={cart} pocketItems={pocketItems} />
             <SearchAside />
             {location.pathname !== '/account/login' &&
                 location.pathname !== '/filters' &&
@@ -97,25 +104,100 @@ export function Layout({
     )
 }
 
-function CartAside({ cart }: any) {
+function CartAside({ cart, pocketItems }: any) {
+    const pocket = pocketItems.collection.products.nodes
+    const swiperRef = useRef<any>(null)
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const [isPocketOpen, setIsPocketOpen] = useState(false)
+
+    const nexto = () => {
+        swiperRef.current?.slideNext()
+    }
+
+    const previo = () => {
+        swiperRef.current?.slidePrev()
+    }
 
     const toggleModal = (data: any) => {
         setIsModalOpen(data)
     }
 
-    const handleOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (e.target === e.currentTarget) {
-            setIsModalOpen(false)
-        }
+    const togglePocket = (data: any) => {
+        setIsPocketOpen(data)
     }
 
+    // const handleOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    //     if (e.target === e.currentTarget) {
+    //         setIsModalOpen(false)
+    //     }
+    // }
+    //
+    // const handleOutsideClickPocket = (e: React.MouseEvent<HTMLDivElement>) => {
+    //     if (e.target === e.currentTarget) {
+    //         setIsPocketOpen(false)
+    //     }
+    // }
+    console.log(pocket[0]?.variants?.nodes[0]?.id)
     return (
         <>
             {isModalOpen && (
-                <div className='dialog-overlay' onClick={handleOutsideClick}>
+                <div
+                    className='dialog-overlay'
+                    onClick={() => toggleModal(false)}
+                >
                     <div className='dialog'>
                         <ToggleModal toggle={toggleModal} />
+                    </div>
+                </div>
+            )}
+            {isPocketOpen && (
+                <div className='dialog-overlay'>
+                    <div className='dialog'>
+                        <TogglePocket toggle={togglePocket}>
+                            {' '}
+                            <Swiper
+                                modules={[Scrollbar]}
+                                scrollbar={{
+                                    hide: false,
+                                }}
+                                watchSlidesProgress={true}
+                                slidesPerGroup={2}
+                                slidesPerView={4}
+                                grabCursor={true}
+                                navigation={{
+                                    nextEl: '.swiper-button-next',
+                                    prevEl: '.swiper-button-prev',
+                                }}
+                                spaceBetween={40}
+                                onSwiper={(swiper) =>
+                                    (swiperRef.current = swiper)
+                                }
+                            >
+                                {pocket?.map((item: any, index: number) => (
+                                    <SwiperSlide
+                                        key={index}
+                                        style={{
+                                            padding: '40px 0',
+                                        }}
+                                        className='product-price'
+                                    >
+                                        <p>{item.title}</p>
+
+                                        <AddToCartButton
+                                            lines={[
+                                                {
+                                                    merchandiseId:
+                                                        item.variants.nodes[0]
+                                                            .id,
+                                                    quantity: 1,
+                                                },
+                                            ]}
+                                            children='Ajouter au panier' // Vous n'avez pas besoin de spécifier children comme une prop, vous pouvez le mettre directement ici
+                                        />
+                                    </SwiperSlide>
+                                ))}
+                            </Swiper>
+                        </TogglePocket>
                     </div>
                 </div>
             )}
@@ -127,7 +209,10 @@ function CartAside({ cart }: any) {
                                 <CartMain
                                     cart={cart}
                                     layout='aside'
-                                    onToggle={toggleModal}
+                                    isModalOpen={isModalOpen}
+                                    isPocketOpen={isPocketOpen}
+                                    onToggleModal={toggleModal}
+                                    onTogglePocket={togglePocket}
                                 />
                             )
                         }}
@@ -135,6 +220,45 @@ function CartAside({ cart }: any) {
                 </Suspense>
             </Aside>
         </>
+    )
+}
+
+function AddToCartButton({
+    analytics,
+    children,
+    disabled,
+    lines,
+    onClick,
+}: {
+    analytics?: unknown
+    children: React.ReactNode
+    disabled?: boolean
+    lines: CartLineInput[]
+    onClick?: () => void
+}) {
+    return (
+        <CartForm
+            route='/cart'
+            inputs={{ lines }}
+            action={CartForm.ACTIONS.LinesAdd}
+        >
+            {(fetcher: FetcherWithComponents<any>) => (
+                <>
+                    <input
+                        name='analytics'
+                        type='hidden'
+                        value={JSON.stringify(analytics)}
+                    />
+                    <button
+                        type='submit'
+                        onClick={onClick}
+                        disabled={disabled ?? fetcher.state !== 'idle'}
+                    >
+                        {children}
+                    </button>
+                </>
+            )}
+        </CartForm>
     )
 }
 
@@ -278,6 +402,14 @@ function ToggleModal(toggle: any) {
                     <p>Livraison express</p>
                 </div>
             </div>
+        </div>
+    )
+}
+
+function TogglePocket({ toggle, children }: any) {
+    return (
+        <div className='modal-stickers-overlay'>
+            <div className='modal-stickers'>{children}</div>
         </div>
     )
 }

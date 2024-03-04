@@ -113,6 +113,8 @@ export async function loader({ context }: LoaderFunctionArgs) {
         },
     })
 
+    const pocketItems = await storefront.query(POCKET_ITEMS)
+
     return defer(
         {
             cart: cartPromise,
@@ -121,6 +123,7 @@ export async function loader({ context }: LoaderFunctionArgs) {
             header: await headerPromise,
             isLoggedIn,
             publicStoreDomain,
+            pocketItems,
         },
         { headers }
     )
@@ -312,4 +315,65 @@ const FOOTER_QUERY2 = `#graphql
     }
   }
   ${MENU_FRAGMENT}
+` as const
+
+const POCKET_ITEMS = `#graphql
+query Collection {
+  collection(handle: "PocketItems") {
+    products(first: 250) {
+      nodes {
+        title
+          productType
+          handle
+          vendor
+          toothBrush: metafield(namespace: "custom", key: "toothbrush") {
+            key
+            value
+          }
+          ooo: metafield(namespace: "custom", key: "outofstock") {
+            key
+            value
+          }
+          new: metafield(namespace: "custom", key: "new") {
+            key
+            value
+          }
+          ship: metafield(namespace: "custom", key: "fastShip") {
+            key
+            value
+          }
+          release: metafield(namespace: "custom", key: "release") {
+            key
+            value
+          }
+          promotion: metafield(namespace: "custom", key: "promotion") {
+            key
+            value
+          }
+          hotDeal: metafield(namespace: "custom", key: "hotDeal") {
+            key
+            value
+          }
+          features: metafield(namespace: "custom", key: "features") {
+            key
+            value
+          }
+          images(first: 1) {
+            nodes {
+              url
+            }
+          }
+          variants(first: 1){
+          nodes{
+            id
+            availableForSale
+            price {
+              amount
+            }
+          }
+        }
+      }
+    }
+  }
+}
 ` as const

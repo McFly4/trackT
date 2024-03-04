@@ -11,7 +11,14 @@ type CartMainProps = {
     layout: 'page' | 'aside'
 }
 
-export function CartMain({ layout, cart, onToggle }: any) {
+export function CartMain({
+    layout,
+    cart,
+    isModalOpen,
+    isPocketOpen,
+    onToggleModal,
+    onTogglePocket,
+}: any) {
     const linesCount = Boolean(cart?.lines?.nodes?.length || 0)
     const withDiscount =
         cart &&
@@ -21,75 +28,94 @@ export function CartMain({ layout, cart, onToggle }: any) {
     const className = `cart-main ${withDiscount ? 'with-discount' : ''}`
     const cartHasItems = !!cart && cart.totalQuantity > 0
     const cartTotalPrice = cart?.cost?.totalAmount?.amount as any
-    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [isValid, setIsValid] = useState(false)
 
     const toggleModal = () => {
-        setIsModalOpen(!isModalOpen)
-        onToggle(isModalOpen)
+        onToggleModal(!isModalOpen)
+    }
+
+    const togglePocket = () => {
+        onTogglePocket(!isPocketOpen)
+        setIsValid(true)
     }
 
     return (
-        <div className={className}>
-            <CartEmpty hidden={linesCount} layout={layout} />
-            {cartHasItems && (
-                <div
-                    onClick={toggleModal}
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                    }}
-                >
-                    {cartTotalPrice <= 250 ? (
-                        <img
-                            src='/cart/cartClassic.png'
-                            alt='panier classic'
-                            style={{
-                                width: 'fit-content',
-                                marginBottom: '50px',
-                            }}
-                        />
-                    ) : cartTotalPrice <= 500 ? (
-                        <img
-                            src='/cart/cartPremium.png'
-                            alt='panier premium'
-                            style={{
-                                width: 'fit-content',
-                                marginBottom: '50px',
-                            }}
-                        />
-                    ) : (
-                        <img
-                            src='/cart/cartExclusif.png'
-                            alt='panier vide'
-                            style={{
-                                width: 'fit-content',
-                                marginBottom: '50px',
-                            }}
-                        />
-                    )}
-                    <h4
+        <>
+            <div className={className}>
+                <CartEmpty hidden={linesCount} layout={layout} />
+                {cartHasItems && (
+                    <div
+                        onClick={toggleModal}
                         style={{
-                            textAlign: 'center',
-                            textTransform: 'uppercase',
-                            marginBottom: '50px',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyContent: 'center',
                         }}
                     >
-                        mes affaires
-                    </h4>
-                </div>
-            )}
-            <div className='cart-details'>
-                <CartLines lines={cart?.lines} layout={layout} />
-                {cartHasItems && (
-                    <CartSummary cost={cart.cost} layout={layout}>
-                        {/*<CartDiscounts discountCodes={cart.discountCodes} />*/}
-                        <CartCheckoutActions checkoutUrl={cart.checkoutUrl} />
-                    </CartSummary>
+                        {cartTotalPrice <= 250 ? (
+                            <img
+                                src='/cart/cartClassic.png'
+                                alt='panier classic'
+                                style={{
+                                    width: 'fit-content',
+                                    marginBottom: '50px',
+                                }}
+                            />
+                        ) : cartTotalPrice <= 500 ? (
+                            <img
+                                src='/cart/cartPremium.png'
+                                alt='panier premium'
+                                style={{
+                                    width: 'fit-content',
+                                    marginBottom: '50px',
+                                }}
+                            />
+                        ) : (
+                            <img
+                                src='/cart/cartExclusif.png'
+                                alt='panier vide'
+                                style={{
+                                    width: 'fit-content',
+                                    marginBottom: '50px',
+                                }}
+                            />
+                        )}
+                        <h4
+                            style={{
+                                textAlign: 'center',
+                                textTransform: 'uppercase',
+                                marginBottom: '50px',
+                            }}
+                        >
+                            mes affaires
+                        </h4>
+                    </div>
                 )}
+                <div className='cart-details'>
+                    <CartLines lines={cart?.lines} layout={layout} />
+                    {cartHasItems && (
+                        <CartSummary cost={cart.cost} layout={layout}>
+                            {/*<CartDiscounts discountCodes={cart.discountCodes} />*/}
+                            {isValid ? (
+                                <CartCheckoutActions
+                                    checkoutUrl={cart.checkoutUrl}
+                                />
+                            ) : (
+                                <div onClick={togglePocket}>
+                                    <div className='cart-checkout'>
+                                        <a>
+                                            <h6>Passer à la caisse</h6>
+                                        </a>
+                                        <br />
+                                    </div>
+                                </div>
+                            )}
+                        </CartSummary>
+                    )}
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 
@@ -175,7 +201,7 @@ function CartCheckoutActions({ checkoutUrl }: { checkoutUrl: string }) {
     return (
         <div className='cart-checkout'>
             <a href={checkoutUrl} target='_self'>
-                <h6>Passer à la caisse</h6>
+                <h6>Valider le panier</h6>
             </a>
             <br />
         </div>

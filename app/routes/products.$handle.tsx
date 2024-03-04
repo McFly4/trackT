@@ -33,7 +33,7 @@ import TrackT from '~/components/Common/TrackT'
 import { Scrollbar, Grid } from 'swiper/modules'
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
-    return [{ title: `Hydrogen | ${data?.product.title ?? ''}` }]
+    return [{ title: `TrackT | ${data?.product.title ?? ''}` }]
 }
 
 export async function loader({ params, request, context }: LoaderFunctionArgs) {
@@ -950,7 +950,6 @@ function ProductPrice({ selectedVariant }: { selectedVariant: any }) {
             option.name === 'Taille' ||
             option.name === 'Title'
     )?.value
-
     return (
         <div className='product-price'>
             <h2>Price</h2>
@@ -972,9 +971,23 @@ function ProductPrice({ selectedVariant }: { selectedVariant: any }) {
                     selectedVariant?.price && (
                         <div className='product-price-container'>
                             {size == undefined ? (
-                                <img src='/product/size/os.png' alt='price' />
+                                <img
+                                    src='/product/size/os.png'
+                                    alt='price'
+                                    style={{
+                                        width: 'unset !important',
+                                        height: 'unset !important',
+                                    }}
+                                />
                             ) : size === 'UNIVERSEL' ? (
-                                <img src='/product/size/os.png' alt='price' />
+                                <img
+                                    src='/product/size/os.png'
+                                    alt='price'
+                                    style={{
+                                        width: 'unset !important',
+                                        height: 'unset !important',
+                                    }}
+                                />
                             ) : (
                                 <img
                                     src={
@@ -983,6 +996,10 @@ function ProductPrice({ selectedVariant }: { selectedVariant: any }) {
                                         }.png` ?? `/product/size/49.png`
                                     }
                                     alt='price'
+                                    style={{
+                                        width: 'unset !important',
+                                        height: 'unset !important',
+                                    }}
                                 />
                             )}
                             <Money data={selectedVariant?.price} />
@@ -997,9 +1014,6 @@ function ProductPrice({ selectedVariant }: { selectedVariant: any }) {
             )}
             <AddToCartButton
                 disabled={!selectedVariant || !selectedVariant.availableForSale}
-                onClick={() => {
-                    window.location.href = window.location.href + '#cart-aside'
-                }}
                 lines={
                     selectedVariant
                         ? [
