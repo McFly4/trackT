@@ -199,7 +199,7 @@ aside li {
 
 
 .overlay .close-outside {
-    background: transparent;
+    background-color: rgba(0, 0, 0, 0.8);
     border: none;
     color: transparent;
     height: 100%;
@@ -207,6 +207,8 @@ aside li {
     position: absolute;
     top: 0;
     width: calc(100% - var(--aside-width));
+    backdrop-filter: blur(10px); /* Ajoute un flou */
+
 }
 
 .overlay .light {
@@ -354,6 +356,7 @@ aside li {
     color: #000;
     font-weight: 500;
     font-size: 18px;
+    text-align: center;
 }
 
 /*
@@ -1278,6 +1281,99 @@ input[type="search"]::-webkit-search-results-decoration {
     bottom: 95px;
 }
 
+.pocket-items{
+    position: fixed;
+    margin-left: 1%;
+    width: calc(100% - 450px);
+    display: flex;
+    align-items: center;
+    z-index: 99999;
+    height: 100%;
+}
+
+.pocket-dialog {
+    position: relative;
+    Width: 95%;
+    margin: auto;
+    border-radius: 8px;
+    animation: fadeIn 0.3s ease; /* Animation d'ouverture */
+    z-index: 999999;
+
+}
+
+.pocket-items-header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.pocket-items-header p{
+    margin-top: 30px;
+    font-size: 23px;
+    font-family: 'HelveticaNeue300', sans-serif;
+}
+
+.pocket-items-product{
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.pocket-items-product-img{
+     position: relative;
+}
+
+.pocket-items-product-img-main{
+    width: 350px;
+    height: 230px;
+    object-fit: contain;
+    background-color: #fff;
+}
+
+.pocket-items-product-img-price{
+    position: absolute;
+    bottom: -40px;
+    right: -30px;
+}
+
+.pocket-items-product-img p{
+    position: absolute;
+    bottom: -5px;
+    right: 5px;
+    font-size: 25px;
+    font-family: 'HelveticaNeue500', sans-serif;
+    color: #000;
+}
+
+.pocket-items-product h4 {
+    margin-top: 15px;
+}
+
+.pocket-items-product h6 {
+    font-weight: 300;
+}
+
+
+.pocket-items-product h4, h6{
+    padding-left: 10px;
+    width: 350px;
+
+}
+
+.pocket-items-product button{
+    border-radius: 5px;
+    background-color: #fff;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 20px 40px;
+    margin-top: 15px;
+    width: 350px;
+    font-family: 'HelveticaNeue500', sans-serif;
+}
+
 .dialog-overlay {
     position: fixed;
     top: 0;
@@ -1292,7 +1388,6 @@ input[type="search"]::-webkit-search-results-decoration {
     z-index: 9999;
 
 }
-
 
 .dialog {
     position: relative;

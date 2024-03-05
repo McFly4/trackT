@@ -126,18 +126,36 @@ function CartAside({ cart, pocketItems }: any) {
         setIsPocketOpen(data)
     }
 
-    // const handleOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    //     if (e.target === e.currentTarget) {
-    //         setIsModalOpen(false)
-    //     }
-    // }
-    //
-    // const handleOutsideClickPocket = (e: React.MouseEvent<HTMLDivElement>) => {
-    //     if (e.target === e.currentTarget) {
-    //         setIsPocketOpen(false)
-    //     }
-    // }
-    console.log(pocket[0]?.variants?.nodes[0]?.id)
+    const handleOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (e.target === e.currentTarget) {
+            setIsModalOpen(false)
+        }
+    }
+
+    const handleOutsideClickPocket = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (e.target === e.currentTarget) {
+            setIsPocketOpen(false)
+        }
+    }
+
+    useEffect(() => {
+        const handleHashChange = () => {
+            if (window.location.hash !== '#cart-aside') {
+                setIsPocketOpen(false)
+            }
+        }
+
+        window.addEventListener('hashchange', handleHashChange)
+
+        handleHashChange()
+
+        return () => {
+            window.removeEventListener('hashchange', handleHashChange)
+        }
+    }, [isModalOpen])
+
+    console.log(pocket)
+
     return (
         <>
             {isModalOpen && (
@@ -151,18 +169,29 @@ function CartAside({ cart, pocketItems }: any) {
                 </div>
             )}
             {isPocketOpen && (
-                <div className='dialog-overlay'>
-                    <div className='dialog'>
+                <div
+                    className='pocket-items'
+                    onClick={handleOutsideClickPocket}
+                >
+                    <div className='pocket-dialog'>
+                        <div className='pocket-items-header'>
+                            <img
+                                src='/cart/pocketItems.png'
+                                alt='pocketItems'
+                            />
+                            <p>
+                                Ajouter quelques items pour atteindre la
+                                couronne supérieure.
+                            </p>
+                        </div>
                         <TogglePocket toggle={togglePocket}>
-                            {' '}
                             <Swiper
                                 modules={[Scrollbar]}
                                 scrollbar={{
                                     hide: false,
                                 }}
                                 watchSlidesProgress={true}
-                                slidesPerGroup={2}
-                                slidesPerView={4}
+                                slidesPerView={3}
                                 grabCursor={true}
                                 navigation={{
                                     nextEl: '.swiper-button-next',
@@ -179,10 +208,33 @@ function CartAside({ cart, pocketItems }: any) {
                                         style={{
                                             padding: '40px 0',
                                         }}
-                                        className='product-price'
+                                        className='pocket-items-product'
                                     >
-                                        <p>{item.title}</p>
-
+                                        <div className='pocket-items-product-img'>
+                                            <img
+                                                src={item.images.nodes[0].url}
+                                                className='pocket-items-product-img-main'
+                                            />
+                                            <img
+                                                src={
+                                                    '/cart/pocket/' +
+                                                    (index % 8) +
+                                                    '.png'
+                                                }
+                                                className='pocket-items-product-img-price'
+                                            />
+                                            <p>
+                                                +
+                                                {
+                                                    item.variants.nodes[0].price.amount.split(
+                                                        '.'
+                                                    )[0]
+                                                }
+                                                €
+                                            </p>
+                                        </div>
+                                        <h4>{item.vendor}</h4>
+                                        <h6>{item.title}</h6>
                                         <AddToCartButton
                                             lines={[
                                                 {
@@ -197,6 +249,7 @@ function CartAside({ cart, pocketItems }: any) {
                                     </SwiperSlide>
                                 ))}
                             </Swiper>
+                            <NavButtons next={nexto} previous={previo} />
                         </TogglePocket>
                     </div>
                 </div>
@@ -220,6 +273,63 @@ function CartAside({ cart, pocketItems }: any) {
                 </Suspense>
             </Aside>
         </>
+    )
+}
+
+function NavButtons({ next, previous }: any) {
+    return (
+        <div
+            className='navigation-buttons'
+            style={{
+                marginTop: '30px',
+                marginLeft: '30px',
+            }}
+        >
+            <button
+                onClick={previous}
+                style={{
+                    width: '41px',
+                    height: '41px',
+                }}
+            >
+                <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='7.574'
+                    height='13.928'
+                    viewBox='0 0 7.574 13.928'
+                >
+                    <path
+                        id='Tracé_416'
+                        data-name='Tracé 416'
+                        d='M-20862.068-17757.791a.61.61,0,0,1-.432-.18.612.612,0,0,1,0-.861l5.924-5.924-5.924-5.924a.612.612,0,0,1,0-.861.611.611,0,0,1,.863,0l6.355,6.354a.614.614,0,0,1,0,.863l-6.355,6.354A.61.61,0,0,1-20862.068-17757.791Z'
+                        transform='translate(20862.678 17771.719)'
+                        fill='#fff'
+                    />
+                </svg>
+            </button>
+            <button
+                onClick={next}
+                style={{
+                    width: '41px',
+                    height: '41px',
+                }}
+            >
+                <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='7.574'
+                    height='13.928'
+                    viewBox='0 0 7.574 13.928'
+                >
+                    <path
+                        id='Tracé_416'
+                        data-name='Tracé 416'
+                        d='M-20862.068-17757.791a.61.61,0,0,1-.432-.18.612.612,0,0,1,0-.861l5.924-5.924-5.924-5.924a.612.612,0,0,1,0-.861.611.611,0,0,1,.863,0l6.355,6.354a.614.614,0,0,1,0,.863l-6.355,6.354A.61.61,0,0,1-20862.068-17757.791Z'
+                        transform='translate(20862.678 17771.719)'
+                        fill='#fff'
+                    />
+                </svg>
+            </button>
+        </div>
     )
 }
 
@@ -407,9 +517,5 @@ function ToggleModal(toggle: any) {
 }
 
 function TogglePocket({ toggle, children }: any) {
-    return (
-        <div className='modal-stickers-overlay'>
-            <div className='modal-stickers'>{children}</div>
-        </div>
-    )
+    return <div>{children}</div>
 }

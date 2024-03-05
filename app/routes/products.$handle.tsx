@@ -1024,6 +1024,9 @@ function ProductPrice({ selectedVariant }: { selectedVariant: any }) {
                           ]
                         : []
                 }
+                onClick={() => {
+                    window.location.href = window.location.href + '#cart-aside'
+                }}
             >
                 Ajouter au panier
             </AddToCartButton>
