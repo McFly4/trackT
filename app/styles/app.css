@@ -1551,6 +1551,7 @@ input[type="search"]::-webkit-search-results-decoration {
 .sitemap .sitemap-content p{
     text-transform: uppercase;
     font-size: 14px;
+    font-weight: 400;
     font-family: "Helvetica Neue", sans-serif;
     margin-bottom: 11px;
 }

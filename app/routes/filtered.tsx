@@ -391,6 +391,10 @@ fragment ProductFragment on Product {
     key
     value
   }
+  box_sizing: metafield(namespace: "custom", key: "box_sizing") {
+    key
+    value
+  }
   priceRange {
     minVariantPrice {
       amount
@@ -461,6 +465,10 @@ query Collection {
             value
           }
           features: metafield(namespace: "custom", key: "features") {
+            key
+            value
+          }
+          box_sizing: metafield(namespace: "custom", key: "box_sizing") {
             key
             value
           }

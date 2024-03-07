@@ -31,6 +31,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import MainProduct from '~/components/Common/mainProduct'
 import TrackT from '~/components/Common/TrackT'
 import { Scrollbar, Grid } from 'swiper/modules'
+import MarketDrag from '~/components/Common/MarketDrag'
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
     return [{ title: `TrackT | ${data?.product.title ?? ''}` }]
@@ -154,6 +155,7 @@ export default function Product() {
                 </video>
             </div>
             <TrackT products={productsList} />
+            <MarketDrag />
         </>
     )
 }
@@ -922,6 +924,7 @@ function ProductPrice({ selectedVariant }: { selectedVariant: any }) {
             option.name === 'Taille' ||
             option.name === 'Title'
     )?.value
+
     return (
         <div className='product-price'>
             <h2>Price</h2>
@@ -929,6 +932,7 @@ function ProductPrice({ selectedVariant }: { selectedVariant: any }) {
                 selectedVariant?.compareAtPrice ? (
                     <>
                         <p>Sale</p>
+
                         <br />
                         <div className='product-price-on-sale'>
                             {selectedVariant ? (
@@ -942,7 +946,9 @@ function ProductPrice({ selectedVariant }: { selectedVariant: any }) {
                 ) : (
                     selectedVariant?.price && (
                         <div className='product-price-container'>
-                            {size == undefined || size == 'OS' ? (
+                            {size == undefined ||
+                            size == 'OS' ||
+                            size == 'One Size' ? (
                                 <img
                                     src='/product/size/os.png'
                                     alt='price'
