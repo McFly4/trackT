@@ -500,7 +500,6 @@ function ExistingAddresses({
                                                         : 'Save'}
                                                 </button>
                                                 <button
-                                                    onClick={toggleDialog}
                                                     disabled={
                                                         stateForMethod(
                                                             'DELETE'
@@ -698,6 +697,11 @@ export function AddressForm({
                     id='defaultAddress'
                     name='defaultAddress'
                     type='checkbox'
+                    style={{
+                        borderRadius: '0px !important',
+                        paddingLeft: '0px !important',
+                        width: '25px',
+                    }}
                 />
                 <label
                     htmlFor='defaultAddress'

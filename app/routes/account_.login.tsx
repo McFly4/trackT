@@ -58,7 +58,7 @@ export async function action({ request, context }: ActionFunctionArgs) {
         const { customerAccessToken } = customerAccessTokenCreate
         session.set('customerAccessToken', customerAccessToken)
 
-        return redirect('/', {
+        return redirect('/account', {
             headers: {
                 'Set-Cookie': await session.commit(),
             },

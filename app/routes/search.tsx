@@ -139,7 +139,11 @@ export default function SearchPage() {
                                     PreviousLink,
                                     isLoading,
                                 }) => (
-                                    <>
+                                    <div
+                                        style={{
+                                            paddingBottom: '50px',
+                                        }}
+                                    >
                                         <PreviousLink>
                                             <div>
                                                 <button>
@@ -167,7 +171,7 @@ export default function SearchPage() {
                                                 </button>
                                             </NextLink>
                                         </div>
-                                    </>
+                                    </div>
                                 )}
                             </Pagination>
                         )}

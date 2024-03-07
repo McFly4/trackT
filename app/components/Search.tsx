@@ -403,18 +403,25 @@ function PredictiveSearchResult({
     const categoryUrl = `/search?q=${
         searchTerm.current
     }&type=${pluralToSingularSearchType(type)}`
+
+    const [inList, setInList] = useState(false)
+
     return (
         <div className='predictive-search-result' key={type}>
             {/*<Link prefetch='intent' to={categoryUrl} onClick={goToSearchResult}>*/}
             {/*    <h5>{isSuggestions ? 'Suggestions' : type}</h5>*/}
             {/*</Link>*/}
-            <ul>
+            <ul
+                onMouseEnter={() => setInList(true)}
+                onMouseLeave={() => setInList(false)}
+            >
                 {items.map(
                     (item: NormalizedPredictiveSearchResultItem, index) => (
                         <SearchResultItem
                             goToSearchResult={goToSearchResult}
                             item={item}
                             key={item.id}
+                            inList={inList}
                         />
                     )
                 )}
@@ -427,7 +434,7 @@ type SearchResultItemProps = Pick<SearchResultTypeProps, 'goToSearchResult'> & {
     item: NormalizedPredictiveSearchResultItem
 }
 
-function SearchResultItem({ goToSearchResult, item }: any) {
+function SearchResultItem({ goToSearchResult, item, inList }: any) {
     const type = item.__typename
 
     const mapping = {
@@ -464,10 +471,7 @@ function SearchResultItem({ goToSearchResult, item }: any) {
                 onMouseEnter={() => handleMouseEnter(item.id)}
                 onMouseLeave={handleMouseLeave}
                 style={{
-                    opacity:
-                        hoveredIndex == null || hoveredIndex === item.id
-                            ? 1
-                            : 0.5,
+                    opacity: !inList ? 1 : hoveredIndex === item.id ? 1 : 0.5,
                 }}
             >
                 <Link onClick={goToSearchResult} to={item.url}>
@@ -501,6 +505,7 @@ function SearchResultItem({ goToSearchResult, item }: any) {
                         style={{
                             display: 'flex',
                             alignItems: 'center',
+                            paddingRight: '25px',
                         }}
                     >
                         {stickersData.map(

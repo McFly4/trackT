@@ -168,12 +168,13 @@ export default function ({ product }: any) {
                     ))}
                 </div>
                 {product.ooo?.value && <span>sold out</span>}
+                {product.soon?.value && <span>soon</span>}
 
                 <div
                     className='product-img-grid'
                     style={{
                         filter:
-                            product.ooo?.value == 'true'
+                            product.ooo?.value == 'true' || product.soon?.value
                                 ? 'opacity(0.2)'
                                 : 'none',
                     }}

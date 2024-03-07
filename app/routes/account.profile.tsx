@@ -246,7 +246,13 @@ export default function AccountProfile() {
                             </div>
                         </div>
                     </div>
-                    <div className='account-profile-marketing'>
+                    <div
+                        className='account-profile-marketing'
+                        style={{
+                            display: 'flex',
+                            alignItems: 'flex-start',
+                        }}
+                    >
                         <input
                             id='acceptsMarketing'
                             name='acceptsMarketing'
@@ -254,10 +260,26 @@ export default function AccountProfile() {
                             placeholder='Accept marketing'
                             aria-label='Accept marketing'
                             defaultChecked={customer.acceptsMarketing}
+                            style={{
+                                borderRadius: 'unset !important',
+                                paddingLeft: 'unset !important',
+                                width: '25px',
+                            }}
                         />
-                        <label htmlFor='acceptsMarketing'>
-                            &nbsp; Subscribed to marketing communications
-                        </label>
+                        <div
+                            style={{
+                                marginLeft: '15px',
+                            }}
+                        >
+                            <h5>Newsletter trackt</h5>
+                            <p>
+                                Soyez au cœur de l’action ! Inscrivez-vous pour
+                                des mises à jour exclusives, des tendances
+                                streetwear inédites <br />
+                                et des offres spéciales, directement dans votre
+                                boîte mail. Juste la crème de Trackt, sans spam
+                            </p>
+                        </div>
                     </div>
                     <br />
                     <div

@@ -154,8 +154,6 @@ function CartAside({ cart, pocketItems }: any) {
         }
     }, [isModalOpen])
 
-    console.log(pocket)
-
     return (
         <>
             {isModalOpen && (

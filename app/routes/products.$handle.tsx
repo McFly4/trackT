@@ -166,6 +166,7 @@ function BreadCrumb({ product }: { product: any }) {
     const productName = product?.title
     const colors = JSON.parse(product?.colors?.value) as any
     const firstColor = colors?.[0] ?? 'white'
+
     return (
         <div
             className='breadcrumb'
@@ -190,46 +191,11 @@ function BreadCrumb({ product }: { product: any }) {
                     paddingLeft: '80px',
                 }}
             >
-                <p
-                    style={
-                        firstColor === 'black'
-                            ? { color: 'white !important' }
-                            : { color: 'black !important' }
-                    }
-                >
+                <p>
                     {isMixte == 'true' ? 'Femme' : 'Homme'} &gt;{' '}
-                    <Link
-                        style={
-                            firstColor === 'black'
-                                ? { color: 'white !important' }
-                                : { color: 'black !important' }
-                        }
-                        to={'/search?q=' + type}
-                    >
-                        {type}
-                    </Link>{' '}
-                    &gt;{' '}
-                    <Link
-                        style={
-                            firstColor === 'black'
-                                ? { color: 'white !important' }
-                                : { color: 'black !important' }
-                        }
-                        to={'/search?q=' + vendor}
-                    >
-                        {vendor}
-                    </Link>{' '}
-                    &gt;{' '}
-                    <Link
-                        style={
-                            firstColor === 'black'
-                                ? { color: 'white !important' }
-                                : { color: 'black !important' }
-                        }
-                        to={'/search?q=' + collection}
-                    >
-                        {collection}
-                    </Link>{' '}
+                    <Link to={'/search?q=' + type}>{type}</Link> &gt;{' '}
+                    <Link to={'/search?q=' + vendor}>{vendor}</Link> &gt;{' '}
+                    <Link to={'/search?q=' + collection}>{collection}</Link>{' '}
                     &gt;{' '}
                     <Link to={'/products/' + product.handle}>
                         {productName}
@@ -970,13 +936,13 @@ function ProductPrice({ selectedVariant }: { selectedVariant: any }) {
                 ) : (
                     selectedVariant?.price && (
                         <div className='product-price-container'>
-                            {size == undefined ? (
+                            {size == undefined || size == 'OS' ? (
                                 <img
                                     src='/product/size/os.png'
                                     alt='price'
                                     style={{
-                                        width: 'unset !important',
-                                        height: 'unset !important',
+                                        width: '250px !important',
+                                        height: '250px !important',
                                     }}
                                 />
                             ) : size === 'UNIVERSEL' ? (
@@ -984,8 +950,8 @@ function ProductPrice({ selectedVariant }: { selectedVariant: any }) {
                                     src='/product/size/os.png'
                                     alt='price'
                                     style={{
-                                        width: 'unset !important',
-                                        height: 'unset !important',
+                                        width: '250px !important',
+                                        height: '250px !important',
                                     }}
                                 />
                             ) : (
@@ -1044,8 +1010,27 @@ function ProductForm({
     variants: Array<ProductVariantFragment>
 }) {
     const variantName = selectedVariant?.selectedOptions[0].value
+    const [isModalOpenToothbrush, setIsModalOpenToothbrush] = useState(false)
+
+    function toggleModalToothbrush() {
+        setIsModalOpenToothbrush(!isModalOpenToothbrush)
+    }
+
+    function handleOutsideClick(event: any) {
+        if (event.target === event.currentTarget) {
+            setIsModalOpenToothbrush(false)
+        }
+    }
+
     return (
         <div className='product-form'>
+            {isModalOpenToothbrush && (
+                <div className='dialog-overlay' onClick={handleOutsideClick}>
+                    <div className='dialog'>
+                        <ToggleModalToothbrush toggle={toggleModalToothbrush} />
+                    </div>
+                </div>
+            )}
             <VariantSelector
                 handle={product.handle}
                 options={product.options}
@@ -1081,7 +1066,12 @@ function ProductForm({
                             <h4>{variantName}</h4>
                         )}
                     </div>
-                    <button className='sizes-guid'>Guide des tailles</button>
+                    <button
+                        className='sizes-guid'
+                        onClick={toggleModalToothbrush}
+                    >
+                        Guide des tailles
+                    </button>
                 </div>
             )}
         </div>

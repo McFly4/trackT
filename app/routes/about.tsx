@@ -258,8 +258,19 @@ export default function About() {
                         authentique pour distinguer et identifier chaque taille.
                     </p>
                     <div className='a-third-stick-container'>
-                        <img src='/product/size/49.5.png' alt='size' />
-                        <img src='/product/size/40.png' alt='size' />
+                        <video muted autoPlay loop>
+                            0
+                            <source
+                                src='/about/tagprices.mp4'
+                                type='video/mp4'
+                            />
+                        </video>
+                        <video muted autoPlay loop>
+                            <source
+                                src='/about/tagprices2.mp4'
+                                type='video/mp4'
+                            />
+                        </video>
                     </div>
                     <div className='a-third-guid'>
                         <h2>Guide des tailles</h2>

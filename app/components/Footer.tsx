@@ -10,7 +10,7 @@ export function Footer(menu: FooterQuery) {
             </div>
             <div className='footer-menu'>
                 <h2>liens utiles</h2>
-                <Link to='/politics/legals'>
+                <Link to='/politics'>
                     <p>mentions légales</p>
                 </Link>
                 <p>RETOURS & REMBOURSEMENTS</p>
