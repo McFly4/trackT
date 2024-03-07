@@ -168,7 +168,7 @@ export default function ({ product }: any) {
                     ))}
                 </div>
                 {product.ooo?.value && <span>sold out</span>}
-                {product.soon?.value && <span>soon</span>}
+                {product.soon?.value && <span className='soon'>soon</span>}
 
                 <div
                     className='product-img-grid'

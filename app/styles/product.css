@@ -215,6 +215,19 @@
     background-color: #EE0A39;
     margin-left: 5px;
 }
+
+.product-price-container span.soon{
+    color: #fff;
+}
+
+.product-price-container span.soon:before{
+    background-color: #fff;
+}
+
+.product-price-container span.soon:after{
+    background-color: #fff;
+}
+
 .product-options h2{
     text-align: center;
     font-size: 30px;

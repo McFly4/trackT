@@ -22,6 +22,7 @@ import Adresses from './account.addresses'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import React from 'react'
 import cliSpinners from 'cli-spinners'
+import TrackT from '~/components/Common/TrackT'
 
 export type ActionResponse = {
     error: string | null
@@ -45,7 +46,9 @@ export async function loader({ context, params }: LoaderFunctionArgs) {
     //
     // const test = await context.storefront.query(GET_PRODUCTS_VIEWED)
 
-    return json({})
+    const products = await context.storefront.query(TRACKT)
+
+    return defer({ products })
 }
 
 export async function action({ request, context }: ActionFunctionArgs) {
@@ -123,8 +126,10 @@ export async function action({ request, context }: ActionFunctionArgs) {
         return json({ error: error.message, customer: null }, { status: 400 })
     }
 }
-
 export default function AccountProfile() {
+    const { products } = useLoaderData<typeof loader>()
+    const productsList =
+        products?.metaobjects?.nodes[0]?.field?.references?.nodes
     const account = useOutletContext<{ customer: CustomerFragment }>()
     const { state } = useNavigation()
     const action = useActionData<ActionResponse>()
@@ -436,31 +441,7 @@ export default function AccountProfile() {
                     </div>
                 </div>
             </div>
-            <div className='foryou'>
-                <h2>Articles pour vous</h2>
-                <div className='foryou-container'>
-                    <div className='foryou-container-item'>
-                        <img src='/images/for-you-1.png' alt='' />
-                        <p>TrackT x Nike Air Force 1</p>
-                        <p>€ 150</p>
-                    </div>
-                    <div className='foryou-container-item'>
-                        <img src='/images/for-you-2.png' alt='' />
-                        <p>TrackT x Nike Air Force 1</p>
-                        <p>€ 150</p>
-                    </div>
-                    <div className='foryou-container-item'>
-                        <img src='/images/for-you-3.png' alt='' />
-                        <p>TrackT x Nike Air Force 1</p>
-                        <p>€ 150</p>
-                    </div>
-                    <div className='foryou-container-item'>
-                        <img src='/images/for-you-4.png' alt='' />
-                        <p>TrackT x Nike Air Force 1</p>
-                        <p>€ 150</p>
-                    </div>
-                </div>
-            </div>
+            <TrackT products={productsList} />
         </>
     )
 }
@@ -546,3 +527,73 @@ const CUSTOMER_UPDATE_MUTATION = `#graphql
 //   }
 // }
 // ` as const
+
+const TRACKT = `#graphql
+query MetaObjects {
+  metaobjects(first: 20, type: "home") {
+    nodes {
+      field(key: "products") {
+        references(first: 20) {
+          nodes {
+            ... on Product {
+              title
+              productType
+              handle
+              vendor
+              toothBrush: metafield(namespace: "custom", key: "toothbrush") {
+                key
+                value
+              }
+              ooo: metafield(namespace: "custom", key: "outofstock") {
+                key
+                value
+              }
+              new: metafield(namespace: "custom", key: "new") {
+                key
+                value
+              }
+              ship: metafield(namespace: "custom", key: "fastShip") {
+                key
+                value
+              }
+              release: metafield(namespace: "custom", key: "release") {
+                key
+                value
+              }
+              promotion: metafield(namespace: "custom", key: "promotion") {
+                key
+                value
+              }
+              hotDeal: metafield(namespace: "custom", key: "hotDeal") {
+                key
+                value
+              }
+              features: metafield(namespace: "custom", key: "features") {
+                key
+                value
+              }
+              manwoman: metafield(namespace: "custom", key: "manwoman") {
+                key
+                value
+              }
+                        soon: metafield(namespace: "custom", key: "soon") {
+            key
+            value
+          }
+                    box_sizing: metafield(namespace: "custom", key: "box_sizing") {
+            key
+            value
+          }
+              images(first: 1) {
+                nodes {
+                  url
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+` as const

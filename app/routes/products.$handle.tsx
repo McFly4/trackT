@@ -696,6 +696,8 @@ function ToggleModalToothbrush(toggle: any) {
                                     value === 'Small'
                                         ? 'none'
                                         : 'brightness(0.4)',
+                                backgroundColor:
+                                    value === 'Small' ? 'unset' : '#262626',
                             }
                         }
                     >
@@ -714,6 +716,8 @@ function ToggleModalToothbrush(toggle: any) {
                                     value === 'Medium'
                                         ? 'none'
                                         : 'brightness(0.4)',
+                                backgroundColor:
+                                    value === 'Medium' ? 'unset' : '#262626',
                             }
                         }
                     >
@@ -732,6 +736,8 @@ function ToggleModalToothbrush(toggle: any) {
                                     value === 'Over'
                                         ? 'none'
                                         : 'brightness(0.4)',
+                                backgroundColor:
+                                    value === 'Over' ? 'unset' : '#262626',
                             }
                         }
                     >
@@ -1547,6 +1553,10 @@ query MetaObjects {
                 value
               }
                         soon: metafield(namespace: "custom", key: "soon") {
+            key
+            value
+          }
+                    box_sizing: metafield(namespace: "custom", key: "box_sizing") {
             key
             value
           }

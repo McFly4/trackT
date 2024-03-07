@@ -2,8 +2,11 @@ import React, { useRef } from 'react'
 import MainProduct from '~/components/Common/mainProduct'
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
 import { Scrollbar } from 'swiper/modules'
+import { useLocation } from '@remix-run/react'
 
 export default function TrackT(products: any) {
+    const location = useLocation()
+
     const swiperRef = useRef<any>(null)
 
     const nexto = () => {
@@ -15,9 +18,21 @@ export default function TrackT(products: any) {
     }
 
     return (
-        <div className='trackT'>
+        <div
+            className='trackT'
+            style={{
+                margin:
+                    location.pathname === '/account/profile'
+                        ? '50px 50px 0 0'
+                        : '',
+            }}
+        >
             <div className='trackT-header'>
-                <h2>Panel trackt</h2>
+                <h2>
+                    {location.pathname === '/account/profile'
+                        ? 'APPAREMMENT, CES ARTICLES NE VOUS ONT PAS LAISSÉ INDIFFÉRENTS'
+                        : 'TrackT'}
+                </h2>
                 <NavButtons next={nexto} previous={previo} />
             </div>
             <Swiper
