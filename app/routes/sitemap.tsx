@@ -1,4 +1,23 @@
+import { json, LoaderFunctionArgs } from '@shopify/remix-oxygen'
+import { useLoaderData, Link } from '@remix-run/react'
+
+export async function loader({ context }: LoaderFunctionArgs) {
+    const products = await context.storefront.query(ALL_PRODUCTS_QUERY)
+
+    return json({ products })
+}
+
 export default function SiteMap() {
+    const { products } = useLoaderData<typeof loader>()
+    const allProducts = products?.products?.edges
+
+    const numDivs = 5
+
+    const sliceSize = Math.ceil(allProducts.length / numDivs)
+
+    const productSlices = Array.from({ length: numDivs }, (_, index) =>
+        allProducts.slice(index * sliceSize, (index + 1) * sliceSize)
+    )
     return (
         <div
             style={{
@@ -23,24 +42,38 @@ export default function SiteMap() {
                     <p>chez vous en 48h</p>
                     <p>en promo</p>
                 </div>
-                <div className='sitemap-content'>
-                    <p>NIKE DUNK LOW SYRACUSE</p>
-                    <p>NIKE DUNK LOW PURPLE</p>
-                </div>
-                <div className='sitemap-content'>
-                    <p>NIKE DUNK HIGH UNIVERSITY BLUE</p>
-                    <p>NIKE JORDAN 1 HIGH DUNK HIGH LEMON HAZE</p>
-                </div>
-                <div className='sitemap-content'>
-                    <p>NIKE DUNK LOW SB SUPER NANA BLUE</p>
-                </div>
-                <div className='sitemap-content'>
-                    <p>ADIDAS YEEZY BOOST 350 ZEBRA</p>
-                </div>
-                <div className='sitemap-content'>
-                    <p>NIKE AIR JORDAN 3 OFF NOIRE</p>
-                </div>
+                {productSlices.map((slice, index) => (
+                    <div
+                        key={index}
+                        className='sitemap-content'
+                        style={{
+                            maxWidth: '280px',
+                        }}
+                    >
+                        {slice.map((product: any, productIndex: any) => (
+                            <Link
+                                to={`/products/${product.node.handle}`}
+                                key={productIndex}
+                            >
+                                <p key={productIndex}>{product.node.title}</p>
+                            </Link>
+                        ))}
+                    </div>
+                ))}
             </div>
         </div>
     )
 }
+
+const ALL_PRODUCTS_QUERY = `#graphql
+query {
+    products(first: 250) {
+        edges {
+            node {
+                id
+                title
+                handle
+            }
+        }
+    }
+}`
