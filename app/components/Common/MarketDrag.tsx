@@ -31,7 +31,14 @@ export default function MarketDrag() {
                                 alignItems: 'center',
                             }}
                         >
-                            <img src='/component/green.png' alt='green' />
+                            <img
+                                src='/component/green.png'
+                                alt='green'
+                                style={{
+                                    width: '150px',
+                                    height: '260px',
+                                }}
+                            />
                             <div
                                 style={{
                                     paddingLeft: '60px',
@@ -77,7 +84,14 @@ export default function MarketDrag() {
                                 alignItems: 'center',
                             }}
                         >
-                            <img src='/component/violet.png' alt='green' />
+                            <img
+                                src='/component/violet.png'
+                                alt='green'
+                                style={{
+                                    width: '150px',
+                                    height: '260px',
+                                }}
+                            />
                             <div
                                 style={{
                                     paddingLeft: '60px',
@@ -119,7 +133,14 @@ export default function MarketDrag() {
                                 alignItems: 'center',
                             }}
                         >
-                            <img src='/component/yellow.png' alt='green' />
+                            <img
+                                src='/component/yellow.png'
+                                alt='green'
+                                style={{
+                                    width: '150px',
+                                    height: '260px',
+                                }}
+                            />
                             <div
                                 style={{
                                     paddingLeft: '60px',
@@ -162,7 +183,14 @@ export default function MarketDrag() {
                                 alignItems: 'center',
                             }}
                         >
-                            <img src='/component/red.png' alt='green' />
+                            <img
+                                src='/component/red.png'
+                                alt='green'
+                                style={{
+                                    width: '150px',
+                                    height: '260px',
+                                }}
+                            />
                             <div
                                 style={{
                                     paddingLeft: '60px',

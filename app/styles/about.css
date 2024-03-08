@@ -247,3 +247,14 @@ text-align: center;
 .a-assets{
     margin-top: 60px;
 }
+
+.a-assets-container{
+    width: 776px;
+    height: 354px;
+    border: 2px solid #fff;
+}
+
+.a-assets-container div:not(:last-child){
+    border-bottom: 2px solid #fff;
+    padding-top: 2px;
+}

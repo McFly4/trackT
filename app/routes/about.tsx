@@ -511,7 +511,41 @@ export default function About() {
                         marginTop: '300px',
                     }}
                 >
-                    <img src='/about/independant1.png' alt='asset1' />
+                    <div className='a-assets-container'>
+                        <div>
+                            <img src='/about/independant.svg' alt='By trackT' />
+                        </div>
+                        <div
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                            }}
+                        >
+                            <img src='/about/byTrackt.svg' alt='By trackT' />
+                            <img src='/about/c.svg' alt='Copyright' />
+                        </div>
+                        <div>
+                            <img src='/about/brand.svg' alt='By trackT' />
+                        </div>
+                        <div>
+                            <p>
+                                Trackt s’apprête à lancer « Independant Brand »,
+                                une catégorie exclusive de notre boutique dédiée
+                                à valoriser des œuvres d’artistes et de marques
+                                indépendantes. Sélectionnés avec soin par notre
+                                direction artistique, ces articles incarnent et
+                                amplifient l’esprit rebelle et libre de Trackt.
+                                De tableaux grunge, objets uniques, accessoires
+                                wtf, textiles… seront disponibles en quantités
+                                extrêmement limitées. Cette initiative est notre
+                                engagement à promouvoir la diversité créative et
+                                à offrir à notre communauté des pièces
+                                véritablement uniques et expressives, en
+                                parfaite harmonie avec l’audace et l’originalité
+                                de la marque Trackt.
+                            </p>
+                        </div>
+                    </div>
                     <img
                         src='/about/independant1.png'
                         alt='asset1'

@@ -113,6 +113,7 @@ export default function SearchPage() {
                         style={{
                             marginTop: '70px',
                             marginLeft: 'unset',
+                            paddingLeft: 'unset !important',
                         }}
                         className='panel-container'
                     >
@@ -257,6 +258,10 @@ fragment SearchProduct on Product {
     key
     value
   }
+  box: metafield(namespace: "custom", key: "box_sizing") {
+    key
+    value
+  }
   variants(first: 1) {
     nodes {
       id
@@ -350,6 +355,10 @@ query Collection {
             value
           }
           features: metafield(namespace: "custom", key: "features") {
+            key
+            value
+          }
+          box: metafield(namespace: "custom", key: "box_sizing") {
             key
             value
           }

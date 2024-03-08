@@ -194,8 +194,18 @@ function BreadCrumb({ product }: { product: any }) {
                 }}
             >
                 <p>
-                    {isMixte == 'true' ? 'Femme' : 'Homme'} &gt;{' '}
-                    <Link to={'/search?q=' + type}>{type}</Link> &gt;{' '}
+                    <Link
+                        to={
+                            '/filtered?' + isMixte == 'true'
+                                ? 'manwoman=false&collection=All'
+                                : isMixte == undefined
+                                ? 'collection=All'
+                                : 'manwoman=true&collection=All'
+                        }
+                    >
+                        {isMixte == 'true' ? 'Femme' : 'Homme'}
+                    </Link>{' '}
+                    &gt; <Link to={'/search?q=' + type}>{type}</Link> &gt;{' '}
                     <Link to={'/search?q=' + vendor}>{vendor}</Link> &gt;{' '}
                     <Link to={'/search?q=' + collection}>{collection}</Link>{' '}
                     &gt;{' '}
@@ -1389,7 +1399,7 @@ fragment Product on Product {
     key
     value
   }
-  box_sizing: metafield(namespace: "custom", key: "box_sizing") {
+  box: metafield(namespace: "custom", key: "box_sizing") {
     key
     value
   }
@@ -1451,7 +1461,7 @@ fragment Product on Product {
             key
             value
           }
-          box_sizing: metafield(namespace: "custom", key: "box_sizing") {
+          box: metafield(namespace: "custom", key: "box_sizing") {
             key
             value
           }
@@ -1558,14 +1568,14 @@ query MetaObjects {
                 key
                 value
               }
-                        soon: metafield(namespace: "custom", key: "soon") {
-            key
-            value
-          }
-                    box_sizing: metafield(namespace: "custom", key: "box_sizing") {
-            key
-            value
-          }
+              soon: metafield(namespace: "custom", key: "soon") {
+                key
+                value
+              }
+              box: metafield(namespace: "custom", key: "box_sizing") {
+                key
+                value
+              }
               images(first: 1) {
                 nodes {
                   url

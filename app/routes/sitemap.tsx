@@ -28,19 +28,39 @@ export default function SiteMap() {
             <h1>Sitemap</h1>
             <div className='sitemap-container'>
                 <div className='sitemap-content'>
-                    <p>trackt</p>
-                    <p>politique</p>
-                    <p>à propos de trackt</p>
-                    <p>infos légales</p>
-                    <p>retours & remboursements</p>
+                    <Link to='/'>
+                        <p>trackt</p>
+                    </Link>
+                    <Link to='/politics'>
+                        <p>politique</p>
+                    </Link>
+                    <Link to='/about'>
+                        <p>à propos de trackt</p>
+                    </Link>
+                    <Link to='/politics'>
+                        <p>infos légales</p>
+                    </Link>
+                    <Link to='/retous'>
+                        <p>retours & remboursements</p>
+                    </Link>
                     <br />
                     <br />
                     <p>indépendant brand</p>
-                    <p>exclusivité item</p>
-                    <p>hot deal</p>
-                    <p>nouveautés</p>
-                    <p>chez vous en 48h</p>
-                    <p>en promo</p>
+                    <Link to='/filtered?release=true'>
+                        <p>exclusive item</p>
+                    </Link>
+                    <Link to='/filtered?hotdeal=true'>
+                        <p>hot deal</p>
+                    </Link>
+                    <Link to='/filtered?new=true'>
+                        <p>nouveautés</p>
+                    </Link>
+                    <Link to='/filtered?fast=true'>
+                        <p>chez vous en 24h</p>
+                    </Link>
+                    <Link to='/filtered?promotion=true'>
+                        <p>en promo</p>
+                    </Link>
                 </div>
                 {productSlices.map((slice, index) => (
                     <div

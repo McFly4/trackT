@@ -205,18 +205,12 @@ export default function filtered() {
                 <div className='search'>
                     <div className='search-container'>
                         <div className='search-txt'>
-                            <h1>VOTRE RECHERCHE PERSONNALISÉE CHEZ TRACKT</h1>
+                            <h1>VOTRE RECHERCHE FILTRÉE CHEZ TRACKT</h1>
                             <p>
-                                Vous avez plongé dans l’univers de Trackt, et
-                                voici ce que nous avons déniché pour vous. Notre
-                                sélection raffinée reflète votre recherche et
-                                les filtres que vous avez appliqués, vous
-                                offrant une gamme de produits qui s’alignent
-                                avec votre quête de style et de qualité. De la
-                                touche classique des Jordan 1 aux dernières
-                                tendances streetwear, chaque pièce de notre
-                                collection a été soigneusement sélectionnée pour
-                                répondre à vos attentes de mode urbaine.
+                                Utilisez nos filtres pour affiner encore
+                                davantage votre sélection – triez par taille,
+                                couleur, style ou modèles – et découvrez des
+                                pièces qui correspondent à votre identité.
                             </p>
                             <a href='#search-aside'>
                                 <button>Nouvelle recherche</button>
