@@ -187,6 +187,11 @@
     width: 100%;
 }
 
+.product-size-os{
+    width: 250px !important;
+    height: 250px !important;
+}
+
 
 .product-price-container span{
     color: #EE0A39;

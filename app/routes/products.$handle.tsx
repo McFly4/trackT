@@ -958,19 +958,12 @@ function ProductPrice({ selectedVariant }: { selectedVariant: any }) {
                         <div className='product-price-container'>
                             {size == undefined ||
                             size == 'OS' ||
-                            size == 'One Size' ? (
+                            size == 'One Size' ||
+                            size == 'UNIVERSEL' ? (
                                 <img
                                     src='/product/size/os.png'
                                     alt='price'
-                                    style={{
-                                        width: '250px !important',
-                                        height: '250px !important',
-                                    }}
-                                />
-                            ) : size === 'UNIVERSEL' ? (
-                                <img
-                                    src='/product/size/os.png'
-                                    alt='price'
+                                    className='product-size-os'
                                     style={{
                                         width: '250px !important',
                                         height: '250px !important',
