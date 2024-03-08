@@ -10,9 +10,9 @@ export default function Politics() {
             className='politics'
         >
             <Menu />
-            <div className='legals'>
+            <div className='legals' id='legals'>
                 <h1>infos légales et conditions</h1>
-                <h2 id='legals'>Mentions légales</h2>
+                <h2>Mentions légales</h2>
                 <p
                     style={{
                         marginTop: '50px',
@@ -29,12 +29,13 @@ export default function Politics() {
                     <br />
                     Les directeurs de publication sont Monsieur Chahinian Jules,
                     Edgar Beaufils et Nathan Bijaoui
-                    <br />
+                    <br id='generals' />
+                    <br id='generals' />
                     <br />
                     Ce site est hébergé par SHOPIFY INC
                 </p>
                 <span className='separator'></span>
-                <h2 id='generals'>Conditions générales de vente</h2>
+                <h2>Conditions générales de vente</h2>
                 <p>Version mise à jour le 30/01/2024</p>
                 <br />
                 <br />
@@ -279,7 +280,7 @@ export default function Politics() {
                 </p>
                 <br />
                 <br />
-                <h4>Langues</h4>
+                <h4 id='cookies'>Langues</h4>
                 <br />
                 <p>
                     Les CGV sont disponibles en français. D’autres versions
@@ -291,7 +292,7 @@ export default function Politics() {
                     tous les emails dans les meilleurs délais.
                 </p>
                 <span className='separator'></span>
-                <h2 id='cookies'>Politique de cookies</h2>
+                <h2>Politique de cookies</h2>
                 <p>Version mise à jour le 30/01/2024</p>
                 <br />
                 <br />
@@ -314,14 +315,14 @@ export default function Politics() {
                     des cookies sont utilisés. Veuillez noter que si vous
                     choisissez de bloquer certains cookies, cela peut affecter
                     le fonctionnement du site.
-                    <br />
+                    <br id='usage' />
                     <br />
                     Consentement : En utilisant notre site, vous consentez à
                     l’utilisation de cookies conformément à notre politique de
                     cookies, à moins de les avoir désactivés.
                 </p>
                 <span className='separator'></span>
-                <h2 id='usage'>CONDITONS GÉNÉRALES D’UTILISATIONS</h2>
+                <h2>CONDITONS GÉNÉRALES D’UTILISATIONS</h2>
                 <p>Verison mise à jour le 30/01/2024</p>
                 <br />
                 <br />
@@ -446,7 +447,7 @@ export default function Politics() {
                 </p>
                 <br />
                 <br />
-                <h4>Validité des cgu</h4>
+                <h4 id='politics'>Validité des cgu</h4>
                 <br />
                 <p>
                     Ces CGU restent valides et applicables même si certaines de
@@ -455,7 +456,7 @@ export default function Politics() {
                     continueront d’être en vigueur.
                 </p>
                 <span className='separator'></span>
-                <h2 id='politics'>politique de confidentialité</h2>
+                <h2>politique de confidentialité</h2>
                 <p>Version mise à jour le 30/01/2024</p>3
                 <br />
                 <br />

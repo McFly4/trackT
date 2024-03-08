@@ -51,6 +51,7 @@ export function CartMain({
                             flexDirection: 'column',
                             alignItems: 'center',
                             justifyContent: 'center',
+                            width: '450px',
                         }}
                     >
                         {cartTotalPrice <= 250 ? (
