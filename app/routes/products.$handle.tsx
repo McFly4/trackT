@@ -593,7 +593,10 @@ function ProductMain({
                 </div>
             </div>
             <div className='product-main-head'>
-                <ProductPrice selectedVariant={selectedVariant} />
+                <ProductPrice
+                    selectedVariant={selectedVariant}
+                    soon={product.soon}
+                />
                 <Suspense
                     fallback={
                         <ProductForm
@@ -869,7 +872,13 @@ function ToggleModal(toggle: any) {
                             opacity: isOoo ? '1' : '0.2',
                         }}
                     >
-                        <img src='/product/stickers/ooo.png' alt='ooo' />
+                        <img
+                            src='/product/stickers/ooo.png'
+                            alt='ooo'
+                            style={{
+                                width: '170px',
+                            }}
+                        />
                         <p>
                             Livraison immédiate, cette sélection est dédiée aux
                             articles expédiés en 48H puisque nous possédons
@@ -927,34 +936,50 @@ function ToggleModal(toggle: any) {
     )
 }
 
-function ProductPrice({ selectedVariant }: { selectedVariant: any }) {
-    const size = selectedVariant?.selectedOptions?.find(
+function ProductPrice(selectedVariant: any) {
+    const size = selectedVariant?.selectedVariant?.selectedOptions?.find(
         (option: any) =>
             option.name === 'Size' ||
             option.name === 'Taille' ||
             option.name === 'Title'
     )?.value
 
+    console.log(selectedVariant?.soon?.value)
+
     return (
         <div className='product-price'>
             <h2>Price</h2>
-            {selectedVariant?.availableForSale ? (
-                selectedVariant?.compareAtPrice ? (
+            {selectedVariant?.soon?.value === 'true' ? (
+                <div className='product-price-container'>
+                    <img src='/product/stickers/soon.png' alt='soon' />
+                    <span className='soon'>soon</span>
+                </div>
+            ) : selectedVariant?.selectedVariant?.availableForSale ? (
+                selectedVariant?.selectedVariant?.compareAtPrice ? (
                     <>
                         <p>Sale</p>
 
                         <br />
                         <div className='product-price-on-sale'>
-                            {selectedVariant ? (
-                                <Money data={selectedVariant.price} />
+                            {selectedVariant?.selectedVariant ? (
+                                <Money
+                                    data={
+                                        selectedVariant?.selectedVariant?.price
+                                    }
+                                />
                             ) : null}
                             <s>
-                                <Money data={selectedVariant.compareAtPrice} />
+                                <Money
+                                    data={
+                                        selectedVariant?.selectedVariant
+                                            ?.compareAtPrice
+                                    }
+                                />
                             </s>
                         </div>
                     </>
                 ) : (
-                    selectedVariant?.price && (
+                    selectedVariant?.selectedVariant?.price && (
                         <div className='product-price-container'>
                             {size == undefined ||
                             size == 'OS' ||
@@ -983,23 +1008,36 @@ function ProductPrice({ selectedVariant }: { selectedVariant: any }) {
                                     }}
                                 />
                             )}
-                            <Money data={selectedVariant?.price} />
+                            <Money
+                                data={selectedVariant?.selectedVariant?.price}
+                            />
                         </div>
                     )
                 )
             ) : (
                 <div className='product-price-container'>
-                    <img src='/product/stickers/ooo.png' alt='out of stock' />
+                    <img
+                        src='/product/stickers/ooo.png'
+                        alt='out of stock'
+                        style={{
+                            width: '170px',
+                        }}
+                    />
                     <span>sold out</span>
                 </div>
             )}
             <AddToCartButton
-                disabled={!selectedVariant || !selectedVariant.availableForSale}
+                disabled={
+                    !selectedVariant?.selectedVariant ||
+                    !selectedVariant?.selectedVariant?.availableForSale ||
+                    selectedVariant?.soon?.value === 'true'
+                }
                 lines={
-                    selectedVariant
+                    selectedVariant?.selectedVariant
                         ? [
                               {
-                                  merchandiseId: selectedVariant.id,
+                                  merchandiseId:
+                                      selectedVariant?.selectedVariant?.id,
                                   quantity: 1,
                               },
                           ]
@@ -1396,6 +1434,10 @@ fragment Product on Product {
     key
     value
   }
+  soon: metafield(namespace: "custom", key: "soon") {
+    key
+    value
+  }
   collections(first: 1) {
     nodes {
       title
@@ -1458,7 +1500,7 @@ fragment Product on Product {
             key
             value
           }
-            soon: metafield(namespace: "custom", key: "soon") {
+          soon: metafield(namespace: "custom", key: "soon") {
             key
             value
           }
