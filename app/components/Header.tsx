@@ -39,7 +39,7 @@ export function Header({ header, isLoggedIn, cart }: HeaderProps) {
                             loop
                             muted
                             playsInline
-                            src='/logo.mp4'
+                            src='/logoVert.mp4'
                         >
                             <img
                                 src={header?.shop?.brand?.logo?.image?.url}

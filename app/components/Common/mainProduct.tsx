@@ -175,7 +175,7 @@ export default function ({ product }: any) {
                     style={{
                         filter:
                             product.ooo?.value == 'true' || product.soon?.value
-                                ? 'opacity(0.2)'
+                                ? 'opacity(0.15)'
                                 : 'none',
                     }}
                 >
@@ -187,7 +187,8 @@ export default function ({ product }: any) {
                             src={product.images?.nodes[0].url}
                             alt={product.title}
                             className={
-                                product.ooo?.value == 'true'
+                                product.ooo?.value == 'true' ||
+                                product.soon?.value
                                     ? 'product-img product-ooo'
                                     : 'product-img'
                             }

@@ -444,6 +444,7 @@ function SearchResultItem({ goToSearchResult, item, inList }: any) {
         ship: item.ship,
         promotion: item.promotion,
         ooo: item.ooo,
+        soon: item.soon,
     } as any
 
     const stickersData = Object.keys(mapping).reduce((acc: any, key: any) => {
@@ -452,6 +453,8 @@ function SearchResultItem({ goToSearchResult, item, inList }: any) {
         }
         return acc
     }, [])
+
+    console.log(stickersData)
 
     const [hoveredIndex, setHoveredIndex] = useState(null)
 

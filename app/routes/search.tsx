@@ -262,6 +262,10 @@ fragment SearchProduct on Product {
     key
     value
   }
+ soon: metafield(namespace: "custom", key: "soon") {
+    key
+    value
+  }
   variants(first: 1) {
     nodes {
       id
@@ -359,6 +363,10 @@ query Collection {
             value
           }
           box: metafield(namespace: "custom", key: "box_sizing") {
+            key
+            value
+          }
+          soon: metafield(namespace: "custom", key: "soon") {
             key
             value
           }

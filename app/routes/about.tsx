@@ -31,45 +31,59 @@ export default function About() {
                     nos collaborations avec des artistes/marques indépendantes.
                 </p>
                 <div className='a-futur-double'>
-                    <div className='a-futur-double-item'>
-                        <h2>L’EXPÉRIENCE FUTURISTE DU STREETWEAR</h2>
-                    </div>
-                    <div className='a-futur-double-item'>
-                        <h2>Vision 2025</h2>
-                    </div>
+                    <a href='#futur'>
+                        <div className='a-futur-double-item'>
+                            <h2>L’EXPÉRIENCE FUTURISTE DU STREETWEAR</h2>
+                        </div>
+                    </a>
+                    <a href='#vision'>
+                        <div className='a-futur-double-item'>
+                            <h2>Vision 2025</h2>
+                        </div>
+                    </a>
                 </div>
             </div>
-            <div className='a-first'>
-                <p>
-                    Trackt transforme votre expérience d’achat en une aventure
-                    immersive et créative, réinventant ainsi l’univers du
-                    streetwear d’un oeil futuriste.
-                </p>
-                <h1>L’EXPÉRIENCE FUTURISTE DU STREETWEAR</h1>
-                <div
-                    style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        margin: '40px 0',
-                    }}
-                >
-                    <img src='/about/1.png' alt='about' />
+            <div className='a-first' id='futur'>
+                <div className='a-first-container'>
+                    <p>
+                        Trackt transforme votre expérience d’achat en une
+                        aventure immersive et créative, réinventant ainsi
+                        l’univers du streetwear d’un oeil futuriste.
+                    </p>
+                    <h1>L’EXPÉRIENCE FUTURISTE DU STREETWEAR</h1>
+                    <div
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            margin: '40px 0',
+                        }}
+                    >
+                        <img src='/about/1.png' alt='about' />
+                    </div>
+                    <h2>Expérience d'achat immersive</h2>
+                    <p
+                        style={{
+                            textAlign: 'center',
+                            marginTop: '20px',
+                        }}
+                    >
+                        Notre marque été pensée pour que vous vous sentiez en
+                        immersion dans l’univers du streetwear. Trackt développe
+                        son propre style à travers son shop, sa communication et
+                        votre expérience d’achat. Chaque étape vous réserve une
+                        surprise, de la découverte de la marque à l’unboxing de
+                        votre item TrackT
+                    </p>
                 </div>
-                <h2>Expérience d'achat immersive</h2>
-                <p
-                    style={{
-                        textAlign: 'center',
-                        marginTop: '20px',
-                    }}
-                >
-                    Notre marque été pensée pour que vous vous sentiez en
-                    immersion dans l’univers du streetwear. Trackt développe son
-                    propre style à travers son shop, sa communication et votre
-                    expérience d’achat. Chaque étape vous réserve une surprise,
-                    de la découverte de la marque à l’unboxing de votre item
-                    TrackT
-                </p>
+                <div className='a-first-video'>
+                    <video muted autoPlay loop>
+                        <source
+                            src='/about/TracktHistory.mp4'
+                            type='video/mp4'
+                        />
+                    </video>
+                </div>
             </div>
             <div className='a-second'>
                 <div
@@ -427,8 +441,9 @@ export default function About() {
                         </p>
                     </div>
                 </div>
+                <div className='a-fourth-trackt' id='vision'></div>
+
                 <TrackT products={productsList} />
-                <div className='a-fourth-trackt'></div>
             </div>
             <div className='a-vision'>
                 <h2>Vision trackT 2025</h2>

@@ -13,7 +13,9 @@ export function Footer(menu: FooterQuery) {
                 <Link to='/politics'>
                     <p>mentions légales</p>
                 </Link>
-                <p>RETOURS & REMBOURSEMENTS</p>
+                <Link to='/retours'>
+                    <p>RETOURS & REMBOURSEMENTS</p>
+                </Link>
                 <Link to='/about'>
                     <p>
                         FAQ

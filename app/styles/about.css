@@ -12,8 +12,12 @@
     width: 100%;
 }
 
-.a-futur-double div{
+.a-futur-double a{
     width: 50%;
+}
+
+.a-futur-double div{
+    width: 100%;
     height: 400px;
     position: relative;
     overflow: hidden;
@@ -43,21 +47,29 @@
     filter: none; /* Supprimer le flou au survol */
 }
 
-.a-futur-double-item:nth-child(1)::before {
+.a-futur-double a:nth-child(1) div::before {
     background-image: url(public/about/experience.png);
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-.a-futur-double-item:nth-child(2)::before {
+.a-futur-double a:nth-child(2) div::before {
     background-image: url(public/about/2025.png);
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-.a-first{
+.a-first-container{
     width: 80%;
     margin: 200px auto;
+}
+
+.a-first-video{
+    margin-bottom: 100px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+
 }
 
 .a-first h1{

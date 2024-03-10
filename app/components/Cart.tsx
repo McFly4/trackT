@@ -328,12 +328,14 @@ function CartLinePrice({
 
     const moneyV2 =
         priceType === 'regular'
-            ? line.cost.totalAmount
+            ? line.cost.amountPerQuantity
             : line.cost.compareAtAmountPerQuantity
 
     if (moneyV2 == null) {
         return null
     }
+
+    console.log(line.cost)
 
     return (
         <div
@@ -370,6 +372,7 @@ export function CartEmpty({
                 alignItems: 'center',
                 justifyContent: 'center',
                 height: '100%',
+                marginLeft: '85px',
             }}
         >
             <img

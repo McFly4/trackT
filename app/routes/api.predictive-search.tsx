@@ -184,6 +184,7 @@ export function normalizePredictiveSearchResults(
                     release: product.release,
                     hotDeal: product.hotDeal,
                     promotion: product.promotion,
+                    soon: product.soon,
                 }
             }),
         })
@@ -317,6 +318,10 @@ const PREDICTIVE_SEARCH_QUERY = `#graphql
       key
       value
     }
+    soon: metafield(namespace: "custom", key: "soon") {
+        key
+        value
+  }
     variants(first: 1) {
       nodes {
         id

@@ -707,12 +707,10 @@ function ToggleModalToothbrush(toggle: any) {
                         className='modal-stickers-body-item '
                         style={
                             value && {
-                                filter:
-                                    value === 'Small'
-                                        ? 'none'
-                                        : 'brightness(0.4)',
                                 backgroundColor:
-                                    value === 'Small' ? 'unset' : '#262626',
+                                    value === 'Small'
+                                        ? 'unset'
+                                        : 'rgb(0 0 0 / 40%)',
                             }
                         }
                     >
@@ -727,12 +725,10 @@ function ToggleModalToothbrush(toggle: any) {
                         className='modal-stickers-body-item'
                         style={
                             value && {
-                                filter:
-                                    value === 'Medium'
-                                        ? 'none'
-                                        : 'brightness(0.4)',
                                 backgroundColor:
-                                    value === 'Medium' ? 'unset' : '#262626',
+                                    value === 'Medium'
+                                        ? 'unset'
+                                        : 'rgb(0 0 0 / 40%)',
                             }
                         }
                     >
@@ -747,12 +743,10 @@ function ToggleModalToothbrush(toggle: any) {
                         className='modal-stickers-body-item'
                         style={
                             value && {
-                                filter:
-                                    value === 'Over'
-                                        ? 'none'
-                                        : 'brightness(0.4)',
                                 backgroundColor:
-                                    value === 'Over' ? 'unset' : '#262626',
+                                    value === 'Over'
+                                        ? 'unset'
+                                        : 'rgb(0 0 0 / 40%)',
                             }
                         }
                     >
@@ -838,6 +832,22 @@ function ToggleModal(toggle: any) {
                     <div
                         className='modal-stickers-body-item'
                         style={{
+                            opacity: isRelease ? '1' : '0.2',
+                        }}
+                    >
+                        <img
+                            src='/product/stickers/release.png'
+                            alt='release'
+                        />
+                        <p>
+                            Accédez à la crème de la crème avec nos sorties
+                            « Exclusive item ». Ces articles premium définissent
+                            les standards du streetwear haut de gamme.
+                        </p>
+                    </div>
+                    <div
+                        className='modal-stickers-body-item'
+                        style={{
                             opacity: isHotDeal ? '1' : '0.2',
                         }}
                     >
@@ -846,12 +856,13 @@ function ToggleModal(toggle: any) {
                             alt='hotDeal'
                         />
                         <p>
-                            Ces articles prisés sont actuellement en rupture de
-                            stock, victimes de leur succès dans l’univers du
-                            streetwear. Inscrivez-vous pour être alerté de leur
-                            retour.
+                            Offres incontournables, sélectionnées pour leur
+                            style audacieux et leurs prix avantageux. Des
+                            opportunités éphémères à saisir rapidement pour les
+                            amateurs de streetwear.
                         </p>
                     </div>
+
                     <div
                         className='modal-stickers-body-item'
                         style={{
@@ -860,31 +871,25 @@ function ToggleModal(toggle: any) {
                     >
                         <img src='/product/stickers/new.png' alt='new' />
                         <p>
-                            Offres incontournables, sélectionnées pour leur
-                            style audacieux et leurs prix avantageux. Des
-                            opportunités éphémères à saisir rapidement pour les
-                            amateurs de streetwear.
+                            Soyez à l’avant-garde avec les dernières nouveautés
+                            du streetwear. Ces articles fraîchement arrivés sont
+                            prêts à définir les prochaines tendances urbaines.
                         </p>
                     </div>
                     <div
                         className='modal-stickers-body-item'
                         style={{
-                            opacity: isOoo ? '1' : '0.2',
+                            opacity: isShip ? '1' : '0.2',
                         }}
                     >
-                        <img
-                            src='/product/stickers/ooo.png'
-                            alt='ooo'
-                            style={{
-                                width: '170px',
-                            }}
-                        />
+                        <img src='/product/stickers/ship.png' alt='ship' />
                         <p>
                             Livraison immédiate, cette sélection est dédiée aux
                             articles expédiés en 48H puisque nous possédons
                             l’article dans nos locaux.
                         </p>
                     </div>
+
                     <div
                         className='modal-stickers-body-item'
                         style={{
@@ -904,30 +909,19 @@ function ToggleModal(toggle: any) {
                     <div
                         className='modal-stickers-body-item'
                         style={{
-                            opacity: isRelease ? '1' : '0.2',
+                            opacity: isOoo ? '1' : '0.2',
                         }}
                     >
                         <img
-                            src='/product/stickers/release.png'
-                            alt='release'
+                            src='/product/stickers/ooo.png'
+                            alt='ooo'
+                            className='img-ooo'
                         />
                         <p>
-                            Accédez à la crème de la crème avec nos sorties
-                            « Exclusive item ». Ces articles premium définissent
-                            les standards du streetwear haut de gamme.
-                        </p>
-                    </div>
-                    <div
-                        className='modal-stickers-body-item'
-                        style={{
-                            opacity: isShip ? '1' : '0.2',
-                        }}
-                    >
-                        <img src='/product/stickers/ship.png' alt='ship' />
-                        <p>
-                            Soyez à l’avant-garde avec les dernières nouveautés
-                            du streetwear. Ces articles fraîchement arrivés sont
-                            prêts à définir les prochaines tendances urbaines.
+                            Ces articles prisés sont actuellement en rupture de
+                            stock, victimes de leur succès dans l’univers du
+                            streetwear. Inscrivez-vous pour être alerté de leur
+                            retour.
                         </p>
                     </div>
                 </div>
@@ -943,8 +937,6 @@ function ProductPrice(selectedVariant: any) {
             option.name === 'Taille' ||
             option.name === 'Title'
     )?.value
-
-    console.log(selectedVariant?.soon?.value)
 
     return (
         <div className='product-price'>
@@ -998,7 +990,7 @@ function ProductPrice(selectedVariant: any) {
                                 <img
                                     src={
                                         `/product/size/${
-                                            size.split(' ')[0]
+                                            size.toLowerCase().split(' ')[0]
                                         }.png` ?? `/product/size/49.png`
                                     }
                                     alt='price'
@@ -1019,9 +1011,7 @@ function ProductPrice(selectedVariant: any) {
                     <img
                         src='/product/stickers/ooo.png'
                         alt='out of stock'
-                        style={{
-                            width: '170px',
-                        }}
+                        className='img-ooo'
                     />
                     <span>sold out</span>
                 </div>
@@ -1058,12 +1048,13 @@ function ProductForm({
     selectedVariant,
     variants,
 }: {
-    product: ProductFragment
-    selectedVariant: ProductFragment['selectedVariant']
-    variants: Array<ProductVariantFragment>
+    product: any
+    selectedVariant: any
+    variants: any
 }) {
     const variantName = selectedVariant?.selectedOptions[0].value
     const [isModalOpenToothbrush, setIsModalOpenToothbrush] = useState(false)
+    const isSoon = product?.soon?.value
 
     function toggleModalToothbrush() {
         setIsModalOpenToothbrush(!isModalOpenToothbrush)
@@ -1133,7 +1124,7 @@ function ProductForm({
 
 function ProductOptions({ option, variants }: any) {
     const [isModalOpenToothbrush, setIsModalOpenToothbrush] = useState(false)
-
+    const isSoon = variants[0]?.product?.soon?.value
     function toggleModalToothbrush() {
         setIsModalOpenToothbrush(!isModalOpenToothbrush)
     }
@@ -1143,8 +1134,15 @@ function ProductOptions({ option, variants }: any) {
             setIsModalOpenToothbrush(false)
         }
     }
-    // Tri alphabétique des valeurs
-    const sortedValues = option.values.slice()
+    const sortedValues = option.values.slice().sort((a: any, b: any) => {
+        const isNumeric = (value: any) => /^\d+(\.\d+)?$/.test(value)
+
+        if (isNumeric(a.value) && isNumeric(b.value)) {
+            return parseFloat(a.value) - parseFloat(b.value)
+        } else {
+            return a.value.localeCompare(b.value)
+        }
+    })
 
     const midle = Math.ceil(sortedValues.length / 2)
 
@@ -1201,7 +1199,12 @@ function ProductOptions({ option, variants }: any) {
                                                 : isPrev || isNext
                                                 ? '24px'
                                                 : '15px',
-                                            opacity: isAvailable ? 1 : 0.2,
+                                            opacity:
+                                                isSoon === 'true'
+                                                    ? 0.2
+                                                    : isAvailable
+                                                    ? 1
+                                                    : 0.2,
                                         }}
                                     >
                                         {value.split(' ') ? (
@@ -1220,10 +1223,7 @@ function ProductOptions({ option, variants }: any) {
                                                             : '#fff',
                                                 }}
                                             >
-                                                {/^\d+(\.\d+)?$/.test(value)
-                                                    ? value
-                                                    : value.charAt(0)}
-
+                                                {value.split(' ')[0]}
                                                 <span
                                                     style={{
                                                         fontSize: '12px',
@@ -1236,7 +1236,7 @@ function ProductOptions({ option, variants }: any) {
                                                                     ?.value ===
                                                                 value
                                                         )?.availableForSale
-                                                            ? 'green'
+                                                            ? 'white'
                                                             : 'red',
                                                     }}
                                                 >
@@ -1244,7 +1244,7 @@ function ProductOptions({ option, variants }: any) {
                                                 </span>
                                             </div>
                                         ) : (
-                                            value
+                                            <p>{value}</p>
                                         )}
                                     </Link>
                                 )}
@@ -1332,6 +1332,10 @@ const PRODUCT_VARIANT_FRAGMENT = `#graphql
     product {
       title
       handle
+      soon: metafield(namespace: "custom", key: "soon") {
+        key
+        value
+      }
       images(first: 5) {
         nodes {
           id

@@ -24,6 +24,8 @@ export default function TrackT(products: any) {
                 margin:
                     location.pathname === '/account/profile'
                         ? '50px 50px 0 0'
+                        : location.pathname === '/account/orders'
+                        ? '50px 0'
                         : '',
             }}
         >
@@ -42,7 +44,12 @@ export default function TrackT(products: any) {
                 }}
                 watchSlidesProgress={true}
                 slidesPerGroup={2}
-                slidesPerView={4}
+                slidesPerView={
+                    location.pathname === '/account/profile' ||
+                    location.pathname === '/account/orders'
+                        ? 3
+                        : 4
+                }
                 grabCursor={true}
                 navigation={{
                     nextEl: '.swiper-button-next',

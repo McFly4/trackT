@@ -26,6 +26,10 @@ const genre = [
     {
         name: 'Femme',
     },
+    {
+        name: 'Tout',
+        value: 'all',
+    },
 ]
 
 const category = [

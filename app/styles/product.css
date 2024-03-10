@@ -555,3 +555,28 @@
     margin-bottom: 50px;
     text-align: center;
 }
+
+.img-ooo{
+    width: 170px;
+}
+/* Media Queries */
+
+@media screen and (max-width: 1650px){
+    .product-image-main{
+        width: 600px;
+        height: 450px;
+    }
+
+    .product-image-container{
+        width: 45%;
+    }
+
+    .product-main{
+        width: 50%;
+    }
+
+    .product-main h1{
+        font-size: 70px;
+    }
+
+}
