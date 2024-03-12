@@ -1621,3 +1621,8 @@ input[type="search"]::-webkit-search-results-decoration {
     margin-bottom: 11px;
 }
 
+@media screen and (max-width: 1600px){
+    .home img {
+        height: unset;
+    }
+}
