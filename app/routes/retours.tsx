@@ -73,7 +73,7 @@ export default function Retours() {
                     retour, vous pouvez délibérément activer votre booster ou le
                     préserver pour de futurs achats.
                     <br />
-                    <br />
+                    <br id='egible' />
                     Si vous retournez une paire de sneaker, par exemple, vous ne
                     recevrez pas de booster pour ce produit spécifique.
                     Cependant, vous aurez la possibilité de l’utiliser sur
@@ -84,7 +84,7 @@ export default function Retours() {
                     effectuez un autre retour, vous n’obtiendrez pas de booster
                     supplémentaire.
                 </p>
-                <h2 id='egible'>ÉGILIBILITÉ RETOUR & REMBOURSEMENT</h2>
+                <h2>ÉGILIBILITÉ RETOUR & REMBOURSEMENT</h2>
                 <p>Version mise à jour le 30/01/2024</p>
                 <br />
                 <br />
@@ -175,14 +175,14 @@ export default function Retours() {
                 <br />
                 <h4>échanges</h4>
                 <br />
-                <p>
+                <p id='help'>
                     Nous ne remplaçons les articles que s’ils sont défectueux ou
                     endommagés à la réception. Si vous avez besoin d’échanger un
                     article pour le même, veuillez contacter notre service
                     clientèle.
                 </p>
                 <span className='separator'></span>
-                <h2 id='help'>COMMENT RETOURNER UNE COMMANDE</h2>
+                <h2>COMMENT RETOURNER UNE COMMANDE</h2>
                 <br />
                 <p>
                     Si vous n’êtes pas entièrement satisfait d’un ou de
@@ -232,14 +232,20 @@ function Menu() {
 
     return (
         <nav role='navigation' className='account-menu'>
-            <img className='account-menu-bg' src='/politics/politics.png' />
+            <img
+                className='account-menu-bg'
+                src='/politics/politics.png'
+                style={{
+                    height: '600px',
+                }}
+            />
             <NavLink to='/retours#option'>
                 <p>Options de livraison & retour</p>
             </NavLink>
-            <NavLink to='/politics#egible'>
+            <NavLink to='/retours#egible'>
                 <p>ÉGILIBILITÉ RETOUR & REMBOURSEMENT</p>
             </NavLink>
-            <NavLink to='/politics#help'>
+            <NavLink to='/retours#help'>
                 <p>Comment retourner une commande</p>
             </NavLink>
         </nav>

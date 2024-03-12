@@ -42,8 +42,9 @@ export default function About() {
                         </div>
                     </a>
                 </div>
+                <div id='futur'></div>
             </div>
-            <div className='a-first' id='futur'>
+            <div className='a-first'>
                 <div className='a-first-container'>
                     <p>
                         Trackt transforme votre expérience d’achat en une
@@ -441,9 +442,8 @@ export default function About() {
                         </p>
                     </div>
                 </div>
-                <div className='a-fourth-trackt' id='vision'></div>
-
                 <TrackT products={productsList} />
+                <div className='a-fourth-trackt'></div>
             </div>
             <div className='a-vision'>
                 <h2>Vision trackT 2025</h2>

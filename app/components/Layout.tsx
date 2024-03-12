@@ -475,8 +475,18 @@ function ToggleModal(toggle: any) {
                 Repérez-les lors de vos achats pour comprendre les modalités de
                 renvois/livraison et choisir ce qui vous convient le mieux.
             </p>
-            <div className='a-third-guid-container a-third-cart'>
-                <div className='a-third-guid-container-item'>
+            <div
+                className='a-third-guid-container a-third-cart'
+                style={{
+                    borderTop: '2px solid #ffffff60',
+                }}
+            >
+                <div
+                    className='a-third-guid-container-item'
+                    style={{
+                        borderRight: '2px solid #ffffff60',
+                    }}
+                >
                     <img src='/cart/cartClassic.png' alt='cartClassic' />
                     <p>Panier classique</p>
                     <span>0 - 250€</span>
@@ -487,7 +497,12 @@ function ToggleModal(toggle: any) {
                     </p>
                     <p>Livraison 10€</p>
                 </div>
-                <div className='a-third-guid-container-item'>
+                <div
+                    className='a-third-guid-container-item'
+                    style={{
+                        borderRight: '2px solid #ffffff60',
+                    }}
+                >
                     <img src='/cart/cartPremium.png' alt='cartClassic' />
                     <p>Panier premium</p>
                     <span>250€ - 500€</span>

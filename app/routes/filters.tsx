@@ -17,6 +17,10 @@ interface Category {
 
 const genre = [
     {
+        name: 'Tout',
+        value: 'all',
+    },
+    {
         name: 'Mixte',
         value: 'mixte',
     },
@@ -25,10 +29,6 @@ const genre = [
     },
     {
         name: 'Femme',
-    },
-    {
-        name: 'Tout',
-        value: 'all',
     },
 ]
 

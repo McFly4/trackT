@@ -43,7 +43,7 @@ export function CartMain({
         <>
             <div className={className}>
                 <CartEmpty hidden={linesCount} layout={layout} />
-                {cartHasItems && (
+                {linesCount && (
                     <div
                         onClick={toggleModal}
                         style={{
@@ -334,8 +334,6 @@ function CartLinePrice({
     if (moneyV2 == null) {
         return null
     }
-
-    console.log(line.cost)
 
     return (
         <div
