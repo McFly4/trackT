@@ -252,6 +252,13 @@ text-align: center;
     padding-left: 50px;
 }
 
+.a-vision-container-item div{
+    min-width: 250px;
+    display: flex;
+    justify-content: center;
+}
+
+
 .a-vision-container-item p{
     padding: 0 50px;
 }

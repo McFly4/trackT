@@ -184,6 +184,8 @@ function BreadCrumb({ product }: { product: any }) {
                         ? '#4d5832'
                         : firstColor === 'blue-navy'
                         ? '#1d3047'
+                        : firstColor === 'blue-clair'
+                        ? '#77B5FE'
                         : firstColor,
             }}
         >
@@ -197,10 +199,10 @@ function BreadCrumb({ product }: { product: any }) {
                     <Link
                         to={
                             '/filtered?' + isMixte == 'true'
-                                ? 'manwoman=false&collection=All'
+                                ? '/filtered?manwoman=true&collection=All'
                                 : isMixte == undefined
-                                ? 'collection=All'
-                                : 'manwoman=true&collection=All'
+                                ? '/filtered?collection=All'
+                                : '/filtered?manwoman=false&collection=All'
                         }
                     >
                         {isMixte == 'true' ? 'Femme' : 'Homme'}
@@ -459,7 +461,7 @@ function ProductMain({
     variants,
 }: {
     product: any
-    selectedVariant: ProductFragment['selectedVariant']
+    selectedVariant: any
     variants: Promise<ProductVariantsQuery>
 }) {
     const { title, descriptionHtml } = product
@@ -487,7 +489,7 @@ function ProductMain({
         ooo: product.ooo,
         promotion: product.promotion,
         release: product.release,
-        ship: product.ship,
+        ship: selectedVariant?.weight >= 1 && product.ship,
         soon: product.soon,
     } as any
 
@@ -952,7 +954,7 @@ function ProductPrice(selectedVariant: any) {
                         <p>Sale</p>
 
                         <br />
-                        <div className='product-price-on-sale'>
+                        <div className='product-price-on-sale' style={{}}>
                             {selectedVariant?.selectedVariant ? (
                                 <Money
                                     data={
@@ -1001,6 +1003,9 @@ function ProductPrice(selectedVariant: any) {
                                 />
                             )}
                             <Money
+                                style={{
+                                    bottom: size == '43' ? '10%' : '',
+                                }}
                                 data={selectedVariant?.selectedVariant?.price}
                             />
                         </div>
@@ -1136,11 +1141,11 @@ function ProductOptions({ option, variants }: any) {
     }
     const sortedValues = option.values.slice().sort((a: any, b: any) => {
         const isNumeric = (value: any) => /^\d+(\.\d+)?$/.test(value)
-
         if (isNumeric(a.value) && isNumeric(b.value)) {
+            // Si les deux valeurs sont numériques, inversez l'ordre du tri
             return parseFloat(a.value) - parseFloat(b.value)
         } else {
-            return a.value.localeCompare(b.value)
+            return a
         }
     })
 

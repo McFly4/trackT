@@ -206,12 +206,27 @@ function CartAside({ cart, pocketItems }: any) {
                                         style={{
                                             padding: '40px 0',
                                         }}
-                                        className='pocket-items-product'
+                                        className={`pocket-items-product ${
+                                            item.variants.nodes[0]
+                                                .availableForSale
+                                                ? ''
+                                                : 'pocketItemOOO'
+                                        }`}
                                     >
                                         <div className='pocket-items-product-img'>
+                                            <span>Sold out</span>
                                             <img
                                                 src={item.images.nodes[0].url}
                                                 className='pocket-items-product-img-main'
+                                                style={{
+                                                    objectFit:
+                                                        item?.box?.value ==
+                                                            '4:5' ||
+                                                        item?.box?.value ==
+                                                            '1:1'
+                                                            ? 'contain'
+                                                            : 'cover',
+                                                }}
                                             />
                                             <img
                                                 src={
@@ -234,6 +249,10 @@ function CartAside({ cart, pocketItems }: any) {
                                         <h4>{item.vendor}</h4>
                                         <h6>{item.title}</h6>
                                         <AddToCartButton
+                                            disabled={
+                                                !item.variants.nodes[0]
+                                                    .availableForSale
+                                            }
                                             lines={[
                                                 {
                                                     merchandiseId:

@@ -449,7 +449,9 @@ export default function About() {
                 <h2>Vision trackT 2025</h2>
                 <div className='a-vision-container'>
                     <div className='a-vision-container-item'>
-                        <img src='/about/drop.png' alt='about' />
+                        <div>
+                            <img src='/about/drop.png' alt='about' />
+                        </div>
                         <p>
                             « Drop Reused » est le centre de la vision durable
                             et innovante de TrackT. Nous réinventons le
@@ -466,7 +468,9 @@ export default function About() {
                         </p>
                     </div>
                     <div className='a-vision-container-item'>
-                        <img src='/about/track.png' alt='about' />
+                        <div>
+                            <img src='/about/track.png' alt='about' />
+                        </div>
                         <p>
                             Chez Trackt, nous savons pertinemment que la quête
                             du parfait style peut parfois demander un petit coup
@@ -482,7 +486,9 @@ export default function About() {
                         </p>
                     </div>
                     <div className='a-vision-container-item'>
-                        <img src='/about/wanted.png' alt='about' />
+                        <div>
+                            <img src='/about/wanted.png' alt='about' />
+                        </div>
                         <p>
                             Pour nos connaisseurs de streetwear, « Wanted Item »
                             est votre terrain de jeu. Vous avez un œil pour les

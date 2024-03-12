@@ -1,6 +1,11 @@
 import React, { useRef } from 'react'
 import { json, type LoaderFunctionArgs } from '@shopify/remix-oxygen'
-import { Link, type MetaFunction, useLoaderData } from '@remix-run/react'
+import {
+    useNavigate,
+    Link,
+    type MetaFunction,
+    useLoaderData,
+} from '@remix-run/react'
 import MainProduct from '~/components/Common/mainProduct'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper/modules'
@@ -17,6 +22,7 @@ export async function loader({ context }: LoaderFunctionArgs) {
 }
 
 export default function HomePage() {
+    const navigate = useNavigate()
     const { products } = useLoaderData<typeof loader>()
     const productsList = products.metaobjects.nodes[0].field.references.nodes
 
@@ -116,12 +122,14 @@ export default function HomePage() {
                 {/*</Link>*/}
             </div>
             <div className='panel-trackt'>
-                <div className='filter-trackt'>
-                    {/* <img src="/home/bg-filters.png" alt="filter" /> */}
+                <div
+                    className='filter-trackt'
+                    onClick={() => {
+                        navigate('/filters')
+                    }}
+                >
                     <div className='filter-sticky'>
-                        <Link to='/filters'>
-                            <h1>filtres</h1>
-                        </Link>
+                        <h1>filtres</h1>
                     </div>
                 </div>
 

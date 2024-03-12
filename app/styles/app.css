@@ -321,11 +321,10 @@ aside li {
 
 .cart-summary-aside {
     background: #000;
-    bottom: 20px;
-    padding-top: 0.75rem;
+    bottom: 0px;
     position: fixed;
-    padding: 0 20px;
-;
+    padding: 0 20px 30px 20px;
+    width: 90%;
 }
 
 
@@ -688,6 +687,7 @@ input[type="search"]::-webkit-search-results-decoration {
     background-image: url(public/home/bg-filters.png);
     background-repeat: no-repeat;
     background-size: cover;
+    cursor: pointer;
 }
 
 .panel-trackt .filter-trackt .filter-sticky {
@@ -1346,7 +1346,7 @@ input[type="search"]::-webkit-search-results-decoration {
     width: calc(100% - 450px);
     display: flex;
     align-items: center;
-    z-index: 99999;
+    z-index: 999;
     height: 100%;
 }
 
@@ -1356,7 +1356,7 @@ input[type="search"]::-webkit-search-results-decoration {
     margin: auto;
     border-radius: 8px;
     animation: fadeIn 0.3s ease; /* Animation d'ouverture */
-    z-index: 999999;
+    z-index: 999;
 
 }
 
@@ -1378,6 +1378,57 @@ input[type="search"]::-webkit-search-results-decoration {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.pocketItemOOO img{
+    opacity: 0.2;
+}
+
+.pocketItemOOO span{
+    color: #EE0A39;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    text-transform: uppercase;
+    font-family: 'HelveticaNeue500', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    animation: glowRed 1s ease-in-out infinite alternate;
+
+}
+
+.pocketItemOOO span:before{
+    content: "";
+    width: 30%;
+    height: 3px;
+    background-color: #EE0A39;
+    margin-right: 5px;
+    box-shadow: 0 0 5px #EE0A39;
+
+}
+
+.pocketItemOOO span:after{
+    content: "";
+    width: 30%;
+    height: 3px;
+    background-color: #EE0A39;
+    margin-left: 5px;
+    box-shadow: 0 0 5px #EE0A39;
+
+}
+
+@-webkit-keyframes glowRed {
+    from {
+        text-shadow: 0 0 5px #EE0A39;
+    }
+
+    to {
+        text-shadow: 0 0 10px #EE0A39;
+    }
 }
 
 .pocket-items-product-img{

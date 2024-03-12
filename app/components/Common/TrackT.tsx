@@ -33,7 +33,7 @@ export default function TrackT(products: any) {
                 <h2>
                     {location.pathname === '/account/profile'
                         ? 'APPAREMMENT, CES ARTICLES NE VOUS ONT PAS LAISSÉ INDIFFÉRENTS'
-                        : 'TrackT'}
+                        : 'PANEL TRACKT'}
                 </h2>
                 <NavButtons next={nexto} previous={previo} />
             </div>

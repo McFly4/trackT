@@ -157,6 +157,10 @@ function CartLineItem({
                     src={image?.url}
                     loading='lazy'
                     width={250}
+                    style={{
+                        objectFit: 'contain',
+                        backgroundColor: '#fff',
+                    }}
                 />
                 <div className='cart-line-top-data'>
                     <div
