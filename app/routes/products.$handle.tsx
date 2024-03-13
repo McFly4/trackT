@@ -218,7 +218,11 @@ function BreadCrumb({ product }: { product: any }) {
                 <div className='breadcrumb-colors'>
                     {colors?.map((color: any, index: number) => (
                         <Link
-                            to={'/search?q=' + color?.split('-')[0]}
+                            to={
+                                color === 'blue-clair'
+                                    ? '/search?q=bleu%20clair'
+                                    : '/search?q=' + color
+                            }
                             key={index}
                         >
                             <div
@@ -234,6 +238,8 @@ function BreadCrumb({ product }: { product: any }) {
                                             ? '#4d5832'
                                             : color === 'blue-cyan'
                                             ? '#ADD8E6'
+                                            : color === 'blue-clair'
+                                            ? '#77B5FE'
                                             : color,
                                 }}
                             ></div>
@@ -945,7 +951,11 @@ function ProductPrice(selectedVariant: any) {
             <h2>Price</h2>
             {selectedVariant?.soon?.value === 'true' ? (
                 <div className='product-price-container'>
-                    <img src='/product/stickers/soon.png' alt='soon' />
+                    <img
+                        src='/product/stickers/soon2x.png'
+                        alt='soon'
+                        className='img-ooo'
+                    />
                     <span className='soon'>soon</span>
                 </div>
             ) : selectedVariant?.selectedVariant?.availableForSale ? (
@@ -1004,7 +1014,13 @@ function ProductPrice(selectedVariant: any) {
                             )}
                             <Money
                                 style={{
-                                    bottom: size == '43' ? '10%' : '',
+                                    bottom:
+                                        size.split(' ')[0] == '43' ||
+                                        size.split(' ')[0] == '40' ||
+                                        size.split(' ')[0] == '38' ||
+                                        size.split(' ')[0] == '36'
+                                            ? '10%'
+                                            : '',
                                 }}
                                 data={selectedVariant?.selectedVariant?.price}
                             />
@@ -1304,6 +1320,9 @@ function AddToCartButton({
                         type='submit'
                         onClick={onClick}
                         disabled={disabled ?? fetcher.state !== 'idle'}
+                        style={{
+                            opacity: disabled ? 0.5 : 1,
+                        }}
                     >
                         {children}
                     </button>

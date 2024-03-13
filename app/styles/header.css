@@ -44,6 +44,10 @@
     margin-right: 40px;
 }
 
+.nav-right p{
+    text-align: center;
+}
+
 .nav-right .nav-images {
     cursor: pointer;
     display: flex;

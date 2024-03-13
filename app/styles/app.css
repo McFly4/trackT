@@ -76,7 +76,7 @@ body {
     scroll-behavior: smooth;
 }
 
-.loading-video{
+.loading-video {
     position: fixed;
     top: 0;
     left: 0;
@@ -88,6 +88,25 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+.loading-video::before,
+.loading-video::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 50px; /* Ajustez la largeur de la bordure comme nécessaire */
+    height: 100%;
+    background-color: black;
+}
+
+.loading-video::before {
+    left: 0;
+}
+
+.loading-video::after {
+    right: 0;
+}
+
 
 /*
 * --------------------------------------------------

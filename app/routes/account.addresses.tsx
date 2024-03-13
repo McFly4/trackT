@@ -278,14 +278,16 @@ export default function Addresses() {
                     marginTop: '16px',
                 }}
             >
-                Ajoutez, modifiez ou supprimez vos adresses pour des achats
-                rapides et précis. <br /> Définissez votre adresse préférée pour
-                une expérience d’achat encore plus fluide chez Trackt.
+                Ajouter des adresses supplémentaires pour diversifié vos options
+                de livraison, ou modifiez celle-ci selon vos besoin.
+                <br />
+                Définissez votre adresse préférée pour une expérience d'achat
+                encre plus fluide chez trackt.
             </p>
             <br />
             {!addresses.nodes.length ? (
                 <div>
-                    <p>Vous n&apos;avez pas d'adresses enregister</p>
+                    <p>Vous n&apos;avez pas d'adresses enregistée</p>
                 </div>
             ) : (
                 <ExistingAddresses

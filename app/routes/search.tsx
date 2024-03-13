@@ -298,7 +298,6 @@ fragment SearchProduct on Product {
 query search($country: CountryCode, $endCursor: String, $first: Int, $language: LanguageCode, $last: Int, $query: String!, $startCursor: String) @inContext(country: $country, language: $language) {
   products: search(
     query: $query
-    unavailableProducts: HIDE
     types: [PRODUCT]
     first: $first
     sortKey: RELEVANCE

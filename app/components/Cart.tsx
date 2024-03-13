@@ -42,7 +42,12 @@ export function CartMain({
     return (
         <>
             <div className={className}>
-                <CartEmpty hidden={linesCount} layout={layout} />
+                <CartEmpty
+                    hidden={linesCount}
+                    layout={layout}
+                    isModalOpen={isModalOpen}
+                    toggle={toggleModal}
+                />
                 {linesCount && (
                     <div
                         onClick={toggleModal}
@@ -361,10 +366,18 @@ function CartLinePrice({
 export function CartEmpty({
     hidden = false,
     layout = 'aside',
+    isModalOpen,
+    toggle,
 }: {
-    hidden: boolean
-    layout?: CartMainProps['layout']
+    hidden: any
+    layout?: any
+    toggle: any
+    isModalOpen: any
 }) {
+    const toggleModal = () => {
+        toggle(!isModalOpen)
+    }
+
     return (
         <div
             hidden={hidden}
@@ -377,14 +390,16 @@ export function CartEmpty({
                 marginLeft: '85px',
             }}
         >
-            <img
-                src='/cart/cartEmpty.png'
-                alt='panier vide'
-                style={{
-                    width: 'fit-content',
-                    marginBottom: '50px',
-                }}
-            />
+            <div onClick={toggleModal}>
+                <img
+                    src='/cart/cartEmpty.png'
+                    alt='panier vide'
+                    style={{
+                        width: 'fit-content',
+                        marginBottom: '50px',
+                    }}
+                />
+            </div>
             <h1
                 style={{
                     textTransform: 'uppercase',

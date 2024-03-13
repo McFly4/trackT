@@ -114,6 +114,7 @@ export async function loader({ context }: LoaderFunctionArgs) {
     })
 
     const pocketItems = await storefront.query(POCKET_ITEMS)
+    const logoTrackt = await storefront.query(LOGO_TRACKT)
 
     return defer(
         {
@@ -124,6 +125,7 @@ export async function loader({ context }: LoaderFunctionArgs) {
             isLoggedIn,
             publicStoreDomain,
             pocketItems,
+            logoTrackt,
         },
         { headers }
     )
@@ -373,6 +375,24 @@ query Collection {
             availableForSale
             price {
               amount
+            }
+          }
+        }
+      }
+    }
+  }
+}
+` as const
+
+const LOGO_TRACKT = `#graphql
+query MetaObjects {
+  metaobjects(first: 20, type: "logo") {
+    nodes {
+      field(key: "logo") {
+        reference {
+          ... on Video {
+            sources{
+              url
             }
           }
         }
