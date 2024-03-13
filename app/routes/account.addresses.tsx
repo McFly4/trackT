@@ -369,6 +369,16 @@ function NewAddressForm() {
                                             }
                                             formMethod='POST'
                                             type='submit'
+                                            onClick={
+                                                stateForMethod('POST') !==
+                                                'idle'
+                                                    ? undefined
+                                                    : () => {
+                                                          setTimeout(() => {
+                                                              toggleDialog()
+                                                          }, 500)
+                                                      }
+                                            }
                                         >
                                             {stateForMethod('POST') !== 'idle'
                                                 ? 'Ajout ...'
@@ -493,6 +503,11 @@ function ExistingAddresses({
                                                     }
                                                     formMethod='PUT'
                                                     type='submit'
+                                                    onClick={() => {
+                                                        setTimeout(() => {
+                                                            toggleDialog()
+                                                        }, 500)
+                                                    }}
                                                 >
                                                     {stateForMethod('PUT') !==
                                                     'idle'
@@ -507,6 +522,11 @@ function ExistingAddresses({
                                                     }
                                                     formMethod='DELETE'
                                                     type='submit'
+                                                    onClick={() => {
+                                                        setTimeout(() => {
+                                                            toggleDialog()
+                                                        }, 500)
+                                                    }}
                                                 >
                                                     {stateForMethod(
                                                         'DELETE'
@@ -697,11 +717,6 @@ export function AddressForm({
                     id='defaultAddress'
                     name='defaultAddress'
                     type='checkbox'
-                    style={{
-                        borderRadius: '0px !important',
-                        paddingLeft: '0px !important',
-                        width: '25px',
-                    }}
                 />
                 <label
                     htmlFor='defaultAddress'
@@ -739,14 +754,34 @@ interface CountryType {
 // From https://bitbucket.org/atlassian/atlaskit-mk-2/raw/4ad0e56649c3e6c973e226b7efaeb28cb240ccb0/packages/core/select/src/data/countries.js
 const countries: readonly CountryType[] = [
     { code: 'FR', label: 'France' },
-    { code: 'GP', label: 'Guadeloupe' },
-    { code: 'RE', label: 'Réunion' },
-    { code: 'CG', label: 'Congo' },
-    {
-        code: 'YT',
-        label: 'Mayotte',
-    },
+    { code: 'BE', label: 'Belgique' },
+    { code: 'BG', label: 'Bulgarie' },
+    { code: 'CZ', label: 'République tchèque' },
+    { code: 'DK', label: 'Danemark' },
+    { code: 'DE', label: 'Allemagne' },
+    { code: 'EE', label: 'Estonie' },
+    { code: 'IE', label: 'Irlande' },
+    { code: 'EL', label: 'Grèce' },
+    { code: 'ES', label: 'Espagne' },
+    { code: 'HR', label: 'Croatie' },
+    { code: 'IT', label: 'Italie' },
+    { code: 'CY', label: 'Chypre' },
+    { code: 'LV', label: 'Lettonie' },
+    { code: 'LT', label: 'Lituanie' },
+    { code: 'LU', label: 'Luxembourg' },
+    { code: 'HU', label: 'Hongrie' },
+    { code: 'MT', label: 'Malte' },
+    { code: 'NL', label: 'Pays-Bas' },
+    { code: 'AT', label: 'Autriche' },
+    { code: 'PL', label: 'Pologne' },
+    { code: 'PT', label: 'Portugal' },
+    { code: 'RO', label: 'Roumanie' },
+    { code: 'SI', label: 'Slovénie' },
+    { code: 'SK', label: 'Slovaquie' },
+    { code: 'FI', label: 'Finlande' },
+    { code: 'SE', label: 'Suède' },
 ]
+
 // NOTE: https://shopify.dev/docs/api/storefront/2023-04/mutations/customeraddressupdate
 const UPDATE_ADDRESS_MUTATION = `#graphql
   mutation customerAddressUpdate(

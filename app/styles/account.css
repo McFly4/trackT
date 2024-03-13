@@ -407,6 +407,7 @@
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
+    padding: 40px;
 }
 
 .form-address-btn button{
@@ -499,18 +500,19 @@
 .order-head-image{
     width: 250px;
     height: 170px;
+    background-color: #fff;
+
 }
 
 .order-head-image-item{
     width: 100%;
     height: 100%;
-    border-radius: 5px;
 }
 
 .order-head-image-item img{
-    width: 100%;
+    width: 65%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .order-head-description{
@@ -636,6 +638,8 @@
     appearance: none;
     border: 2px solid white;
     background-color: black;
+    padding-left: 0px !important;
+    border-radius: 0 !important;
     width: 21px;
     height: 21px;
 }

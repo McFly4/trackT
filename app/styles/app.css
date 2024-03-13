@@ -616,13 +616,16 @@ input[type="search"]::-webkit-search-results-decoration {
     background-color: black;
 }
 
-/*.home .shopnow {*/
-/*    position: absolute;*/
-/*    bottom: 20px;*/
-/*    right: 20px;*/
-/*    z-index: 2;*/
-/*    width: fit-content;*/
-/*}*/
+.home .shopnow {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 2;
+    width: 315px;
+    height: 50px;
+
+
+}
 
 .autoplay-progress {
     position: absolute;
@@ -1605,7 +1608,6 @@ input[type="search"]::-webkit-search-results-decoration {
 .sitemap .sitemap-container{
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
 }
 
 .sitemap .sitemap-container div:not(:last-child){

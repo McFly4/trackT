@@ -48,12 +48,11 @@ export default function HomePage() {
                     slidesPerView={1}
                     spaceBetween={0}
                     loop
+                    grabCursor={true}
                     modules={[Autoplay]}
                     autoplay={{
-                        delay: 10000,
+                        delay: 3000,
                     }}
-                    allowTouchMove={false}
-                    onAutoplayTimeLeft={onAutoplayTimeLeft}
                     style={{
                         maxHeight: '100vh',
                     }}
@@ -76,12 +75,13 @@ export default function HomePage() {
                                     width: '100%',
                                 }}
                             />
-                            <div
-                                className='autoplay-progress'
-                                slot='container-end'
-                            >
-                                <span ref={progressContent}></span>
-                            </div>
+                            <button>''</button>
+                            {/*<div*/}
+                            {/*    className='autoplay-progress'*/}
+                            {/*    slot='container-end'*/}
+                            {/*>*/}
+                            {/*    <span ref={progressContent}></span>*/}
+                            {/*</div>*/}
                         </div>
                     </SwiperSlide>
                     <SwiperSlide
@@ -103,12 +103,12 @@ export default function HomePage() {
                                         width: '100%',
                                     }}
                                 />
-                                <div
-                                    className='autoplay-progress'
-                                    slot='container-end'
-                                >
-                                    <span ref={progressContent}></span>
-                                </div>
+                                {/*<div*/}
+                                {/*    className='autoplay-progress'*/}
+                                {/*    slot='container-end'*/}
+                                {/*>*/}
+                                {/*    <span ref={progressContent}></span>*/}
+                                {/*</div>*/}
                             </div>
                         </Link>
                     </SwiperSlide>

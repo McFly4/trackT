@@ -166,6 +166,7 @@ function OrderItem({ order }: { order: OrderItemFragment }) {
         gridTemplateRows: `repeat(${numRows}, 1fr)`,
         gridTemplateColumns: `repeat(${numCols}, 1fr)`,
     }
+    console.log(order)
     return (
         <Link to={`/account/orders/${btoa(order.id)}`}>
             <div className='order'>
@@ -176,6 +177,9 @@ function OrderItem({ order }: { order: OrderItemFragment }) {
                                 <img
                                     src={image?.variant?.image?.url}
                                     alt={`Image ${index + 1}`}
+                                    style={{
+                                        width: imageCount <= 2 ? '100%' : '',
+                                    }}
                                 />
                             </div>
                         ))}
@@ -198,7 +202,11 @@ function OrderItem({ order }: { order: OrderItemFragment }) {
                     </div>
                     <div className='order-description-item'>
                         <p>Date</p>
-                        <p>{new Date(order.processedAt).toDateString()}</p>
+                        <p>
+                            {new Date(order.processedAt).toLocaleDateString(
+                                'fr-FR'
+                            )}
+                        </p>
                     </div>
                     <div className='order-description-item'>
                         <p>Statut</p>
