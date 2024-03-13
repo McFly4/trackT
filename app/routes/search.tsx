@@ -4,6 +4,7 @@ import { getPaginationVariables, Pagination } from '@shopify/hydrogen'
 import MainProduct from '~/components/Common/mainProduct'
 import React, { useState } from 'react'
 import MarketDrag from '~/components/Common/MarketDrag'
+import TrackT from '~/components/Common/TrackT'
 
 export const meta: MetaFunction = () => {
     return [{ title: `Hydrogen | Search` }]
@@ -43,13 +44,46 @@ export async function loader({ request, context }: LoaderFunctionArgs) {
         results: data,
     }
 
-    return defer({ searchTerm, searchResults, allProducts })
+    const randomList = ['hotDeal', 'soon', 'fastShip', 'release']
+    const metafieldRandom =
+        randomList[Math.floor(Math.random() * randomList.length)]
+
+    const randomProduct = await context.storefront.query(FILTERS_QUERY, {
+        variables: {
+            first: 30,
+            filters: [
+                {
+                    productMetafield: {
+                        namespace: 'custom',
+                        key: metafieldRandom,
+                        value: 'true',
+                    },
+                },
+            ],
+            collections: 'title:all',
+            ...pagination,
+        },
+    })
+
+    return defer({
+        searchTerm,
+        searchResults,
+        allProducts,
+        randomProduct,
+        metafieldRandom,
+    })
 }
 
 export default function SearchPage() {
-    const { searchResults, searchTerm, allProducts } = useLoaderData<
-        typeof loader
-    >() as any
+    const {
+        searchResults,
+        searchTerm,
+        allProducts,
+        randomProduct,
+        metafieldRandom,
+    } = useLoaderData<typeof loader>() as any
+    const carousel = randomProduct.collections.nodes[0].products.nodes
+    const carouselName = metafieldRandom
     const all = allProducts?.collection?.products?.nodes
     const products = searchResults?.results?.products
     const [randomProducts, setRandomProducts] = useState([]) as any
@@ -73,41 +107,131 @@ export default function SearchPage() {
                 className='panel-trackt'
                 style={{
                     marginTop: '200px',
+                    justifyContent:
+                        products?.nodes?.length === 0 ? 'center' : '',
                 }}
             >
-                <div className='filter-trackt'>
-                    <div className='filter-sticky'>
-                        <Link to='/filters'>
-                            <h1>filtres</h1>
-                        </Link>
+                {products?.nodes?.length > 0 && (
+                    <div className='filter-trackt'>
+                        <div className='filter-sticky'>
+                            <Link to='/filters'>
+                                <h1>filtres</h1>
+                            </Link>
+                        </div>
                     </div>
-                </div>
+                )}
                 <div className='search'>
                     <div className='search-container'>
-                        <div className='search-txt'>
-                            <h1>VOTRE RECHERCHE PERSONNALISÉE CHEZ TRACKT</h1>
-                            <p>
-                                Vous avez plongé dans l’univers de Trackt, et
-                                voici ce que nous avons déniché pour vous. Notre
-                                sélection raffinée reflète votre recherche et
-                                les filtres que vous avez appliqués, vous
-                                offrant une gamme de produits qui s’alignent
-                                avec votre quête de style et de qualité. De la
-                                touche classique des Jordan 1 aux dernières
-                                tendances streetwear, chaque pièce de notre
-                                collection a été soigneusement sélectionnée pour
-                                répondre à vos attentes de mode urbaine.
-                            </p>
-                            <a href='#search-aside'>
-                                <button>Nouvelle recherche</button>
-                            </a>
-                        </div>
-                        <div
-                            className='search-img'
-                            onClick={handleRandomizeProducts}
-                        >
-                            <img src='/randomItem.png' alt='search' />
-                        </div>
+                        {products?.nodes?.length > 0 ? (
+                            <>
+                                <div className='search-txt'>
+                                    <h1>SÉLECTION PERSONNALISÉE</h1>
+                                    <p>
+                                        Voici les articles qui correspondent à
+                                        votre recherche. Ajustez vos critères si
+                                        vous souhaitez affiner vos résultats ou
+                                        alors tentez la recherche ‘random’.
+                                    </p>
+                                    <div
+                                        className='four-btns'
+                                        style={{
+                                            marginTop: '30px',
+                                        }}
+                                    >
+                                        <Link to='/filters'>
+                                            <button>
+                                                Rechercher par filtres
+                                            </button>
+                                        </Link>
+
+                                        <button>Shopping par catégories</button>
+                                        <Link to='#search-aside'>
+                                            <button>
+                                                <svg
+                                                    id='icon'
+                                                    xmlns='http://www.w3.org/2000/svg'
+                                                    width='21.548'
+                                                    height='21.547'
+                                                    viewBox='0 0 21.548 21.547'
+                                                >
+                                                    <path
+                                                        id='Tracé_219'
+                                                        data-name='Tracé 219'
+                                                        d='M988.192,241.428a8.08,8.08,0,1,1,8.08-8.08A8.089,8.089,0,0,1,988.192,241.428Zm0-13.467a5.387,5.387,0,1,0,5.387,5.387A5.393,5.393,0,0,0,988.192,227.961Z'
+                                                        transform='translate(-980.112 -225.268)'
+                                                        fill='#fff'
+                                                    />
+                                                    <path
+                                                        id='Tracé_220'
+                                                        data-name='Tracé 220'
+                                                        d='M997.192,243.695a1.337,1.337,0,0,1-.952-.395l-6.734-6.733a1.346,1.346,0,0,1,1.9-1.9l6.734,6.733a1.347,1.347,0,0,1-.952,2.3Z'
+                                                        transform='translate(-976.992 -222.148)'
+                                                        fill='#fff'
+                                                    />
+                                                </svg>
+                                                Rechercher manuellement
+                                            </button>
+                                        </Link>
+                                    </div>
+                                </div>
+                                <div
+                                    className='search-img'
+                                    onClick={handleRandomizeProducts}
+                                >
+                                    <img src='/randomItem.png' alt='search' />
+                                </div>
+                            </>
+                        ) : (
+                            <div className='search-empty'>
+                                <div className='search-empty-top'>
+                                    <h3>
+                                        VOTRE RECHERCHE N’A FOURNI AUCUN
+                                        RÉSULTAT
+                                    </h3>
+                                    <p>
+                                        Réessayez, vous avez le choix entre
+                                        plusieurs options !
+                                    </p>
+                                </div>
+                                <div className='four-btns'>
+                                    <Link to='/filters'>
+                                        <button>Rechercher par filtres</button>
+                                    </Link>
+
+                                    <button>Shopping par catégories</button>
+                                    <Link to='#search-aside'>
+                                        <button>
+                                            <svg
+                                                id='icon'
+                                                xmlns='http://www.w3.org/2000/svg'
+                                                width='21.548'
+                                                height='21.547'
+                                                viewBox='0 0 21.548 21.547'
+                                            >
+                                                <path
+                                                    id='Tracé_219'
+                                                    data-name='Tracé 219'
+                                                    d='M988.192,241.428a8.08,8.08,0,1,1,8.08-8.08A8.089,8.089,0,0,1,988.192,241.428Zm0-13.467a5.387,5.387,0,1,0,5.387,5.387A5.393,5.393,0,0,0,988.192,227.961Z'
+                                                    transform='translate(-980.112 -225.268)'
+                                                    fill='#fff'
+                                                />
+                                                <path
+                                                    id='Tracé_220'
+                                                    data-name='Tracé 220'
+                                                    d='M997.192,243.695a1.337,1.337,0,0,1-.952-.395l-6.734-6.733a1.346,1.346,0,0,1,1.9-1.9l6.734,6.733a1.347,1.347,0,0,1-.952,2.3Z'
+                                                    transform='translate(-976.992 -222.148)'
+                                                    fill='#fff'
+                                                />
+                                            </svg>
+                                            Rechercher manuellement
+                                        </button>
+                                    </Link>
+                                    <Link to='/filtered'>
+                                        <button>Random item</button>
+                                    </Link>
+                                </div>
+                            </div>
+                        )}
                     </div>
                     <div
                         style={{
@@ -179,37 +303,81 @@ export default function SearchPage() {
                     </div>
                 </div>
             </div>
-            <div
-                className='hfooter'
-                style={{
-                    backgroundColor: '#000',
-                }}
-            >
+            {products?.nodes?.length > 0 && (
                 <div
+                    className='hfooter'
                     style={{
-                        width: '100%',
-                        height: '10px',
-                        backgroundColor: '#121212',
+                        backgroundColor: '#000',
                     }}
-                ></div>
-                <div className='gofilters'>
-                    <h1>Pas encore trouvé votre perle rare ?</h1>
-                    <p>
-                        Nous avons une multitude de styles et de pièces uniques,
-                        mais nous savons que parfois, vous cherchez quelque
-                        chose de très spécifique. <br />
-                        Si vous n’avez pas encore trouvé exactement ce que vous
-                        voulez dans notre Panel Trackt, nous sommes là pour vous
-                        aider.
-                    </p>
-                    <div className='gofilters-btn'>
-                        <img src='/home/btn.png' alt='btn' />
-                        <p>accéder aux filtres</p>
-                    </div>
-                </div>
+                >
+                    <div
+                        style={{
+                            width: '100%',
+                            height: '10px',
+                            backgroundColor: '#121212',
+                        }}
+                    ></div>
+                    <div className='gofilters'>
+                        <h1>Pas encore trouvé votre perle rare ?</h1>
+                        <p>
+                            Nous avons une multitude de styles et de pièces
+                            uniques, mais nous savons que parfois, vous cherchez
+                            quelque chose de très spécifique. <br />
+                            Si vous n’avez pas encore trouvé exactement ce que
+                            vous voulez dans notre Panel Trackt, nous sommes là
+                            pour vous aider.
+                        </p>
+                        <div className='gofilters-btn'>
+                            <div className='four-btns'>
+                                <Link to='/filters'>
+                                    <button>Rechercher par filtres</button>
+                                </Link>
 
-                <MarketDrag />
-            </div>
+                                <button>Shopping par catégories</button>
+                                <Link to='#search-aside'>
+                                    <button>
+                                        <svg
+                                            id='icon'
+                                            xmlns='http://www.w3.org/2000/svg'
+                                            width='21.548'
+                                            height='21.547'
+                                            viewBox='0 0 21.548 21.547'
+                                        >
+                                            <path
+                                                id='Tracé_219'
+                                                data-name='Tracé 219'
+                                                d='M988.192,241.428a8.08,8.08,0,1,1,8.08-8.08A8.089,8.089,0,0,1,988.192,241.428Zm0-13.467a5.387,5.387,0,1,0,5.387,5.387A5.393,5.393,0,0,0,988.192,227.961Z'
+                                                transform='translate(-980.112 -225.268)'
+                                                fill='#fff'
+                                            />
+                                            <path
+                                                id='Tracé_220'
+                                                data-name='Tracé 220'
+                                                d='M997.192,243.695a1.337,1.337,0,0,1-.952-.395l-6.734-6.733a1.346,1.346,0,0,1,1.9-1.9l6.734,6.733a1.347,1.347,0,0,1-.952,2.3Z'
+                                                transform='translate(-976.992 -222.148)'
+                                                fill='#fff'
+                                            />
+                                        </svg>
+                                        Rechercher manuellement
+                                    </button>
+                                </Link>
+                                <Link to='/filtered'>
+                                    <button>Random item</button>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                    <video
+                        src='/product/banner.mp4'
+                        autoPlay
+                        muted
+                        playsInline
+                        loop
+                    />
+                    <TrackT products={carousel} title={carouselName} />
+                    <MarketDrag />
+                </div>
+            )}
         </>
     )
 }
@@ -379,3 +547,107 @@ query Collection {
   }
 }
 ` as const
+
+const FILTERS_QUERY = `#graphql
+fragment ProductFragment on Product {
+  id
+  title
+  vendor
+  handle
+  description
+  options {
+    name
+    values
+  }
+  images(first: 1) {
+    nodes {
+      url
+    }
+  }
+  toothBrush: metafield(namespace: "custom", key: "toothbrush") {
+    key
+    value
+  }
+  ooo: metafield(namespace: "custom", key: "outofstock") {
+    key
+    value
+  }
+  new: metafield(namespace: "custom", key: "new") {
+    key
+    value
+  }
+  ship: metafield(namespace: "custom", key: "fastShip") {
+    key
+    value
+  }
+  release: metafield(namespace: "custom", key: "release") {
+    key
+    value
+  }
+  promotion: metafield(namespace: "custom", key: "promotion") {
+    key
+    value
+  }
+  hotDeal: metafield(namespace: "custom", key: "hotDeal") {
+    key
+    value
+  }
+  features: metafield(namespace: "custom", key: "features") {
+    key
+    value
+  }
+  materials: metafield(namespace: "custom", key: "materiaux") {
+    key
+    value
+  }
+  daterelease: metafield(namespace: "custom", key: "date") {
+    key
+    value
+  }
+  colors: metafield(namespace: "custom", key: "couleurs") {
+    key
+    value
+  }
+  box_sizing: metafield(namespace: "custom", key: "box_sizing") {
+    key
+    value
+  }
+ soon: metafield(namespace: "custom", key: "soon") {
+    key
+    value
+  }
+  box: metafield(namespace: "custom", key: "box_sizing"){
+    key
+    value
+   }
+  priceRange {
+    minVariantPrice {
+      amount
+      currencyCode
+    }
+  }
+}
+
+query FiltersQuery($first: Int!, $filters: [ProductFilter!], $collections: String, $startCursor: String, $endCursor: String) {
+  collections(query: $collections, first: 1) {
+  nodes {
+    products(
+      first: $first
+      filters: $filters
+      before: $startCursor
+      after: $endCursor
+    ) {
+      nodes {
+        ...ProductFragment
+      }
+      pageInfo {
+        hasPreviousPage
+        hasNextPage
+        startCursor
+        endCursor
+      }
+    }
+  }
+}
+}
+`

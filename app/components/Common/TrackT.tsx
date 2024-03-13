@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
 import { Scrollbar } from 'swiper/modules'
 import { useLocation } from '@remix-run/react'
 
-export default function TrackT(products: any) {
+export default function TrackT({ products, title }: any) {
     const location = useLocation()
 
     const swiperRef = useRef<any>(null)
@@ -16,6 +16,8 @@ export default function TrackT(products: any) {
     const previo = () => {
         swiperRef.current?.slidePrev()
     }
+
+    console.log(products)
 
     return (
         <div
@@ -33,7 +35,7 @@ export default function TrackT(products: any) {
                 <h2>
                     {location.pathname === '/account/profile'
                         ? 'APPAREMMENT, CES ARTICLES NE VOUS ONT PAS LAISSÉ INDIFFÉRENTS'
-                        : 'PANEL TRACKT'}
+                        : title}
                 </h2>
                 <NavButtons next={nexto} previous={previo} />
             </div>
@@ -60,14 +62,14 @@ export default function TrackT(products: any) {
                 spaceBetween={40}
                 onSwiper={(swiper) => (swiperRef.current = swiper)}
             >
-                {products?.products?.map((product: any, index: number) => (
+                {products?.map((product: any, index: number) => (
                     <SwiperSlide
                         key={index}
                         style={{
                             padding: '40px 0',
                         }}
                     >
-                        <MainProduct product={product} />
+                        <MainProduct product={product} stickers={false} />
                     </SwiperSlide>
                 ))}
             </Swiper>

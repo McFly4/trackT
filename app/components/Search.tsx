@@ -372,15 +372,19 @@ function NoPredictiveSearchResults({
     return (
         <div className='no-results'>
             <div className='no-results-found'>
-                <p>Aucun resultat pour</p>
-                <p>'{searchTerm.current}'</p>
-                <button
-                    onClick={() => {
-                        window.location.reload()
-                    }}
-                >
-                    Recommencer la recherche
-                </button>
+                <p>Vous pouvez encore trouver</p>
+                <p>
+                    VOUS POUVEZ ENCORE TROUVER CLIQUER SUR ‘AFFICHER TOUS LES
+                    RÉSULTATS’ POUR <br /> ESSAYER DE RECHERCHER DANS LES
+                    DESCRIPTIONS DES PRODUITS
+                </p>
+                {/*<button*/}
+                {/*    onClick={() => {*/}
+                {/*        window.location.reload()*/}
+                {/*    }}*/}
+                {/*>*/}
+                {/*    Recommencer la recherche*/}
+                {/*</button>*/}
             </div>
         </div>
     )

@@ -275,7 +275,10 @@ function ProductImage({ image, product }: { image: any; product: any }) {
     // Maintenant, codeBar est une liste d'objets avec des propriétés id et url.
 
     const [mainImage, setMainImage] = useState(firstImage || image?.url)
-    const productsFromCollection = product?.collections?.nodes[0].products.nodes
+    const productsFromCollection = product?.collections?.nodes[1]
+        ? product?.collections?.nodes[1].products.nodes
+        : product?.collections?.nodes[0].products.nodes
+    console.log(product)
     const swiperRef = useRef<any>(null)
 
     const nexto = () => {
@@ -1466,7 +1469,7 @@ fragment Product on Product {
     key
     value
   }
-  collections(first: 1) {
+  collections(first: 5) {
     nodes {
       title
       id

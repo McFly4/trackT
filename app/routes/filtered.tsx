@@ -193,40 +193,137 @@ export default function filtered() {
                 className='panel-trackt'
                 style={{
                     marginTop: '200px',
+                    justifyContent:
+                        productList.nodes?.length === 0 ? 'center' : '',
                 }}
             >
-                <div className='filter-trackt'>
-                    <div className='filter-sticky'>
-                        <Link to='/filters'>
-                            <h1>filtres</h1>
-                        </Link>
+                {productList.nodes?.length > 0 && (
+                    <div className='filter-trackt'>
+                        <div className='filter-sticky'>
+                            <Link to='/filters'>
+                                <h1>filtres</h1>
+                            </Link>
+                        </div>
                     </div>
-                </div>
+                )}
                 <div className='search'>
                     <div className='search-container'>
-                        <div className='search-txt'>
-                            <h1>VOTRE RECHERCHE FILTRÉE CHEZ TRACKT</h1>
-                            <p>
-                                Utilisez nos filtres pour affiner encore
-                                davantage votre sélection – triez par taille,
-                                couleur, style ou modèles – et découvrez des
-                                pièces qui correspondent à votre identité.
-                            </p>
-                            <a href='#search-aside'>
-                                <button>Nouvelle recherche</button>
-                            </a>
-                        </div>
-                        <div
-                            className='search-img'
-                            onClick={handleRandomizeProducts}
-                        >
-                            <img src='/randomItem.png' alt='search' />
-                        </div>
+                        {productList.nodes?.length > 0 ? (
+                            <>
+                                <div className='search-txt'>
+                                    <h1>SÉLECTION PERSONNALISÉE</h1>
+                                    <p>
+                                        Voici les articles qui correspondent à
+                                        votre recherche. Ajustez vos critères si
+                                        vous souhaitez affiner vos résultats ou
+                                        alors tentez la recherche ‘random’.
+                                    </p>
+                                    <div
+                                        className='four-btns'
+                                        style={{
+                                            marginTop: '30px',
+                                        }}
+                                    >
+                                        <Link to='/filters'>
+                                            <button>
+                                                Rechercher par filtres
+                                            </button>
+                                        </Link>
+
+                                        <button>Shopping par catégories</button>
+                                        <Link to='#search-aside'>
+                                            <button>
+                                                <svg
+                                                    id='icon'
+                                                    xmlns='http://www.w3.org/2000/svg'
+                                                    width='21.548'
+                                                    height='21.547'
+                                                    viewBox='0 0 21.548 21.547'
+                                                >
+                                                    <path
+                                                        id='Tracé_219'
+                                                        data-name='Tracé 219'
+                                                        d='M988.192,241.428a8.08,8.08,0,1,1,8.08-8.08A8.089,8.089,0,0,1,988.192,241.428Zm0-13.467a5.387,5.387,0,1,0,5.387,5.387A5.393,5.393,0,0,0,988.192,227.961Z'
+                                                        transform='translate(-980.112 -225.268)'
+                                                        fill='#fff'
+                                                    />
+                                                    <path
+                                                        id='Tracé_220'
+                                                        data-name='Tracé 220'
+                                                        d='M997.192,243.695a1.337,1.337,0,0,1-.952-.395l-6.734-6.733a1.346,1.346,0,0,1,1.9-1.9l6.734,6.733a1.347,1.347,0,0,1-.952,2.3Z'
+                                                        transform='translate(-976.992 -222.148)'
+                                                        fill='#fff'
+                                                    />
+                                                </svg>
+                                                Rechercher manuellement
+                                            </button>
+                                        </Link>
+                                    </div>
+                                </div>
+                                <div
+                                    className='search-img'
+                                    onClick={handleRandomizeProducts}
+                                >
+                                    <img src='/randomItem.png' alt='search' />
+                                </div>
+                            </>
+                        ) : (
+                            <div className='search-empty'>
+                                <div className='search-empty-top'>
+                                    <h3>
+                                        VOTRE RECHERCHE N’A FOURNI AUCUN
+                                        RÉSULTAT
+                                    </h3>
+                                    <p>
+                                        Réessayez, vous avez le choix entre
+                                        plusieurs options !
+                                    </p>
+                                </div>
+                                <div className='four-btns'>
+                                    <Link to='/filters'>
+                                        <button>Rechercher par filtres</button>
+                                    </Link>
+
+                                    <button>Shopping par catégories</button>
+                                    <Link to='#search-aside'>
+                                        <button>
+                                            <svg
+                                                id='icon'
+                                                xmlns='http://www.w3.org/2000/svg'
+                                                width='21.548'
+                                                height='21.547'
+                                                viewBox='0 0 21.548 21.547'
+                                            >
+                                                <path
+                                                    id='Tracé_219'
+                                                    data-name='Tracé 219'
+                                                    d='M988.192,241.428a8.08,8.08,0,1,1,8.08-8.08A8.089,8.089,0,0,1,988.192,241.428Zm0-13.467a5.387,5.387,0,1,0,5.387,5.387A5.393,5.393,0,0,0,988.192,227.961Z'
+                                                    transform='translate(-980.112 -225.268)'
+                                                    fill='#fff'
+                                                />
+                                                <path
+                                                    id='Tracé_220'
+                                                    data-name='Tracé 220'
+                                                    d='M997.192,243.695a1.337,1.337,0,0,1-.952-.395l-6.734-6.733a1.346,1.346,0,0,1,1.9-1.9l6.734,6.733a1.347,1.347,0,0,1-.952,2.3Z'
+                                                    transform='translate(-976.992 -222.148)'
+                                                    fill='#fff'
+                                                />
+                                            </svg>
+                                            Rechercher manuellement
+                                        </button>
+                                    </Link>
+                                    <Link to='/filtered'>
+                                        <button>Random item</button>
+                                    </Link>
+                                </div>
+                            </div>
+                        )}
                     </div>
                     <div
                         style={{
                             marginTop: '70px',
                             marginLeft: 'unset',
+                            paddingLeft: 'unset !important',
                         }}
                         className='panel-container'
                     >
@@ -315,8 +412,43 @@ export default function filtered() {
                         aider.
                     </p>
                     <div className='gofilters-btn'>
-                        <img src='/home/btn.png' alt='btn' />
-                        <p>accéder aux filtres</p>
+                        <div className='four-btns'>
+                            <Link to='/filters'>
+                                <button>Rechercher par filtres</button>
+                            </Link>
+
+                            <button>Shopping par catégories</button>
+                            <Link to='#search-aside'>
+                                <button>
+                                    <svg
+                                        id='icon'
+                                        xmlns='http://www.w3.org/2000/svg'
+                                        width='21.548'
+                                        height='21.547'
+                                        viewBox='0 0 21.548 21.547'
+                                    >
+                                        <path
+                                            id='Tracé_219'
+                                            data-name='Tracé 219'
+                                            d='M988.192,241.428a8.08,8.08,0,1,1,8.08-8.08A8.089,8.089,0,0,1,988.192,241.428Zm0-13.467a5.387,5.387,0,1,0,5.387,5.387A5.393,5.393,0,0,0,988.192,227.961Z'
+                                            transform='translate(-980.112 -225.268)'
+                                            fill='#fff'
+                                        />
+                                        <path
+                                            id='Tracé_220'
+                                            data-name='Tracé 220'
+                                            d='M997.192,243.695a1.337,1.337,0,0,1-.952-.395l-6.734-6.733a1.346,1.346,0,0,1,1.9-1.9l6.734,6.733a1.347,1.347,0,0,1-.952,2.3Z'
+                                            transform='translate(-976.992 -222.148)'
+                                            fill='#fff'
+                                        />
+                                    </svg>
+                                    Rechercher manuellement
+                                </button>
+                            </Link>
+                            <Link to='/filtered'>
+                                <button>Random item</button>
+                            </Link>
+                        </div>
                     </div>
                 </div>
                 <MarketDrag />

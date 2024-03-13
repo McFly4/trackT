@@ -1,7 +1,9 @@
 import { Link } from '@remix-run/react'
 import React, { useState } from 'react'
+import { useNavigate } from '@remix-run/react'
 
-export default function ({ product }: any) {
+export default function ({ product, stickers }: any) {
+    const navigate = useNavigate()
     const [isOpen, setIsOpen] = useState(false)
 
     const toggleDialog = () => {
@@ -159,7 +161,13 @@ export default function ({ product }: any) {
                 </div>
             )}
             <div className='product-grid'>
-                <div onClick={toggleDialog}>
+                <div
+                    onClick={() => {
+                        stickers === false
+                            ? navigate('/' + product.url)
+                            : toggleDialog
+                    }}
+                >
                     {stickersData.map((item: any, index: any, array: any[]) => (
                         <ImageComponent
                             key={index}

@@ -214,6 +214,10 @@ export default function AccountProfile() {
                                     placeholder='Email'
                                     aria-label='Email address'
                                     defaultValue={customer.email ?? ''}
+                                    disabled
+                                    style={{
+                                        opacity: '0.5',
+                                    }}
                                 />
                             </div>
                         </div>

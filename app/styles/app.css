@@ -94,7 +94,7 @@ body {
     content: "";
     position: absolute;
     top: 0;
-    width: 50px; /* Ajustez la largeur de la bordure comme nécessaire */
+    width: 100px; /* Ajustez la largeur de la bordure comme nécessaire */
     height: 100%;
     background-color: black;
 }
@@ -583,6 +583,64 @@ input[type="search"]::-webkit-search-results-decoration {
     padding-top: 50px;
 }
 
+.four-btns{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 100px;
+}
+
+.four-btns button {
+    margin: 0 20px;
+    border-radius: 15px;
+    text-transform: uppercase;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px !important;
+    font-weight: 500 !important;
+    padding: 0 20px;
+    color: #fff;
+    background-size: cover;
+    background-position: center;
+    background-color: #000 !important;
+}
+
+.four-btns button:nth-child(1) {
+    background-image: url(public/filters.png);
+}
+
+.four-btns button:nth-child(2) {
+    background-image: url(public/categories.png);
+}
+
+.four-btns button:nth-child(3) {
+    background-image: url(public/manual.png);
+}
+
+.four-btns button:nth-child(4) {
+    background-image: url(public/random.png);
+}
+
+
+.search-empty{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-empty p{
+    text-align: center;
+}
+.search-empty .search-empty-top{
+    background-color: #161616;
+    padding: 50px;
+    border-radius: 15px;
+}
+
+
 .search .search-container{
     display: flex;
     align-items: center;
@@ -1029,8 +1087,9 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .hfooter .gofilters {
-    margin-top: 100px;
+    margin: 100px auto;
     text-align: center;
+    width: 80%;
 }
 
 .hfooter .gofilters h1 {
@@ -1641,6 +1700,9 @@ input[type="search"]::-webkit-search-results-decoration {
     font-family: "Helvetica Neue", sans-serif;
     margin-bottom: 11px;
 }
+
+
+
 
 @media screen and (max-width: 1600px){
     .home img {

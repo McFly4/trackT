@@ -9,7 +9,6 @@ export function Header({ header, isLoggedIn, cart, logo }: any) {
     const [opacity1, setOpacity1] = useState(1)
     const [opacity2, setOpacity2] = useState(1)
     const [opacity3, setOpacity3] = useState(1)
-    console.log(urlLogo)
     const handleOpacity1 = () => {
         const newOpacity = opacity1 - 0.2
         setOpacity1(newOpacity)
