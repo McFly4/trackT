@@ -896,10 +896,9 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .panel-container .panel-products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 50px;
-    justify-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 
@@ -907,6 +906,7 @@ input[type="search"]::-webkit-search-results-decoration {
     position: relative;
     overflow: visible !important;
     max-width: 300px;
+    margin: 20px;
 }
 
 .product-grid .product-img-grid {
