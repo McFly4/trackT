@@ -19,7 +19,7 @@ import {
     Link,
 } from '@remix-run/react'
 import type { CustomerAccessToken } from '@shopify/hydrogen/storefront-api-types'
-import favicon from '../public/favicon.svg'
+import favicon from '../public/favicon.ico'
 import resetStyles from './styles/reset.css'
 import appStyles from './styles/app.css'
 import header from './styles/header.css'

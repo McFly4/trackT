@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { json, type LoaderFunctionArgs } from '@shopify/remix-oxygen'
 import {
     useNavigate,
@@ -49,20 +49,24 @@ export async function loader({ request, context }: LoaderFunctionArgs) {
 }
 
 export default function HomePage() {
-    const navigate = useNavigate()
     const { products, randomProduct, metafieldRandom } =
         useLoaderData<typeof loader>()
+    const navigate = useNavigate()
     const productsList = products.metaobjects.nodes[0].field.references.nodes
     const randomProducts = randomProduct.collections.nodes[0].products.nodes
     const randomName = metafieldRandom
     const swiperRef = useRef(null)
+    const [autoplayTimes, setAutoplayTimes] = useState<number[]>([0, 0]) // État pour stocker les temps restants
 
-    const progressContent = useRef<HTMLSpanElement | null>(null)
-
-    const onAutoplayTimeLeft = (s: any, time: any, progress: any) => {
-        if (progressContent.current) {
-            progressContent.current.textContent = `${Math.ceil(time / 1000)}`
-        }
+    const onAutoplayTimeLeft = (
+        s: any,
+        time: any,
+        progress: any,
+        index: number
+    ) => {
+        const updatedTimes = [...autoplayTimes]
+        updatedTimes[index] = Math.ceil(time / 1000) // Mettre à jour le temps restant pour la diapositive spécifiée
+        setAutoplayTimes(updatedTimes)
     }
 
     return (
@@ -80,11 +84,14 @@ export default function HomePage() {
                     grabCursor={true}
                     modules={[Autoplay]}
                     autoplay={{
-                        delay: 3000,
+                        delay: 5000,
                     }}
                     style={{
                         maxHeight: '100vh',
                     }}
+                    onAutoplayTimeLeft={(s, time, progress) =>
+                        onAutoplayTimeLeft(s, time, progress, 0)
+                    } // Pour la première diapositive
                 >
                     <SwiperSlide
                         style={{
@@ -109,16 +116,16 @@ export default function HomePage() {
                                         width: '100%',
                                     }}
                                 />
+                                <div
+                                    className='autoplay-progress'
+                                    slot='container-end'
+                                >
+                                    <span>{autoplayTimes[0]}</span>
+                                </div>
                                 <div className='shop-now'>
                                     <Link to='#shop'>
                                         <h4>Shop now</h4>
                                     </Link>
-                                    {/*<div*/}
-                                    {/*    className='autoplay-progress'*/}
-                                    {/*    slot='container-end'*/}
-                                    {/*>*/}
-                                    {/*    <span ref={progressContent}></span>*/}
-                                    {/*</div>*/}
                                 </div>
                             </div>
                         </div>
@@ -147,24 +154,18 @@ export default function HomePage() {
                                             width: '100%',
                                         }}
                                     />
+                                    <div
+                                        className='autoplay-progress'
+                                        slot='container-end'
+                                    >
+                                        <span>{autoplayTimes[0]}</span>
+                                    </div>
                                     <div className='discover-trackt'>
                                         <Link to='#shop'>
                                             <h4>Découvrir la vision trackt</h4>
                                         </Link>
-                                        {/*<div*/}
-                                        {/*    className='autoplay-progress'*/}
-                                        {/*    slot='container-end'*/}
-                                        {/*>*/}
-                                        {/*    <span ref={progressContent}></span>*/}
-                                        {/*</div>*/}
                                     </div>
                                 </div>
-                                {/*<div*/}
-                                {/*    className='autoplay-progress'*/}
-                                {/*    slot='container-end'*/}
-                                {/*>*/}
-                                {/*    <span ref={progressContent}></span>*/}
-                                {/*</div>*/}
                             </div>
                         </Link>
                     </SwiperSlide>

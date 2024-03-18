@@ -6,7 +6,7 @@ import {
 } from '@shopify/remix-oxygen'
 import { Form, Link, useActionData } from '@remix-run/react'
 import type { CustomerCreateMutation } from 'storefrontapi.generated'
-
+import { useState } from 'react'
 type ActionResponse = {
     error: string | null
     newCustomer:
@@ -35,12 +35,10 @@ export async function action({ request, context }: ActionFunctionArgs) {
     const passwordConfirm = form.has('passwordConfirm')
         ? String(form.get('passwordConfirm'))
         : null
-    const birthday = form.has('birthday') ? String(form.get('birthday')) : null
     const firstName = form.has('firstName')
         ? String(form.get('firstName'))
         : null
     const lastName = form.has('lastName') ? String(form.get('lastName')) : null
-    const phone = form.has('phone') ? String(form.get('phone')) : null
 
     const validPasswords =
         password && passwordConfirm && password === passwordConfirm
@@ -81,8 +79,6 @@ export async function action({ request, context }: ActionFunctionArgs) {
                     input: {
                         email,
                         password,
-                        firstName,
-                        lastName,
                     },
                 },
             }
@@ -117,6 +113,17 @@ export async function action({ request, context }: ActionFunctionArgs) {
 export default function Register() {
     const data = useActionData<ActionResponse>()
     const error = data?.error || null
+    const [showPassword, setShowPassword] = useState(false)
+    const [showPassword2, setShowPassword2] = useState(false)
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword)
+    }
+
+    const togglePasswordVisibility2 = () => {
+        setShowPassword2(!showPassword2)
+    }
+
     return (
         <div className='register login'>
             <h1
@@ -146,32 +153,86 @@ export default function Register() {
 
                         <div className='login-form-field'>
                             <label htmlFor='password'>Mot de passe *</label>
-                            <input
-                                id='password'
-                                name='password'
-                                type='password'
-                                autoComplete='current-password'
-                                placeholder='Mot de passe'
-                                aria-label='Password'
-                                minLength={8}
-                                required
-                            />
+                            <div style={{ position: 'relative' }}>
+                                <input
+                                    id='password'
+                                    name='password'
+                                    type={showPassword ? 'text' : 'password'}
+                                    autoComplete='current-password'
+                                    placeholder='Mot de passe'
+                                    aria-label='Password'
+                                    minLength={8}
+                                    required
+                                    style={{
+                                        width: '93%',
+                                    }}
+                                />
+                                <svg
+                                    xmlns='http://www.w3.org/2000/svg'
+                                    width='28'
+                                    height='23.293'
+                                    viewBox='0 0 28 23.293'
+                                    style={{
+                                        position: 'absolute',
+                                        right: '30px',
+                                        top: '50%',
+                                        transform: 'translateY(-50%)',
+                                        cursor: 'pointer',
+                                    }}
+                                    onClick={togglePasswordVisibility}
+                                >
+                                    <path
+                                        id='Tracé_443'
+                                        data-name='Tracé 443'
+                                        d='M15.182,3a14.239,14.239,0,0,1,14,11.647,14.238,14.238,0,0,1-28,0A14.239,14.239,0,0,1,15.182,3Zm0,20.705A11.653,11.653,0,0,0,26.54,14.647a11.651,11.651,0,0,0-22.717,0A11.653,11.653,0,0,0,15.182,23.705Zm0-3.235A5.823,5.823,0,1,1,21,14.647,5.823,5.823,0,0,1,15.182,20.47Zm0-2.588a3.235,3.235,0,1,0-3.235-3.235A3.235,3.235,0,0,0,15.182,17.882Z'
+                                        transform='translate(-1.182 -3)'
+                                        fill='#fff'
+                                    />
+                                </svg>
+                            </div>
                         </div>
 
                         <div className='login-form-field'>
                             <label htmlFor='passwordConfirm'>
                                 Confirmation mot de passe
                             </label>
-                            <input
-                                id='passwordConfirm'
-                                name='passwordConfirm'
-                                type='password'
-                                autoComplete='current-password'
-                                placeholder='Confirmer mot de passe'
-                                aria-label='Re-enter password'
-                                minLength={8}
-                                required
-                            />
+                            <div style={{ position: 'relative' }}>
+                                <input
+                                    id='passwordConfirm'
+                                    name='passwordConfirm'
+                                    type={showPassword2 ? 'text' : 'password'}
+                                    autoComplete='current-password'
+                                    placeholder='Confirmer mot de passe'
+                                    aria-label='Re-enter password'
+                                    minLength={8}
+                                    required
+                                    style={{
+                                        width: '93%',
+                                    }}
+                                />
+                                <svg
+                                    xmlns='http://www.w3.org/2000/svg'
+                                    width='28'
+                                    height='23.293'
+                                    viewBox='0 0 28 23.293'
+                                    style={{
+                                        position: 'absolute',
+                                        right: '30px',
+                                        top: '50%',
+                                        transform: 'translateY(-50%)',
+                                        cursor: 'pointer',
+                                    }}
+                                    onClick={togglePasswordVisibility2}
+                                >
+                                    <path
+                                        id='Tracé_443'
+                                        data-name='Tracé 443'
+                                        d='M15.182,3a14.239,14.239,0,0,1,14,11.647,14.238,14.238,0,0,1-28,0A14.239,14.239,0,0,1,15.182,3Zm0,20.705A11.653,11.653,0,0,0,26.54,14.647a11.651,11.651,0,0,0-22.717,0A11.653,11.653,0,0,0,15.182,23.705Zm0-3.235A5.823,5.823,0,1,1,21,14.647,5.823,5.823,0,0,1,15.182,20.47Zm0-2.588a3.235,3.235,0,1,0-3.235-3.235A3.235,3.235,0,0,0,15.182,17.882Z'
+                                        transform='translate(-1.182 -3)'
+                                        fill='#fff'
+                                    />
+                                </svg>
+                            </div>
                         </div>
                     </div>
                     <div
@@ -242,6 +303,9 @@ const CUSTOMER_CREATE_MUTATION = `#graphql
     customerCreate(input: $input) {
       customer {
         id
+        email
+        lastName
+        firstName
       }
       customerUserErrors {
         code

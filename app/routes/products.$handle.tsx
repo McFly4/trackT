@@ -32,6 +32,7 @@ import MainProduct from '~/components/Common/mainProduct'
 import TrackT from '~/components/Common/TrackT'
 import { Scrollbar, Grid } from 'swiper/modules'
 import MarketDrag from '~/components/Common/MarketDrag'
+import { Mousewheel, Pagination } from 'swiper/modules'
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
     return [{ title: `TrackT | ${data?.product.title ?? ''}` }]
@@ -278,7 +279,6 @@ function ProductImage({ image, product }: { image: any; product: any }) {
     const productsFromCollection = product?.collections?.nodes[1]
         ? product?.collections?.nodes[1].products.nodes
         : product?.collections?.nodes[0].products.nodes
-    console.log(product)
     const swiperRef = useRef<any>(null)
 
     const nexto = () => {
@@ -382,7 +382,7 @@ function ProductImage({ image, product }: { image: any; product: any }) {
                 }}
             >
                 <div className='trackT-header'>
-                    <h2>Produits connexe</h2>
+                    <h2>Produits connexes</h2>
                     <div className='navigation-buttons'>
                         <button onClick={previo}>
                             <svg
@@ -498,7 +498,10 @@ function ProductMain({
         ooo: product.ooo,
         promotion: product.promotion,
         release: product.release,
-        ship: selectedVariant?.weight >= 1 && product.ship,
+        ship:
+            selectedVariant.title === 'One Size'
+                ? product.ship
+                : selectedVariant?.weight >= 1 && product.ship,
         soon: product.soon,
     } as any
 
@@ -1005,8 +1008,8 @@ function ProductPrice(selectedVariant: any) {
                                 <img
                                     src={
                                         `/product/size/${
-                                            size.toLowerCase().split(' ')[0]
-                                        }.png` ?? `/product/size/49.png`
+                                            size.toLowerCase()?.split(' ')[0]
+                                        }.png` || `/product/size/default.png` // Utilisation de l'image par défaut si l'image spécifiée n'est pas trouvée
                                     }
                                     alt='price'
                                     style={{
@@ -1015,13 +1018,14 @@ function ProductPrice(selectedVariant: any) {
                                     }}
                                 />
                             )}
+
                             <Money
                                 style={{
                                     bottom:
-                                        size.split(' ')[0] == '43' ||
-                                        size.split(' ')[0] == '40' ||
-                                        size.split(' ')[0] == '38' ||
-                                        size.split(' ')[0] == '36'
+                                        size?.split(' ')[0] == '43' ||
+                                        size?.split(' ')[0] == '40' ||
+                                        size?.split(' ')[0] == '38' ||
+                                        size?.split(' ')[0] == '36'
                                             ? '10%'
                                             : '',
                                 }}
@@ -1148,6 +1152,10 @@ function ProductForm({
 
 function ProductOptions({ option, variants }: any) {
     const [isModalOpenToothbrush, setIsModalOpenToothbrush] = useState(false)
+    const defaultSize =
+        typeof window !== 'undefined'
+            ? localStorage.getItem('selectedShoeSize')
+            : null
     const isSoon = variants[0]?.product?.soon?.value
     function toggleModalToothbrush() {
         setIsModalOpenToothbrush(!isModalOpenToothbrush)
@@ -1168,7 +1176,15 @@ function ProductOptions({ option, variants }: any) {
         }
     })
 
-    const midle = Math.ceil(sortedValues.length / 2)
+    function findIndexByValue(arr: any, targetValue: any) {
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i].value === targetValue) {
+                return i // Retourne l'index de l'objet trouvé
+            }
+        }
+        return -1 // Retourne -1 si la valeur n'est pas trouvée
+    }
+    const selectedSize = findIndexByValue(sortedValues, defaultSize)
 
     const handleSlideChange = (swiper: any) => {
         const activeIndex = swiper.activeIndex
@@ -1179,6 +1195,16 @@ function ProductOptions({ option, variants }: any) {
                 link.click()
             }, 50)
         }
+    }
+
+    const swiperRef = useRef<any>(null)
+
+    const nexto = () => {
+        swiperRef.current?.slideNext()
+    }
+
+    const previo = () => {
+        swiperRef.current?.slidePrev()
     }
 
     return (
@@ -1193,10 +1219,13 @@ function ProductOptions({ option, variants }: any) {
             <h2>Taille</h2>
             <div className='product-options-grid'>
                 <Swiper
+                    onSwiper={(swiper) => (swiperRef.current = swiper)}
                     slidesPerView={5}
                     grabCursor={true}
+                    mousewheel={true}
+                    modules={[Mousewheel, Pagination]}
                     centeredSlides={true}
-                    initialSlide={midle}
+                    initialSlide={selectedSize}
                     className='product-swiper'
                     slideToClickedSlide={true}
                     onSlideChange={handleSlideChange}
@@ -1247,7 +1276,7 @@ function ProductOptions({ option, variants }: any) {
                                                             : '#fff',
                                                 }}
                                             >
-                                                {value.split(' ')[0]}
+                                                {value?.split(' ')[0]}
                                                 <span
                                                     style={{
                                                         fontSize: '12px',
@@ -1264,7 +1293,7 @@ function ProductOptions({ option, variants }: any) {
                                                             : 'red',
                                                     }}
                                                 >
-                                                    {value.split(' ')[1]}
+                                                    {value?.split(' ')[1]}
                                                 </span>
                                             </div>
                                         ) : (
@@ -1283,11 +1312,50 @@ function ProductOptions({ option, variants }: any) {
                         marginTop: '20px',
                     }}
                 >
-                    <img src='/product/sizeSelector.png' alt='size selector' />
+                    <NavButtons next={nexto} previous={previo} />
                 </div>
             </div>
             <button onClick={toggleModalToothbrush} className='sizes-guid'>
                 Guide des tailles
+            </button>
+        </div>
+    )
+}
+
+function NavButtons({ next, previous }: any) {
+    return (
+        <div className='navigation-buttons'>
+            <button onClick={previous}>
+                <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='7.574'
+                    height='13.928'
+                    viewBox='0 0 7.574 13.928'
+                >
+                    <path
+                        id='Tracé_416'
+                        data-name='Tracé 416'
+                        d='M-20862.068-17757.791a.61.61,0,0,1-.432-.18.612.612,0,0,1,0-.861l5.924-5.924-5.924-5.924a.612.612,0,0,1,0-.861.611.611,0,0,1,.863,0l6.355,6.354a.614.614,0,0,1,0,.863l-6.355,6.354A.61.61,0,0,1-20862.068-17757.791Z'
+                        transform='translate(20862.678 17771.719)'
+                        fill='#fff'
+                    />
+                </svg>
+            </button>
+            <button onClick={next}>
+                <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='7.574'
+                    height='13.928'
+                    viewBox='0 0 7.574 13.928'
+                >
+                    <path
+                        id='Tracé_416'
+                        data-name='Tracé 416'
+                        d='M-20862.068-17757.791a.61.61,0,0,1-.432-.18.612.612,0,0,1,0-.861l5.924-5.924-5.924-5.924a.612.612,0,0,1,0-.861.611.611,0,0,1,.863,0l6.355,6.354a.614.614,0,0,1,0,.863l-6.355,6.354A.61.61,0,0,1-20862.068-17757.791Z'
+                        transform='translate(20862.678 17771.719)'
+                        fill='#fff'
+                    />
+                </svg>
             </button>
         </div>
     )

@@ -5,6 +5,7 @@ import {
     type LoaderFunctionArgs,
 } from '@shopify/remix-oxygen'
 import { Form, Link, useActionData, type MetaFunction } from '@remix-run/react'
+import { useState } from 'react'
 
 type ActionResponse = {
     error: string | null
@@ -74,6 +75,11 @@ export async function action({ request, context }: ActionFunctionArgs) {
 export default function Login() {
     const data = useActionData<ActionResponse>()
     const error = data?.error || null
+    const [showPassword, setShowPassword] = useState(false)
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword)
+    }
 
     return (
         <div className='login'>
@@ -92,24 +98,45 @@ export default function Login() {
                         autoFocus
                     />
                 </div>
-                <div
-                    className='login-form-field'
-                    style={{
-                        marginBottom: 'unset',
-                    }}
-                >
-                    <label htmlFor='password'>Mot de passe</label>
-                    <input
-                        id='password'
-                        name='password'
-                        type='password'
-                        autoComplete='current-password'
-                        placeholder='Password'
-                        aria-label='Password'
-                        minLength={8}
-                        required
-                        className={error ? 'input-error' : ''}
-                    />
+                <div className='login-form-field'>
+                    <label htmlFor='password'>Mot de passe *</label>
+                    <div style={{ position: 'relative' }}>
+                        <input
+                            id='password'
+                            name='password'
+                            type={showPassword ? 'text' : 'password'}
+                            autoComplete='current-password'
+                            placeholder='Mot de passe'
+                            aria-label='Password'
+                            minLength={8}
+                            required
+                            style={{
+                                width: '93%',
+                            }}
+                        />
+                        <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            width='28'
+                            height='23.293'
+                            viewBox='0 0 28 23.293'
+                            style={{
+                                position: 'absolute',
+                                right: '30px',
+                                top: '50%',
+                                transform: 'translateY(-50%)',
+                                cursor: 'pointer',
+                            }}
+                            onClick={togglePasswordVisibility}
+                        >
+                            <path
+                                id='Tracé_443'
+                                data-name='Tracé 443'
+                                d='M15.182,3a14.239,14.239,0,0,1,14,11.647,14.238,14.238,0,0,1-28,0A14.239,14.239,0,0,1,15.182,3Zm0,20.705A11.653,11.653,0,0,0,26.54,14.647a11.651,11.651,0,0,0-22.717,0A11.653,11.653,0,0,0,15.182,23.705Zm0-3.235A5.823,5.823,0,1,1,21,14.647,5.823,5.823,0,0,1,15.182,20.47Zm0-2.588a3.235,3.235,0,1,0-3.235-3.235A3.235,3.235,0,0,0,15.182,17.882Z'
+                                transform='translate(-1.182 -3)'
+                                fill='#fff'
+                            />
+                        </svg>
+                    </div>
                     <Link to='/account/recover'>
                         <p>J'ai encore oublié...</p>
                     </Link>

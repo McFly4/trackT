@@ -458,8 +458,6 @@ function SearchResultItem({ goToSearchResult, item, inList }: any) {
         return acc
     }, [])
 
-    console.log(item)
-
     const [hoveredIndex, setHoveredIndex] = useState(null)
 
     const handleMouseEnter = (index: any) => {

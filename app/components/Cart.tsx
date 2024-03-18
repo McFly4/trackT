@@ -3,6 +3,7 @@ import type { CartLineUpdateInput } from '@shopify/hydrogen/storefront-api-types
 import type { CartApiQueryFragment } from 'storefrontapi.generated'
 import { useVariantUrl } from '~/utils'
 import React, { useState } from 'react'
+import { Link } from '@remix-run/react'
 
 type CartLine = CartApiQueryFragment['lines']['nodes'][0]
 
@@ -165,6 +166,9 @@ function CartLineItem({
                     style={{
                         objectFit: 'contain',
                         backgroundColor: '#fff',
+                    }}
+                    onClick={() => {
+                        window.location.href = lineItemUrl
                     }}
                 />
                 <div className='cart-line-top-data'>

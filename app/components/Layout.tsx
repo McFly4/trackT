@@ -1,5 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Await, FetcherWithComponents } from '@remix-run/react'
+import {
+    Await,
+    FetcherWithComponents,
+    Link,
+    useNavigation,
+} from '@remix-run/react'
 import { Suspense } from 'react'
 import type {
     CartApiQueryFragment,
@@ -15,7 +20,7 @@ import {
     PredictiveSearchResults,
 } from '~/components/Search'
 import { AsideSearch } from './AsideSearch'
-import { useLocation } from '@remix-run/react'
+import { useLocation, useNavigate } from '@remix-run/react'
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
 import { Scrollbar } from 'swiper/modules'
 import type { CartLineInput } from '@shopify/hydrogen/storefront-api-types'
@@ -111,6 +116,7 @@ function CartAside({ cart, pocketItems }: any) {
     const swiperRef = useRef<any>(null)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isPocketOpen, setIsPocketOpen] = useState(false)
+    const naviguate = useNavigate()
 
     const nexto = () => {
         swiperRef.current?.slideNext()
@@ -215,11 +221,16 @@ function CartAside({ cart, pocketItems }: any) {
                                                 : 'pocketItemOOO'
                                         }`}
                                     >
-                                        <div className='pocket-items-product-img'>
+                                        <div
+                                            className='pocket-items-product-img'
+                                            onClick={() => {
+                                                window.location.href = `/products/${item.handle}`
+                                            }}
+                                        >
                                             {!item.variants.nodes[0]
                                                 .availableForSale && (
                                                 <span>Sold out</span>
-                                            )}
+                                            )}{' '}
                                             <img
                                                 src={item.images.nodes[0].url}
                                                 className='pocket-items-product-img-main'
@@ -251,8 +262,14 @@ function CartAside({ cart, pocketItems }: any) {
                                                 €
                                             </p>
                                         </div>
-                                        <h4>{item.vendor}</h4>
-                                        <h6>{item.title}</h6>
+                                        <div
+                                            onClick={() => {
+                                                window.location.href = `/products/${item.handle}`
+                                            }}
+                                        >
+                                            <h4>{item.vendor}</h4>
+                                            <h6>{item.title}</h6>
+                                        </div>
                                         <AddToCartButton
                                             disabled={
                                                 !item.variants.nodes[0]
@@ -471,7 +488,7 @@ function SearchAside() {
                                         marginLeft: '20px',
                                     }}
                                 >
-                                    afficher tout les resultats
+                                    afficher tous les resultats
                                 </h5>
                             </button>
                         </div>

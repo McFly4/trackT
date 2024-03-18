@@ -40,7 +40,7 @@ export default function SiteMap() {
                     <Link to='/politics'>
                         <p>infos légales</p>
                     </Link>
-                    <Link to='/retous'>
+                    <Link to='/retours'>
                         <p>retours & remboursements</p>
                     </Link>
                     <br />

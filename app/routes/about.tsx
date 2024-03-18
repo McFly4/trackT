@@ -203,18 +203,21 @@ export default function About() {
                     <div className='modal-stickers-body'>
                         <div className='modal-stickers-body-item'>
                             <img
-                                src='/product/stickers/hotDeal.png'
-                                alt='hotDeal'
+                                src='/product/stickers/release.png'
+                                alt='release'
                             />
                             <p>
-                                Ces articles prisés sont actuellement en rupture
-                                de stock, victimes de leur succès dans l’univers
-                                du streetwear. Inscrivez-vous pour être alerté
-                                de leur retour.
+                                Accédez à la crème de la crème avec nos sorties
+                                « Exclusive item ». Ces articles premium
+                                définissent les standards du streetwear haut de
+                                gamme.
                             </p>
                         </div>
                         <div className='modal-stickers-body-item'>
-                            <img src='/product/stickers/new.png' alt='new' />
+                            <img
+                                src='/product/stickers/hotDeal.png'
+                                alt='hotDeal'
+                            />
                             <p>
                                 Offres incontournables, sélectionnées pour leur
                                 style audacieux et leurs prix avantageux. Des
@@ -222,14 +225,25 @@ export default function About() {
                                 les amateurs de streetwear.
                             </p>
                         </div>
+
                         <div className='modal-stickers-body-item'>
-                            <img src='/product/stickers/ooo.png' alt='ooo' />
+                            <img src='/product/stickers/new.png' alt='new' />
+                            <p>
+                                Soyez à l’avant-garde avec les dernières
+                                nouveautés du streetwear. Ces articles
+                                fraîchement arrivés sont prêts à définir les
+                                prochaines tendances urbaines.
+                            </p>
+                        </div>
+                        <div className='modal-stickers-body-item'>
+                            <img src='/product/stickers/ship.png' alt='ship' />
                             <p>
                                 Livraison immédiate, cette sélection est dédiée
                                 aux articles expédiés en 48H puisque nous
                                 possédons l’article dans nos locaux.
                             </p>
                         </div>
+
                         <div className='modal-stickers-body-item'>
                             <img
                                 src='/product/stickers/promotion.png'
@@ -244,23 +258,15 @@ export default function About() {
                         </div>
                         <div className='modal-stickers-body-item'>
                             <img
-                                src='/product/stickers/release.png'
-                                alt='release'
+                                src='/product/stickers/ooo.png'
+                                alt='ooo'
+                                className='img-ooo'
                             />
                             <p>
-                                Accédez à la crème de la crème avec nos sorties
-                                « Exclusive item ». Ces articles premium
-                                définissent les standards du streetwear haut de
-                                gamme.
-                            </p>
-                        </div>
-                        <div className='modal-stickers-body-item'>
-                            <img src='/product/stickers/ship.png' alt='ship' />
-                            <p>
-                                Soyez à l’avant-garde avec les dernières
-                                nouveautés du streetwear. Ces articles
-                                fraîchement arrivés sont prêts à définir les
-                                prochaines tendances urbaines.
+                                Ces articles prisés sont actuellement en rupture
+                                de stock, victimes de leur succès dans l’univers
+                                du streetwear. Inscrivez-vous pour être alerté
+                                de leur retour.
                             </p>
                         </div>
                     </div>

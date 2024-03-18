@@ -166,7 +166,6 @@ function OrderItem({ order }: { order: OrderItemFragment }) {
         gridTemplateRows: `repeat(${numRows}, 1fr)`,
         gridTemplateColumns: `repeat(${numCols}, 1fr)`,
     }
-    console.log(order)
     return (
         <Link to={`/account/orders/${btoa(order.id)}`}>
             <div className='order'>

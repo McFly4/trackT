@@ -76,7 +76,7 @@ export function Header({ header, isLoggedIn, cart, logo }: any) {
                     //     opacity: opacity1,
                     // }}
                 >
-                    <Link to='/about'>
+                    <Link to='/about#vision'>
                         <img src='/nav/dropReused.png' alt='drop' />
                         <p>Non disponible</p>
                     </Link>
@@ -88,7 +88,7 @@ export function Header({ header, isLoggedIn, cart, logo }: any) {
                     //     opacity: opacity2,
                     // }}
                 >
-                    <Link to='/about'>
+                    <Link to='/about#vision'>
                         <img src='/nav/wanted.png' alt='drop' />
                         <p>Non disponible</p>
                     </Link>
@@ -100,7 +100,7 @@ export function Header({ header, isLoggedIn, cart, logo }: any) {
                     //     opacity: opacity3,
                     // }}
                 >
-                    <Link to='/about'>
+                    <Link to='/about#vision'>
                         <img src='/nav/track.png' alt='drop' />
                         <p>Non disponible</p>
                     </Link>

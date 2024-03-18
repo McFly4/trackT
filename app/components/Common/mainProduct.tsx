@@ -163,9 +163,9 @@ export default function ({ product, stickers }: any) {
             <div className='product-grid'>
                 <div
                     onClick={() => {
-                        stickers === false
-                            ? navigate('/' + product.url)
-                            : toggleDialog
+                        stickers === false || stickers !== undefined
+                            ? navigate('/products/' + product.handle)
+                            : toggleDialog()
                     }}
                 >
                     {stickersData.map((item: any, index: any, array: any[]) => (
@@ -219,16 +219,21 @@ export default function ({ product, stickers }: any) {
                     </div>
                 </div>
                 <div className='product-info-grid'>
-                    <h3>
-                        {product.vendor?.length > 20
-                            ? product.vendor.slice(0, 19) + '...'
-                            : product.vendor}
-                    </h3>
-                    <p>
-                        {product.title?.length > 25
-                            ? product.title.slice(0, 20) + '...'
-                            : product.title}
-                    </p>
+                    <Link
+                        key={product.title}
+                        to={`/products/${product.handle}`}
+                    >
+                        <h3>
+                            {product.vendor?.length > 20
+                                ? product.vendor.slice(0, 19) + '...'
+                                : product.vendor}
+                        </h3>
+                        <p>
+                            {product.title?.length > 25
+                                ? product.title.slice(0, 20) + '...'
+                                : product.title}
+                        </p>
+                    </Link>
                 </div>
             </div>
         </>

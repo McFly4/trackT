@@ -17,8 +17,6 @@ export default function TrackT({ products, title }: any) {
         swiperRef.current?.slidePrev()
     }
 
-    console.log(products)
-
     return (
         <div
             className='trackT'
