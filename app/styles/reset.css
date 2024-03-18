@@ -8,6 +8,10 @@
     user-select: none;
 }
 
+video{
+    width: 100%;
+}
+
 img {
     -webkit-user-drag: none;
     -khtml-user-drag: none;

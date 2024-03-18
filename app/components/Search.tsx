@@ -458,7 +458,7 @@ function SearchResultItem({ goToSearchResult, item, inList }: any) {
         return acc
     }, [])
 
-    console.log(stickersData)
+    console.log(item)
 
     const [hoveredIndex, setHoveredIndex] = useState(null)
 

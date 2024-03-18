@@ -607,19 +607,19 @@ input[type="search"]::-webkit-search-results-decoration {
     background-color: #000 !important;
 }
 
-.four-btns button:nth-child(1) {
+.four-btns a:nth-child(1) button {
     background-image: url(public/filters.png);
 }
 
-.four-btns button:nth-child(2) {
+.four-btns a:nth-child(2) button{
     background-image: url(public/categories.png);
 }
 
-.four-btns button:nth-child(3) {
+.four-btns a:nth-child(3) button{
     background-image: url(public/manual.png);
 }
 
-.four-btns button:nth-child(4) {
+.four-btns a:nth-child(4) button{
     background-image: url(public/random.png);
 }
 
@@ -691,18 +691,40 @@ input[type="search"]::-webkit-search-results-decoration {
     background-repeat: no-repeat; /* Empêche la répétition de l'image */
     background-position: center; /* Centre l'image horizontalement et verticalement */
     background-color: black;
+    position: relative;
 }
 
-.home .shopnow {
+
+
+.shop-now{
+    /*background-image: url(public/manual.png);*/
+    background-color: #000;
+
+    border-radius: 15px;
+    background-size: cover;
     position: absolute;
     bottom: 20px;
     right: 20px;
     z-index: 2;
-    width: 315px;
-    height: 50px;
-
-
+    padding: 20px 40px;
 }
+
+.discover-trackt{
+    /*background-image: url(public/manual.png);*/
+    background-color: #fff;
+    border-radius: 15px;
+    background-size: cover;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 2;
+    padding: 20px 40px;
+}
+
+.discover-trackt h4{
+    color: #000;
+}
+
 
 .autoplay-progress {
     position: absolute;
@@ -815,7 +837,7 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .panel-container-box{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin:50px;
 }
 
@@ -824,8 +846,13 @@ input[type="search"]::-webkit-search-results-decoration {
     flex-direction: column;
     background: #212121;
     padding: 40px;
-    width: 40%;
+    width: 100%;
 }
+
+.panel-container-box-item:first-child{
+    margin-right: 80px;
+}
+
 
 .panel-container-box-item p{
     font-size: 19px;
@@ -1105,10 +1132,6 @@ input[type="search"]::-webkit-search-results-decoration {
     cursor: pointer;
 }
 
-.hfooter .gofilters-btn img{
-    opacity: 0.5;
-
-}
 
 
 .hfooter .gofilters-btn p {
