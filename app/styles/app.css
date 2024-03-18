@@ -931,6 +931,17 @@ input[type="search"]::-webkit-search-results-decoration {
     }
 }
 
+@media screen and (max-width: 1400px){
+    .product-grid{
+        flex-basis: calc(33.333333% - 60px);
+        width: calc(33.333333% - 60px);
+    }
+
+    .product-grid .product-img-grid {
+        height: 300px;
+    }
+}
+
 .trackT-swiper .swiper-wrapper{
     padding-bottom: 40px;
     padding-top: 40px;
