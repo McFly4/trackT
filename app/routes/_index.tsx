@@ -173,17 +173,6 @@ export default function HomePage() {
             </div>
             <div className='panel-trackt'>
                 <div
-                    className='filter-trackt'
-                    onClick={() => {
-                        navigate('/filters')
-                    }}
-                >
-                    <div className='filter-sticky'>
-                        <h1>filtres</h1>
-                    </div>
-                </div>
-
-                <div
                     style={{
                         display: 'flex',
                         flexDirection: 'column',

@@ -899,22 +899,36 @@ input[type="search"]::-webkit-search-results-decoration {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin-left: -30px;
 }
 
 
 .product-grid{
     position: relative;
     overflow: visible !important;
-    max-width: 300px;
-    margin: 20px;
+    flex-basis: calc(25% - 60px);
+    width: calc(25% - 60px);
+    margin: 30px;
+    box-sizing: border-box;
 }
 
 .product-grid .product-img-grid {
-    width: 300px;
-    height: 200px !important;
+    height: 300px !important;
     background-color: #fff;
     transition: 0.2s;
     position: relative;
+}
+
+@media screen and (max-width: 1850px){
+    .product-grid .product-img-grid {
+        height: 250px !important;
+    }
+}
+
+@media screen and (max-width: 1650px){
+    .product-grid .product-img-grid {
+        height: 200px !important;
+    }
 }
 
 .trackT-swiper .swiper-wrapper{
