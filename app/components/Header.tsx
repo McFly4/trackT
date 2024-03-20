@@ -52,7 +52,8 @@ export function Header({ header, isLoggedIn, cart, logo }: any) {
                             <img src='/icons/person.svg' alt='person' />
                         </NavLink>
                     </div>
-                    <div className='icon'>
+                    <div className='icon icon-cart'>
+                        <span>{cart?._data?.totalQuantity || 0}</span>
                         <a href='#cart-aside'>
                             <img src='/icons/cart.svg' alt='cart' />
                         </a>

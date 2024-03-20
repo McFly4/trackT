@@ -369,6 +369,7 @@ function NoPredictiveSearchResults({
     if (!searchTerm.current) {
         return null
     }
+
     return (
         <div className='no-results'>
             <div className='no-results-found'>

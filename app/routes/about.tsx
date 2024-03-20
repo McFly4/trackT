@@ -360,7 +360,7 @@ export default function About() {
                                 <p>
                                     LIVRAISON PAYANTE <br />
                                     RETOURS GRATUIT <br />
-                                    BOOSTER RETOUR* 24H (10 €)
+                                    {/*BOOSTER RETOUR* 24H (10 €)*/}
                                 </p>
                                 <p>Livraison 10€</p>
                             </div>
@@ -374,7 +374,7 @@ export default function About() {
                                 <p>
                                     LIVRAISON PAYANTE <br />
                                     RETOURS GRATUIT <br />
-                                    BOOSTER RETOUR* 24H (20 €)
+                                    {/*BOOSTER RETOUR* 24H (20 €)*/}
                                 </p>
                                 <p>Livraison 5€</p>
                             </div>
@@ -388,26 +388,26 @@ export default function About() {
                                 <p>
                                     LIVRAISON GRATUITE <br />
                                     RETOURS GRATUIT <br />
-                                    BOOSTER RETOUR* 48H (30 €)
+                                    {/*BOOSTER RETOUR* 48H (30 €)*/}
                                 </p>
                                 <p>Livraison express</p>
                             </div>
                         </div>
                     </div>
-                    <p
-                        style={{
-                            width: '80%',
-                            margin: '0 auto',
-                            marginTop: '-50px',
-                        }}
-                    >
-                        * Les booster retours sont des codes de réductions que
-                        vous pouvez activer sur toute notre boutique. Leur
-                        montant et leur durée de vie sont variable selon le type
-                        de panier que vous avez commandé. Dès que notre équipe
-                        valide votre retour, vous pouvez délibérément activer
-                        votre booster ou le préserver pour de futurs achats.
-                    </p>
+                    {/*<p*/}
+                    {/*    style={{*/}
+                    {/*        width: '80%',*/}
+                    {/*        margin: '0 auto',*/}
+                    {/*        marginTop: '-50px',*/}
+                    {/*    }}*/}
+                    {/*>*/}
+                    {/*    * Les booster retours sont des codes de réductions que*/}
+                    {/*    vous pouvez activer sur toute notre boutique. Leur*/}
+                    {/*    montant et leur durée de vie sont variable selon le type*/}
+                    {/*    de panier que vous avez commandé. Dès que notre équipe*/}
+                    {/*    valide votre retour, vous pouvez délibérément activer*/}
+                    {/*    votre booster ou le préserver pour de futurs achats.*/}
+                    {/*</p>*/}
                 </div>
             </div>
             <div className='a-fourth'>
@@ -587,7 +587,14 @@ export default function About() {
                         justifyContent: 'flex-end',
                     }}
                 >
-                    <video muted autoPlay loop>
+                    <video
+                        muted
+                        autoPlay
+                        loop
+                        style={{
+                            width: 'unset',
+                        }}
+                    >
                         <source src='/about/betaVersion.mp4' type='video/mp4' />
                     </video>
                 </div>

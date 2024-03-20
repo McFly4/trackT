@@ -185,6 +185,7 @@
     align-items: center;
     justify-content: center;
     width: 100%;
+    height: 200px;
 }
 
 .product-size-os{
@@ -274,6 +275,7 @@
 .product-swiper .swiper-slide{
     display: flex !important;
     justify-content: center;
+    height: 40px;
 }
 
 .sizes-guid{
@@ -304,6 +306,10 @@
 
 .product-options-grid a{
     color: #fff;
+}
+
+ product-options-grid div{
+    height: 40px !important;
 }
 
 .product-price-container div {

@@ -454,7 +454,10 @@ function ProductImage({ image, product }: { image: any; product: any }) {
                     {productsFromCollection?.map(
                         (product: any, index: number) => (
                             <SwiperSlide key={index}>
-                                <MainProduct product={product} />
+                                <MainProduct
+                                    product={product}
+                                    stickers={false}
+                                />
                             </SwiperSlide>
                         )
                     )}

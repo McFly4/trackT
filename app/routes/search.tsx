@@ -174,7 +174,21 @@ export default function SearchPage() {
                                     className='search-img'
                                     onClick={handleRandomizeProducts}
                                 >
-                                    <img src='/randomItem.png' alt='search' />
+                                    <video
+                                        src='/randomItem.mp4'
+                                        autoPlay
+                                        muted
+                                        playsInline
+                                        loop
+                                        style={{
+                                            width: '360px',
+                                        }}
+                                    >
+                                        <img
+                                            src='/randomItem.png'
+                                            alt='search'
+                                        />
+                                    </video>
                                 </div>
                             </>
                         ) : (

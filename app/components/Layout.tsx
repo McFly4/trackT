@@ -448,6 +448,7 @@ function SearchAside() {
                             />
                             &nbsp;
                             <button
+                                disabled={inputRef.current?.value?.length === 0}
                                 onClick={() => {
                                     history.go(-1)
                                     window.location.href = `/search?q=${inputRef?.current?.value}`
@@ -458,6 +459,11 @@ function SearchAside() {
                                     justifyContent: 'center',
                                     width: '500px',
                                 }}
+                                className={
+                                    inputRef.current?.value?.length === 0
+                                        ? 'btn-disabled'
+                                        : ''
+                                }
                             >
                                 <svg
                                     xmlns='http://www.w3.org/2000/svg'
@@ -501,7 +507,6 @@ function SearchAside() {
 }
 
 function ToggleModal(toggle: any, { cart }: any) {
-    // console.log(cart)
     return (
         <div
             className='a-third-guid'
@@ -552,7 +557,7 @@ function ToggleModal(toggle: any, { cart }: any) {
                     <p>
                         LIVRAISON PAYANTE <br />
                         RETOURS GRATUIT <br />
-                        BOOSTER RETOUR* 24H (10 €)
+                        {/*BOOSTER RETOUR* 24H (10 €)*/}
                     </p>
                     <p>Livraison 10€</p>
                 </div>
@@ -568,7 +573,7 @@ function ToggleModal(toggle: any, { cart }: any) {
                     <p>
                         LIVRAISON PAYANTE <br />
                         RETOURS GRATUIT <br />
-                        BOOSTER RETOUR* 24H (20 €)
+                        {/*BOOSTER RETOUR* 24H (20 €)*/}
                     </p>
                     <p>Livraison 5€</p>
                 </div>
@@ -579,7 +584,7 @@ function ToggleModal(toggle: any, { cart }: any) {
                     <p>
                         LIVRAISON GRATUITE <br />
                         RETOURS GRATUIT <br />
-                        BOOSTER RETOUR* 48H (30 €)
+                        {/*BOOSTER RETOUR* 48H (30 €)*/}
                     </p>
                     <p>Livraison express</p>
                 </div>

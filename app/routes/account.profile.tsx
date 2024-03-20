@@ -145,9 +145,24 @@ export default function AccountProfile() {
         { index: 7, size: '43' },
         { index: 8, size: '44' },
     ]
-    const clothesSize = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL']
+    const clothesSize = [
+        { index: 0, size: 'XS' },
+        { index: 1, size: 'S' },
+        { index: 2, size: 'M' },
+        { index: 3, size: 'L' },
+        { index: 4, size: 'XL' },
+        { index: 5, size: 'XXL' },
+        { index: 6, size: 'XXXL' },
+    ]
+
     const [selectedShoeSize, setSelectedShoeSize] = useState('')
     const [selectedClothesSize, setSelectedClothesSize] = useState('')
+    const selectedShoeIndex = shoesSize.findIndex(
+        (item) => item.size === selectedShoeSize
+    )
+    const selectedClotheIndex = clothesSize.findIndex(
+        (item) => item.size === selectedClothesSize
+    )
 
     useEffect(() => {
         const storedShoeSize = localStorage.getItem('selectedShoeSize')
@@ -172,15 +187,8 @@ export default function AccountProfile() {
         localStorage.setItem('selectedClothesSize', newSize)
     }
 
-    const selectedShoeIndex = useMemo(() => {
-        if (selectedShoeSize === '') {
-            // Si la valeur n'est pas encore chargée, retourne une valeur par défaut
-            return 0 // ou -1 ou tout autre index par défaut que vous préférez
-        }
-
-        return shoesSize.findIndex((value) => value.size === selectedShoeSize)
-    }, [selectedShoeSize])
-
+    console.log('index', selectedShoeIndex)
+    console.log('index', selectedClotheIndex)
     return (
         <>
             <div className='account-profile'>
@@ -424,9 +432,15 @@ export default function AccountProfile() {
                             slidesPerView={5}
                             grabCursor={true}
                             centeredSlides={true}
+                            onSlideChange={(swiper) =>
+                                handleClothesSizeChange(
+                                    clothesSize[swiper.activeIndex]
+                                )
+                            }
+                            initialSlide={selectedClotheIndex}
                         >
                             {clothesSize.map((value: any) => (
-                                <SwiperSlide key={value}>
+                                <SwiperSlide key={value.index}>
                                     {({ isActive, isPrev, isNext }) => (
                                         <p
                                             style={{
@@ -438,7 +452,7 @@ export default function AccountProfile() {
                                                     : '15px',
                                             }}
                                         >
-                                            {value}
+                                            {value.size}
                                         </p>
                                     )}
                                 </SwiperSlide>
