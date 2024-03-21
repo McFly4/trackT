@@ -161,7 +161,7 @@ export default function HomePage() {
                                         <span>{autoplayTimes[0]}</span>
                                     </div>
                                     <div className='discover-trackt'>
-                                        <Link to='#shop'>
+                                        <Link to='/about#vision'>
                                             <h4>Découvrir la vision trackt</h4>
                                         </Link>
                                     </div>
