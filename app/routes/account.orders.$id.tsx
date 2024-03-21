@@ -52,29 +52,97 @@ export async function loader({ params, context }: LoaderFunctionArgs) {
 }
 
 export default function OrderRoute() {
+    const [modalOpen, setModalOpen] = React.useState(false)
     const { order, lineItems, discountValue, discountPercentage } =
         useLoaderData<typeof loader>()
     const numberOfProducts = order.lineItems.nodes.length
     const discountCode = order.discountApplications.nodes[0]?.title || 'NON'
+    const cartTotalPrice = order.totalPriceV2.amount
+    function toggleModal() {
+        setModalOpen(!modalOpen)
+    }
 
     return (
         <div className='account-order'>
-            <h2>commande {order.name}</h2>
-            <div className='account-order-status'>
-                <h2>Status</h2>
-                <div className='account-order'>status des commandes</div>
-                <div className='account-order-status__content'>
+            {modalOpen && (
+                <div
+                    className='dialog-overlay'
+                    onClick={() => setModalOpen(false)}
+                >
+                    <div className='dialog'>
+                        <ToggleModal
+                            toggle={toggleModal}
+                            cart={cartTotalPrice}
+                        />
+                    </div>
+                </div>
+            )}
+            <div className='account-order-header'>
+                <div>
+                    <h2>commande {order.name}</h2>
+                    <div className='account-order-status'>
+                        <h2>Status</h2>
+                        <div className='account-order'>
+                            status des commandes
+                        </div>
+                        <div className='account-order-status__content'>
+                            <p>
+                                <strong>Order Status:</strong>{' '}
+                                {order.fulfillmentStatus}
+                            </p>
+                        </div>
+                    </div>
+
                     <p>
-                        <strong>Order Status:</strong> {order.fulfillmentStatus}
+                        <a
+                            target='_blank'
+                            href={order.statusUrl}
+                            rel='noreferrer'
+                        >
+                            View Order Status →
+                        </a>
                     </p>
                 </div>
+                <div
+                    onClick={toggleModal}
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: '450px',
+                    }}
+                >
+                    {cartTotalPrice <= 250 ? (
+                        <img
+                            src='/cart/cartClassic.png'
+                            alt='panier classic'
+                            style={{
+                                width: 'fit-content',
+                                marginBottom: '50px',
+                            }}
+                        />
+                    ) : cartTotalPrice <= 500 ? (
+                        <img
+                            src='/cart/cartPremium.png'
+                            alt='panier premium'
+                            style={{
+                                width: 'fit-content',
+                                marginBottom: '50px',
+                            }}
+                        />
+                    ) : (
+                        <img
+                            src='/cart/cartExclusif.png'
+                            alt='panier vide'
+                            style={{
+                                width: 'fit-content',
+                                marginBottom: '50px',
+                            }}
+                        />
+                    )}
+                </div>
             </div>
-
-            <p>
-                <a target='_blank' href={order.statusUrl} rel='noreferrer'>
-                    View Order Status →
-                </a>
-            </p>
             <div className='orders-informations'>
                 <div className='order-description-item'>
                     <p>Total</p>
@@ -181,6 +249,94 @@ function OrderLineRow(lineItem: any) {
                     </div>
                 )
             })}
+        </div>
+    )
+}
+
+function ToggleModal(toggle: any, { cart }: any) {
+    console.log(cart)
+    return (
+        <div
+            className='a-third-guid'
+            style={{
+                backgroundColor: 'unset',
+                width: 'unset',
+                marginBottom: 'unset',
+            }}
+        >
+            <div className='modal-stickers-close' onClick={toggle.toggle}>
+                <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='16'
+                    height='16'
+                    viewBox='0 0 16 16'
+                >
+                    <path
+                        id='Tracé_243'
+                        data-name='Tracé 243'
+                        d='M16841.295-8037.292l-6.295-6.294-6.295,6.294a.988.988,0,0,1-.705.292.988.988,0,0,1-.705-.292,1,1,0,0,1,0-1.417l6.291-6.292-6.291-6.292a1,1,0,0,1,0-1.416,1,1,0,0,1,1.41,0l6.295,6.294,6.295-6.294a1,1,0,0,1,1.41,0,1,1,0,0,1,0,1.416l-6.291,6.292,6.291,6.292a1,1,0,0,1,0,1.417.988.988,0,0,1-.705.292A.988.988,0,0,1,16841.295-8037.292Z'
+                        transform='translate(-16827 8053)'
+                        fill='#fff'
+                    />
+                </svg>
+            </div>
+            <h2>OPTIONS DE LIVRAISON & RETOUR</h2>
+            <p>
+                Nous avons crée trois catégories d’achats pour nuancer les
+                différentes options de retours et remboursement. <br />
+                Repérez-les lors de vos achats pour comprendre les modalités de
+                renvois/livraison et choisir ce qui vous convient le mieux.
+            </p>
+            <div
+                className='a-third-guid-container a-third-cart'
+                style={{
+                    borderTop: '2px solid #ffffff60',
+                }}
+            >
+                <div
+                    className='a-third-guid-container-item'
+                    style={{
+                        borderRight: '2px solid #ffffff60',
+                    }}
+                >
+                    <img src='/cart/cartClassic.png' alt='cartClassic' />
+                    <p>Panier classique</p>
+                    <span>0 - 250€</span>
+                    <p>
+                        LIVRAISON PAYANTE <br />
+                        RETOURS GRATUIT <br />
+                        {/*BOOSTER RETOUR* 24H (10 €)*/}
+                    </p>
+                    <p>Livraison 10€</p>
+                </div>
+                <div
+                    className='a-third-guid-container-item'
+                    style={{
+                        borderRight: '2px solid #ffffff60',
+                    }}
+                >
+                    <img src='/cart/cartPremium.png' alt='cartClassic' />
+                    <p>Panier premium</p>
+                    <span>250€ - 500€</span>
+                    <p>
+                        LIVRAISON PAYANTE <br />
+                        RETOURS GRATUIT <br />
+                        {/*BOOSTER RETOUR* 24H (20 €)*/}
+                    </p>
+                    <p>Livraison 5€</p>
+                </div>
+                <div className='a-third-guid-container-item'>
+                    <img src='/cart/cartExclusif.png' alt='cartClassic' />
+                    <p>Panier premium</p>
+                    <span>+500€</span>
+                    <p>
+                        LIVRAISON GRATUITE <br />
+                        RETOURS GRATUIT <br />
+                        {/*BOOSTER RETOUR* 48H (30 €)*/}
+                    </p>
+                    <p>Livraison express</p>
+                </div>
+            </div>
         </div>
     )
 }

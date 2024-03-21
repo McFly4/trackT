@@ -676,3 +676,7 @@
     cursor: pointer;
     margin-top: 75px;
 }
+
+.account-order-header{
+    display: flex;
+}

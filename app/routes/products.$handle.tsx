@@ -1194,7 +1194,6 @@ function ProductOptions({ option, variants }: any) {
     }
     const selectedSize = findIndexByValue(sortedValues, defaultSize)
     const selectedClotheSize = findIndexByValue(sortedValues, defaultClotheSize)
-    console.log(defaultClotheSize)
     const handleSlideChange = (swiper: any) => {
         const activeIndex = swiper.activeIndex
         const link = document.getElementById(`product-link-${activeIndex}`)
@@ -1217,7 +1216,6 @@ function ProductOptions({ option, variants }: any) {
     }
 
     const sizeType = option?.values[0]?.value
-    console.log()
 
     return (
         <div className='product-options' key={option.name}>

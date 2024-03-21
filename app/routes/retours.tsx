@@ -211,6 +211,14 @@ export default function Retours() {
                     *après réception et vérification des articles retournés par
                     notre équipe Trackt.
                 </p>
+                <div className='politics-retours-cb'>
+                    <h4>Remboursement classique</h4>
+                    <p>
+                        Remboursement disponible dans un délais de 3 à 5 jours
+                        ouvrables par virement ou carte banquaire, dans la
+                        devise utilisée lors du paiement.
+                    </p>
+                </div>
             </div>
         </div>
     )

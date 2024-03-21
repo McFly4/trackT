@@ -25,6 +25,7 @@ import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
 import { Scrollbar } from 'swiper/modules'
 import type { CartLineInput } from '@shopify/hydrogen/storefront-api-types'
 import { CartForm } from '@shopify/hydrogen'
+import { AsideCategories } from '~/components/AsideCategories'
 
 export type LayoutProps = {
     cart: Promise<CartApiQueryFragment | null>
@@ -86,6 +87,7 @@ export function Layout({
             )}
             <CartAside cart={cart} pocketItems={pocketItems} />
             <SearchAside />
+            <CategoriesAside />
             {location.pathname !== '/account/login' &&
                 location.pathname !== '/filters' &&
                 location.pathname !== '/account/register' &&
@@ -409,6 +411,10 @@ function AddToCartButton({
             )}
         </CartForm>
     )
+}
+
+function CategoriesAside() {
+    return <AsideCategories id='categories-aside' heading='CATEGORIES' />
 }
 
 function SearchAside() {

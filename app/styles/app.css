@@ -196,6 +196,97 @@ aside li {
     z-index: 99999;
 }
 
+.categoriesAside{
+    background-image: url(public/categoriesAside.png);
+}
+
+
+.categoriesAside main{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: space-between;
+}
+
+.categoriesAsideNav{
+    margin: 20px auto;
+}
+
+.categoriesAsideNav h5{
+    text-align: center;
+}
+
+.categoriesAside-container{
+    padding-top: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+.categoriesAside-column{
+    display: flex;
+    flex-direction: column;
+    border-right: 2px solid #646464;
+    width: fit-content;
+    padding: 0 80px;
+}
+
+.categoriesAside-column:last-child{
+    border-right: none;
+    padding: 0 0 0 80px;
+}
+
+.categoriesAside-item{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 35px;
+}
+
+.categoriesAside-item h4{
+    margin-bottom: 10px;
+    font-family: "Helvetica Neue", sans-serif;
+    display: flex;
+}
+
+.categoriesAside-item span{
+    margin-left: 5px;
+    font-size: 15px;
+}
+
+.categoriesAside-item span{
+    background-color: #fff;
+    color: #000;
+    font-family: "Helvetica Neue", sans-serif;
+    margin-bottom: 9px;
+    width: fit-content;
+    padding: 5px 10px;
+    font-weight: 600;
+    border-radius: 50px;
+    text-transform: uppercase;
+}
+
+.categoriesAside-item p{
+    font-weight: 500;
+    font-size: 15px;
+    font-family: "Helvetica Neue", sans-serif;
+    margin-bottom: 9px;
+    text-transform: uppercase;
+}
+
+.categoriesAside-item div{
+    display: flex;
+    align-items: center;
+    margin-bottom: 9px;
+}
+
+.categoriesAside-item div p{
+    margin-bottom: unset;
+}
+
+.categoriesAside-item div img{
+    width: 43px;
+    margin-right: 10px;
+}
+
 .searchAside main {
     margin: 0;
 }
@@ -1775,6 +1866,17 @@ input[type="search"]::-webkit-search-results-decoration {
     font-weight: 400;
     margin-bottom: unset;
 }
+
+.politics-retours-cb{
+    margin-top: 45px;
+    background-color: #363636;
+    border-radius: 5px;
+    padding: 50px;
+    margin-bottom: 500px;
+    justify-content: center;
+
+}
+
 
 /*
 * --------------------------------------------------

@@ -29,11 +29,10 @@ export default function GoFilters() {
                             Rechercher par filtres
                         </button>
                     </Link>
-
-                    <Link to='/'>
+                    <a href='#categories-aside'>
                         <button>Shopping par catégories</button>
-                    </Link>
-                    <Link to='#search-aside'>
+                    </a>
+                    <a href='#search-aside'>
                         <button>
                             <svg
                                 id='icon'
@@ -62,7 +61,7 @@ export default function GoFilters() {
                             </svg>
                             Rechercher manuellement
                         </button>
-                    </Link>
+                    </a>
                     <Link to='/filtered'>
                         <button>
                             <img

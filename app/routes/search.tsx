@@ -132,16 +132,24 @@ export default function SearchPage() {
                                     >
                                         <Link to='/filters'>
                                             <button>
+                                                <img
+                                                    src='/filters/checkbox.png'
+                                                    alt='check'
+                                                    style={{
+                                                        width: '20px',
+                                                        marginRight: '10px',
+                                                    }}
+                                                />
                                                 Rechercher par filtres
                                             </button>
                                         </Link>
 
-                                        <Link to='/'>
+                                        <a href='#categories-aside'>
                                             <button>
                                                 Shopping par catégories
                                             </button>
-                                        </Link>
-                                        <Link to='#search-aside'>
+                                        </a>
+                                        <a href='#search-aside'>
                                             <button>
                                                 <svg
                                                     id='icon'
@@ -149,6 +157,9 @@ export default function SearchPage() {
                                                     width='21.548'
                                                     height='21.547'
                                                     viewBox='0 0 21.548 21.547'
+                                                    style={{
+                                                        marginRight: '10px',
+                                                    }}
                                                 >
                                                     <path
                                                         id='Tracé_219'
@@ -167,7 +178,7 @@ export default function SearchPage() {
                                                 </svg>
                                                 Rechercher manuellement
                                             </button>
-                                        </Link>
+                                        </a>
                                     </div>
                                 </div>
                                 <div
@@ -205,11 +216,23 @@ export default function SearchPage() {
                                 </div>
                                 <div className='four-btns'>
                                     <Link to='/filters'>
-                                        <button>Rechercher par filtres</button>
+                                        <button>
+                                            <img
+                                                src='/filters/checkbox.png'
+                                                alt='check'
+                                                style={{
+                                                    width: '20px',
+                                                    marginRight: '10px',
+                                                }}
+                                            />
+                                            Rechercher par filtres
+                                        </button>
                                     </Link>
 
-                                    <button>Shopping par catégories</button>
-                                    <Link to='#search-aside'>
+                                    <a href='#categories-aside'>
+                                        <button>Shopping par catégories</button>
+                                    </a>
+                                    <a href='#search-aside'>
                                         <button>
                                             <svg
                                                 id='icon'
@@ -217,6 +240,9 @@ export default function SearchPage() {
                                                 width='21.548'
                                                 height='21.547'
                                                 viewBox='0 0 21.548 21.547'
+                                                style={{
+                                                    marginRight: '10px',
+                                                }}
                                             >
                                                 <path
                                                     id='Tracé_219'
@@ -235,9 +261,18 @@ export default function SearchPage() {
                                             </svg>
                                             Rechercher manuellement
                                         </button>
-                                    </Link>
+                                    </a>
                                     <Link to='/filtered'>
-                                        <button>Random item</button>
+                                        <button>
+                                            <img
+                                                src='/filters/arrow-shuffle.png'
+                                                alt='arrow'
+                                                style={{
+                                                    marginRight: '10px',
+                                                }}
+                                            />
+                                            Random item
+                                        </button>
                                     </Link>
                                 </div>
                             </div>

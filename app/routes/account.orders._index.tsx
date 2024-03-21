@@ -166,12 +166,13 @@ function OrderItem({ order }: { order: OrderItemFragment }) {
         gridTemplateRows: `repeat(${numRows}, 1fr)`,
         gridTemplateColumns: `repeat(${numCols}, 1fr)`,
     }
+    console.log(order)
     return (
         <Link to={`/account/orders/${btoa(order.id)}`}>
             <div className='order'>
                 <div className='order-head'>
                     <div className='order-head-image' style={gridStyle}>
-                        {images?.map((image, index) => (
+                        {images?.slice(0, 4).map((image, index) => (
                             <div key={index} className='order-head-image-item'>
                                 <img
                                     src={image?.variant?.image?.url}

@@ -1,86 +1,335 @@
-import { json, redirect, type LoaderFunctionArgs } from "@shopify/remix-oxygen";
-import { useLoaderData, Link, type MetaFunction } from "@remix-run/react";
-import { Pagination, getPaginationVariables, Image, Money } from "@shopify/hydrogen";
-import type { ProductItemFragment } from "storefrontapi.generated";
-import { useVariantUrl } from "~/utils";
+import { json, redirect, type LoaderFunctionArgs } from '@shopify/remix-oxygen'
+import { useLoaderData, Link, type MetaFunction } from '@remix-run/react'
+import {
+    Pagination,
+    getPaginationVariables,
+    Image,
+    Money,
+} from '@shopify/hydrogen'
+import type { ProductItemFragment } from 'storefrontapi.generated'
+import { useVariantUrl } from '~/utils'
+import MainProduct from '~/components/Common/mainProduct'
+import GoFilters from '~/components/Common/GoFilters'
+import TrackT from '~/components/Common/TrackT'
+import MarketDrag from '~/components/Common/MarketDrag'
+import React, { useState } from 'react'
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
-    return [{ title: `Hydrogen | ${data?.collection.title ?? ""} Collection` }];
-};
+    return [{ title: `Hydrogen | ${data?.collection.title ?? ''} Collection` }]
+}
 
 export async function loader({ request, params, context }: LoaderFunctionArgs) {
-    const { handle } = params;
-    const { storefront } = context;
+    const { handle } = params
+    const { storefront } = context
     const paginationVariables = getPaginationVariables(request, {
         pageBy: 8,
-    });
+    })
+    const pagination = getPaginationVariables(request, {
+        pageBy: 24,
+    })
 
     if (!handle) {
-        return redirect("/collections");
+        return redirect('/collections')
     }
 
     const { collection } = await storefront.query(COLLECTION_QUERY, {
         variables: { handle, ...paginationVariables },
-    });
+    })
 
     if (!collection) {
         throw new Response(`Collection ${handle} not found`, {
             status: 404,
-        });
+        })
     }
-    return json({ collection });
+
+    // rest of the additional data
+    const allProducts = await context.storefront.query(RANDOM_ITEM)
+    const randomList = ['hotDeal', 'soon', 'fastShip', 'release']
+    const metafieldRandom =
+        randomList[Math.floor(Math.random() * randomList.length)]
+
+    const randomProduct = await context.storefront.query(FILTERS_QUERY, {
+        variables: {
+            first: 30,
+            filters: [
+                {
+                    productMetafield: {
+                        namespace: 'custom',
+                        key: metafieldRandom,
+                        value: 'true',
+                    },
+                },
+            ],
+            collections: 'title:all',
+            ...pagination,
+        },
+    })
+
+    return json({ collection, allProducts, randomProduct, metafieldRandom })
 }
 
 export default function Collection() {
-    const { collection } = useLoaderData<typeof loader>();
-    return (
-        <div className="collection">
-            <h1>{collection.title}</h1>
-            <p className="collection-description">{collection.description}</p>
-            <Pagination connection={collection.products}>
-                {({ nodes, isLoading, PreviousLink, NextLink }) => (
-                    <>
-                        <PreviousLink>{isLoading ? "Loading..." : <span>↑ Load previous</span>}</PreviousLink>
-                        <ProductsGrid products={nodes} />
-                        <br />
-                        <NextLink>{isLoading ? "Loading..." : <span>Load more ↓</span>}</NextLink>
-                    </>
-                )}
-            </Pagination>
-        </div>
-    );
-}
+    const { collection, allProducts, randomProduct, metafieldRandom } =
+        useLoaderData<typeof loader>()
+    const carousel = randomProduct.collections.nodes[0].products.nodes
+    const carouselName = metafieldRandom
+    const all = allProducts?.collection?.products?.nodes
 
-function ProductsGrid({ products }: { products: ProductItemFragment[] }) {
-    return (
-        <div className="products-grid">
-            {products.map((product, index) => {
-                return <ProductItem key={product.id} product={product} loading={index < 8 ? "eager" : undefined} />;
-            })}
-        </div>
-    );
-}
+    const [randomProducts, setRandomProducts] = useState([]) as any
+    const [isRandom, setIsRandom] = useState(false)
 
-function ProductItem({ product, loading }: { product: ProductItemFragment; loading?: "eager" | "lazy" }) {
-    const variant = product.variants.nodes[0];
-    const variantUrl = useVariantUrl(product.handle, variant.selectedOptions);
+    const handleRandomizeProducts = () => {
+        if (all && all.length > 0) {
+            const copiedProducts = [...all]
+            const shuffledProducts = copiedProducts.sort(
+                () => Math.random() - 0.5
+            )
+            const selectedProducts = shuffledProducts.slice(0, 20)
+            setRandomProducts(selectedProducts)
+            setIsRandom(true)
+        }
+    }
+
     return (
-        <Link className="product-item" key={product.id} prefetch="intent" to={variantUrl}>
-            {product.featuredImage && (
-                <Image
-                    alt={product.featuredImage.altText || product.title}
-                    aspectRatio="1/1"
-                    data={product.featuredImage}
-                    loading={loading}
-                    sizes="(min-width: 45em) 400px, 100vw"
-                />
+        <>
+            <div
+                className='panel-trackt'
+                style={{
+                    marginTop: '200px',
+                    justifyContent:
+                        collection?.nodes?.length === 0 ? 'center' : '',
+                }}
+            >
+                <div className='search'>
+                    <div className='search-container'>
+                        {collection.products?.nodes?.length > 0 ? (
+                            <>
+                                <div className='search-txt'>
+                                    <h1>SÉLECTION PERSONNALISÉE</h1>
+                                    <p>
+                                        Voici les articles qui correspondent à
+                                        votre recherche. Ajustez vos critères si
+                                        vous souhaitez affiner vos résultats ou
+                                        alors tentez la recherche ‘random’.
+                                    </p>
+                                    <div
+                                        className='four-btns'
+                                        style={{
+                                            marginTop: '30px',
+                                        }}
+                                    >
+                                        <Link to='/filters'>
+                                            <button>
+                                                Rechercher par filtres
+                                            </button>
+                                        </Link>
+
+                                        <Link to='/'>
+                                            <button>
+                                                Shopping par catégories
+                                            </button>
+                                        </Link>
+                                        <Link to='#search-aside'>
+                                            <button>
+                                                <svg
+                                                    id='icon'
+                                                    xmlns='http://www.w3.org/2000/svg'
+                                                    width='21.548'
+                                                    height='21.547'
+                                                    viewBox='0 0 21.548 21.547'
+                                                >
+                                                    <path
+                                                        id='Tracé_219'
+                                                        data-name='Tracé 219'
+                                                        d='M988.192,241.428a8.08,8.08,0,1,1,8.08-8.08A8.089,8.089,0,0,1,988.192,241.428Zm0-13.467a5.387,5.387,0,1,0,5.387,5.387A5.393,5.393,0,0,0,988.192,227.961Z'
+                                                        transform='translate(-980.112 -225.268)'
+                                                        fill='#fff'
+                                                    />
+                                                    <path
+                                                        id='Tracé_220'
+                                                        data-name='Tracé 220'
+                                                        d='M997.192,243.695a1.337,1.337,0,0,1-.952-.395l-6.734-6.733a1.346,1.346,0,0,1,1.9-1.9l6.734,6.733a1.347,1.347,0,0,1-.952,2.3Z'
+                                                        transform='translate(-976.992 -222.148)'
+                                                        fill='#fff'
+                                                    />
+                                                </svg>
+                                                Rechercher manuellement
+                                            </button>
+                                        </Link>
+                                    </div>
+                                </div>
+                                <div
+                                    className='search-img'
+                                    onClick={handleRandomizeProducts}
+                                >
+                                    <video
+                                        src='/randomItem.mp4'
+                                        autoPlay
+                                        muted
+                                        playsInline
+                                        loop
+                                        style={{
+                                            width: '360px',
+                                        }}
+                                    >
+                                        <img
+                                            src='/randomItem.png'
+                                            alt='search'
+                                        />
+                                    </video>
+                                </div>
+                            </>
+                        ) : (
+                            <div className='search-empty'>
+                                <div className='search-empty-top'>
+                                    <h3>
+                                        VOTRE RECHERCHE N’A FOURNI AUCUN
+                                        RÉSULTAT
+                                    </h3>
+                                    <p>
+                                        Réessayez, vous avez le choix entre
+                                        plusieurs options !
+                                    </p>
+                                </div>
+                                <div className='four-btns'>
+                                    <Link to='/filters'>
+                                        <button>Rechercher par filtres</button>
+                                    </Link>
+
+                                    <button>Shopping par catégories</button>
+                                    <Link to='#search-aside'>
+                                        <button>
+                                            <svg
+                                                id='icon'
+                                                xmlns='http://www.w3.org/2000/svg'
+                                                width='21.548'
+                                                height='21.547'
+                                                viewBox='0 0 21.548 21.547'
+                                            >
+                                                <path
+                                                    id='Tracé_219'
+                                                    data-name='Tracé 219'
+                                                    d='M988.192,241.428a8.08,8.08,0,1,1,8.08-8.08A8.089,8.089,0,0,1,988.192,241.428Zm0-13.467a5.387,5.387,0,1,0,5.387,5.387A5.393,5.393,0,0,0,988.192,227.961Z'
+                                                    transform='translate(-980.112 -225.268)'
+                                                    fill='#fff'
+                                                />
+                                                <path
+                                                    id='Tracé_220'
+                                                    data-name='Tracé 220'
+                                                    d='M997.192,243.695a1.337,1.337,0,0,1-.952-.395l-6.734-6.733a1.346,1.346,0,0,1,1.9-1.9l6.734,6.733a1.347,1.347,0,0,1-.952,2.3Z'
+                                                    transform='translate(-976.992 -222.148)'
+                                                    fill='#fff'
+                                                />
+                                            </svg>
+                                            Rechercher manuellement
+                                        </button>
+                                    </Link>
+                                    <Link to='/filtered'>
+                                        <button>Random item</button>
+                                    </Link>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                    <div
+                        style={{
+                            marginTop: '70px',
+                            marginLeft: 'unset',
+                            paddingLeft: 'unset !important',
+                        }}
+                        className='panel-container'
+                    >
+                        {isRandom ? (
+                            <div className='panel-products-grid'>
+                                <div className='panel-products-grid'>
+                                    {randomProducts.map(
+                                        (product: any, index: number) => {
+                                            return (
+                                                <MainProduct
+                                                    key={index}
+                                                    product={product}
+                                                />
+                                            )
+                                        }
+                                    )}
+                                </div>
+                            </div>
+                        ) : (
+                            <Pagination connection={collection.products}>
+                                {({
+                                    nodes,
+                                    NextLink,
+                                    PreviousLink,
+                                    isLoading,
+                                }) => (
+                                    <div
+                                        style={{
+                                            paddingBottom: '50px',
+                                        }}
+                                    >
+                                        <PreviousLink>
+                                            <div>
+                                                <button>
+                                                    {isLoading
+                                                        ? 'Chargement...'
+                                                        : 'Charger les produits précédents'}
+                                                </button>
+                                            </div>
+                                        </PreviousLink>
+                                        <div className='panel-products-grid'>
+                                            <div className='panel-products-grid'>
+                                                {nodes.map((product) => (
+                                                    <MainProduct
+                                                        product={product}
+                                                    />
+                                                ))}
+                                            </div>
+                                        </div>
+                                        <div className='pagination'>
+                                            <NextLink>
+                                                <button>
+                                                    {isLoading
+                                                        ? 'Chargement...'
+                                                        : 'Afficher plus de résultats'}
+                                                </button>
+                                            </NextLink>
+                                        </div>
+                                    </div>
+                                )}
+                            </Pagination>
+                        )}
+                    </div>
+                </div>
+            </div>
+            {collection.products?.nodes?.length > 0 && (
+                <div
+                    className='hfooter'
+                    style={{
+                        backgroundColor: '#000',
+                    }}
+                >
+                    <GoFilters />
+                    <div
+                        style={{
+                            width: '100%',
+                            height: '10px',
+                            backgroundColor: '#121212',
+                            marginBottom: '60px',
+                        }}
+                    ></div>
+                    <video
+                        src='/product/banner.mp4'
+                        autoPlay
+                        muted
+                        playsInline
+                        loop
+                    />
+                    <TrackT products={carousel} title={carouselName} />
+                    <MarketDrag />
+                </div>
             )}
-            <h4>{product.title}</h4>
-            <small>
-                <Money data={product.priceRange.minVariantPrice} />
-            </small>
-        </Link>
-    );
+        </>
+    )
 }
 
 const PRODUCT_ITEM_FRAGMENT = `#graphql
@@ -92,6 +341,13 @@ const PRODUCT_ITEM_FRAGMENT = `#graphql
     id
     handle
     title
+    vendor
+    productType
+    images(first: 1) {
+    nodes {
+        url
+        }
+    }
     featuredImage {
       id
       altText
@@ -116,7 +372,7 @@ const PRODUCT_ITEM_FRAGMENT = `#graphql
       }
     }
   }
-` as const;
+` as const
 
 // NOTE: https://shopify.dev/docs/api/storefront/2022-04/objects/collection
 const COLLECTION_QUERY = `#graphql
@@ -153,4 +409,168 @@ const COLLECTION_QUERY = `#graphql
       }
     }
   }
-` as const;
+` as const
+
+const RANDOM_ITEM = `#graphql
+query Collection {
+  collection(handle: "all") {
+    products(first: 250) {
+      nodes {
+        title
+          productType
+          handle
+          vendor
+          toothBrush: metafield(namespace: "custom", key: "toothbrush") {
+            key
+            value
+          }
+          ooo: metafield(namespace: "custom", key: "outofstock") {
+            key
+            value
+          }
+          new: metafield(namespace: "custom", key: "new") {
+            key
+            value
+          }
+          ship: metafield(namespace: "custom", key: "fastShip") {
+            key
+            value
+          }
+          release: metafield(namespace: "custom", key: "release") {
+            key
+            value
+          }
+          promotion: metafield(namespace: "custom", key: "promotion") {
+            key
+            value
+          }
+          hotDeal: metafield(namespace: "custom", key: "hotDeal") {
+            key
+            value
+          }
+          features: metafield(namespace: "custom", key: "features") {
+            key
+            value
+          }
+          box: metafield(namespace: "custom", key: "box_sizing") {
+            key
+            value
+          }
+          soon: metafield(namespace: "custom", key: "soon") {
+            key
+            value
+          }
+          images(first: 1) {
+            nodes {
+              url
+            }
+          }
+      }
+    }
+  }
+}
+` as const
+
+const FILTERS_QUERY = `#graphql
+fragment ProductFragment on Product {
+  id
+  title
+  vendor
+  handle
+  description
+  options {
+    name
+    values
+  }
+  images(first: 1) {
+    nodes {
+      url
+    }
+  }
+  toothBrush: metafield(namespace: "custom", key: "toothbrush") {
+    key
+    value
+  }
+  ooo: metafield(namespace: "custom", key: "outofstock") {
+    key
+    value
+  }
+  new: metafield(namespace: "custom", key: "new") {
+    key
+    value
+  }
+  ship: metafield(namespace: "custom", key: "fastShip") {
+    key
+    value
+  }
+  release: metafield(namespace: "custom", key: "release") {
+    key
+    value
+  }
+  promotion: metafield(namespace: "custom", key: "promotion") {
+    key
+    value
+  }
+  hotDeal: metafield(namespace: "custom", key: "hotDeal") {
+    key
+    value
+  }
+  features: metafield(namespace: "custom", key: "features") {
+    key
+    value
+  }
+  materials: metafield(namespace: "custom", key: "materiaux") {
+    key
+    value
+  }
+  daterelease: metafield(namespace: "custom", key: "date") {
+    key
+    value
+  }
+  colors: metafield(namespace: "custom", key: "couleurs") {
+    key
+    value
+  }
+  box_sizing: metafield(namespace: "custom", key: "box_sizing") {
+    key
+    value
+  }
+ soon: metafield(namespace: "custom", key: "soon") {
+    key
+    value
+  }
+  box: metafield(namespace: "custom", key: "box_sizing"){
+    key
+    value
+   }
+  priceRange {
+    minVariantPrice {
+      amount
+      currencyCode
+    }
+  }
+}
+
+query FiltersQuery($first: Int!, $filters: [ProductFilter!], $collections: String, $startCursor: String, $endCursor: String) {
+  collections(query: $collections, first: 1) {
+  nodes {
+    products(
+      first: $first
+      filters: $filters
+      before: $startCursor
+      after: $endCursor
+    ) {
+      nodes {
+        ...ProductFragment
+      }
+      pageInfo {
+        hasPreviousPage
+        hasNextPage
+        startCursor
+        endCursor
+      }
+    }
+  }
+}
+}
+`
