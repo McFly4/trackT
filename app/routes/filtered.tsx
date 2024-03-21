@@ -257,7 +257,11 @@ export default function filtered() {
                                             </button>
                                         </Link>
 
-                                        <button>Shopping par catégories</button>
+                                        <Link to='/'>
+                                            <button>
+                                                Shopping par catégories
+                                            </button>
+                                        </Link>
                                         <Link to='#search-aside'>
                                             <button>
                                                 <svg

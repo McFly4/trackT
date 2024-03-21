@@ -2,7 +2,7 @@ import { Link } from '@remix-run/react'
 import React, { useState } from 'react'
 import { useNavigate } from '@remix-run/react'
 
-export default function ({ product, stickers }: any) {
+export default function ({ product, stickers, isCarousel }: any) {
     const navigate = useNavigate()
     const [isOpen, setIsOpen] = useState(false)
 
@@ -160,7 +160,14 @@ export default function ({ product, stickers }: any) {
                     </div>
                 </div>
             )}
-            <div className='product-grid'>
+            <div
+                className='product-grid'
+                style={
+                    isCarousel && {
+                        width: 'unset',
+                    }
+                }
+            >
                 <div
                     onClick={() => {
                         stickers === false || stickers !== undefined
@@ -204,11 +211,12 @@ export default function ({ product, stickers }: any) {
                                     : 'product-img'
                             }
                             style={{
-                                objectFit:
-                                    product?.box?.value == '4:5' ||
-                                    product?.box?.value == '1:1'
-                                        ? 'contain'
-                                        : 'cover',
+                                objectFit: isCarousel
+                                    ? 'contain'
+                                    : product?.box?.value == '4:5' ||
+                                      product?.box?.value == '1:1'
+                                    ? 'contain'
+                                    : 'cover',
                             }}
                         />
                     </Link>

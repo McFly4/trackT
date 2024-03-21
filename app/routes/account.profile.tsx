@@ -127,13 +127,18 @@ export async function action({ request, context }: ActionFunctionArgs) {
     }
 }
 export default function AccountProfile() {
-    const { products } = useLoaderData<typeof loader>()
-    const productsList =
-        products?.metaobjects?.nodes[0]?.field?.references?.nodes
-    const account = useOutletContext<{ customer: CustomerFragment }>()
     const { state } = useNavigation()
     const action = useActionData<ActionResponse>()
+    const { products } = useLoaderData<typeof loader>()
+    const account = useOutletContext<{ customer: CustomerFragment }>()
     const customer = action?.customer ?? account?.customer
+    const [showPassword, setShowPassword] = useState(false)
+    const [showPassword2, setShowPassword2] = useState(false)
+    const [selectedShoeSize, setSelectedShoeSize] = useState('')
+    const [selectedClothesSize, setSelectedClothesSize] = useState('')
+    const productsList =
+        products?.metaobjects?.nodes[0]?.field?.references?.nodes
+
     const shoesSize = [
         { index: 0, size: '36' },
         { index: 1, size: '37' },
@@ -155,8 +160,6 @@ export default function AccountProfile() {
         { index: 6, size: 'XXXL' },
     ]
 
-    const [selectedShoeSize, setSelectedShoeSize] = useState('')
-    const [selectedClothesSize, setSelectedClothesSize] = useState('')
     const selectedShoeIndex = shoesSize.findIndex(
         (item) => item.size === selectedShoeSize
     )
@@ -164,18 +167,13 @@ export default function AccountProfile() {
         (item) => item.size === selectedClothesSize
     )
 
-    useEffect(() => {
-        const storedShoeSize = localStorage.getItem('selectedShoeSize')
-        const storedClothesSize = localStorage.getItem('selectedClothesSize')
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword)
+    }
 
-        if (storedShoeSize) {
-            setSelectedShoeSize(storedShoeSize)
-        }
-
-        if (storedClothesSize) {
-            setSelectedClothesSize(storedClothesSize)
-        }
-    }, [])
+    const togglePasswordVisibility2 = () => {
+        setShowPassword2(!showPassword2)
+    }
 
     const handleShoeSizeChange = (newSize: any) => {
         setSelectedShoeSize(newSize)
@@ -187,8 +185,23 @@ export default function AccountProfile() {
         localStorage.setItem('selectedClothesSize', newSize)
     }
 
-    console.log('index', selectedShoeIndex)
-    console.log('index', selectedClotheIndex)
+    useEffect(() => {
+        const storedShoeSize = localStorage.getItem('selectedShoeSize')
+        const storedClothesSize = localStorage.getItem('selectedClothesSize')
+
+        if (storedShoeSize) {
+            setSelectedShoeSize(storedShoeSize)
+        } else {
+            setSelectedShoeSize('36')
+        }
+
+        if (storedClothesSize) {
+            setSelectedClothesSize(storedClothesSize)
+        } else {
+            setSelectedClothesSize('XS')
+        }
+    }, [])
+
     return (
         <>
             <div className='account-profile'>
@@ -275,15 +288,42 @@ export default function AccountProfile() {
                             <label htmlFor='currentPassword'>
                                 Ancient mot de passe
                             </label>
-                            <input
-                                id='currentPassword'
-                                name='currentPassword'
-                                type='password'
-                                autoComplete='current-password'
-                                placeholder='Current password'
-                                aria-label='Current password'
-                                minLength={8}
-                            />
+                            <div style={{ position: 'relative' }}>
+                                <input
+                                    id='currentPassword'
+                                    name='currentPassword'
+                                    type={showPassword ? 'text' : 'password'}
+                                    style={{
+                                        width: '93%',
+                                    }}
+                                    autoComplete='current-password'
+                                    placeholder='Current password'
+                                    aria-label='Current password'
+                                    minLength={8}
+                                />
+                                <svg
+                                    xmlns='http://www.w3.org/2000/svg'
+                                    width='28'
+                                    height='23.293'
+                                    viewBox='0 0 28 23.293'
+                                    style={{
+                                        position: 'absolute',
+                                        right: '30px',
+                                        top: '50%',
+                                        transform: 'translateY(-50%)',
+                                        cursor: 'pointer',
+                                    }}
+                                    onClick={togglePasswordVisibility}
+                                >
+                                    <path
+                                        id='Tracé_443'
+                                        data-name='Tracé 443'
+                                        d='M15.182,3a14.239,14.239,0,0,1,14,11.647,14.238,14.238,0,0,1-28,0A14.239,14.239,0,0,1,15.182,3Zm0,20.705A11.653,11.653,0,0,0,26.54,14.647a11.651,11.651,0,0,0-22.717,0A11.653,11.653,0,0,0,15.182,23.705Zm0-3.235A5.823,5.823,0,1,1,21,14.647,5.823,5.823,0,0,1,15.182,20.47Zm0-2.588a3.235,3.235,0,1,0-3.235-3.235A3.235,3.235,0,0,0,15.182,17.882Z'
+                                        transform='translate(-1.182 -3)'
+                                        fill='#fff'
+                                    />
+                                </svg>
+                            </div>
                         </div>
                         <div
                             className='login-form-field'
@@ -294,14 +334,41 @@ export default function AccountProfile() {
                             <label htmlFor='newPassword'>
                                 Nouveau mot de passe
                             </label>
-                            <input
-                                id='newPassword'
-                                name='newPassword'
-                                type='password'
-                                placeholder='New password'
-                                aria-label='New password'
-                                minLength={8}
-                            />
+                            <div style={{ position: 'relative' }}>
+                                <input
+                                    id='newPassword'
+                                    name='newPassword'
+                                    placeholder='New password'
+                                    aria-label='New password'
+                                    minLength={8}
+                                    type={showPassword2 ? 'text' : 'password'}
+                                    style={{
+                                        width: '93%',
+                                    }}
+                                />
+                                <svg
+                                    xmlns='http://www.w3.org/2000/svg'
+                                    width='28'
+                                    height='23.293'
+                                    viewBox='0 0 28 23.293'
+                                    style={{
+                                        position: 'absolute',
+                                        right: '30px',
+                                        top: '50%',
+                                        transform: 'translateY(-50%)',
+                                        cursor: 'pointer',
+                                    }}
+                                    onClick={togglePasswordVisibility2}
+                                >
+                                    <path
+                                        id='Tracé_443'
+                                        data-name='Tracé 443'
+                                        d='M15.182,3a14.239,14.239,0,0,1,14,11.647,14.238,14.238,0,0,1-28,0A14.239,14.239,0,0,1,15.182,3Zm0,20.705A11.653,11.653,0,0,0,26.54,14.647a11.651,11.651,0,0,0-22.717,0A11.653,11.653,0,0,0,15.182,23.705Zm0-3.235A5.823,5.823,0,1,1,21,14.647,5.823,5.823,0,0,1,15.182,20.47Zm0-2.588a3.235,3.235,0,1,0-3.235-3.235A3.235,3.235,0,0,0,15.182,17.882Z'
+                                        transform='translate(-1.182 -3)'
+                                        fill='#fff'
+                                    />
+                                </svg>
+                            </div>
                         </div>
                     </div>
                     <div
@@ -390,36 +457,38 @@ export default function AccountProfile() {
                 <div className='trackT-size-container'>
                     <div className='trackT-size-container-item'>
                         <h2>sneakers</h2>
-                        <Swiper
-                            slidesPerView={5}
-                            grabCursor={true}
-                            centeredSlides={true}
-                            onSlideChange={(swiper) =>
-                                handleShoeSizeChange(
-                                    shoesSize[swiper.activeIndex]?.size
-                                )
-                            }
-                            initialSlide={selectedShoeIndex}
-                        >
-                            {shoesSize.map((value: any) => (
-                                <SwiperSlide key={value.index}>
-                                    {({ isActive, isPrev, isNext }) => (
-                                        <p
-                                            style={{
-                                                transition: 'all 0.3s ease',
-                                                fontSize: isActive
-                                                    ? '40px'
-                                                    : isPrev || isNext
-                                                    ? '24px'
-                                                    : '15px',
-                                            }}
-                                        >
-                                            {value.size}
-                                        </p>
-                                    )}
-                                </SwiperSlide>
-                            ))}
-                        </Swiper>
+                        {selectedShoeSize !== '' && (
+                            <Swiper
+                                slidesPerView={5}
+                                grabCursor={true}
+                                centeredSlides={true}
+                                onSlideChange={(swiper) =>
+                                    handleShoeSizeChange(
+                                        shoesSize[swiper.activeIndex]?.size
+                                    )
+                                }
+                                initialSlide={selectedShoeIndex}
+                            >
+                                {shoesSize.map((value: any) => (
+                                    <SwiperSlide key={value.index}>
+                                        {({ isActive, isPrev, isNext }) => (
+                                            <p
+                                                style={{
+                                                    transition: 'all 0.3s ease',
+                                                    fontSize: isActive
+                                                        ? '40px'
+                                                        : isPrev || isNext
+                                                        ? '24px'
+                                                        : '15px',
+                                                }}
+                                            >
+                                                {value.size}
+                                            </p>
+                                        )}
+                                    </SwiperSlide>
+                                ))}
+                            </Swiper>
+                        )}
                     </div>
                     <div
                         className='trackT-size-container-item'
@@ -428,36 +497,38 @@ export default function AccountProfile() {
                         }}
                     >
                         <h2>Vêtements</h2>
-                        <Swiper
-                            slidesPerView={5}
-                            grabCursor={true}
-                            centeredSlides={true}
-                            onSlideChange={(swiper) =>
-                                handleClothesSizeChange(
-                                    clothesSize[swiper.activeIndex]
-                                )
-                            }
-                            initialSlide={selectedClotheIndex}
-                        >
-                            {clothesSize.map((value: any) => (
-                                <SwiperSlide key={value.index}>
-                                    {({ isActive, isPrev, isNext }) => (
-                                        <p
-                                            style={{
-                                                transition: 'all 0.3s ease',
-                                                fontSize: isActive
-                                                    ? '40px'
-                                                    : isPrev || isNext
-                                                    ? '24px'
-                                                    : '15px',
-                                            }}
-                                        >
-                                            {value.size}
-                                        </p>
-                                    )}
-                                </SwiperSlide>
-                            ))}
-                        </Swiper>
+                        {selectedClothesSize !== '' && (
+                            <Swiper
+                                slidesPerView={5}
+                                grabCursor={true}
+                                centeredSlides={true}
+                                onSlideChange={(swiper) =>
+                                    handleClothesSizeChange(
+                                        clothesSize[swiper.activeIndex]?.size
+                                    )
+                                }
+                                initialSlide={selectedClotheIndex}
+                            >
+                                {clothesSize.map((value: any) => (
+                                    <SwiperSlide key={value.index}>
+                                        {({ isActive, isPrev, isNext }) => (
+                                            <p
+                                                style={{
+                                                    transition: 'all 0.3s ease',
+                                                    fontSize: isActive
+                                                        ? '40px'
+                                                        : isPrev || isNext
+                                                        ? '24px'
+                                                        : '15px',
+                                                }}
+                                            >
+                                                {value.size}
+                                            </p>
+                                        )}
+                                    </SwiperSlide>
+                                ))}
+                            </Swiper>
+                        )}
                     </div>
                 </div>
             </div>

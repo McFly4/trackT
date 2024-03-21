@@ -157,12 +157,12 @@ export default function Register() {
                                 <input
                                     id='password'
                                     name='password'
-                                    type={showPassword ? 'text' : 'password'}
                                     autoComplete='current-password'
                                     placeholder='Mot de passe'
                                     aria-label='Password'
                                     minLength={8}
                                     required
+                                    type={showPassword ? 'text' : 'password'}
                                     style={{
                                         width: '93%',
                                     }}

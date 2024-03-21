@@ -47,7 +47,7 @@ const category = [
     },
     {
         name: 'Accessories',
-        value: 'Accessories',
+        value: 'accessories',
     },
 ]
 
@@ -882,28 +882,81 @@ export default function Filters() {
                     <div
                         style={{
                             display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            width: '100%',
                         }}
                     >
-                        <a
-                            href='#search-aside'
+                        <div
                             style={{
-                                color: '#fff',
+                                display: 'flex',
                             }}
                         >
-                            <div className='filter-footer-container-search'>
-                                <img src='/icons/search.svg' alt='search' />
-                                <span>recherche manuelle</span>
-                            </div>
-                        </a>
-                        {manwoman.length > 0 && (
                             <div
-                                className='filter-footer-container-reset'
-                                onClick={resetAll}
+                                className='filter-footer-container-search'
+                                style={{
+                                    opacity: manwoman.length > 0 ? 1 : 0.5,
+                                    transition: 'opacity 0.s ease-in-out',
+                                }}
                             >
-                                <img src='/icons/close.svg' alt='reset' />
-                                <span>réinitialiser</span>
+                                <Link to={`/filtered${handleSearch()}`}>
+                                    <span>Afficher les resultats</span>
+                                </Link>
                             </div>
-                        )}
+                            {manwoman.length > 0 && (
+                                <div
+                                    className='filter-footer-container-reset'
+                                    onClick={resetAll}
+                                    style={{
+                                        marginLeft: '10px',
+                                    }}
+                                >
+                                    <img src='/icons/close.svg' alt='reset' />
+                                    <span>réinitialiser</span>
+                                </div>
+                            )}
+                        </div>
+                        <div
+                            className='four-btns'
+                            style={{
+                                marginTop: 'unset',
+                            }}
+                        >
+                            <Link to='/filters'>
+                                <button>Rechercher par filtres</button>
+                            </Link>
+
+                            <Link to='/'>
+                                <button>Shopping par catégories</button>
+                            </Link>
+                            <Link to='#search-aside'>
+                                <button>
+                                    <svg
+                                        id='icon'
+                                        xmlns='http://www.w3.org/2000/svg'
+                                        width='21.548'
+                                        height='21.547'
+                                        viewBox='0 0 21.548 21.547'
+                                    >
+                                        <path
+                                            id='Tracé_219'
+                                            data-name='Tracé 219'
+                                            d='M988.192,241.428a8.08,8.08,0,1,1,8.08-8.08A8.089,8.089,0,0,1,988.192,241.428Zm0-13.467a5.387,5.387,0,1,0,5.387,5.387A5.393,5.393,0,0,0,988.192,227.961Z'
+                                            transform='translate(-980.112 -225.268)'
+                                            fill='#fff'
+                                        />
+                                        <path
+                                            id='Tracé_220'
+                                            data-name='Tracé 220'
+                                            d='M997.192,243.695a1.337,1.337,0,0,1-.952-.395l-6.734-6.733a1.346,1.346,0,0,1,1.9-1.9l6.734,6.733a1.347,1.347,0,0,1-.952,2.3Z'
+                                            transform='translate(-976.992 -222.148)'
+                                            fill='#fff'
+                                        />
+                                    </svg>
+                                    Rechercher manuellement
+                                </button>
+                            </Link>
+                        </div>
                     </div>
                     {sizes?.length > 0 ? (
                         <img
@@ -977,17 +1030,6 @@ export default function Filters() {
                             )}
                         </div>
                     )}
-                    <div
-                        className='filter-footer-container-search'
-                        style={{
-                            opacity: manwoman.length > 0 ? 1 : 0.5,
-                            transition: 'opacity 0.s ease-in-out',
-                        }}
-                    >
-                        <Link to={`/filtered${handleSearch()}`}>
-                            <span>Afficher les resultats</span>
-                        </Link>
-                    </div>
                 </div>
             </div>
             <Link to='/'>

@@ -57,8 +57,22 @@ export default function TrackT({ products, title }: any) {
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
                 }}
-                spaceBetween={40}
+                spaceBetween={0}
                 onSwiper={(swiper) => (swiperRef.current = swiper)}
+                breakpoints={{
+                    0: {
+                        slidesPerView: 1,
+                    },
+                    600: {
+                        slidesPerView: 2,
+                    },
+                    800: {
+                        slidesPerView: 3,
+                    },
+                    1200: {
+                        slidesPerView: 4,
+                    },
+                }}
             >
                 {products?.map((product: any, index: number) => (
                     <SwiperSlide
@@ -67,7 +81,11 @@ export default function TrackT({ products, title }: any) {
                             padding: '40px 0',
                         }}
                     >
-                        <MainProduct product={product} stickers={false} />
+                        <MainProduct
+                            product={product}
+                            stickers={false}
+                            isCarousel={true}
+                        />
                     </SwiperSlide>
                 ))}
             </Swiper>

@@ -909,6 +909,8 @@ input[type="search"]::-webkit-search-results-decoration {
     flex-wrap: wrap;
     justify-content: center;
     margin-left: -30px;
+    overflow: hidden;
+    padding-top: 20px;
 }
 
 

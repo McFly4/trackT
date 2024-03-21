@@ -457,6 +457,7 @@ function ProductImage({ image, product }: { image: any; product: any }) {
                                 <MainProduct
                                     product={product}
                                     stickers={false}
+                                    isCarousel={true}
                                 />
                             </SwiperSlide>
                         )
@@ -1159,6 +1160,10 @@ function ProductOptions({ option, variants }: any) {
         typeof window !== 'undefined'
             ? localStorage.getItem('selectedShoeSize')
             : null
+    const defaultClotheSize =
+        typeof window !== 'undefined'
+            ? localStorage.getItem('selectedClothesSize')
+            : null
     const isSoon = variants[0]?.product?.soon?.value
     function toggleModalToothbrush() {
         setIsModalOpenToothbrush(!isModalOpenToothbrush)
@@ -1188,7 +1193,8 @@ function ProductOptions({ option, variants }: any) {
         return -1 // Retourne -1 si la valeur n'est pas trouvée
     }
     const selectedSize = findIndexByValue(sortedValues, defaultSize)
-
+    const selectedClotheSize = findIndexByValue(sortedValues, defaultClotheSize)
+    console.log(defaultClotheSize)
     const handleSlideChange = (swiper: any) => {
         const activeIndex = swiper.activeIndex
         const link = document.getElementById(`product-link-${activeIndex}`)
@@ -1210,6 +1216,9 @@ function ProductOptions({ option, variants }: any) {
         swiperRef.current?.slidePrev()
     }
 
+    const sizeType = option?.values[0]?.value
+    console.log()
+
     return (
         <div className='product-options' key={option.name}>
             {isModalOpenToothbrush && (
@@ -1228,7 +1237,11 @@ function ProductOptions({ option, variants }: any) {
                     mousewheel={true}
                     modules={[Mousewheel, Pagination]}
                     centeredSlides={true}
-                    initialSlide={selectedSize}
+                    initialSlide={
+                        /^\d+(\.\d+)?$/.test(sizeType)
+                            ? selectedSize
+                            : selectedClotheSize
+                    }
                     className='product-swiper'
                     slideToClickedSlide={true}
                     onSlideChange={handleSlideChange}
