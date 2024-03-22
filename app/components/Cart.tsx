@@ -181,7 +181,10 @@ function CartLineItem({
                         <h4>
                             {
                                 selectedOptions?.filter(
-                                    (option) => option.name === 'Size'
+                                    (option) =>
+                                        option.name === 'Size' ||
+                                        option.name === 'Taille' ||
+                                        option.name === 'size'
                                 )?.[0]?.value
                             }
                         </h4>

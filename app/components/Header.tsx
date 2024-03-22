@@ -6,23 +6,6 @@ type Viewport = 'desktop' | 'mobile'
 
 export function Header({ header, isLoggedIn, cart, logo }: any) {
     const urlLogo = logo.metaobjects.nodes[0]?.field?.reference?.sources[0]?.url
-    const [opacity1, setOpacity1] = useState(1)
-    const [opacity2, setOpacity2] = useState(1)
-    const [opacity3, setOpacity3] = useState(1)
-    const handleOpacity1 = () => {
-        const newOpacity = opacity1 - 0.2
-        setOpacity1(newOpacity)
-    }
-
-    const handleOpacity2 = () => {
-        const newOpacity = opacity2 - 0.2
-        setOpacity2(newOpacity)
-    }
-
-    const handleOpacity3 = () => {
-        const newOpacity = opacity3 - 0.2
-        setOpacity3(newOpacity)
-    }
 
     return (
         <header className='myheader'>
@@ -53,7 +36,9 @@ export function Header({ header, isLoggedIn, cart, logo }: any) {
                         </NavLink>
                     </div>
                     <div className='icon icon-cart'>
-                        <span>{cart?._data?.totalQuantity || 0}</span>
+                        {cart?._data?.totalQuantity > 0 && (
+                            <span>{cart?._data?.totalQuantity || 0}</span>
+                        )}
                         <a href='#cart-aside'>
                             <img src='/icons/cart.svg' alt='cart' />
                         </a>
@@ -70,37 +55,19 @@ export function Header({ header, isLoggedIn, cart, logo }: any) {
                 </div>
             </div>
             <div className='nav-right'>
-                <div
-                    className='nav-images'
-                    // onClick={handleOpacity1}
-                    // style={{
-                    //     opacity: opacity1,
-                    // }}
-                >
+                <div className='nav-images'>
                     <Link to='/about#vision'>
                         <img src='/nav/dropReused.png' alt='drop' />
                         <p>Non disponible</p>
                     </Link>
                 </div>
-                <div
-                    className='nav-images'
-                    // onClick={handleOpacity2}
-                    // style={{
-                    //     opacity: opacity2,
-                    // }}
-                >
+                <div className='nav-images'>
                     <Link to='/about#vision'>
                         <img src='/nav/wanted.png' alt='drop' />
                         <p>Non disponible</p>
                     </Link>
                 </div>
-                <div
-                    className='nav-images'
-                    onClick={handleOpacity3}
-                    // style={{
-                    //     opacity: opacity3,
-                    // }}
-                >
+                <div className='nav-images'>
                     <Link to='/about#vision'>
                         <img src='/nav/track.png' alt='drop' />
                         <p>Non disponible</p>
@@ -108,13 +75,5 @@ export function Header({ header, isLoggedIn, cart, logo }: any) {
                 </div>
             </div>
         </header>
-    )
-}
-
-function HeaderMenuMobileToggle() {
-    return (
-        <a className='header-menu-mobile-toggle' href='#mobile-menu-aside'>
-            <h3>☰</h3>
-        </a>
     )
 }

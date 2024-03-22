@@ -444,6 +444,9 @@ export default function filtered() {
                                             {nodes.map((product) => (
                                                 <MainProduct
                                                     product={product}
+                                                    quantity={
+                                                        productList.nodes.length
+                                                    }
                                                 />
                                             ))}
                                         </div>

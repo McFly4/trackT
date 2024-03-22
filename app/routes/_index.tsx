@@ -13,6 +13,7 @@ import MarketDrag from '~/components/Common/MarketDrag'
 import TrackT from '~/components/Common/TrackT'
 import GoFilters from '~/components/Common/GoFilters'
 import { getPaginationVariables } from '@shopify/hydrogen'
+import useWindowDimensions from '~/hooks/useWindowDimension'
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
     return [{ title: `TrackT ` }]
@@ -49,6 +50,8 @@ export async function loader({ request, context }: LoaderFunctionArgs) {
 }
 
 export default function HomePage() {
+    const { width } = useWindowDimensions()
+    const sizeScreen = width || 1920
     const { products, randomProduct, metafieldRandom } =
         useLoaderData<typeof loader>()
     const navigate = useNavigate()
@@ -110,7 +113,11 @@ export default function HomePage() {
                                 }}
                             >
                                 <img
-                                    src='/home/home1.png'
+                                    src={
+                                        sizeScreen > 2300
+                                            ? '/home/home1Large.png'
+                                            : '/home/home1.png'
+                                    }
                                     alt='home'
                                     style={{
                                         width: '100%',
@@ -148,7 +155,11 @@ export default function HomePage() {
                                     }}
                                 >
                                     <img
-                                        src='/home/home2.png'
+                                        src={
+                                            sizeScreen > 2300
+                                                ? '/home/home2Large.png'
+                                                : '/home/home2.png'
+                                        }
                                         alt='home'
                                         style={{
                                             width: '100%',
@@ -196,12 +207,16 @@ export default function HomePage() {
                         </div>
                         <div className='panel-products-grid'>
                             {productsList.map((product: any) => (
-                                <MainProduct product={product} />
+                                <MainProduct
+                                    product={product}
+                                    quantity={productsList?.length}
+                                />
                             ))}
                         </div>
                     </div>
                 </div>
             </div>
+
             <div className='hfooter'>
                 <video
                     width='100%'

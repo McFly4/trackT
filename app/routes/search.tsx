@@ -328,6 +328,10 @@ export default function SearchPage() {
                                                 {nodes.map((product) => (
                                                     <MainProduct
                                                         product={product}
+                                                        quantity={
+                                                            products?.nodes
+                                                                ?.length
+                                                        }
                                                     />
                                                 ))}
                                             </div>

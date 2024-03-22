@@ -293,6 +293,8 @@ const PREDICTIVE_SEARCH_QUERY = `#graphql
     title
     handle
     tags
+    productType
+    vendor  
     trackingParameters
     ooo: metafield(namespace: "custom", key: "outofstock") {
       key
@@ -321,6 +323,81 @@ const PREDICTIVE_SEARCH_QUERY = `#graphql
     soon: metafield(namespace: "custom", key: "soon") {
         key
         value
+  }
+    collections(first: 5) {
+    nodes {
+      title
+      id
+      products(first: 25) {
+        nodes {
+          title
+          handle
+          productType
+          vendor
+            toothBrush: metafield(namespace: "custom", key: "toothbrush") {
+            key
+            value
+          }
+          ooo: metafield(namespace: "custom", key: "outofstock") {
+            key
+            value
+          }
+          new: metafield(namespace: "custom", key: "new") {
+            key
+            value
+          }
+          ship: metafield(namespace: "custom", key: "fastShip") {
+            key
+            value
+          }
+          release: metafield(namespace: "custom", key: "release") {
+            key
+            value
+          }
+          promotion: metafield(namespace: "custom", key: "promotion") {
+            key
+            value
+          }
+          hotDeal: metafield(namespace: "custom", key: "hotDeal") {
+            key
+            value
+          }
+          features: metafield(namespace: "custom", key: "features") {
+            key
+            value
+          }
+          materials: metafield(namespace: "custom", key: "materiaux") {
+            key
+            value
+          }
+          daterelease: metafield(namespace: "custom", key: "date") {
+            key
+            value
+          }
+          colors: metafield(namespace: "custom", key: "palette") {
+            key
+            value
+          }
+          manwoman: metafield(namespace: "custom", key: "manwoman") {
+            key
+            value
+          }
+          box: metafield(namespace: "custom", key: "box_sizing") {
+            key
+            value
+          }
+          soon: metafield(namespace: "custom", key: "soon") {
+            key
+            value
+          }
+          images(first: 1) {
+            nodes {
+              url
+            }
+          }
+        }
+      }
+    }
   }
     variants(first: 1) {
       nodes {

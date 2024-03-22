@@ -165,10 +165,15 @@ function BreadCrumb({ product }: { product: any }) {
     const isMixte = product.manwoman?.value ?? 'Mixte'
     const type = product?.productType
     const vendor = product?.vendor
-    const collection = product?.collections?.nodes[0].title
     const productName = product?.title
     const colors = JSON.parse(product?.colors?.value) as any
     const firstColor = colors?.[0] ?? 'white'
+    const collection =
+        product?.collections?.nodes?.length > 1
+            ? product?.collections?.nodes?.find(
+                  (collection: any) => collection.title !== 'All'
+              )?.title
+            : product?.collections?.nodes[0]?.title
 
     return (
         <div
@@ -276,9 +281,14 @@ function ProductImage({ image, product }: { image: any; product: any }) {
     // Maintenant, codeBar est une liste d'objets avec des propriétés id et url.
 
     const [mainImage, setMainImage] = useState(firstImage || image?.url)
-    const productsFromCollection = product?.collections?.nodes[1]
-        ? product?.collections?.nodes[1].products.nodes
-        : product?.collections?.nodes[0].products.nodes
+
+    const productsFromCollection =
+        product?.collections?.nodes?.length > 1
+            ? product?.collections?.nodes?.find(
+                  (collection: any) => collection.title !== 'All'
+              )?.products.nodes
+            : product?.collections?.nodes[0].products.nodes
+
     const swiperRef = useRef<any>(null)
 
     const nexto = () => {
@@ -1286,7 +1296,7 @@ function ProductOptions({ option, variants }: any) {
                                                                     ?.value ===
                                                                 value
                                                         )?.weight === 1
-                                                            ? 'violet'
+                                                            ? '#a422f7'
                                                             : '#fff',
                                                 }}
                                             >

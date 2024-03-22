@@ -37,8 +37,6 @@ export default function TrackT({ products, title }: any) {
                 </h2>
                 <NavButtons next={nexto} previous={previo} />
             </div>
-            <div id='vision'></div>
-
             <Swiper
                 modules={[Scrollbar]}
                 scrollbar={{

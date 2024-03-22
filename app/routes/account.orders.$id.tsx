@@ -307,7 +307,7 @@ function ToggleModal(toggle: any, { cart }: any) {
                         RETOURS GRATUIT <br />
                         {/*BOOSTER RETOUR* 24H (10 €)*/}
                     </p>
-                    <p>Livraison 10€</p>
+                    <p>Livraison 10€ - Retours 10€</p>
                 </div>
                 <div
                     className='a-third-guid-container-item'
@@ -332,7 +332,7 @@ function ToggleModal(toggle: any, { cart }: any) {
                     <p>
                         LIVRAISON GRATUITE <br />
                         RETOURS GRATUIT <br />
-                        {/*BOOSTER RETOUR* 48H (30 €)*/}
+                        POCKET ITEM SURPRISE
                     </p>
                     <p>Livraison express</p>
                 </div>

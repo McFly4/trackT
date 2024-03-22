@@ -33,9 +33,9 @@ export default function Retours() {
                     <p>
                         LIVRAISON PAYANTE <br />
                         RETOURS GRATUIT <br />
-                        BOOSTER RETOUR* 24H (10 €)
+                        {/*BOOSTER RETOUR* 24H (10 €)*/}
                     </p>
-                    <p>Livraison 10€</p>
+                    <p>Livraison 10€ - Retours 10€</p>
                 </div>
                 <div className='a-third-guid-container-item'>
                     <img src='/cart/cartPremium.png' alt='cartClassic' />
@@ -44,7 +44,6 @@ export default function Retours() {
                     <p>
                         LIVRAISON PAYANTE <br />
                         RETOURS GRATUIT <br />
-                        BOOSTER RETOUR* 24H (20 €)
                     </p>
                     <p>Livraison 5€</p>
                 </div>
@@ -55,7 +54,7 @@ export default function Retours() {
                     <p>
                         LIVRAISON GRATUITE <br />
                         RETOURS GRATUIT <br />
-                        BOOSTER RETOUR* 48H (30 €)
+                        POCKET ITEM SURPRISE
                     </p>
                     <p>Livraison express</p>
                 </div>
@@ -212,8 +211,20 @@ export default function Retours() {
                     notre équipe Trackt.
                 </p>
                 <div className='politics-retours-cb'>
-                    <h4>Remboursement classique</h4>
-                    <p>
+                    <img src='/about/cb.png' alt='cb' />
+
+                    <h4
+                        style={{
+                            textAlign: 'center',
+                        }}
+                    >
+                        Remboursement classique
+                    </h4>
+                    <p
+                        style={{
+                            textAlign: 'center',
+                        }}
+                    >
                         Remboursement disponible dans un délais de 3 à 5 jours
                         ouvrables par virement ou carte banquaire, dans la
                         devise utilisée lors du paiement.

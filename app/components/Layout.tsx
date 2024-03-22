@@ -269,8 +269,12 @@ function CartAside({ cart, pocketItems }: any) {
                                                 window.location.href = `/products/${item.handle}`
                                             }}
                                         >
-                                            <h4>{item.vendor}</h4>
-                                            <h6>{item.title}</h6>
+                                            <h4 className='p-title'>
+                                                {item.vendor}
+                                            </h4>
+                                            <h6 className='p-title'>
+                                                {item.title}
+                                            </h6>
                                         </div>
                                         <AddToCartButton
                                             disabled={
@@ -468,7 +472,7 @@ function SearchAside() {
                                 className={
                                     inputRef.current?.value?.length === 0
                                         ? 'btn-disabled'
-                                        : ''
+                                        : 'btn-active'
                                 }
                             >
                                 <svg
@@ -483,14 +487,24 @@ function SearchAside() {
                                             data-name='Tracé 219'
                                             d='M988.286,241.616a8.174,8.174,0,1,1,8.174-8.174A8.183,8.183,0,0,1,988.286,241.616Zm0-13.623a5.449,5.449,0,1,0,5.449,5.449A5.456,5.456,0,0,0,988.286,227.993Z'
                                             transform='translate(-980.112 -225.268)'
-                                            fill='#fff'
+                                            fill={
+                                                inputRef.current?.value
+                                                    ?.length !== 0
+                                                    ? '#000'
+                                                    : '#fff'
+                                            }
                                         />
                                         <path
                                             id='Tracé_220'
                                             data-name='Tracé 220'
                                             d='M997.286,243.8a1.352,1.352,0,0,1-.963-.4l-6.812-6.812a1.362,1.362,0,0,1,1.926-1.926l6.812,6.812a1.362,1.362,0,0,1-.963,2.325Z'
                                             transform='translate(-976.851 -222.007)'
-                                            fill='#fff'
+                                            fill={
+                                                inputRef.current?.value
+                                                    ?.length !== 0
+                                                    ? '#000'
+                                                    : '#fff'
+                                            }
                                         />
                                     </g>
                                 </svg>

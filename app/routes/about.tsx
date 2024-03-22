@@ -42,7 +42,170 @@ export default function About() {
                         </div>
                     </a>
                 </div>
-                <div id='futur'></div>
+            </div>
+            <div className='a-vision'>
+                <div
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        marginTop: '20px',
+                        marginBottom: '100px',
+                    }}
+                >
+                    <h2>Vision trackT 2025</h2>
+                    <img
+                        style={{
+                            marginLeft: '20px',
+                        }}
+                        src='/coming.png'
+                        alt='coming'
+                    />
+                </div>
+                <div className='a-vision-container'>
+                    <div className='a-vision-container-item'>
+                        <div>
+                            <img src='/about/drop.png' alt='about' />
+                        </div>
+                        <p>
+                            « Drop Reused » est le centre de la vision durable
+                            et innovante de TrackT. Nous réinventons le
+                            streetwear en donnant une seconde vie à des produits
+                            usagés, notamment des sneakers, remis à neuf et
+                            proposés à des prix accessibles. Ces ventes
+                            régulières sont une célébration de la mode
+                            responsable et un moyen d’obtenir des produits plus
+                            accessibles. Grâce à notre système de notation
+                            transparent, chaque client peut connaître l’état
+                            précis du produit. C’est une expérience d’achat
+                            travaillée et authentique, où le style rencontre la
+                            durabilité et l’accessibilité.
+                        </p>
+                    </div>
+                    <div className='a-vision-container-item'>
+                        <div>
+                            <img src='/about/track.png' alt='about' />
+                        </div>
+                        <p>
+                            Chez Trackt, nous savons pertinemment que la quête
+                            du parfait style peut parfois demander un petit coup
+                            de pouce. C’est pourquoi nous vous présentons
+                            « Track Item » : un service sur mesure où vos
+                            souhaits prennent vie. Vous ne trouvez pas
+                            exactement ce que vous cherchez sur notre site ?
+                            Envoyez-nous votre requête, et notre équipe se
+                            lancera dans une traque pour vous aider à trouver
+                            l’article idéal, à votre taille et à un prix qui
+                            vous convient. C’est l’authenticité Trackt à votre
+                            service, où chaque demande est un nouveau défi.
+                        </p>
+                    </div>
+                    <div className='a-vision-container-item'>
+                        <div>
+                            <img src='/about/wanted.png' alt='about' />
+                        </div>
+                        <p>
+                            Pour nos connaisseurs de streetwear, « Wanted Item »
+                            est votre terrain de jeu. Vous avez un œil pour les
+                            pièces rares et exclusives ? Parcourez notre liste
+                            d’items convoités et, si vous possédez ce que nous
+                            cherchons, faites-nous une proposition. C’est une
+                            collaboration moderne, et rémunératrice, où votre
+                            passion et votre connaissance du streetwear sont
+                            récompensées. Rejoignez-nous dans cette aventure
+                            unique, où chaque article que vous proposez
+                            contribue à façonner et à enrichir l’univers
+                            diversifié et dynamique de Trackt. Votre flair pour
+                            dénicher l’exceptionnel devient une partie
+                            intégrante de notre mission pour offrir le meilleur
+                            du streetwear à notre communauté.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div className='a-assets'>
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                    }}
+                >
+                    <img src='/about/jean.png' alt='asset1' />
+                </div>
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                    }}
+                >
+                    <img src='/about/sweat.png' alt='asset1' />
+                </div>
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        marginTop: '300px',
+                    }}
+                >
+                    <div className='a-assets-container'>
+                        <div>
+                            <img src='/about/independant.svg' alt='By trackT' />
+                        </div>
+                        <div
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                            }}
+                        >
+                            <img src='/about/byTrackt.svg' alt='By trackT' />
+                            <img src='/about/c.svg' alt='Copyright' />
+                        </div>
+                        <div>
+                            <img src='/about/brand.svg' alt='By trackT' />
+                        </div>
+                        <div>
+                            <p>
+                                Trackt s’apprête à lancer « Independant Brand »,
+                                une catégorie exclusive de notre boutique dédiée
+                                à valoriser des œuvres d’artistes et de marques
+                                indépendantes. Sélectionnés avec soin par notre
+                                direction artistique, ces articles incarnent et
+                                amplifient l’esprit rebelle et libre de Trackt.
+                                De tableaux grunge, objets uniques, accessoires
+                                wtf, textiles… seront disponibles en quantités
+                                extrêmement limitées. Cette initiative est notre
+                                engagement à promouvoir la diversité créative et
+                                à offrir à notre communauté des pièces
+                                véritablement uniques et expressives, en
+                                parfaite harmonie avec l’audace et l’originalité
+                                de la marque Trackt.
+                            </p>
+                        </div>
+                    </div>
+                    <img
+                        src='/about/independant1.png'
+                        alt='asset1'
+                        style={{
+                            marginLeft: '65px',
+                        }}
+                    />
+                </div>
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'flex-end',
+                    }}
+                >
+                    <video
+                        muted
+                        autoPlay
+                        loop
+                        style={{
+                            width: 'unset',
+                        }}
+                    >
+                        <source src='/about/betaVersion.mp4' type='video/mp4' />
+                    </video>
+                </div>
             </div>
             <div className='a-first'>
                 <div className='a-first-container'>
@@ -362,7 +525,7 @@ export default function About() {
                                     RETOURS GRATUIT <br />
                                     {/*BOOSTER RETOUR* 24H (10 €)*/}
                                 </p>
-                                <p>Livraison 10€</p>
+                                <p>Livraison 10€ - Retours 10€</p>
                             </div>
                             <div className='a-third-guid-container-item'>
                                 <img
@@ -388,7 +551,7 @@ export default function About() {
                                 <p>
                                     LIVRAISON GRATUITE <br />
                                     RETOURS GRATUIT <br />
-                                    {/*BOOSTER RETOUR* 48H (30 €)*/}
+                                    POCKET ITEM SURPRISE
                                 </p>
                                 <p>Livraison express</p>
                             </div>
@@ -450,154 +613,6 @@ export default function About() {
                 </div>
                 <TrackT products={productsList} />
                 <div className='a-fourth-trackt'></div>
-            </div>
-            <div className='a-vision'>
-                <h2>Vision trackT 2025</h2>
-                <div className='a-vision-container'>
-                    <div className='a-vision-container-item'>
-                        <div>
-                            <img src='/about/drop.png' alt='about' />
-                        </div>
-                        <p>
-                            « Drop Reused » est le centre de la vision durable
-                            et innovante de TrackT. Nous réinventons le
-                            streetwear en donnant une seconde vie à des produits
-                            usagés, notamment des sneakers, remis à neuf et
-                            proposés à des prix accessibles. Ces ventes
-                            régulières sont une célébration de la mode
-                            responsable et un moyen d’obtenir des produits plus
-                            accessibles. Grâce à notre système de notation
-                            transparent, chaque client peut connaître l’état
-                            précis du produit. C’est une expérience d’achat
-                            travaillée et authentique, où le style rencontre la
-                            durabilité et l’accessibilité.
-                        </p>
-                    </div>
-                    <div className='a-vision-container-item'>
-                        <div>
-                            <img src='/about/track.png' alt='about' />
-                        </div>
-                        <p>
-                            Chez Trackt, nous savons pertinemment que la quête
-                            du parfait style peut parfois demander un petit coup
-                            de pouce. C’est pourquoi nous vous présentons
-                            « Track Item » : un service sur mesure où vos
-                            souhaits prennent vie. Vous ne trouvez pas
-                            exactement ce que vous cherchez sur notre site ?
-                            Envoyez-nous votre requête, et notre équipe se
-                            lancera dans une traque pour vous aider à trouver
-                            l’article idéal, à votre taille et à un prix qui
-                            vous convient. C’est l’authenticité Trackt à votre
-                            service, où chaque demande est un nouveau défi.
-                        </p>
-                    </div>
-                    <div className='a-vision-container-item'>
-                        <div>
-                            <img src='/about/wanted.png' alt='about' />
-                        </div>
-                        <p>
-                            Pour nos connaisseurs de streetwear, « Wanted Item »
-                            est votre terrain de jeu. Vous avez un œil pour les
-                            pièces rares et exclusives ? Parcourez notre liste
-                            d’items convoités et, si vous possédez ce que nous
-                            cherchons, faites-nous une proposition. C’est une
-                            collaboration moderne, et rémunératrice, où votre
-                            passion et votre connaissance du streetwear sont
-                            récompensées. Rejoignez-nous dans cette aventure
-                            unique, où chaque article que vous proposez
-                            contribue à façonner et à enrichir l’univers
-                            diversifié et dynamique de Trackt. Votre flair pour
-                            dénicher l’exceptionnel devient une partie
-                            intégrante de notre mission pour offrir le meilleur
-                            du streetwear à notre communauté.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div className='a-assets'>
-                <div
-                    style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                    }}
-                >
-                    <img src='/about/jean.png' alt='asset1' />
-                </div>
-                <div
-                    style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                    }}
-                >
-                    <img src='/about/sweat.png' alt='asset1' />
-                </div>
-                <div
-                    style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        marginTop: '300px',
-                    }}
-                >
-                    <div className='a-assets-container'>
-                        <div>
-                            <img src='/about/independant.svg' alt='By trackT' />
-                        </div>
-                        <div
-                            style={{
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                            }}
-                        >
-                            <img src='/about/byTrackt.svg' alt='By trackT' />
-                            <img src='/about/c.svg' alt='Copyright' />
-                        </div>
-                        <div>
-                            <img src='/about/brand.svg' alt='By trackT' />
-                        </div>
-                        <div>
-                            <p>
-                                Trackt s’apprête à lancer « Independant Brand »,
-                                une catégorie exclusive de notre boutique dédiée
-                                à valoriser des œuvres d’artistes et de marques
-                                indépendantes. Sélectionnés avec soin par notre
-                                direction artistique, ces articles incarnent et
-                                amplifient l’esprit rebelle et libre de Trackt.
-                                De tableaux grunge, objets uniques, accessoires
-                                wtf, textiles… seront disponibles en quantités
-                                extrêmement limitées. Cette initiative est notre
-                                engagement à promouvoir la diversité créative et
-                                à offrir à notre communauté des pièces
-                                véritablement uniques et expressives, en
-                                parfaite harmonie avec l’audace et l’originalité
-                                de la marque Trackt.
-                            </p>
-                        </div>
-                    </div>
-                    <img
-                        src='/about/independant1.png'
-                        alt='asset1'
-                        style={{
-                            marginLeft: '65px',
-                        }}
-                    />
-                </div>
-                <div
-                    style={{
-                        display: 'flex',
-                        justifyContent: 'flex-end',
-                    }}
-                >
-                    <video
-                        muted
-                        autoPlay
-                        loop
-                        style={{
-                            width: 'unset',
-                        }}
-                    >
-                        <source src='/about/betaVersion.mp4' type='video/mp4' />
-                    </video>
-                </div>
             </div>
         </>
     )

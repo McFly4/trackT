@@ -2,7 +2,7 @@ import { Link } from '@remix-run/react'
 import React, { useState } from 'react'
 import { useNavigate } from '@remix-run/react'
 
-export default function ({ product, stickers, isCarousel }: any) {
+export default function ({ product, stickers, isCarousel, quantity }: any) {
     const navigate = useNavigate()
     const [isOpen, setIsOpen] = useState(false)
 
@@ -162,11 +162,22 @@ export default function ({ product, stickers, isCarousel }: any) {
             )}
             <div
                 className='product-grid'
-                style={
-                    isCarousel && {
-                        width: 'unset',
-                    }
-                }
+                style={{
+                    ...(isCarousel && { width: 'unset' }),
+                    ...(quantity === 4 && {
+                        flexBasis: 'calc(25% - 20px)',
+                        width: 'calc(25% - 20px)',
+                    }),
+                    ...(quantity === 3 && {
+                        flexBasis: 'calc(33.33333% - 20px)',
+                        width: 'calc(33.33333% - 20px)',
+                    }),
+                    ...(quantity === 2 && {
+                        flexBasis: 'calc(50% - 20px)',
+                        width: 'calc(50% - 20px)',
+                    }),
+                    ...(quantity === 1 && { width: 'calc(100% - 20px)' }),
+                }}
             >
                 <div
                     onClick={() => {

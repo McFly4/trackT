@@ -238,8 +238,8 @@ text-align: center;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: #fff;
     color: #000;
-    margin-top: 20px;
-    margin-bottom: 100px;
+
+    width: fit-content;
 }
 
 .a-vision-container-item{

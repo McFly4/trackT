@@ -205,11 +205,16 @@ aside li {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    justify-content: space-between;
 }
 
 .categoriesAsideNav{
-    margin: 20px auto;
+    position: absolute;
+    bottom: 20px;
+    left:0;
+    right:0;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
 }
 
 .categoriesAsideNav h5{
@@ -270,6 +275,7 @@ aside li {
     font-family: "Helvetica Neue", sans-serif;
     margin-bottom: 9px;
     text-transform: uppercase;
+    cursor: pointer;
 }
 
 .categoriesAside-item div{
@@ -574,25 +580,23 @@ aside li {
 .btn-disabled{
     pointer-events: none;
     cursor: not-allowed;
-    background-color: #515451;
     color: #fff;
     border: none;
     opacity: 0.5;
+    background: rgba(255, 255, 255, 0.1);
 }
 
-.predictive-search-form button:hover {
-    background: #fff;
+.btn-active{
+    pointer-events: auto;
+    cursor: pointer;
+    border: none;
+    opacity: 1;
+    background: #fff !important;
 }
 
-.predictive-search-form button:hover svg{
-    filter: invert(1);
+.btn-active h5{
+    color: #000 !important;
 }
-
-
-.predictive-search-form button:hover h5{
-    color: #000;
-}
-
 
 .predictive-search-form button p {
     font-size: 18px;
@@ -804,8 +808,6 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .home img {
-    width: 100%; /* Largeur totale de la container */
-    max-width: 1920px; /* Limite maximale de largeur pour l'image */
     height: 100vh; /* Hauteur de la container */
     background-size: cover; /* Ajuste la taille de l'image pour couvrir la container */
     background-repeat: no-repeat; /* Empêche la répétition de l'image */
@@ -1748,7 +1750,7 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 
-.pocket-items-product h4, h6{
+.pocket-items-product .p-title{
     padding-left: 10px;
     width: 350px;
 
@@ -1873,9 +1875,22 @@ input[type="search"]::-webkit-search-results-decoration {
     border-radius: 5px;
     padding: 50px;
     margin-bottom: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-
 }
+
+.politics-retours-cb img{
+    margin-bottom: 30px;
+}
+
+.politics-retours-cb h4{
+    margin-bottom: 10px;
+}
+
+
+
 
 
 /*
