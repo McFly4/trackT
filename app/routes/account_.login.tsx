@@ -129,6 +129,7 @@ export default function Login() {
                                     : 'Une erreur est survenue, veuillez réessayer.'}
                             </p>
                         ) : (
+                            <br />
                         )}
                         {showPassword ? (
                             <svg
