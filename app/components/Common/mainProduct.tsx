@@ -176,7 +176,10 @@ export default function ({ product, stickers, isCarousel, quantity }: any) {
                         flexBasis: 'calc(50% - 20px)',
                         width: 'calc(50% - 20px)',
                     }),
-                    ...(quantity === 1 && { width: 'calc(100% - 20px)' }),
+                    ...(quantity === 1 && {
+                        width: 'calc(100% - 20px)',
+                        flexBasis: 'calc(100% - 20px)',
+                    }),
                 }}
             >
                 <div

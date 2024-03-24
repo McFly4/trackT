@@ -187,7 +187,7 @@ export function AsideCategories({
                                             '/search?q=hoodie'
                                     }}
                                 >
-                                    toues les hoodies
+                                    tous les hoodies
                                 </p>
                                 <p
                                     onClick={() => {
@@ -231,9 +231,7 @@ export function AsideCategories({
                         </div>
                         <div className='categoriesAside-column'>
                             <div className='categoriesAside-item'>
-                                <h4>
-                                    Modèles populaires <span>Nike</span>
-                                </h4>
+                                <span>Nike</span>
                                 <p
                                     onClick={() => {
                                         window.location.href =
@@ -284,9 +282,7 @@ export function AsideCategories({
                                 </p>
                             </div>
                             <div className='categoriesAside-item'>
-                                <h4>
-                                    Modèles populaires <span>Adidas</span>
-                                </h4>
+                                <span>Adidas</span>
                                 <p
                                     onClick={() => {
                                         window.location.href =
@@ -313,9 +309,7 @@ export function AsideCategories({
                                 </p>
                             </div>
                             <div className='categoriesAside-item'>
-                                <h4>
-                                    Modèles populaires <span>Supreme</span>
-                                </h4>
+                                <span>Supreme</span>
                                 <p
                                     onClick={() => {
                                         window.location.href =
