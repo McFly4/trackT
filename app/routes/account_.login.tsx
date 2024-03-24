@@ -116,21 +116,7 @@ export default function Login() {
                                 outline: error ? 'unset !important' : '',
                             }}
                         />
-                        {error ? (
-                            <p
-                                style={{
-                                    textAlign: 'start',
-                                    color: 'red',
-                                    paddingLeft: '10px',
-                                }}
-                            >
-                                {error === 'Unidentified customer'
-                                    ? 'Email ou mot de passe incorrect'
-                                    : 'Une erreur est survenue, veuillez réessayer.'}
-                            </p>
-                        ) : (
-                            <br />
-                        )}
+
                         {showPassword ? (
                             <svg
                                 id='eye'
@@ -180,6 +166,21 @@ export default function Login() {
                             </svg>
                         )}
                     </div>
+                    {error ? (
+                        <p
+                            style={{
+                                textAlign: 'start',
+                                color: 'red',
+                                paddingLeft: '10px',
+                            }}
+                        >
+                            {error === 'Unidentified customer'
+                                ? 'Email ou mot de passe incorrect'
+                                : 'Une erreur est survenue, veuillez réessayer.'}
+                        </p>
+                    ) : (
+                        <br />
+                    )}
                     <Link to='/account/recover'>
                         <p>J'ai encore oublié...</p>
                     </Link>

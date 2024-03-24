@@ -149,15 +149,15 @@ export default function AccountProfile() {
         { index: 6, size: '42' },
         { index: 7, size: '43' },
         { index: 8, size: '44' },
+        { index: 9, size: '45' },
+        { index: 10, size: '46' },
+        { index: 11, size: '47' },
     ]
     const clothesSize = [
-        { index: 0, size: 'XS' },
         { index: 1, size: 'S' },
         { index: 2, size: 'M' },
         { index: 3, size: 'L' },
         { index: 4, size: 'XL' },
-        { index: 5, size: 'XXL' },
-        { index: 6, size: 'XXXL' },
     ]
 
     const selectedShoeIndex = shoesSize.findIndex(

@@ -56,19 +56,19 @@ export function Header({ header, isLoggedIn, cart, logo }: any) {
             </div>
             <div className='nav-right'>
                 <div className='nav-images'>
-                    <Link to='/about#vision'>
+                    <Link to='/about'>
                         <img src='/nav/dropReused.png' alt='drop' />
                         <p>Non disponible</p>
                     </Link>
                 </div>
                 <div className='nav-images'>
-                    <Link to='/about#vision'>
+                    <Link to='/about'>
                         <img src='/nav/wanted.png' alt='drop' />
                         <p>Non disponible</p>
                     </Link>
                 </div>
                 <div className='nav-images'>
-                    <Link to='/about#vision'>
+                    <Link to='/about'>
                         <img src='/nav/track.png' alt='drop' />
                         <p>Non disponible</p>
                     </Link>

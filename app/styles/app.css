@@ -523,6 +523,7 @@ aside li {
     font-size: 18px;
     text-transform: uppercase;
     font-weight: 400;
+    text-align: center;
 }
 
 .no-results-found button{
@@ -715,7 +716,7 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .four-btns button {
-    margin: 0 20px;
+    margin-right: 40px;
     border-radius: 15px;
     text-transform: uppercase;
     height: 60px;

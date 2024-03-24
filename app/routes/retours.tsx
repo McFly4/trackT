@@ -32,7 +32,7 @@ export default function Retours() {
                     <span>0 - 250€</span>
                     <p>
                         LIVRAISON PAYANTE <br />
-                        RETOURS GRATUIT <br />
+                        RETOURS PAYANTS <br />
                         {/*BOOSTER RETOUR* 24H (10 €)*/}
                     </p>
                     <p>Livraison 10€ - Retours 10€</p>
@@ -42,7 +42,7 @@ export default function Retours() {
                     <p>Panier premium</p>
                     <span>250€ - 500€</span>
                     <p>
-                        LIVRAISON PAYANTE <br />
+                        RÉDUCTION LIVRAISON <br />
                         RETOURS GRATUIT <br />
                     </p>
                     <p>Livraison 5€</p>
