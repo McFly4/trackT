@@ -84,7 +84,6 @@ export default function SearchPage() {
         metafieldRandom,
     } = useLoaderData<typeof loader>() as any
     const carousel = randomProduct.collections.nodes[0].products.nodes
-    const carouselName = metafieldRandom
     const all = allProducts?.collection?.products?.nodes
     const products = searchResults?.results?.products
     const [randomProducts, setRandomProducts] = useState([]) as any
@@ -99,6 +98,18 @@ export default function SearchPage() {
             const selectedProducts = shuffledProducts.slice(0, 20)
             setRandomProducts(selectedProducts)
             setIsRandom(true)
+        }
+    }
+
+    function randomNameFunction() {
+        if (metafieldRandom === 'hotDeal') {
+            return 'Hot Deal'
+        } else if (metafieldRandom === 'soon') {
+            return 'Bientôt disponible'
+        } else if (metafieldRandom === 'fastShip') {
+            return 'Chez vous en 48h'
+        } else if (metafieldRandom === 'release') {
+            return 'Exclusive Items'
         }
     }
 
@@ -375,7 +386,7 @@ export default function SearchPage() {
                         playsInline
                         loop
                     />
-                    <TrackT products={carousel} title={carouselName} />
+                    <TrackT products={carousel} title={randomNameFunction()} />
                     <MarketDrag />
                 </div>
             )}

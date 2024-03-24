@@ -233,7 +233,7 @@ aside li {
     flex-direction: column;
     border-right: 2px solid #8d8d8d3d;
     width: fit-content;
-    padding: 0 80px;
+    padding: 0 60px;
 }
 
 .categoriesAside-column:last-child{
@@ -1294,6 +1294,7 @@ input[type="search"]::-webkit-search-results-decoration {
     align-items: center;
     padding: 20px 40px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
 }
 
 .modal-stickers-body-item p{

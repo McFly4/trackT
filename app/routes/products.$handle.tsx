@@ -21,6 +21,7 @@ import {
     type VariantOption,
     getSelectedProductOptions,
     CartForm,
+    getPaginationVariables,
 } from '@shopify/hydrogen'
 import type {
     CartLineInput,
@@ -41,7 +42,9 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 export async function loader({ params, request, context }: LoaderFunctionArgs) {
     const { handle } = params
     const { storefront } = context
-
+    const pagination = getPaginationVariables(request, {
+        pageBy: 24,
+    })
     const selectedOptions = getSelectedProductOptions(request).filter(
         (option) =>
             // Filter out Shopify predictive search query params
@@ -94,12 +97,31 @@ export async function loader({ params, request, context }: LoaderFunctionArgs) {
         variables: { handle },
     })
 
-    const products = await context.storefront.query(TRACKT)
+    const randomList = ['hotDeal', 'soon', 'fastShip', 'release']
+    const metafieldRandom =
+        randomList[Math.floor(Math.random() * randomList.length)]
 
+    const randomProduct = await context.storefront.query(FILTERS_QUERY, {
+        variables: {
+            first: 30,
+            filters: [
+                {
+                    productMetafield: {
+                        namespace: 'custom',
+                        key: metafieldRandom,
+                        value: 'true',
+                    },
+                },
+            ],
+            collections: 'title:all',
+            ...pagination,
+        },
+    })
     return defer({
         product,
         variants,
-        products,
+        randomProduct,
+        metafieldRandom,
     })
 }
 
@@ -127,10 +149,22 @@ function redirectToFirstVariant({
 }
 
 export default function Product() {
-    const { product, variants, products } = useLoaderData<typeof loader>()
+    const { product, variants, randomProduct, metafieldRandom } =
+        useLoaderData<typeof loader>()
     const { selectedVariant } = product
-    const productsList =
-        products?.metaobjects?.nodes[0]?.field?.references?.nodes
+    const random = randomProduct.collections.nodes[0].products.nodes
+
+    function randomNameFunction() {
+        if (metafieldRandom === 'hotDeal') {
+            return 'Hot Deal'
+        } else if (metafieldRandom === 'soon') {
+            return 'Bientôt disponible'
+        } else if (metafieldRandom === 'fastShip') {
+            return 'Chez vous en 48h'
+        } else if (metafieldRandom === 'release') {
+            return 'Exclusive Items'
+        }
+    }
 
     return (
         <>
@@ -155,7 +189,7 @@ export default function Product() {
                     <img src='/product/banner.png' alt='banner' />
                 </video>
             </div>
-            <TrackT products={productsList} />
+            <TrackT products={random} title={randomNameFunction()} />
             <MarketDrag />
         </>
     )
@@ -596,13 +630,15 @@ function ProductMain({
 
                         {product?.toothBrush?.value && (
                             <div onClick={toggleModalToothbrush}>
-                                {product?.toothBrush?.value === 'Small' ? (
+                                {product?.toothBrush?.value === 'Small' ||
+                                product?.toothBrush?.value === 'SMALL' ? (
                                     <img
                                         src='/about/little_toothbrush.png'
                                         alt='little toothbrush'
                                         className='toothbrush'
                                     />
-                                ) : product?.toothBrush?.value === 'Medium' ? (
+                                ) : product?.toothBrush?.value === 'Medium' ||
+                                  product?.toothBrush?.value === 'MEDIUM' ? (
                                     <img
                                         src='/about/medium_toothbrush.png'
                                         alt='medium toothbrush'
@@ -1678,72 +1714,106 @@ const VARIANTS_QUERY = `#graphql
   }
 ` as const
 
-const TRACKT = `#graphql
-query MetaObjects {
-  metaobjects(first: 20, type: "home") {
+const FILTERS_QUERY = `#graphql
+fragment ProductFragment on Product {
+  id
+  title
+  vendor
+  handle
+  description
+  options {
+    name
+    values
+  }
+  images(first: 1) {
     nodes {
-      field(key: "products") {
-        references(first: 20) {
-          nodes {
-            ... on Product {
-              title
-              productType
-              handle
-              vendor
-              toothBrush: metafield(namespace: "custom", key: "toothbrush") {
-                key
-                value
-              }
-              ooo: metafield(namespace: "custom", key: "outofstock") {
-                key
-                value
-              }
-              new: metafield(namespace: "custom", key: "new") {
-                key
-                value
-              }
-              ship: metafield(namespace: "custom", key: "fastShip") {
-                key
-                value
-              }
-              release: metafield(namespace: "custom", key: "release") {
-                key
-                value
-              }
-              promotion: metafield(namespace: "custom", key: "promotion") {
-                key
-                value
-              }
-              hotDeal: metafield(namespace: "custom", key: "hotDeal") {
-                key
-                value
-              }
-              features: metafield(namespace: "custom", key: "features") {
-                key
-                value
-              }
-              manwoman: metafield(namespace: "custom", key: "manwoman") {
-                key
-                value
-              }
-              soon: metafield(namespace: "custom", key: "soon") {
-                key
-                value
-              }
-              box: metafield(namespace: "custom", key: "box_sizing") {
-                key
-                value
-              }
-              images(first: 1) {
-                nodes {
-                  url
-                }
-              }
-            }
-          }
-        }
+      url
+    }
+  }
+  toothBrush: metafield(namespace: "custom", key: "toothbrush") {
+    key
+    value
+  }
+  ooo: metafield(namespace: "custom", key: "outofstock") {
+    key
+    value
+  }
+  new: metafield(namespace: "custom", key: "new") {
+    key
+    value
+  }
+  ship: metafield(namespace: "custom", key: "fastShip") {
+    key
+    value
+  }
+  release: metafield(namespace: "custom", key: "release") {
+    key
+    value
+  }
+  promotion: metafield(namespace: "custom", key: "promotion") {
+    key
+    value
+  }
+  hotDeal: metafield(namespace: "custom", key: "hotDeal") {
+    key
+    value
+  }
+  features: metafield(namespace: "custom", key: "features") {
+    key
+    value
+  }
+  materials: metafield(namespace: "custom", key: "materiaux") {
+    key
+    value
+  }
+  daterelease: metafield(namespace: "custom", key: "date") {
+    key
+    value
+  }
+  colors: metafield(namespace: "custom", key: "couleurs") {
+    key
+    value
+  }
+  box_sizing: metafield(namespace: "custom", key: "box_sizing") {
+    key
+    value
+  }
+ soon: metafield(namespace: "custom", key: "soon") {
+    key
+    value
+  }
+  box: metafield(namespace: "custom", key: "box_sizing"){
+    key
+    value
+   }
+  priceRange {
+    minVariantPrice {
+      amount
+      currencyCode
+    }
+  }
+}
+
+query FiltersQuery($first: Int!, $filters: [ProductFilter!], $collections: String, $startCursor: String, $endCursor: String) {
+  collections(query: $collections, first: 1) {
+  nodes {
+    products(
+      first: $first
+      filters: $filters
+      before: $startCursor
+      after: $endCursor
+    ) {
+      nodes {
+        ...ProductFragment
+      }
+      pageInfo {
+        hasPreviousPage
+        hasNextPage
+        startCursor
+        endCursor
       }
     }
   }
 }
-` as const
+}
+`

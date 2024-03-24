@@ -73,9 +73,9 @@ async function fetchPredictiveSearchResults({
         rawTypes === 'ANY'
             ? DEFAULT_SEARCH_TYPES
             : rawTypes
-                  .split(',')
-                  .map((t) => t.toUpperCase() as PredictiveSearchTypes)
-                  .filter((t) => DEFAULT_SEARCH_TYPES.includes(t))
+                  ?.split(',')
+                  ?.map((t) => t.toUpperCase() as PredictiveSearchTypes)
+                  ?.filter((t) => DEFAULT_SEARCH_TYPES.includes(t))
 
     if (!searchTerm) {
         return {
@@ -142,7 +142,7 @@ export function normalizePredictiveSearchResults(
     if (predictiveSearch.queries.length) {
         results.push({
             type: 'queries',
-            items: predictiveSearch.queries.map(
+            items: predictiveSearch.queries?.map(
                 (query: PredictiveQueryFragment) => {
                     const trackingParams = applyTrackingParams(
                         query,
@@ -167,7 +167,7 @@ export function normalizePredictiveSearchResults(
     if (predictiveSearch.products.length) {
         results.push({
             type: 'products',
-            items: predictiveSearch.products.map((product: any) => {
+            items: predictiveSearch.products?.map((product: any) => {
                 totalResults++
                 const trackingParams = applyTrackingParams(product)
                 return {
@@ -193,7 +193,7 @@ export function normalizePredictiveSearchResults(
     if (predictiveSearch.collections.length) {
         results.push({
             type: 'collections',
-            items: predictiveSearch.collections.map(
+            items: predictiveSearch.collections?.map(
                 (collection: PredictiveCollectionFragment) => {
                     totalResults++
                     const trackingParams = applyTrackingParams(collection)
@@ -213,7 +213,7 @@ export function normalizePredictiveSearchResults(
     if (predictiveSearch.pages.length) {
         results.push({
             type: 'pages',
-            items: predictiveSearch.pages.map(
+            items: predictiveSearch.pages?.map(
                 (page: PredictivePageFragment) => {
                     totalResults++
                     const trackingParams = applyTrackingParams(page)
@@ -233,7 +233,7 @@ export function normalizePredictiveSearchResults(
     if (predictiveSearch.articles.length) {
         results.push({
             type: 'articles',
-            items: predictiveSearch.articles.map(
+            items: predictiveSearch.articles?.map(
                 (article: PredictiveArticleFragment) => {
                     totalResults++
                     const trackingParams = applyTrackingParams(article)

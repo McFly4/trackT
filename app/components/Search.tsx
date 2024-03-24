@@ -118,7 +118,7 @@ export function SearchResults({
     return (
         <div>
             {results &&
-                keys.map((type) => {
+                keys?.map((type) => {
                     const resourceResults = results[type]
 
                     if (resourceResults.nodes[0]?.__typename === 'Page') {
@@ -168,7 +168,7 @@ function SearchResultsProductsGrid({
             <h2>Products</h2>
             <Pagination connection={products}>
                 {({ nodes, isLoading, NextLink, PreviousLink }) => {
-                    const itemsMarkup = nodes.map((product) => (
+                    const itemsMarkup = nodes?.map((product) => (
                         <div className='search-results-item' key={product.id}>
                             <Link
                                 prefetch='intent'
@@ -327,13 +327,14 @@ export function PredictiveSearchResults() {
         window.location.href = event.currentTarget.href
     }
 
-    if (!totalResults) {
+    if (totalResults === 0) {
         return <NoPredictiveSearchResults searchTerm={searchTerm} />
     }
+
     return (
         <div className='predictive-search-results'>
             <div>
-                {results.map(({ type, items }) => {
+                {results?.map(({ type, items }) => {
                     return (
                         <PredictiveSearchResult
                             goToSearchResult={goToSearchResult}
@@ -344,6 +345,10 @@ export function PredictiveSearchResults() {
                         />
                     )
                 })}
+
+                {totalResults <= 4 && (
+                    <NoPredictiveSearchResults searchTerm={searchTerm} />
+                )}
             </div>
             {/* view all results /search?q=term */}
             {/*{searchTerm.current && (*/}
@@ -456,7 +461,6 @@ function PredictiveSearchResult({
     }&type=${pluralToSingularSearchType(type)}`
 
     const [inList, setInList] = useState(false)
-
     return (
         <div className='predictive-search-result' key={type}>
             {/*<Link prefetch='intent' to={categoryUrl} onClick={goToSearchResult}>*/}
@@ -466,7 +470,7 @@ function PredictiveSearchResult({
                 onMouseEnter={() => setInList(true)}
                 onMouseLeave={() => setInList(false)}
             >
-                {items.map(
+                {items?.map(
                     (item: NormalizedPredictiveSearchResultItem, index) => (
                         <SearchResultItem
                             goToSearchResult={goToSearchResult}
@@ -560,7 +564,7 @@ function SearchResultItem({ goToSearchResult, item, inList }: any) {
                             paddingRight: '25px',
                         }}
                     >
-                        {stickersData.map(
+                        {stickersData?.map(
                             (item: any, index: any, array: any[]) => (
                                 <ImageComponent
                                     key={index}
@@ -646,5 +650,5 @@ function pluralToSingularSearchType(
         return plural[type]
     }
 
-    return type.map((t) => plural[t]).join(',')
+    return type?.map((t) => plural[t]).join(',')
 }

@@ -25,18 +25,14 @@ export async function loader({ request, context }: LoaderFunctionArgs) {
         pageBy: 24,
     })
 
-    const randomList = ['hotDeal', 'soon', 'fastShip', 'release']
-    const metafieldRandom =
-        randomList[Math.floor(Math.random() * randomList.length)]
-
-    const randomProduct = await context.storefront.query(FILTERS_QUERY, {
+    const fastShip = await context.storefront.query(FILTERS_QUERY, {
         variables: {
             first: 30,
             filters: [
                 {
                     productMetafield: {
                         namespace: 'custom',
-                        key: metafieldRandom,
+                        key: 'fastShip',
                         value: 'true',
                     },
                 },
@@ -46,18 +42,38 @@ export async function loader({ request, context }: LoaderFunctionArgs) {
         },
     })
 
-    return json({ products, randomProduct, metafieldRandom })
+    const exclusive = await context.storefront.query(FILTERS_QUERY, {
+        variables: {
+            first: 30,
+            filters: [
+                {
+                    productMetafield: {
+                        namespace: 'custom',
+                        key: 'release',
+                        value: 'true',
+                    },
+                },
+            ],
+            collections: 'title:all',
+            ...pagination,
+        },
+    })
+
+    return json({
+        products,
+        fastShip,
+        exclusive,
+    })
 }
 
 export default function HomePage() {
     const { width } = useWindowDimensions()
     const sizeScreen = width || 1920
-    const { products, randomProduct, metafieldRandom } =
-        useLoaderData<typeof loader>()
+    const { products, fastShip, exclusive } = useLoaderData<typeof loader>()
     const navigate = useNavigate()
     const productsList = products.metaobjects.nodes[0].field.references.nodes
-    const randomProducts = randomProduct.collections.nodes[0].products.nodes
-    const randomName = metafieldRandom
+    const fastShipProducts = fastShip.collections.nodes[0].products.nodes
+    const exclusiveProducts = exclusive.collections.nodes[0].products.nodes
     const swiperRef = useRef(null)
     const [autoplayTimes, setAutoplayTimes] = useState<number[]>([0, 0]) // État pour stocker les temps restants
 
@@ -370,10 +386,10 @@ export default function HomePage() {
                         </p>
                     </div>
                 </div>
-                <TrackT products={productsList} title='Panel 2' />
+                <TrackT products={fastShipProducts} title='Chez vous en 48h' />
                 <MarketDrag />
                 <GoFilters />
-                <TrackT products={randomProducts} title={randomName} />
+                <TrackT products={exclusiveProducts} title='Exclusive Items' />
             </div>
         </div>
     )

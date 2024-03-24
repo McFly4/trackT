@@ -968,7 +968,13 @@ export type PredictivePageFragment = { __typename: 'Page' } & Pick<
 
 export type PredictiveProductFragment = { __typename: 'Product' } & Pick<
     StorefrontAPI.Product,
-    'id' | 'title' | 'handle' | 'trackingParameters'
+    | 'id'
+    | 'title'
+    | 'handle'
+    | 'trackingParameters'
+    | 'productType'
+    | 'tags'
+    | 'vendor'
 > & {
         variants: {
             nodes: Array<
