@@ -67,7 +67,7 @@ export default function TrackT({ products, title }: any) {
                     800: {
                         slidesPerView: 3,
                     },
-                    1200: {
+                    1600: {
                         slidesPerView: 4,
                     },
                 }}
