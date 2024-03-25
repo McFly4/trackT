@@ -165,20 +165,20 @@ export default function ({ product, stickers, isCarousel, quantity }: any) {
                 style={{
                     ...(isCarousel && { width: 'unset' }),
                     ...(quantity === 4 && {
-                        flexBasis: 'calc(25% - 20px)',
-                        width: 'calc(25% - 20px)',
+                        flexBasis: 'calc(25% - 60px)',
+                        width: 'calc(25% - 60px)',
                     }),
                     ...(quantity === 3 && {
-                        flexBasis: 'calc(33.33333% - 20px)',
-                        width: 'calc(33.33333% - 20px)',
+                        flexBasis: 'calc(33.33333% - 60px)',
+                        width: 'calc(33.33333% - 60px)',
                     }),
                     ...(quantity === 2 && {
-                        flexBasis: 'calc(50% - 20px)',
-                        width: 'calc(50% - 20px)',
+                        flexBasis: 'calc(50% - 60px)',
+                        width: 'calc(50% - 60px)',
                     }),
                     ...(quantity === 1 && {
-                        width: 'calc(100% - 20px)',
-                        flexBasis: 'calc(100% - 20px)',
+                        width: 'calc(100% - 60px)',
+                        flexBasis: 'calc(100% - 60px)',
                     }),
                 }}
             >
