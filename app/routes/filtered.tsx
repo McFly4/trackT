@@ -452,14 +452,17 @@ export default function filtered() {
                                             </div>
                                         </PreviousLink>
                                         <div className='panel-products-grid'>
-                                            {nodes.map((product) => (
-                                                <MainProduct
-                                                    product={product}
-                                                    quantity={
-                                                        productList.nodes.length
-                                                    }
-                                                />
-                                            ))}
+                                            <div className='panel-products-grid'>
+                                                {nodes.map((product) => (
+                                                    <MainProduct
+                                                        product={product}
+                                                        quantity={
+                                                            productList.nodes
+                                                                .length
+                                                        }
+                                                    />
+                                                ))}
+                                            </div>
                                         </div>
                                         <div className='pagination'>
                                             <NextLink>
