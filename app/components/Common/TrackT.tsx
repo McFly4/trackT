@@ -67,6 +67,9 @@ export default function TrackT({ products, title, isAccount }: any) {
                     800: {
                         slidesPerView: 3,
                     },
+                    1300: {
+                        slidesPerView: isAccount === true ? 2 : 3,
+                    },
                     1600: {
                         slidesPerView: isAccount === true ? 3 : 4,
                     },
