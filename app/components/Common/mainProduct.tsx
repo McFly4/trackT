@@ -234,7 +234,10 @@ export default function ({ product, stickers, isCarousel, quantity }: any) {
                             // }}
                             style={{
                                 objectFit: 'contain',
-                                width: quantity === 1 ? '333px' : '',
+                                width:
+                                    quantity === 1 || quantity === 3
+                                        ? '333px'
+                                        : '',
                             }}
                         />
                     </Link>
