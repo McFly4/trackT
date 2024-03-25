@@ -166,6 +166,13 @@ export default function Product() {
         }
     }
 
+    const productsFromCollection =
+        product?.collections?.nodes?.length > 1
+            ? product?.collections?.nodes?.find(
+                  (collection: any) => collection.title !== 'All'
+              )?.products.nodes
+            : product?.collections?.nodes[0].products.nodes
+
     return (
         <>
             <div
@@ -183,6 +190,10 @@ export default function Product() {
                     />
                 </div>
             </div>
+            <TrackT
+                products={productsFromCollection}
+                title='Produits connexes'
+            />
             <div className='productBanner'>
                 <video width='100%' height='auto' autoPlay muted loop>
                     <source src='/product/banner.mp4' type='video/mp4' />
@@ -418,96 +429,96 @@ function ProductImage({ image, product }: { image: any; product: any }) {
                     ))}
                 </div>
             </div>
-            <div
-                className='trackT'
-                style={{
-                    margin: 'unset',
-                    marginTop: '50px',
-                }}
-            >
-                <div className='trackT-header'>
-                    <h2>Produits connexes</h2>
-                    <div className='navigation-buttons'>
-                        <button onClick={previo}>
-                            <svg
-                                xmlns='http://www.w3.org/2000/svg'
-                                width='7.574'
-                                height='13.928'
-                                viewBox='0 0 7.574 13.928'
-                            >
-                                <path
-                                    id='Tracé_416'
-                                    data-name='Tracé 416'
-                                    d='M-20862.068-17757.791a.61.61,0,0,1-.432-.18.612.612,0,0,1,0-.861l5.924-5.924-5.924-5.924a.612.612,0,0,1,0-.861.611.611,0,0,1,.863,0l6.355,6.354a.614.614,0,0,1,0,.863l-6.355,6.354A.61.61,0,0,1-20862.068-17757.791Z'
-                                    transform='translate(20862.678 17771.719)'
-                                    fill='#fff'
-                                />
-                            </svg>
-                        </button>
-                        <button onClick={nexto}>
-                            <svg
-                                xmlns='http://www.w3.org/2000/svg'
-                                width='7.574'
-                                height='13.928'
-                                viewBox='0 0 7.574 13.928'
-                            >
-                                <path
-                                    id='Tracé_416'
-                                    data-name='Tracé 416'
-                                    d='M-20862.068-17757.791a.61.61,0,0,1-.432-.18.612.612,0,0,1,0-.861l5.924-5.924-5.924-5.924a.612.612,0,0,1,0-.861.611.611,0,0,1,.863,0l6.355,6.354a.614.614,0,0,1,0,.863l-6.355,6.354A.61.61,0,0,1-20862.068-17757.791Z'
-                                    transform='translate(20862.678 17771.719)'
-                                    fill='#fff'
-                                />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-                <Swiper
-                    modules={[Scrollbar, Grid]}
-                    grid={{
-                        rows: 2,
-                        fill: 'row',
-                    }}
-                    scrollbar={{
-                        hide: false,
-                    }}
-                    watchSlidesProgress={true}
-                    breakpoints={
-                        {
-                            0: {
-                                slidesPerView: 1,
-                            },
-                            768: {
-                                slidesPerView: 2,
-                            },
-                            1800: {
-                                slidesPerView: 3,
-                            },
-                        } as any
-                    }
-                    slidesPerView={3}
-                    grabCursor={true}
-                    navigation={{
-                        nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev',
-                    }}
-                    spaceBetween={40}
-                    onSwiper={(swiper) => (swiperRef.current = swiper)}
-                    className='trackT-swiper'
-                >
-                    {productsFromCollection?.map(
-                        (product: any, index: number) => (
-                            <SwiperSlide key={index}>
-                                <MainProduct
-                                    product={product}
-                                    stickers={false}
-                                    isCarousel={true}
-                                />
-                            </SwiperSlide>
-                        )
-                    )}
-                </Swiper>
-            </div>
+            {/*<div*/}
+            {/*    className='trackT'*/}
+            {/*    style={{*/}
+            {/*        margin: 'unset',*/}
+            {/*        marginTop: '50px',*/}
+            {/*    }}*/}
+            {/*>*/}
+            {/*    <div className='trackT-header'>*/}
+            {/*        <h2>Produits connexes</h2>*/}
+            {/*        <div className='navigation-buttons'>*/}
+            {/*            <button onClick={previo}>*/}
+            {/*                <svg*/}
+            {/*                    xmlns='http://www.w3.org/2000/svg'*/}
+            {/*                    width='7.574'*/}
+            {/*                    height='13.928'*/}
+            {/*                    viewBox='0 0 7.574 13.928'*/}
+            {/*                >*/}
+            {/*                    <path*/}
+            {/*                        id='Tracé_416'*/}
+            {/*                        data-name='Tracé 416'*/}
+            {/*                        d='M-20862.068-17757.791a.61.61,0,0,1-.432-.18.612.612,0,0,1,0-.861l5.924-5.924-5.924-5.924a.612.612,0,0,1,0-.861.611.611,0,0,1,.863,0l6.355,6.354a.614.614,0,0,1,0,.863l-6.355,6.354A.61.61,0,0,1-20862.068-17757.791Z'*/}
+            {/*                        transform='translate(20862.678 17771.719)'*/}
+            {/*                        fill='#fff'*/}
+            {/*                    />*/}
+            {/*                </svg>*/}
+            {/*            </button>*/}
+            {/*            <button onClick={nexto}>*/}
+            {/*                <svg*/}
+            {/*                    xmlns='http://www.w3.org/2000/svg'*/}
+            {/*                    width='7.574'*/}
+            {/*                    height='13.928'*/}
+            {/*                    viewBox='0 0 7.574 13.928'*/}
+            {/*                >*/}
+            {/*                    <path*/}
+            {/*                        id='Tracé_416'*/}
+            {/*                        data-name='Tracé 416'*/}
+            {/*                        d='M-20862.068-17757.791a.61.61,0,0,1-.432-.18.612.612,0,0,1,0-.861l5.924-5.924-5.924-5.924a.612.612,0,0,1,0-.861.611.611,0,0,1,.863,0l6.355,6.354a.614.614,0,0,1,0,.863l-6.355,6.354A.61.61,0,0,1-20862.068-17757.791Z'*/}
+            {/*                        transform='translate(20862.678 17771.719)'*/}
+            {/*                        fill='#fff'*/}
+            {/*                    />*/}
+            {/*                </svg>*/}
+            {/*            </button>*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*    <Swiper*/}
+            {/*        modules={[Scrollbar, Grid]}*/}
+            {/*        grid={{*/}
+            {/*            rows: 2,*/}
+            {/*            fill: 'row',*/}
+            {/*        }}*/}
+            {/*        scrollbar={{*/}
+            {/*            hide: false,*/}
+            {/*        }}*/}
+            {/*        watchSlidesProgress={true}*/}
+            {/*        breakpoints={*/}
+            {/*            {*/}
+            {/*                0: {*/}
+            {/*                    slidesPerView: 1,*/}
+            {/*                },*/}
+            {/*                768: {*/}
+            {/*                    slidesPerView: 2,*/}
+            {/*                },*/}
+            {/*                1800: {*/}
+            {/*                    slidesPerView: 3,*/}
+            {/*                },*/}
+            {/*            } as any*/}
+            {/*        }*/}
+            {/*        slidesPerView={3}*/}
+            {/*        grabCursor={true}*/}
+            {/*        navigation={{*/}
+            {/*            nextEl: '.swiper-button-next',*/}
+            {/*            prevEl: '.swiper-button-prev',*/}
+            {/*        }}*/}
+            {/*        spaceBetween={40}*/}
+            {/*        onSwiper={(swiper) => (swiperRef.current = swiper)}*/}
+            {/*        className='trackT-swiper'*/}
+            {/*    >*/}
+            {/*        {productsFromCollection?.map(*/}
+            {/*            (product: any, index: number) => (*/}
+            {/*                <SwiperSlide key={index}>*/}
+            {/*                    <MainProduct*/}
+            {/*                        product={product}*/}
+            {/*                        stickers={false}*/}
+            {/*                        isCarousel={true}*/}
+            {/*                    />*/}
+            {/*                </SwiperSlide>*/}
+            {/*            )*/}
+            {/*        )}*/}
+            {/*    </Swiper>*/}
+            {/*</div>*/}
         </div>
     )
 }
