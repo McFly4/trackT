@@ -1050,6 +1050,11 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 @media screen and (max-width: 1650px){
+    .product-grid{
+        flex-basis: calc(25% - 60px);
+        width: calc(25% - 60px);
+    }
+
     .product-grid .product-img-grid {
         height: 200px !important;
     }
