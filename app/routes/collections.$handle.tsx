@@ -72,7 +72,6 @@ export default function Collection() {
     const { collection, allProducts, randomProduct, metafieldRandom } =
         useLoaderData<typeof loader>()
     const carousel = randomProduct.collections.nodes[0].products.nodes
-    const carouselName = metafieldRandom
     const all = allProducts?.collection?.products?.nodes
 
     const [randomProducts, setRandomProducts] = useState([]) as any
@@ -90,6 +89,17 @@ export default function Collection() {
         }
     }
 
+    function randomNameFunction() {
+        if (metafieldRandom === 'hotDeal') {
+            return 'Hot Deal'
+        } else if (metafieldRandom === 'soon') {
+            return 'Bientôt disponible'
+        } else if (metafieldRandom === 'fastShip') {
+            return 'Chez vous en 48h'
+        } else if (metafieldRandom === 'release') {
+            return 'Exclusive Items'
+        }
+    }
     return (
         <>
             <div
@@ -97,7 +107,9 @@ export default function Collection() {
                 style={{
                     marginTop: '200px',
                     justifyContent:
-                        collection?.nodes?.length === 0 ? 'center' : '',
+                        collection.products?.nodes?.length === 0
+                            ? 'center'
+                            : '',
                 }}
             >
                 <div className='search'>
@@ -120,16 +132,24 @@ export default function Collection() {
                                     >
                                         <Link to='/filters'>
                                             <button>
+                                                <img
+                                                    src='/filters/checkbox.png'
+                                                    alt='check'
+                                                    style={{
+                                                        width: '20px',
+                                                        marginRight: '10px',
+                                                    }}
+                                                />
                                                 Rechercher par filtres
                                             </button>
                                         </Link>
 
-                                        <Link to='/'>
+                                        <a href='#categories-aside'>
                                             <button>
                                                 Shopping par catégories
                                             </button>
-                                        </Link>
-                                        <Link to='#search-aside'>
+                                        </a>
+                                        <a href='#search-aside'>
                                             <button>
                                                 <svg
                                                     id='icon'
@@ -137,6 +157,9 @@ export default function Collection() {
                                                     width='21.548'
                                                     height='21.547'
                                                     viewBox='0 0 21.548 21.547'
+                                                    style={{
+                                                        marginRight: '10px',
+                                                    }}
                                                 >
                                                     <path
                                                         id='Tracé_219'
@@ -155,7 +178,7 @@ export default function Collection() {
                                                 </svg>
                                                 Rechercher manuellement
                                             </button>
-                                        </Link>
+                                        </a>
                                     </div>
                                 </div>
                                 <div
@@ -193,11 +216,23 @@ export default function Collection() {
                                 </div>
                                 <div className='four-btns'>
                                     <Link to='/filters'>
-                                        <button>Rechercher par filtres</button>
+                                        <button>
+                                            <img
+                                                src='/filters/checkbox.png'
+                                                alt='check'
+                                                style={{
+                                                    width: '20px',
+                                                    marginRight: '10px',
+                                                }}
+                                            />
+                                            Rechercher par filtres
+                                        </button>
                                     </Link>
 
-                                    <button>Shopping par catégories</button>
-                                    <Link to='#search-aside'>
+                                    <a href='#categories-aside'>
+                                        <button>Shopping par catégories</button>
+                                    </a>
+                                    <a href='#search-aside'>
                                         <button>
                                             <svg
                                                 id='icon'
@@ -205,6 +240,9 @@ export default function Collection() {
                                                 width='21.548'
                                                 height='21.547'
                                                 viewBox='0 0 21.548 21.547'
+                                                style={{
+                                                    marginRight: '10px',
+                                                }}
                                             >
                                                 <path
                                                     id='Tracé_219'
@@ -223,9 +261,18 @@ export default function Collection() {
                                             </svg>
                                             Rechercher manuellement
                                         </button>
-                                    </Link>
+                                    </a>
                                     <Link to='/filtered'>
-                                        <button>Random item</button>
+                                        <button>
+                                            <img
+                                                src='/filters/arrow-shuffle.png'
+                                                alt='arrow'
+                                                style={{
+                                                    marginRight: '10px',
+                                                }}
+                                            />
+                                            Random item
+                                        </button>
                                     </Link>
                                 </div>
                             </div>
@@ -281,6 +328,10 @@ export default function Collection() {
                                                 {nodes.map((product) => (
                                                     <MainProduct
                                                         product={product}
+                                                        quantity={
+                                                            collection.products
+                                                                ?.nodes?.length
+                                                        }
                                                     />
                                                 ))}
                                             </div>
@@ -324,7 +375,7 @@ export default function Collection() {
                         playsInline
                         loop
                     />
-                    <TrackT products={carousel} title={carouselName} />
+                    <TrackT products={carousel} title={randomNameFunction()} />
                     <MarketDrag />
                 </div>
             )}
