@@ -224,13 +224,16 @@ export default function ({ product, stickers, isCarousel, quantity }: any) {
                                     ? 'product-img product-ooo'
                                     : 'product-img'
                             }
+                            // style={{
+                            //     objectFit: isCarousel
+                            //         ? 'contain'
+                            //         : product?.box?.value == '4:5' ||
+                            //           product?.box?.value == '1:1'
+                            //         ? 'contain'
+                            //         : 'cover',
+                            // }}
                             style={{
-                                objectFit: isCarousel
-                                    ? 'contain'
-                                    : product?.box?.value == '4:5' ||
-                                      product?.box?.value == '1:1'
-                                    ? 'contain'
-                                    : 'cover',
+                                objectFit: 'contain',
                             }}
                         />
                     </Link>

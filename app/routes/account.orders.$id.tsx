@@ -78,71 +78,73 @@ export default function OrderRoute() {
                 </div>
             )}
             <div className='account-order-header'>
-                <div>
-                    <h2>commande {order.name}</h2>
-                    <div className='account-order-status'>
-                        <h2>Status</h2>
-                        <div className='account-order'>
-                            status des commandes
-                        </div>
-                        <div className='account-order-status__content'>
-                            <p>
-                                <strong>Order Status:</strong>{' '}
-                                {order.fulfillmentStatus}
-                            </p>
-                        </div>
-                    </div>
-
-                    <p>
-                        <a
-                            target='_blank'
-                            href={order.statusUrl}
-                            rel='noreferrer'
-                        >
-                            View Order Status →
-                        </a>
-                    </p>
-                </div>
                 <div
-                    onClick={toggleModal}
                     style={{
                         display: 'flex',
-                        flexDirection: 'column',
                         alignItems: 'center',
-                        justifyContent: 'center',
-                        width: '450px',
+                        justifyContent: 'space-between',
+                        width: '100%',
                     }}
                 >
-                    {cartTotalPrice <= 250 ? (
-                        <img
-                            src='/cart/cartClassic.png'
-                            alt='panier classic'
-                            style={{
-                                width: 'fit-content',
-                                marginBottom: '50px',
-                            }}
-                        />
-                    ) : cartTotalPrice <= 500 ? (
-                        <img
-                            src='/cart/cartPremium.png'
-                            alt='panier premium'
-                            style={{
-                                width: 'fit-content',
-                                marginBottom: '50px',
-                            }}
-                        />
-                    ) : (
-                        <img
-                            src='/cart/cartExclusif.png'
-                            alt='panier vide'
-                            style={{
-                                width: 'fit-content',
-                                marginBottom: '50px',
-                            }}
-                        />
-                    )}
+                    <h2>commande {order.name}</h2>
+                    <div
+                        onClick={toggleModal}
+                        style={{
+                            marginRight: '50px',
+                        }}
+                    >
+                        {cartTotalPrice <= 250 ? (
+                            <img
+                                src='/cart/cartClassic.png'
+                                alt='panier classic'
+                                style={{
+                                    width: 'fit-content',
+                                    marginBottom: '50px',
+                                }}
+                            />
+                        ) : cartTotalPrice <= 500 ? (
+                            <img
+                                src='/cart/cartPremium.png'
+                                alt='panier premium'
+                                style={{
+                                    width: 'fit-content',
+                                    marginBottom: '50px',
+                                }}
+                            />
+                        ) : (
+                            <img
+                                src='/cart/cartExclusif.png'
+                                alt='panier vide'
+                                style={{
+                                    width: 'fit-content',
+                                    marginBottom: '50px',
+                                }}
+                            />
+                        )}
+                    </div>
                 </div>
             </div>
+            {/*<div className='orders-status'>*/}
+            {/*    <div className='account-order-status'>*/}
+            {/*        <h2>StatuT</h2>*/}
+            {/*        <div className='account-order-status__content'>*/}
+            {/*            <p>*/}
+            {/*                <strong>Order Status:</strong>{' '}*/}
+            {/*                {order.fulfillmentStatus}*/}
+            {/*            </p>*/}
+            {/*        </div>*/}
+
+            {/*        <p>*/}
+            {/*            <a*/}
+            {/*                target='_blank'*/}
+            {/*                href={order.statusUrl}*/}
+            {/*                rel='noreferrer'*/}
+            {/*            >*/}
+            {/*                View Order Status →*/}
+            {/*            </a>*/}
+            {/*        </p>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
             <div className='orders-informations'>
                 <div className='order-description-item'>
                     <p>Total</p>
@@ -160,7 +162,7 @@ export default function OrderRoute() {
                     <p>{dayjs(order.processedAt).format('DD/MM/YYYY')}</p>
                 </div>
                 <div className='order-description-item'>
-                    <p>Status</p>
+                    <p>Statut</p>
                     <p>
                         {order.financialStatus === 'PAID'
                             ? 'Commandé'
@@ -168,8 +170,8 @@ export default function OrderRoute() {
                     </p>
                 </div>
                 <div className='order-description-item'>
-                    <p>codes promo</p>
-                    <p>{discountCode}</p>
+                    <p>Méthode de paiment</p>
+                    <p>{console.log(order)}</p>
                 </div>
                 <div className='order-description-item'>
                     <p>Adresse de livraison</p>
@@ -195,7 +197,7 @@ export default function OrderRoute() {
                     possible. Adressez-nous votre problème au mail ci-dessous,
                     et nous nous occuperons du reste !
                 </p>
-                <span>[Hotline Trackt]</span>
+                <span>order@trackt.com</span>
             </div>
         </div>
     )
@@ -206,7 +208,6 @@ function OrderLineRow(lineItem: any) {
         <div className='order-products'>
             <div className='order-products-header'>
                 <h2>Articles commandés</h2>
-                <button>options</button>
             </div>
             {lineItem.lineItem.map((item: any) => {
                 return (
@@ -254,7 +255,6 @@ function OrderLineRow(lineItem: any) {
 }
 
 function ToggleModal(toggle: any, { cart }: any) {
-    console.log(cart)
     return (
         <div
             className='a-third-guid'
@@ -426,6 +426,7 @@ const CUSTOMER_ORDER_QUERY = `#graphql
       ...OrderMoney
     }
     totalPriceV2 {
+    
       ...OrderMoney
     }
     subtotalPriceV2 {

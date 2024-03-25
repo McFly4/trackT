@@ -582,10 +582,14 @@
 }
 
 .orders-informations {
+    background: #121212;
+    padding: 60px;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    gap: 60px
+    border-radius: 20px;
+    width: 90%;
+    margin-bottom: 100px;
 }
 
 .order-description-item {
