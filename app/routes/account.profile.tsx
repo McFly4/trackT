@@ -584,7 +584,7 @@ export default function AccountProfile() {
                     </div>
                 </div>
             </div>
-            <TrackT products={productsList} />
+            <TrackT products={productsList} isAccount={true} />
         </>
     )
 }

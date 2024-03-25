@@ -17,7 +17,7 @@ export const meta: MetaFunction = () => {
 
 export async function loader({ context }: LoaderFunctionArgs) {
     if (await context.session.get('customerAccessToken')) {
-        return redirect('/account')
+        return redirect('/account/profile')
     }
     return json({})
 }
@@ -59,7 +59,7 @@ export async function action({ request, context }: ActionFunctionArgs) {
         const { customerAccessToken } = customerAccessTokenCreate
         session.set('customerAccessToken', customerAccessToken)
 
-        return redirect('/account', {
+        return redirect('/account/profile', {
             headers: {
                 'Set-Cookie': await session.commit(),
             },

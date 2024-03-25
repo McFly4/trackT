@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
 import { Scrollbar } from 'swiper/modules'
 import { useLocation } from '@remix-run/react'
 
-export default function TrackT({ products, title }: any) {
+export default function TrackT({ products, title, isAccount }: any) {
     const location = useLocation()
 
     const swiperRef = useRef<any>(null)
@@ -68,7 +68,7 @@ export default function TrackT({ products, title }: any) {
                         slidesPerView: 3,
                     },
                     1600: {
-                        slidesPerView: 4,
+                        slidesPerView: isAccount === true ? 3 : 4,
                     },
                 }}
             >
