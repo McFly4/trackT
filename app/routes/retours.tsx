@@ -43,7 +43,7 @@ export default function Retours() {
                     <span>250€ - 500€</span>
                     <p>
                         RÉDUCTION LIVRAISON <br />
-                        RETOURS GRATUIT <br />
+                        RETOURS GRATUITS <br />
                     </p>
                     <p>Livraison 5€</p>
                 </div>
@@ -53,7 +53,7 @@ export default function Retours() {
                     <span>+500€</span>
                     <p>
                         LIVRAISON GRATUITE <br />
-                        RETOURS GRATUIT <br />
+                        RETOURS GRATUITS <br />
                         POCKET ITEM SURPRISE
                     </p>
                     <p>Livraison express</p>

@@ -592,7 +592,7 @@ function ToggleModal(toggle: any, { cart }: any) {
                     <span>250€ - 500€</span>
                     <p>
                         RÉDUCTION LIVRAISON <br />
-                        RETOURS GRATUIT <br />
+                        RETOURS GRATUITS <br />
                         {/*BOOSTER RETOUR* 24H (20 €)*/}
                     </p>
                     <p>Livraison 5€</p>
@@ -603,7 +603,7 @@ function ToggleModal(toggle: any, { cart }: any) {
                     <span>+500€</span>
                     <p>
                         LIVRAISON GRATUITE <br />
-                        RETOURS GRATUIT <br />
+                        RETOURS GRATUITS <br />
                         POCKET ITEM SURPRISE
                         {/*BOOSTER RETOUR* 48H (30 €)*/}
                     </p>

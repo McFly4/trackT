@@ -21,6 +21,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 
 export async function loader({ request, context }: LoaderFunctionArgs) {
     const products = await context.storefront.query(HOME_PRODUCTS_QUERY)
+    const hero = await context.storefront.query(HERO)
     const pagination = getPaginationVariables(request, {
         pageBy: 24,
     })
@@ -63,19 +64,24 @@ export async function loader({ request, context }: LoaderFunctionArgs) {
         products,
         fastShip,
         exclusive,
+        hero,
     })
 }
 
 export default function HomePage() {
     const { width } = useWindowDimensions()
     const sizeScreen = width || 1920
-    const { products, fastShip, exclusive } = useLoaderData<typeof loader>()
+    const { products, fastShip, exclusive, hero } =
+        useLoaderData<typeof loader>()
     const navigate = useNavigate()
     const productsList = products.metaobjects.nodes[0].field.references.nodes
     const fastShipProducts = fastShip.collections.nodes[0].products.nodes
     const exclusiveProducts = exclusive.collections.nodes[0].products.nodes
+    const heroSection = hero?.metaobjects?.nodes
     const swiperRef = useRef(null)
     const [autoplayTimes, setAutoplayTimes] = useState<number[]>([0, 0]) // État pour stocker les temps restants
+
+    // wait
 
     const onAutoplayTimeLeft = (
         s: any,
@@ -112,53 +118,13 @@ export default function HomePage() {
                         onAutoplayTimeLeft(s, time, progress, 0)
                     } // Pour la première diapositive
                 >
-                    <SwiperSlide
-                        style={{
-                            width: '100% !important',
-                        }}
-                    >
-                        <div
+                    {heroSection?.map((hero: any, index: number) => (
+                        <SwiperSlide
+                            key={index}
                             style={{
-                                display: 'flex',
-                                justifyContent: 'center',
+                                width: '100% !important',
                             }}
                         >
-                            <div
-                                style={{
-                                    position: 'relative',
-                                }}
-                            >
-                                <img
-                                    src={
-                                        sizeScreen > 2300
-                                            ? '/home/home1Large.png'
-                                            : '/home/home1.png'
-                                    }
-                                    alt='home'
-                                    style={{
-                                        width: '100%',
-                                    }}
-                                />
-                                <div
-                                    className='autoplay-progress'
-                                    slot='container-end'
-                                >
-                                    <span>{autoplayTimes[0]}</span>
-                                </div>
-                                <div className='shop-now'>
-                                    <Link to='#shop'>
-                                        <h4>Shop now</h4>
-                                    </Link>
-                                </div>
-                            </div>
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide
-                        style={{
-                            width: '100% !important',
-                        }}
-                    >
-                        <Link to='/about'>
                             <div
                                 style={{
                                     display: 'flex',
@@ -172,9 +138,11 @@ export default function HomePage() {
                                 >
                                     <img
                                         src={
-                                            sizeScreen > 2300
-                                                ? '/home/home2Large.png'
-                                                : '/home/home2.png'
+                                            hero.fields?.find(
+                                                (field: any) =>
+                                                    field?.key ===
+                                                    'file_desktop'
+                                            )?.reference?.image?.url
                                         }
                                         alt='home'
                                         style={{
@@ -187,15 +155,46 @@ export default function HomePage() {
                                     >
                                         <span>{autoplayTimes[0]}</span>
                                     </div>
-                                    <div className='discover-trackt'>
-                                        <Link to='/about#vision'>
-                                            <h4>Découvrir la vision trackt</h4>
+                                    <div
+                                        className='shop-now'
+                                        style={{
+                                            backgroundColor: hero?.fields?.find(
+                                                (field: any) =>
+                                                    field?.key === 'color_txt'
+                                            )?.value,
+                                        }}
+                                    >
+                                        <Link
+                                            to={
+                                                hero.fields?.find(
+                                                    (field: any) =>
+                                                        field?.key === 'link'
+                                                )?.value
+                                            }
+                                        >
+                                            <h4
+                                                style={{
+                                                    color: hero.fields?.find(
+                                                        (field: any) =>
+                                                            field?.key ===
+                                                            'color'
+                                                    )?.value,
+                                                }}
+                                            >
+                                                {
+                                                    hero.fields?.find(
+                                                        (field: any) =>
+                                                            field?.key ===
+                                                            'bouton'
+                                                    )?.value
+                                                }
+                                            </h4>
                                         </Link>
                                     </div>
                                 </div>
                             </div>
-                        </Link>
-                    </SwiperSlide>
+                        </SwiperSlide>
+                    ))}
                 </Swiper>
             </div>
             <div className='panel-trackt'>
@@ -564,3 +563,28 @@ query FiltersQuery($first: Int!, $filters: [ProductFilter!], $collections: Strin
 }
 }
 `
+
+const HERO = `#graphql
+query MetaObjects {
+  metaobjects(first: 20, type: "HERO_SECTION") {
+    nodes {
+      fields {
+        key
+        value
+        reference {
+          ... on Video {
+            sources{
+              url
+            }
+          }
+          ... on MediaImage{
+            image{
+              url
+            }
+          }
+        }
+      }
+    }
+  }
+}
+` as const
