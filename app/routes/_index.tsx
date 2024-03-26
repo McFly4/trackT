@@ -138,10 +138,10 @@ export default function HomePage() {
                                 >
                                     <img
                                         src={
-                                            hero.fields?.find(
-                                                (field: any) =>
-                                                    field?.key ===
-                                                    'file_desktop'
+                                            hero.fields?.find((field: any) =>
+                                                field?.key === sizeScreen > 1300
+                                                    ? 'file_desktop'
+                                                    : 'file_mobile'
                                             )?.reference?.image?.url
                                         }
                                         alt='home'
@@ -149,6 +149,31 @@ export default function HomePage() {
                                             width: '100%',
                                         }}
                                     />
+                                    {hero.fields?.find((field: any) =>
+                                        field?.key === sizeScreen > 1300
+                                            ? 'file_desktop'
+                                            : 'file_mobile'
+                                    )?.reference?.sources?.[0]?.url && (
+                                        <video
+                                            src={
+                                                hero.fields?.find(
+                                                    (field: any) =>
+                                                        field?.key ===
+                                                        sizeScreen > 1300
+                                                            ? 'file_desktop'
+                                                            : 'file_mobile'
+                                                )?.reference?.sources?.[0]?.url
+                                            }
+                                            autoPlay
+                                            loop
+                                            muted
+                                            playsInline
+                                            style={{
+                                                width: '100%',
+                                            }}
+                                        ></video>
+                                    )}
+
                                     <div
                                         className='autoplay-progress'
                                         slot='container-end'
