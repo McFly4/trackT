@@ -94,6 +94,8 @@ export default function HomePage() {
         setAutoplayTimes(updatedTimes)
     }
 
+    console.log(sizeScreen > 1300)
+
     return (
         <div
             style={{
@@ -107,10 +109,10 @@ export default function HomePage() {
                     spaceBetween={0}
                     loop
                     grabCursor={true}
-                    modules={[Autoplay]}
-                    autoplay={{
-                        delay: 5000,
-                    }}
+                    // modules={[Autoplay]}
+                    // autoplay={{
+                    //     delay: 5000,
+                    // }}
                     style={{
                         maxHeight: '100vh',
                     }}
@@ -138,10 +140,12 @@ export default function HomePage() {
                                 >
                                     <img
                                         src={
-                                            hero.fields?.find((field: any) =>
-                                                field?.key === sizeScreen > 1300
-                                                    ? 'file_desktop'
-                                                    : 'file_mobile'
+                                            hero.fields?.find(
+                                                (field: any) =>
+                                                    field?.key ===
+                                                    (sizeScreen > 1300
+                                                        ? 'file_desktop'
+                                                        : 'file_mobile')
                                             )?.reference?.image?.url
                                         }
                                         alt='home'
@@ -149,19 +153,22 @@ export default function HomePage() {
                                             width: '100%',
                                         }}
                                     />
-                                    {hero.fields?.find((field: any) =>
-                                        field?.key === sizeScreen > 1300
-                                            ? 'file_desktop'
-                                            : 'file_mobile'
+
+                                    {hero.fields?.find(
+                                        (field: any) =>
+                                            field?.key ===
+                                            (sizeScreen > 1300
+                                                ? 'file_desktop'
+                                                : 'file_mobile')
                                     )?.reference?.sources?.[0]?.url && (
                                         <video
                                             src={
                                                 hero.fields?.find(
                                                     (field: any) =>
                                                         field?.key ===
-                                                        sizeScreen > 1300
+                                                        (sizeScreen > 1300
                                                             ? 'file_desktop'
-                                                            : 'file_mobile'
+                                                            : 'file_mobile')
                                                 )?.reference?.sources?.[0]?.url
                                             }
                                             autoPlay
