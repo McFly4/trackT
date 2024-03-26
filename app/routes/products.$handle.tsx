@@ -207,7 +207,9 @@ export default function Product() {
 }
 
 function BreadCrumb({ product }: { product: any }) {
-    const isMixte = product.manwoman?.value ?? 'Mixte'
+    const isMixte = product?.manwoman
+        ? (JSON.parse(product?.manwoman?.value) as any)
+        : 'Mixte'
     const type = product?.productType
     const vendor = product?.vendor
     const productName = product?.title
@@ -247,17 +249,7 @@ function BreadCrumb({ product }: { product: any }) {
                 }}
             >
                 <p>
-                    <Link
-                        to={
-                            '/filtered?' + isMixte == 'true'
-                                ? '/filtered?manwoman=true&collection=All'
-                                : isMixte == undefined
-                                ? '/filtered?collection=All'
-                                : '/filtered?manwoman=false&collection=All'
-                        }
-                    >
-                        {isMixte == 'true' ? 'Femme' : 'Homme'}
-                    </Link>{' '}
+                    <Link to={'/filtered?manwoman=' + isMixte}>{isMixte}</Link>{' '}
                     &gt; <Link to={'/search?q=' + type}>{type}</Link> &gt;{' '}
                     <Link to={'/search?q=' + vendor}>{vendor}</Link> &gt;{' '}
                     <Link to={'/search?q=' + collection}>{collection}</Link>{' '}
@@ -535,7 +527,7 @@ function ProductMain({
     const { title, descriptionHtml } = product
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isModalOpenToothbrush, setIsModalOpenToothbrush] = useState(false)
-
+    const parsedColors = JSON.parse(product.colors?.value) as any
     function toggleModalToothbrush() {
         setIsModalOpenToothbrush(!isModalOpenToothbrush)
     }
@@ -710,10 +702,8 @@ function ProductMain({
 
                     {product?.colors && (
                         <p>
-                            couleurs :{' '}
-                            {JSON.parse(product?.colors?.value).map(
-                                (color: any) => color + ' '
-                            )}
+                            couleurs :
+                            {parsedColors?.map((color: any) => color + ' ')}
                         </p>
                     )}
 

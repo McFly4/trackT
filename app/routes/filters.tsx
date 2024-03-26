@@ -344,13 +344,16 @@ export default function Filters() {
 
                 if (name === 'Homme') {
                     return {
-                        manwoman: 'false',
+                        manwoman: 'Homme',
                     }
                 } else if (name === 'Femme') {
                     return {
                         manwoman: 'true',
                     }
                 } else if (name === 'Mixte') {
+                    return {
+                        manwoman: 'Mixte',
+                    }
                 }
 
                 return /*valeur par défaut*/

@@ -94,8 +94,6 @@ export default function HomePage() {
         setAutoplayTimes(updatedTimes)
     }
 
-    console.log(sizeScreen > 1300)
-
     return (
         <div
             style={{
@@ -109,10 +107,10 @@ export default function HomePage() {
                     spaceBetween={0}
                     loop
                     grabCursor={true}
-                    // modules={[Autoplay]}
-                    // autoplay={{
-                    //     delay: 5000,
-                    // }}
+                    modules={[Autoplay]}
+                    autoplay={{
+                        delay: 5000,
+                    }}
                     style={{
                         maxHeight: '100vh',
                     }}

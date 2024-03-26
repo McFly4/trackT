@@ -55,7 +55,7 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
         productMetafield: {
             namespace: 'custom',
             key: 'manwoman',
-            value: manwoman,
+            value: manwoman.charAt(0).toUpperCase() + manwoman.slice(1),
         },
     }))
 
@@ -203,7 +203,6 @@ export default function filtered() {
         randomProduct,
         metafieldRandom,
     } = useLoaderData<typeof loader>()
-
     const productList = products.collections.nodes[0].products
     const all = allProducts?.collection?.products?.nodes
     const carousel = randomProduct.collections.nodes[0].products.nodes
@@ -581,6 +580,10 @@ fragment ProductFragment on Product {
     value
   }
  soon: metafield(namespace: "custom", key: "soon") {
+    key
+    value
+  }
+  manwoman: metafield(namespace: "custom", key: "manwoman") {
     key
     value
   }
