@@ -391,7 +391,7 @@ export default function Filters() {
 
         if (colors && colors.length > 0) {
             const colorsObjects = colors.map((color: any) => ({
-                colors: color?.name,
+                palette: color?.name,
             }))
             queryParams.push(...colorsObjects)
         }

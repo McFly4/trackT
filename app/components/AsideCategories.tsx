@@ -9,19 +9,27 @@ export function AsideCategories({
     id?: string
 }) {
     const colors = [
-        { name: 'blanc', hex: '#fff', link: '/search?q=white' },
-        { name: 'rouge', hex: '#ff0000', link: '/search?q=red' },
-        { name: 'rose', hex: '#ff00ff', link: '/search?q=pink' },
-        { name: 'violet', hex: '#800080', link: '/search?q=purple' },
-        { name: 'Bleu navy', hex: '#000080', link: '/search?q=navy' },
-        { name: 'bleu clair', hex: '#add8e6', link: '/search?q=lightblue' },
-        { name: 'vert', hex: '#008000', link: '/search?q=green' },
-        { name: 'jaune', hex: '#ffff00', link: '/search?q=yellow' },
-        { name: 'orange', hex: '#ffa500', link: '/search?q=orange' },
-        { name: 'marron', hex: '#8b4513', link: '/search?q=brown' },
-        { name: 'kaki', hex: '#556b2f', link: '/search?q=kaki' },
-        { name: 'gris', hex: '#808080', link: '/search?q=grey' },
-        { name: 'noir', hex: '#000', link: '/search?q=black' },
+        { name: 'blanc', hex: '#fff', link: '/filtered?palette=white' },
+        { name: 'rouge', hex: '#ff0000', link: '/filtered?palette=red' },
+        { name: 'rose', hex: '#ff00ff', link: '/filtered?palette=pink' },
+        { name: 'violet', hex: '#800080', link: '/filtered?palette=violet' },
+        {
+            name: 'Bleu navy',
+            hex: '#000080',
+            link: '/filtered?palette=blue-navy',
+        },
+        {
+            name: 'bleu clair',
+            hex: '#add8e6',
+            link: '/filtered?palette=blue-clair',
+        },
+        { name: 'vert', hex: '#008000', link: '/filtered?palette=green' },
+        { name: 'jaune', hex: '#ffff00', link: '/filtered?palette=yellow' },
+        { name: 'orange', hex: '#ffa500', link: '/filtered?palette=orange' },
+        { name: 'marron', hex: '#8b4513', link: '/filtered?palette=brown' },
+        { name: 'kaki', hex: '#556b2f', link: '/filtered?palette=kaki' },
+        { name: 'gris', hex: '#808080', link: '/filtered?palette=grey' },
+        { name: 'noir', hex: '#000', link: '/filtered?palette=black' },
     ]
 
     const brandList = [
@@ -71,8 +79,7 @@ export function AsideCategories({
                                 </p>
                                 <p
                                     onClick={() => {
-                                        window.location.href =
-                                            '/filtered?manwoman'
+                                        window.location.href = '/filtered'
                                     }}
                                 >
                                     Homme
@@ -80,17 +87,10 @@ export function AsideCategories({
                                 <p
                                     onClick={() => {
                                         window.location.href =
-                                            '/filtered?manwoman=true'
+                                            '/filtered?manwoman=Femme'
                                     }}
                                 >
                                     Femme
-                                </p>
-                                <p
-                                    onClick={() => {
-                                        window.location.href = '/filtered'
-                                    }}
-                                >
-                                    Mixte
                                 </p>
                             </div>
                             <div className='categoriesAside-item'>
@@ -125,7 +125,7 @@ export function AsideCategories({
                                 <p
                                     onClick={() => {
                                         window.location.href =
-                                            '/search?q=figurines'
+                                            '/collections/Figurines'
                                     }}
                                 >
                                     Toutes les figurines
@@ -133,7 +133,7 @@ export function AsideCategories({
                                 <p
                                     onClick={() => {
                                         window.location.href =
-                                            '/search?q=casquette'
+                                            '/collections/Cap'
                                     }}
                                 >
                                     toutes les casquettes
@@ -141,7 +141,7 @@ export function AsideCategories({
                                 <p
                                     onClick={() => {
                                         window.location.href =
-                                            '/search?q=bonnet'
+                                            '/collections/Bonnets'
                                     }}
                                 >
                                     Tous les bonnets
@@ -149,15 +149,7 @@ export function AsideCategories({
                                 <p
                                     onClick={() => {
                                         window.location.href =
-                                            '/search?q=clothing'
-                                    }}
-                                >
-                                    tous les sous vêtements
-                                </p>
-                                <p
-                                    onClick={() => {
-                                        window.location.href =
-                                            '/search?q=Skateboards'
+                                            '/collections/Planches'
                                     }}
                                 >
                                     toutes les planches
@@ -165,10 +157,10 @@ export function AsideCategories({
                                 <p
                                     onClick={() => {
                                         window.location.href =
-                                            '/search?q=accessoires'
+                                            '/collections/accessoires'
                                     }}
                                 >
-                                    tous le autres accessoires
+                                    tous les autres accessoires
                                 </p>
                             </div>
                             <div className='categoriesAside-item'>
@@ -176,7 +168,7 @@ export function AsideCategories({
                                 <p
                                     onClick={() => {
                                         window.location.href =
-                                            '/search?q=t-shirt'
+                                            '/collections/T-shirt'
                                     }}
                                 >
                                     Tous les tee-shirt
@@ -184,7 +176,7 @@ export function AsideCategories({
                                 <p
                                     onClick={() => {
                                         window.location.href =
-                                            '/search?q=hoodie'
+                                            '/collections/Hoodie'
                                     }}
                                 >
                                     tous les hoodies
@@ -192,25 +184,18 @@ export function AsideCategories({
                                 <p
                                     onClick={() => {
                                         window.location.href =
-                                            '/search?q=jacket'
+                                            '/collections/Veste'
                                     }}
                                 >
                                     toutes les vestes
                                 </p>
                                 <p
                                     onClick={() => {
-                                        window.location.href = '/search?q=pants'
+                                        window.location.href =
+                                            '/collections/Pants'
                                     }}
                                 >
                                     tous les pants
-                                </p>
-                                <p
-                                    onClick={() => {
-                                        window.location.href =
-                                            '/search?q=clothing'
-                                    }}
-                                >
-                                    tous les autres textiles
                                 </p>
                             </div>
                         </div>
@@ -235,7 +220,15 @@ export function AsideCategories({
                                 <p
                                     onClick={() => {
                                         window.location.href =
-                                            '/search?q=jordan 3'
+                                            '/collections/Jordan-1'
+                                    }}
+                                >
+                                    Jordan 1
+                                </p>
+                                <p
+                                    onClick={() => {
+                                        window.location.href =
+                                            '/collections/Jordan-3'
                                     }}
                                 >
                                     Jordan 3
@@ -243,7 +236,7 @@ export function AsideCategories({
                                 <p
                                     onClick={() => {
                                         window.location.href =
-                                            '/search?q=jordan 4'
+                                            '/collections/Jordan-4'
                                     }}
                                 >
                                     Jordan 4
@@ -251,16 +244,15 @@ export function AsideCategories({
                                 <p
                                     onClick={() => {
                                         window.location.href =
-                                            '/search?q=jordan 5'
+                                            '/collections/Jordan-5'
                                     }}
                                 >
                                     Jordan 5
                                 </p>
-
                                 <p
                                     onClick={() => {
                                         window.location.href =
-                                            '/search?q=sb dunk low'
+                                            '/collections/sb-dunk-low'
                                     }}
                                 >
                                     SB dunk low
@@ -268,7 +260,7 @@ export function AsideCategories({
                                 <p
                                     onClick={() => {
                                         window.location.href =
-                                            '/search?q=dunk low'
+                                            '/collections/dunk-low'
                                     }}
                                 >
                                     dunk low
@@ -286,7 +278,39 @@ export function AsideCategories({
                                 <p
                                     onClick={() => {
                                         window.location.href =
-                                            '/search?q=yeezy slide'
+                                            '/collections/campus-00s'
+                                    }}
+                                >
+                                    CAmpus
+                                </p>
+                                <p
+                                    onClick={() => {
+                                        window.location.href =
+                                            '/collections/gazelle'
+                                    }}
+                                >
+                                    gazelle
+                                </p>
+                                <p
+                                    onClick={() => {
+                                        window.location.href =
+                                            '/collections/yeezy-350'
+                                    }}
+                                >
+                                    yeezy 350
+                                </p>
+                                <p
+                                    onClick={() => {
+                                        window.location.href =
+                                            '/collections/yeezy-750'
+                                    }}
+                                >
+                                    yeezy 750
+                                </p>
+                                <p
+                                    onClick={() => {
+                                        window.location.href =
+                                            '/collections/yeezy-slide'
                                     }}
                                 >
                                     yeezy slide
@@ -294,18 +318,10 @@ export function AsideCategories({
                                 <p
                                     onClick={() => {
                                         window.location.href =
-                                            '/search?q=yeezy boost'
-                                    }}
-                                >
-                                    yeezy boost
-                                </p>
-                                <p
-                                    onClick={() => {
-                                        window.location.href =
                                             '/search?q=adidas'
                                     }}
                                 >
-                                    toutes les adidas{' '}
+                                    toutes les adidas
                                 </p>
                             </div>
                             <div className='categoriesAside-item'>
@@ -321,7 +337,7 @@ export function AsideCategories({
                                 <p
                                     onClick={() => {
                                         window.location.href =
-                                            '/search?q=collab'
+                                            '/collections/Collab'
                                     }}
                                 >
                                     collab
@@ -384,7 +400,7 @@ export function AsideCategories({
                                 <div
                                     onClick={() => {
                                         window.location.href =
-                                            '/filtered?hotDeal=true'
+                                            '/filtered?hotdeal=true'
                                     }}
                                 >
                                     <img

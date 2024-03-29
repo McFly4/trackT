@@ -18,7 +18,7 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
 
     const getcollection = searchParams.getAll('collection')
     const genre = searchParams.getAll('manwoman')
-    const getColors = searchParams.getAll('colors')
+    const getColors = searchParams.getAll('palette')
     const getMaterials = searchParams.getAll('materials')
     const getTags = searchParams.getAll('tags')
     const getSize = searchParams.getAll('size')
@@ -30,6 +30,7 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
     const promotion = searchParams.getAll('promotion')
     const fast = searchParams.getAll('fast')
     const release = searchParams.getAll('release')
+    const soon = searchParams.getAll('soon')
 
     // collection
 
@@ -123,6 +124,14 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
         },
     }))
 
+    const stickerSoon = soon.map((soon: any) => ({
+        productMetafield: {
+            namespace: 'custom',
+            key: 'soon',
+            value: soon,
+        },
+    }))
+
     const productVendor = getProductVendor.map((brand: any) => ({
         productVendor: brand,
     }))
@@ -150,6 +159,7 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
         ...stickerPromotion,
         ...stickerFast,
         ...stickerRelease,
+        ...stickerSoon,
     ]
 
     const pagination = getPaginationVariables(request, {
@@ -208,6 +218,7 @@ export default function filtered() {
     const carousel = randomProduct.collections.nodes[0].products.nodes
     const [randomProducts, setRandomProducts] = useState([]) as any
     const [isRandom, setIsRandom] = useState(false)
+    console.log(allFitlers)
 
     const handleRandomizeProducts = () => {
         if (all && all.length > 0) {
@@ -571,7 +582,7 @@ fragment ProductFragment on Product {
     key
     value
   }
-  colors: metafield(namespace: "custom", key: "couleurs") {
+  colors: metafield(namespace: "custom", key: "palette") {
     key
     value
   }
