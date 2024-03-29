@@ -354,14 +354,7 @@ function BreadCrumb({ product }: { product: any }) {
                 </p>
                 <div className='breadcrumb-colors'>
                     {colors?.map((color: any, index: number) => (
-                        <Link
-                            to={
-                                color === 'blue-clair'
-                                    ? '/search?q=bleu%20clair'
-                                    : '/search?q=' + color
-                            }
-                            key={index}
-                        >
+                        <Link to={'/filtered?palette=' + color} key={index}>
                             <div
                                 key={index}
                                 className='breadcrumb-color'

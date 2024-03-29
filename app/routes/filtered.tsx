@@ -218,7 +218,6 @@ export default function filtered() {
     const carousel = randomProduct.collections.nodes[0].products.nodes
     const [randomProducts, setRandomProducts] = useState([]) as any
     const [isRandom, setIsRandom] = useState(false)
-    console.log(allFitlers)
 
     const handleRandomizeProducts = () => {
         if (all && all.length > 0) {
