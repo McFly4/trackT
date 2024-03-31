@@ -193,7 +193,7 @@ export default function ({ product, stickers, isCarousel, quantity }: any) {
                         <ImageComponent
                             key={index}
                             keyName={item.key}
-                            offset={index * 30}
+                            offset={index * 20}
                             zIdx={1 + array.length - index - 1}
                             ooo={product.ooo?.value}
                         />

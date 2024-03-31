@@ -522,7 +522,7 @@ export default function About() {
                                 <p>Panier classique</p>
                                 <span>0 - 250€</span>
                                 <p>
-                                    LIVRAISON PAYANTE <br />
+                                    <br />
                                     RETOURS PAYANTS <br />
                                     {/*BOOSTER RETOUR* 24H (10 €)*/}
                                 </p>
@@ -550,7 +550,8 @@ export default function About() {
                                 <p>Panier premium</p>
                                 <span>+500€</span>
                                 <p>
-                                    LIVRAISON GRATUITE <br />
+                                    LIVRAISON GRATUITE EXPRESS
+                                    <br />
                                     RETOURS GRATUITS <br />
                                     POCKET ITEM SURPRISE
                                 </p>

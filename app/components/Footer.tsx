@@ -9,7 +9,7 @@ export function Footer(menu: FooterQuery) {
                 </Link>
             </div>
             <div className='footer-menu'>
-                <h2>liens utiles</h2>
+                <h4>liens utiles</h4>
                 <Link to='/politics'>
                     <p>mentions légales</p>
                 </Link>
@@ -39,7 +39,7 @@ export function Footer(menu: FooterQuery) {
                 </Link>
             </div>
             <div className='footer-menu'>
-                <h2>incontournables</h2>
+                <h4>incontournables</h4>
                 <p>
                     indépendant brand
                     <img src='/coming.png' alt='coming soon' />
@@ -61,9 +61,9 @@ export function Footer(menu: FooterQuery) {
                 </Link>
             </div>
             <div className='footer-media'>
-                <h2>
+                <h4>
                     it's time to follow<span>(please)</span>
-                </h2>
+                </h4>
                 <div className='footer-media-container'>
                     <a
                         href='https://www.instagram.com/tracktonline/'

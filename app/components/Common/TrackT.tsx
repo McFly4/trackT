@@ -3,9 +3,13 @@ import MainProduct from '~/components/Common/mainProduct'
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
 import { Scrollbar } from 'swiper/modules'
 import { useLocation } from '@remix-run/react'
+import useWindowDimensions from '~/hooks/useWindowDimension'
 
 export default function TrackT({ products, title, isAccount }: any) {
     const location = useLocation()
+    const { width } = useWindowDimensions()
+
+    const sizeScreen = width || 1920
 
     const swiperRef = useRef<any>(null)
 
@@ -35,7 +39,10 @@ export default function TrackT({ products, title, isAccount }: any) {
                         ? 'APPAREMMENT, CES ARTICLES NE VOUS ONT PAS LAISSÉ INDIFFÉRENTS'
                         : title}
                 </h2>
-                <NavButtons next={nexto} previous={previo} />
+
+                {sizeScreen > 768 && (
+                    <NavButtons next={nexto} previous={previo} />
+                )}
             </div>
             <Swiper
                 modules={[Scrollbar]}
@@ -51,6 +58,7 @@ export default function TrackT({ products, title, isAccount }: any) {
                         : 4
                 }
                 grabCursor={true}
+                centeredSlides={true}
                 navigation={{
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
@@ -60,9 +68,6 @@ export default function TrackT({ products, title, isAccount }: any) {
                 breakpoints={{
                     0: {
                         slidesPerView: 1,
-                    },
-                    600: {
-                        slidesPerView: 2,
                     },
                     800: {
                         slidesPerView: 3,
@@ -78,8 +83,10 @@ export default function TrackT({ products, title, isAccount }: any) {
                 {products?.map((product: any, index: number) => (
                     <SwiperSlide
                         key={index}
+                        className='trackT-slide'
                         style={{
                             padding: '40px 0',
+                            width: '300px !important',
                         }}
                     >
                         <MainProduct

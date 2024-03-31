@@ -289,7 +289,6 @@ function CartAside({ cart, pocketItems }: any) {
                                                     quantity: 1,
                                                 },
                                             ]}
-                                            children='Ajouter au panier' // Vous n'avez pas besoin de spécifier children comme une prop, vous pouvez le mettre directement ici
                                         />
                                     </SwiperSlide>
                                 ))}
@@ -380,13 +379,11 @@ function NavButtons({ next, previous }: any) {
 
 function AddToCartButton({
     analytics,
-    children,
     disabled,
     lines,
     onClick,
 }: {
     analytics?: unknown
-    children: React.ReactNode
     disabled?: boolean
     lines: CartLineInput[]
     onClick?: () => void
@@ -409,7 +406,9 @@ function AddToCartButton({
                         onClick={onClick}
                         disabled={disabled ?? fetcher.state !== 'idle'}
                     >
-                        {children}
+                        {fetcher.state !== 'idle'
+                            ? 'Ajout ...'
+                            : 'Ajouter au panier'}
                     </button>
                 </>
             )}

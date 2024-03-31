@@ -29,6 +29,27 @@ body {
     background: #000;
 }
 
+p,
+span,
+ h1,
+ h2,
+ h3,
+ h4,
+ h5,
+ h6 {
+     color: #fff;
+     margin: unset;
+    font-family: "Helvetica Neue", sans-serif;
+ }
+
+h1,
+h2,
+p {
+    margin: 0;
+    padding: 0;
+}
+
+
 button {
     outline: none;
     border: unset;
@@ -36,6 +57,20 @@ button {
 }
 
 /* DESIGN SYSTEM */
+
+
+h1 {
+    font-size: 41px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+h2 {
+    font-size: 31px;
+    text-transform: uppercase;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 
 h3{
     font-size: 31px;
@@ -69,38 +104,6 @@ h6{
 
 }
 
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    color: #fff;
-    margin: unset;
-}
-
-h1,
-h2,
-p {
-    margin: 0;
-    padding: 0;
-}
-
-h1 {
-    font-size: 41px;
-    font-weight: 700;
-    text-transform: uppercase;
-}
-
-h2 {
-    font-size: 31px;
-    text-transform: uppercase;
-}
-
-h3 {
-    font-size: 23px;
-}
 
 p {
     font-size: 1rem;
@@ -218,4 +221,30 @@ code {
     margin-top: -100px;
     z-index: 10;
     cursor: pointer;
+}
+
+@media screen and (max-width: 768px){
+    h1{
+        font-size: 52px;
+    }
+
+    h2{
+        font-size: 29px;
+    }
+
+    h3{
+        font-size: 23px;
+    }
+
+    h4{
+        font-size: 20px;
+    }
+
+    h5{
+        font-size: 18px;
+    }
+
+    h6{
+        font-size: 15px;
+    }
 }
