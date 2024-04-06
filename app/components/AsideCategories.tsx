@@ -270,7 +270,7 @@ export function AsideCategories({
                                         window.location.href = '/search?q=nike'
                                     }}
                                 >
-                                    tous les nikes
+                                    toutes les nikes
                                 </p>
                             </div>
                             <div className='categoriesAside-item'>
