@@ -870,7 +870,7 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .autoplay-progress {
     position: absolute;
-    top: 240px;
+    top: 190px;
     right: 50px;
     z-index: 10;
     width: 70px;

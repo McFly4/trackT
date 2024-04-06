@@ -111,9 +111,9 @@ export default function HomePage() {
                     loop
                     grabCursor={true}
                     modules={[Autoplay]}
-                    // autoplay={{
-                    //     delay: 5000,
-                    // }}
+                    autoplay={{
+                        delay: 5000,
+                    }}
                     style={{
                         maxHeight: '100vh',
                     }}
