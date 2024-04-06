@@ -826,7 +826,6 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .home img {
-    height: 100vh; /* Hauteur de la container */
     background-size: cover; /* Ajuste la taille de l'image pour couvrir la container */
     background-repeat: no-repeat; /* Empêche la répétition de l'image */
     background-position: center; /* Centre l'image horizontalement et verticalement */
