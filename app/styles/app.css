@@ -1973,6 +1973,10 @@ input[type="search"]::-webkit-search-results-decoration {
         margin-top: 120px;
     }
 
+    .autoplay-progress{
+        top: 70px;
+    }
+
     .home img {
         height: unset;
     }
