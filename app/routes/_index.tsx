@@ -147,7 +147,7 @@ export default function HomePage() {
                                                     field?.key ===
                                                     (sizeScreen > 2000
                                                         ? 'fileBig'
-                                                        : sizeScreen > 1300
+                                                        : sizeScreen > 768
                                                         ? 'file_desktop'
                                                         : 'file_mobile')
                                             )?.reference?.image?.url
@@ -163,7 +163,7 @@ export default function HomePage() {
                                             field?.key ===
                                             (sizeScreen > 2000
                                                 ? 'fileBig'
-                                                : sizeScreen > 1300
+                                                : sizeScreen > 768
                                                 ? 'file_desktop'
                                                 : 'file_mobile')
                                     )?.reference?.sources?.[0]?.url && (
@@ -174,7 +174,7 @@ export default function HomePage() {
                                                         field?.key ===
                                                         (sizeScreen > 2000
                                                             ? 'fileBig'
-                                                            : sizeScreen > 1300
+                                                            : sizeScreen > 768
                                                             ? 'file_desktop'
                                                             : 'file_mobile')
                                                 )?.reference?.sources?.[0]?.url
