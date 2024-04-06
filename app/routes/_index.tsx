@@ -145,7 +145,7 @@ export default function HomePage() {
                                             hero.fields?.find(
                                                 (field: any) =>
                                                     field?.key ===
-                                                    (sizeScreen > 2000
+                                                    (sizeScreen > 1600
                                                         ? 'fileBig'
                                                         : sizeScreen > 768
                                                         ? 'file_desktop'
@@ -161,7 +161,7 @@ export default function HomePage() {
                                     {hero.fields?.find(
                                         (field: any) =>
                                             field?.key ===
-                                            (sizeScreen > 2000
+                                            (sizeScreen > 1600
                                                 ? 'fileBig'
                                                 : sizeScreen > 768
                                                 ? 'file_desktop'
@@ -172,7 +172,7 @@ export default function HomePage() {
                                                 hero.fields?.find(
                                                     (field: any) =>
                                                         field?.key ===
-                                                        (sizeScreen > 2000
+                                                        (sizeScreen > 1600
                                                             ? 'fileBig'
                                                             : sizeScreen > 768
                                                             ? 'file_desktop'
