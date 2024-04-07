@@ -19,11 +19,8 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
     const getcollection = searchParams.getAll('collection')
     const genre = searchParams.getAll('manwoman')
     const getColors = searchParams.getAll('palette')
-    const getMaterials = searchParams.getAll('materials')
-    const getTags = searchParams.getAll('tags')
-    const getSize = searchParams.getAll('size')
+    const getTags = searchParams.getAll('tag')
     const getPrice = searchParams.getAll('price')
-    const getProductType = searchParams.getAll('productType')
     const getProductVendor = searchParams.getAll('productVendor')
     const getNew = searchParams.getAll('new')
     const hotDeal = searchParams.getAll('hotdeal')
@@ -60,12 +57,8 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
         },
     }))
 
-    const productType = getProductType.map((category: any) => ({
-        productType: category,
-    }))
-
-    const tags = getTags.map((tag: any) => ({
-        tags: tag,
+    const tag = getTags.map((tag: any) => ({
+        tag: tag,
     }))
 
     const colors = getColors.map((color: any) => ({
@@ -73,14 +66,6 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
             namespace: 'custom',
             key: 'palette',
             value: color,
-        },
-    }))
-
-    const materials = getMaterials.map((material: any) => ({
-        productMetafield: {
-            namespace: 'custom',
-            key: 'materiaux',
-            value: material,
         },
     }))
 
@@ -148,10 +133,8 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
 
     const allFitlers = [
         ...manwoman,
-        ...productType,
-        ...tags,
+        ...tag,
         ...colors,
-        ...materials,
         ...productVendor,
         ...price,
         ...stickerNew,
@@ -242,6 +225,8 @@ export default function filtered() {
             return 'Exclusive Items'
         }
     }
+
+    console.log(allFitlers)
 
     return (
         <>
@@ -532,6 +517,8 @@ fragment ProductFragment on Product {
   vendor
   handle
   description
+  productType
+  tags
   options {
     name
     values
