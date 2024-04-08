@@ -226,8 +226,6 @@ export default function filtered() {
         }
     }
 
-    console.log(allFitlers)
-
     return (
         <>
             <div
