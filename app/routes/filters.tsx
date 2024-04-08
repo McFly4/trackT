@@ -374,6 +374,7 @@ export default function Filters() {
                             </div>
                         )}
                     </div>
+
                     {tag?.length > 0 && (
                         <div className='filters__categories'>
                             <h5 className='filters__title'>Couleurs</h5>
@@ -405,10 +406,10 @@ export default function Filters() {
                                             <input
                                                 type='checkbox'
                                                 checked={colors.includes(
-                                                    color.name
+                                                    color.value
                                                 )}
                                                 onChange={() =>
-                                                    handleColors(color.name)
+                                                    handleColors(color.value)
                                                 }
                                             />
                                             {color.name}
