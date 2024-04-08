@@ -1986,7 +1986,7 @@ input[type="search"]::-webkit-search-results-decoration {
 .market-drag-item{
     background-color: #121212;
     padding: 30px 40px;
-    display: flex;,
+    display: flex;
     align-items: center;
 }
 
