@@ -29,7 +29,7 @@ const category = [
     },
     {
         name: 'Hoodies',
-        value: 'hoodies',
+        value: 'Sweatshirt',
     },
     {
         name: 'Casquettes',
@@ -204,10 +204,9 @@ export default function Filters() {
     function handleSearch() {
         const queryParams = [] as any
 
-        if (manwoman && manwoman.length > 0) {
+        if (manwoman && manwoman.length > 0 && manwoman.length < 2) {
             const genreObjects = manwoman.map((genre: any) => {
                 const name = genre
-
                 if (name === 'Femme') return { manwoman: 'Femme' }
 
                 return /*valeur par défaut*/
