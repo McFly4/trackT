@@ -1690,7 +1690,7 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .pocket-dialog {
     position: relative;
-    Width: 95%;
+    width: 95%;
     margin: auto;
     border-radius: 8px;
     animation: fadeIn 0.3s ease; /* Animation d'ouverture */
