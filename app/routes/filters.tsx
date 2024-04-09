@@ -274,9 +274,6 @@ export default function Filters() {
                 collection,
             }))
             queryParams.push(...shoeObjects)
-        } else {
-            // Si 'Tout' est sélectionné ou si la collection est vide, ajoute 'All' par défaut
-            queryParams.push({ collection: 'All' })
         }
 
         // Vérifie s'il y a des prix sélectionnés et s'ils ne sont pas égaux à 'Tout'
