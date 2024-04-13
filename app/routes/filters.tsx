@@ -42,7 +42,7 @@ const category = [
     },
 ]
 
-const productTypeList = [
+const ProductTypeList = [
     {
         name: 'Sneakers',
         value: 'sneakers',
@@ -119,7 +119,7 @@ export default function Filters() {
     const [colors, setColors] = useState<any>([])
     const [collections, setCollections] = useState<any>([])
     const [prices, setPrices] = useState<any>([])
-    const [productType, setProductType] = useState<any>([])
+    const [ProductType, setProductType] = useState<any>([])
 
     const handleGenre = (selectedGenre: string) => {
         if (selectedGenre === 'Tout') {
@@ -258,11 +258,11 @@ export default function Filters() {
             queryParams.push(...subcategoryObjects)
         }
 
-        if (productType && productType.length > 0) {
-            const productTypeObjects = productType.map((type: any) => ({
-                productType: type,
+        if (ProductType && ProductType.length > 0) {
+            const ProductTypeObjects = ProductType.map((type: any) => ({
+                ProductType: type,
             }))
-            queryParams.push(...productTypeObjects)
+            queryParams.push(...ProductTypeObjects)
         }
 
         if (
@@ -387,7 +387,7 @@ export default function Filters() {
                                             </label>
                                         </li>
                                     ))}
-                                    {productTypeList?.map((item: any) => (
+                                    {ProductTypeList?.map((item: any) => (
                                         <li
                                             className='filters__item'
                                             key={item.name}
@@ -395,7 +395,7 @@ export default function Filters() {
                                             <label>
                                                 <input
                                                     type='checkbox'
-                                                    checked={productType.includes(
+                                                    checked={ProductType.includes(
                                                         item.value
                                                     )}
                                                     onChange={() => {
@@ -413,7 +413,7 @@ export default function Filters() {
                         )}
                     </div>
 
-                    {(tag?.length > 0 || productType?.length > 0) && (
+                    {(tag?.length > 0 || ProductType?.length > 0) && (
                         <div className='filters__categories'>
                             <h5 className='filters__title'>Couleurs</h5>
                             <ul className='filters__list'>
