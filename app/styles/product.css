@@ -634,6 +634,12 @@
         top: -25px;
     }
 
+    .tr{
+        top: -45px;
+        right: -30px;
+        width: 100px !important;
+    }
+
     .bl{
         bottom: -35px
     }
