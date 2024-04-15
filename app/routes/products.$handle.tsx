@@ -13,6 +13,7 @@ import type {
     ProductVariantsQuery,
     ProductVariantFragment,
 } from 'storefrontapi.generated'
+import { Transition } from 'react-transition-group'
 
 import {
     Image,
@@ -154,9 +155,16 @@ export default function Product() {
     const { product, variants, randomProduct, metafieldRandom } =
         useLoaderData<typeof loader>()
     const { selectedVariant } = product
+    const [size, setSize] = useState(false)
+    const [stickers, setStickers] = useState(false)
+    const [tobasket, setTobasket] = useState(false)
     const random = randomProduct.collections.nodes[0].products.nodes
     const windowDimensions = useWindowDimensions()
     const width = windowDimensions.width || 1920
+    const parsedColors = JSON.parse(product.colors?.value) as any
+    const [showText1, setShowText1] = useState(false)
+    const [expanded, setExpanded] = useState(false)
+
     function randomNameFunction() {
         if (metafieldRandom === 'hotDeal') {
             return 'Hot Deal'
@@ -169,12 +177,50 @@ export default function Product() {
         }
     }
 
+    function toggleAddedToCart() {
+        setTobasket(!tobasket)
+    }
+
     const productsFromCollection =
         product?.collections?.nodes?.length > 1
             ? product?.collections?.nodes?.find(
                   (collection: any) => collection.title !== 'All'
               )?.products.nodes
             : product?.collections?.nodes[0].products.nodes
+
+    const toggleExpand = () => {
+        setExpanded(!expanded)
+    }
+
+    const mapping = {
+        hotDeal: product.hotDeal,
+        new: product.new,
+        ooo: product.ooo,
+        promotion: product.promotion,
+        release: product.release,
+        ship:
+            selectedVariant.title === 'One Size'
+                ? product.ship
+                : selectedVariant?.weight >= 1 && product.ship,
+        soon: product.soon,
+    } as any
+
+    const stickersData = Object.keys(mapping).reduce((acc: any, key: any) => {
+        if (mapping[key]) {
+            acc.push({ key })
+        }
+        return acc
+    }, [])
+
+    const toothBrush = product?.toothBrush?.value
+    function calculateHeight(length: any) {
+        if (length === 1) return '250px'
+        else if (length >= 2 && length <= 6) {
+            return `${250 + (length - 1) * 50}px`
+        } else {
+            return ''
+        }
+    }
 
     return (
         <>
@@ -183,6 +229,96 @@ export default function Product() {
                     marginTop: width > 768 ? '300px' : '200px',
                 }}
             >
+                {width < 768 && (
+                    <div
+                        className={`product-menu ${expanded ? 'expanded' : ''}`}
+                        style={{
+                            height: expanded
+                                ? calculateHeight(stickersData?.length)
+                                : '',
+                        }}
+                    >
+                        <button
+                            onClick={toggleExpand}
+                            className='button-expand'
+                        >
+                            <svg
+                                xmlns='http://www.w3.org/2000/svg'
+                                width='15.999'
+                                height='16'
+                                viewBox='0 0 15.999 16'
+                            >
+                                <path
+                                    id='Union_14'
+                                    data-name='Union 14'
+                                    d='M147.111,486.711a1,1,0,0,1-1-1v-5.5h-5.5a1,1,0,0,1-1-1v-1a1,1,0,0,1,1-1h5.5v-5.5a1,1,0,0,1,1-1h1a1,1,0,0,1,1,1v5.5h5.5a1,1,0,0,1,1,1v1a1,1,0,0,1-1,1h-5.5v5.5a1,1,0,0,1-1,1Z'
+                                    transform='translate(-139.612 -470.711)'
+                                    fill='#fff'
+                                />
+                            </svg>
+                        </button>
+                        {expanded && (
+                            <div className='expanded-buttons'>
+                                <span></span>
+                                {stickersData?.map(
+                                    (item: any, index: number) => (
+                                        <div
+                                            key={index}
+                                            className='product-menu-stickers'
+                                        >
+                                            <img
+                                                src={`/product/stickers/${item.key}.png`}
+                                                alt={item.key}
+                                                style={{
+                                                    width: '43px',
+                                                    height: '39px',
+                                                    paddingBottom: '18px',
+                                                }}
+                                                onClick={() =>
+                                                    setStickers(!stickers)
+                                                }
+                                            />
+                                        </div>
+                                    )
+                                )}
+                                {toothBrush === 'Small' ? (
+                                    <div className='product-menu-stickers'>
+                                        <img
+                                            src='/about/little_toothbrush.png'
+                                            alt='little toothbrush'
+                                            style={{
+                                                width: '35px',
+                                                height: '65px',
+                                            }}
+                                        />
+                                    </div>
+                                ) : toothBrush === 'Medium' ? (
+                                    <div className='product-menu-stickers'>
+                                        <img
+                                            src='/about/medium_toothbrush.png'
+                                            alt='medium toothbrush'
+                                            style={{
+                                                width: '35px',
+                                                height: '65px',
+                                            }}
+                                        />
+                                    </div>
+                                ) : (
+                                    <div className='product-menu-stickers'>
+                                        <img
+                                            src='/about/over_toothbrush.png'
+                                            alt='over toothbrush'
+                                            style={{
+                                                width: '35px',
+                                                height: '65px',
+                                            }}
+                                        />
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                    </div>
+                )}
                 <BreadCrumb product={product} />
                 <div className='product'>
                     <ProductImage image={selectedVariant} product={product} />
@@ -195,7 +331,7 @@ export default function Product() {
                     )}
                 </div>
             </div>
-            {width > 768 && (
+            {width > 768 ? (
                 <>
                     <TrackT
                         products={productsFromCollection}
@@ -299,6 +435,215 @@ export default function Product() {
                         </div>
                     </div>
                 </>
+            ) : (
+                <div className='product-desc'>
+                    <div className='product-caracteristics'>
+                        {product?.daterelease && (
+                            <p>
+                                Date de sortie : {product?.daterelease?.value}
+                            </p>
+                        )}
+
+                        {product?.colors && (
+                            <p>
+                                couleurs :
+                                {parsedColors?.map((color: any) => color + ' ')}
+                            </p>
+                        )}
+
+                        {product?.materials && (
+                            <p>{product?.materials?.value}</p>
+                        )}
+                    </div>
+                    <div className='product-description'>
+                        {!showText1 ? (
+                            <div>{product.description.slice(0, 80)}...</div>
+                        ) : (
+                            <div
+                                dangerouslySetInnerHTML={{
+                                    __html: product.descriptionHtml,
+                                }}
+                            />
+                        )}
+                        <button
+                            className='responsive-btn-show'
+                            onClick={() => setShowText1(!showText1)}
+                        >
+                            {showText1 ? '-' : '+'}
+                        </button>
+                    </div>
+                </div>
+            )}
+            {width < 768 && (
+                <>
+                    {tobasket && (
+                        <div className='responsive-modal'>
+                            <button
+                                className='responsive-modal-close'
+                                onClick={toggleAddedToCart}
+                            >
+                                <svg
+                                    xmlns='http://www.w3.org/2000/svg'
+                                    width='16'
+                                    height='16'
+                                    viewBox='0 0 16 16'
+                                >
+                                    <path
+                                        id='Tracé_467'
+                                        data-name='Tracé 467'
+                                        d='M16841.295-8037.292l-6.295-6.294-6.295,6.294a.988.988,0,0,1-.705.292.988.988,0,0,1-.705-.292,1,1,0,0,1,0-1.417l6.291-6.292-6.291-6.292a1,1,0,0,1,0-1.416,1,1,0,0,1,1.41,0l6.295,6.294,6.295-6.294a1,1,0,0,1,1.41,0,1,1,0,0,1,0,1.416l-6.291,6.292,6.291,6.292a1,1,0,0,1,0,1.417.988.988,0,0,1-.705.292A.988.988,0,0,1,16841.295-8037.292Z'
+                                        transform='translate(-16827 8053)'
+                                        fill='#fff'
+                                    />
+                                </svg>
+                            </button>
+                            <ProductPrice
+                                selectedVariant={selectedVariant}
+                                soon={product.soon}
+                            />
+                            <Suspense
+                                fallback={
+                                    <ProductForm
+                                        product={product}
+                                        selectedVariant={selectedVariant}
+                                        variants={[]}
+                                    />
+                                }
+                            >
+                                <Await
+                                    errorElement='There was a problem loading product variants'
+                                    resolve={variants}
+                                >
+                                    {(data) => (
+                                        <ProductForm
+                                            product={product}
+                                            selectedVariant={selectedVariant}
+                                            variants={
+                                                data.product?.variants.nodes ||
+                                                []
+                                            }
+                                        />
+                                    )}
+                                </Await>
+                            </Suspense>
+                        </div>
+                    )}
+                    {!tobasket && (
+                        <div className='choose-size'>
+                            <h6 onClick={() => setTobasket(!tobasket)}>
+                                Choisir ma taille
+                            </h6>
+                        </div>
+                    )}
+                </>
+            )}
+            {width < 768 && stickers && (
+                <div className='responsive-modal'>
+                    <button
+                        className='responsive-modal-close'
+                        onClick={() => setStickers(!stickers)}
+                    >
+                        <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            width='16'
+                            height='16'
+                            viewBox='0 0 16 16'
+                        >
+                            <path
+                                id='Tracé_467'
+                                data-name='Tracé 467'
+                                d='M16841.295-8037.292l-6.295-6.294-6.295,6.294a.988.988,0,0,1-.705.292.988.988,0,0,1-.705-.292,1,1,0,0,1,0-1.417l6.291-6.292-6.291-6.292a1,1,0,0,1,0-1.416,1,1,0,0,1,1.41,0l6.295,6.294,6.295-6.294a1,1,0,0,1,1.41,0,1,1,0,0,1,0,1.416l-6.291,6.292,6.291,6.292a1,1,0,0,1,0,1.417.988.988,0,0,1-.705.292A.988.988,0,0,1,16841.295-8037.292Z'
+                                transform='translate(-16827 8053)'
+                                fill='#fff'
+                            />
+                        </svg>
+                    </button>
+                    <div className='stickers-responsive'>
+                        <h4>Labels trackt</h4>
+                        <div className='stickers-responsive-item'>
+                            <img
+                                src='/product/stickers/release.png'
+                                alt='release'
+                            />
+                            <p>
+                                Accédez à la crème de la crème avec nos sorties
+                                « Exclusive item ». Ces articles premium
+                                définissent les standards du streetwear haut de
+                                gamme.
+                            </p>
+                        </div>
+                        <div className='stickers-responsive-item'>
+                            <img
+                                src='/product/stickers/ship.png'
+                                alt='release'
+                            />
+                            <p>
+                                Livraison immédiate, cette sélection est dédiée
+                                aux articles expédiés en 48H puisque nous
+                                possédons l’article dans nos locaux.
+                            </p>
+                        </div>
+                        <div className='stickers-responsive-item'>
+                            <img
+                                src='/product/stickers/hotDeal.png'
+                                alt='release'
+                            />
+                            <p>
+                                Offres incontournables, sélectionnées pour leur
+                                style audacieux et leurs prix avantageux. Des
+                                opportunités éphémères à saisir rapidement pour
+                                les amateurs de streetwear.
+                            </p>
+                        </div>
+                        <div className='stickers-responsive-item'>
+                            <img
+                                src='/product/stickers/new.png'
+                                alt='release'
+                            />
+                            <p>
+                                Soyez à l’avant-garde avec les dernières
+                                nouveautés du streetwear. Ces articles
+                                fraîchement arrivés sont prêts à définir les
+                                prochaines tendances urbaines.
+                            </p>
+                        </div>
+                        <div className='stickers-responsive-item'>
+                            <img
+                                src='/product/stickers/soon.png'
+                                alt='release'
+                            />
+                            <p>
+                                Disponibles à la vente dans un avenir proche.
+                                Gardez un œil sur notre site pour ne pas manquer
+                                leur lancement !
+                            </p>
+                        </div>
+                        <div className='stickers-responsive-item'>
+                            <img
+                                src='/product/stickers/ooo.png'
+                                alt='release'
+                            />
+                            <p>
+                                Ces articles prisés sont actuellement en rupture
+                                de stock, victimes de leur succès dans l’univers
+                                du streetwear. Inscrivez-vous pour être alerté
+                                de leur retour.
+                            </p>
+                        </div>
+                        <div className='stickers-responsive-item'>
+                            <img
+                                src='/product/stickers/promotion.png'
+                                alt='release'
+                            />
+                            <p>
+                                Profitez de promotions exclusives pour enrichir
+                                votre collection de streetwear. Des pièces
+                                uniques et des réductions alléchantes vous
+                                attendent.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             )}
         </>
     )
@@ -444,8 +789,6 @@ function ProductImage({ image, product }: { image: any; product: any }) {
     useEffect(() => {
         setMainImage(firstImage)
     }, [firstImage])
-
-    console.log(product)
 
     return (
         <div className='product-image-container'>
@@ -1130,6 +1473,8 @@ function ProductPrice(selectedVariant: any) {
             option.name === 'Taille' ||
             option.name === 'Title'
     )?.value
+    const useWidth = useWindowDimensions()
+    const width = useWidth.width || 1920
 
     return (
         <div className='product-price'>
@@ -1241,7 +1586,10 @@ function ProductPrice(selectedVariant: any) {
                         : []
                 }
                 onClick={() => {
-                    window.location.href = window.location.href + '#cart-aside'
+                    width > 768
+                        ? (window.location.href =
+                              window.location.href + '#cart-aside')
+                        : window.location.reload()
                 }}
             >
                 Ajouter au panier
@@ -1583,6 +1931,7 @@ function AddToCartButton({
                         style={{
                             opacity: disabled ? 0.5 : 1,
                         }}
+                        className='add-to-cart'
                     >
                         {children}
                     </button>

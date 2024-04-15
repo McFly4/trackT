@@ -248,3 +248,15 @@ code {
         font-size: 15px;
     }
 }
+
+
+/* COMPONENTS */
+
+.responsive-btn-show{
+    margin-top: 10px;
+    width: 100%;
+    background-color: #242424;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 20px;
+}

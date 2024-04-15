@@ -1,14 +1,14 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\matroman\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add axios uuid
+  C:\Program Files\nodejs\node.exe C:\Users\matroman\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add react-transition-group
 
 PATH: 
-  C:\Program Files (x86)\VMware\VMware Player\bin\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\nodejs\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\dotnet\;C:\Program Files (x86)\Microsoft SQL Server\160\Tools\Binn\;C:\Program Files\Microsoft SQL Server\160\Tools\Binn\;C:\Program Files\Microsoft SQL Server\160\DTS\Binn\;C:\Program Files\Azure Data Studio\bin;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files (x86)\Microsoft SQL Server\160\DTS\Binn\;C:\Users\matroman\.console-ninja\.bin;C:\Users\matroman\AppData\Local\Microsoft\WindowsApps;C:\Users\matroman\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\matroman\AppData\Roaming\npm;C:\Users\matroman\AppData\Local\Programs\Git\cmd;C:\Users\matroman\.dotnet\tools;C:\Program Files\Azure Data Studio\bin;C:\Program Files\JetBrains\WebStorm 2023.2.5\bin;;C:\Users\matroman\AppData\Local\Programs\oh-my-posh\bin;C:\Users\matroman\Documents\projects\hydrogen-storefront\node_modules\.bin
+  C:\Program Files (x86)\VMware\VMware Player\bin\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\dotnet\;C:\Program Files (x86)\Microsoft SQL Server\160\Tools\Binn\;C:\Program Files\Microsoft SQL Server\160\Tools\Binn\;C:\Program Files\Microsoft SQL Server\160\DTS\Binn\;C:\Program Files\Azure Data Studio\bin;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files (x86)\Microsoft SQL Server\160\DTS\Binn\;C:\Program Files\nodejs\;C:\ngrok;C:\Users\matroman\.console-ninja\.bin;C:\Users\matroman\AppData\Local\Microsoft\WindowsApps;C:\Users\matroman\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\matroman\AppData\Local\Programs\Git\cmd;C:\Users\matroman\.dotnet\tools;C:\Program Files\Azure Data Studio\bin;C:\Program Files\JetBrains\WebStorm 2023.2.5\bin;;C:\Users\matroman\AppData\Local\Programs\oh-my-posh\bin;C:\Users\matroman\AppData\Roaming\npm;C:\Users\matroman\Documents\projects\hydrogen-storefront\node_modules\.bin
 
 Yarn version: 
   1.22.19
 
 Node version: 
-  18.16.0
+  20.11.1
 
 Platform: 
   win32 x64
@@ -32,12 +32,16 @@ npm manifest:
       },
       "dependencies": {
           "@apollo/client": "^3.8.7",
+          "@emotion/react": "^11.11.3",
+          "@emotion/styled": "^11.11.0",
+          "@mui/material": "^5.15.9",
           "@remix-run/react": "2.1.0",
           "@shopify/cli": "3.50.0",
           "@shopify/cli-hydrogen": "^6.0.0",
           "@shopify/hydrogen": "^2023.10.0",
           "@shopify/remix-oxygen": "^2.0.0",
           "@thebeyondgroup/shopify-rich-text-renderer": "^1.0.0",
+          "dayjs": "^1.11.10",
           "graphql": "^16.8.1",
           "graphql-tag": "^2.12.6",
           "isbot": "^3.6.6",
