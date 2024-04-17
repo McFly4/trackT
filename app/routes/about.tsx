@@ -3,6 +3,9 @@ import MarketDrag from '~/components/Common/MarketDrag'
 import TrackT from '~/components/Common/TrackT'
 import { json, LoaderFunctionArgs } from '@shopify/remix-oxygen'
 import React from 'react'
+import useWindowDimensions from '~/hooks/useWindowDimension'
+import Crowns from '~/components/Common/Modals/Crowns'
+import Labels from '~/components/Common/Modals/Labels'
 export const meta: MetaFunction = () => {
     return [{ title: 'About' }]
 }
@@ -17,6 +20,29 @@ export default function About() {
     const { products } = useLoaderData<typeof loader>()
     const productsList =
         products?.metaobjects?.nodes[0]?.field?.references?.nodes
+    const useWidth = useWindowDimensions()
+    const width = useWidth.width || 1920
+    const [showText1, setShowText1] = React.useState(false)
+    const [showText2, setShowText2] = React.useState(false)
+    const [crownsOpen, setCronwsOpen] = React.useState(false)
+    const [labelsOpen, setLabelsOpen] = React.useState(false)
+
+    const openLabels = () => {
+        setLabelsOpen(true)
+    }
+
+    const closeLabels = () => {
+        setLabelsOpen(false)
+    }
+
+    const openCronws = () => {
+        setCronwsOpen(true)
+    }
+
+    const closeCrowns = () => {
+        setCronwsOpen(false)
+    }
+
     return (
         <>
             <div className='a-futur'>
@@ -57,7 +83,7 @@ export default function About() {
                         style={{
                             marginLeft: '20px',
                         }}
-                        src='/coming.png'
+                        src='/about/soonAbout.png'
                         alt='coming'
                     />
                 </div>
@@ -181,13 +207,15 @@ export default function About() {
                             </p>
                         </div>
                     </div>
-                    <img
-                        src='/about/independant1.png'
-                        alt='asset1'
-                        style={{
-                            marginLeft: '65px',
-                        }}
-                    />
+                    {width > 768 && (
+                        <img
+                            src='/about/independant1.png'
+                            alt='asset1'
+                            style={{
+                                marginLeft: '65px',
+                            }}
+                        />
+                    )}
                 </div>
                 <div
                     style={{
@@ -200,7 +228,8 @@ export default function About() {
                         autoPlay
                         loop
                         style={{
-                            width: 'unset',
+                            width: width > 768 ? 'unset' : '100%',
+                            marginBottom: width > 768 ? '0' : '100px',
                         }}
                     >
                         <source src='/about/betaVersion.mp4' type='video/mp4' />
@@ -260,7 +289,13 @@ export default function About() {
                         margin: '40px 0',
                     }}
                 >
-                    <img src='/about/2.png' alt='about' />
+                    <img
+                        src='/about/2.png'
+                        alt='about'
+                        style={{
+                            width: width > 768 ? '250px' : '150px',
+                        }}
+                    />
                     <h2
                         style={{
                             marginTop: '80px',
@@ -269,64 +304,142 @@ export default function About() {
                         safe place
                     </h2>
                 </div>
-                <div className='a-second-container'>
-                    <div className='a-second-container-item'>
+                <div className='panel-container-box'>
+                    <div className='panel-container-box-item'>
+                        <img
+                            src='/home/red.png'
+                            alt='red'
+                            style={{
+                                width: '580px',
+                                height: '340px',
+                            }}
+                        />
+                        <h2
+                            style={{
+                                color: '#E51E1A',
+                                marginTop: '80px',
+                                marginBottom: '10px',
+                            }}
+                        >
+                            support client personnalisé
+                        </h2>
+                        {width > 768 ? (
+                            <p>
+                                Entrez dans l’univers Trackt, où chaque
+                                interaction est une expérience unique. Notre
+                                équipe dédiée au support client est le cœur
+                                battant de notre atelier mystérieux. Nous sommes
+                                là pour vous guider, vous inspirer et répondre à
+                                vos questions avec une touche personnelle.{' '}
+                                <br /> <br />
+                                Que vous cherchiez des conseils sur la dernière
+                                tendance ou des détails sur une pièce rare,
+                                notre équipe, en coulisses, travaille avec
+                                passion pour vous offrir une assistance
+                                sur-mesure. C’est le conseil d’un connaisseur,
+                                le soutien d’un ami, le secret d’un atelier où
+                                chaque question trouve sa réponse.
+                            </p>
+                        ) : (
+                            <div className='responsive-show-more'>
+                                {!showText1 ? (
+                                    <p>
+                                        Ici chaque interaction est une
+                                        expérience unique. Notre équipe dédiée
+                                        au support client est le…
+                                    </p>
+                                ) : (
+                                    <p>
+                                        Entrez dans l’univers Trackt, où chaque
+                                        interaction est une expérience unique.
+                                        Notre équipe dédiée au support client
+                                        est le cœur battant de notre atelier
+                                        mystérieux. Nous sommes là pour vous
+                                        guider, vous inspirer et répondre à vos
+                                        questions avec une touche personnelle.{' '}
+                                        <br /> <br />
+                                        Que vous cherchiez des conseils sur la
+                                        dernière tendance ou des détails sur une
+                                        pièce rare, notre équipe, en coulisses,
+                                        travaille avec passion pour vous offrir
+                                        une assistance sur-mesure. C’est le
+                                        conseil d’un connaisseur, le soutien
+                                        d’un ami, le secret d’un atelier où
+                                        chaque question trouve sa réponse.
+                                    </p>
+                                )}
+
+                                <button
+                                    onClick={() => setShowText1(!showText1)}
+                                >
+                                    {showText1 ? '-' : '+'}
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                    <div className='panel-container-box-item'>
                         <img
                             src='/home/blue.png'
                             alt='blue'
                             style={{
-                                width: '600px',
-                                height: '350px',
+                                width: '580px',
+                                height: '340px',
                             }}
                         />
                         <h2
                             style={{
                                 color: '#3950D3',
+                                marginTop: '80px',
+                                marginBottom: '10px',
                             }}
                         >
-                            Authenticité garantie
+                            AUTHENTICITÉ GARANTIE
                         </h2>
-                        <p>
-                            Plongez dans l’univers Trackt, où chaque pièce
-                            raconte une histoire, chaque design reflète une
-                            passion. Ici, l’authenticité n’est pas juste un mot
-                            à la mode - c’est notre essence. Nous curons
-                            méticuleusement nos collections pour vous offrir des
-                            pièces authentiques et chargées d’histoire,
-                            directement issues des créateurs les plus novateurs
-                            du streetwear. Chez Trackt, chaque article est une
-                            promesse de qualité et d’originalité. Vous ne
-                            trouverez pas juste des vêtements ici, mais des
-                            expressions de styles brut, des pièces qui parlent
-                            de créativité et d’individualité
-                        </p>
-                    </div>
-                    <div
-                        className='a-second-container-item'
-                        style={{
-                            marginLeft: '50px',
-                        }}
-                    >
-                        <img
-                            src='/home/red.png'
-                            alt='blue'
-                            style={{
-                                width: '600px',
-                                height: '350px',
-                            }}
-                        />
-                        <h2>Support client personnalisé</h2>
-                        <p>
-                            Ici chaque interaction est une expérience unique.
-                            Notre équipe dédiée au support client est le cœur
-                            battant de notre atelier. Nous sommes là pour vous
-                            guider, vous inspirer et répondre à vos questions
-                            avec une touche personnelle. Que vous cherchiez des
-                            conseils sur la dernière tendance ou des détails sur
-                            une pièce rare, notre équipe, en coulisses,
-                            travaille avec passion pour vous offrir une
-                            assistance sur-mesure. Disponible 7 / 7
-                        </p>
+                        {width > 768 ? (
+                            <p>
+                                Ici chaque interaction est une expérience
+                                unique. Notre équipe dédiée au support client
+                                est le cœur battant de notre atelier. Nous
+                                sommes là pour vous guider, vous inspirer et
+                                répondre à vos questions avec une touche
+                                personnelle. Que vous cherchiez des conseils sur
+                                la dernière tendance ou des détails sur une
+                                pièce rare, notre équipe, en coulisses,
+                                travaille avec passion pour vous offrir une
+                                assistance sur-mesure. Disponible 7 / 7
+                            </p>
+                        ) : (
+                            <div className='responsive-show-more'>
+                                {!showText2 ? (
+                                    <p>
+                                        Ici chaque interaction est une
+                                        expérience unique. Notre équipe dédiée
+                                        au support client est le…
+                                    </p>
+                                ) : (
+                                    <p>
+                                        Ici chaque interaction est une
+                                        expérience unique. Notre équipe dédiée
+                                        au support client est le… cœur battant
+                                        de notre atelier. Nous sommes là pour
+                                        vous guider, vous inspirer et répondre à
+                                        vos questions avec une touche
+                                        personnelle. Que vous cherchiez des
+                                        conseils sur la dernière tendance ou des
+                                        détails sur une pièce rare, notre
+                                        équipe, en coulisses, travaille avec
+                                        passion pour vous offrir une assistance
+                                        sur-mesure. Disponible 7 / 7
+                                    </p>
+                                )}
+
+                                <button
+                                    onClick={() => setShowText2(!showText2)}
+                                >
+                                    {showText2 ? '-' : '+'}
+                                </button>
+                            </div>
+                        )}
                     </div>
                 </div>
                 <MarketDrag />
@@ -341,7 +454,13 @@ export default function About() {
                         margin: '40px 0',
                     }}
                 >
-                    <img src='/about/3.png' alt='about' />
+                    <img
+                        src='/about/3.png'
+                        alt='about'
+                        style={{
+                            width: width > 768 ? '250px' : '150px',
+                        }}
+                    />
                     <h2
                         style={{
                             marginTop: '80px',
@@ -350,230 +469,293 @@ export default function About() {
                         repères visuels
                     </h2>
                 </div>
-                <div className='modal-stickers modal-stickers-about'>
-                    <div className='modal-stickers-header'>
-                        <h3>Labels trackt</h3>
-                        <p>
-                            Nos pastilles sont là pour vous guider en un clin
-                            d’œil ! Chacune d’elles est un repère visuel qui
-                            révèle une caractéristique clé du produit,. Utilisez
-                            ces indicateurs pour naviguer dans notre collection
-                            et dénicher les pièces qui correspondent à vos
-                            critères spécifiques. C’est simple, rapide et cela
-                            rend votre expérience d’achat chez Trackt encore
-                            plus intuitive et personnalisée.
-                        </p>
-                    </div>
-                    <div className='modal-stickers-body'>
-                        <div className='modal-stickers-body-item'>
-                            <img
-                                src='/product/stickers/release.png'
-                                alt='release'
-                            />
-                            <p>
-                                Accédez à la crème de la crème avec nos sorties
-                                « Exclusive item ». Ces articles premium
-                                définissent les standards du streetwear haut de
-                                gamme.
-                            </p>
-                        </div>
-                        <div className='modal-stickers-body-item'>
-                            <img
-                                src='/product/stickers/hotDeal.png'
-                                alt='hotDeal'
-                            />
-                            <p>
-                                Offres incontournables, sélectionnées pour leur
-                                style audacieux et leurs prix avantageux. Des
-                                opportunités éphémères à saisir rapidement pour
-                                les amateurs de streetwear.
-                            </p>
-                        </div>
+                {width > 768 ? (
+                    <>
+                        <div className='modal-stickers modal-stickers-about'>
+                            <div className='modal-stickers-header'>
+                                <h3>Labels trackt</h3>
+                                <p>
+                                    Nos pastilles sont là pour vous guider en un
+                                    clin d’œil ! Chacune d’elles est un repère
+                                    visuel qui révèle une caractéristique clé du
+                                    produit,. Utilisez ces indicateurs pour
+                                    naviguer dans notre collection et dénicher
+                                    les pièces qui correspondent à vos critères
+                                    spécifiques. C’est simple, rapide et cela
+                                    rend votre expérience d’achat chez Trackt
+                                    encore plus intuitive et personnalisée.
+                                </p>
+                            </div>
 
-                        <div className='modal-stickers-body-item'>
-                            <img src='/product/stickers/new.png' alt='new' />
-                            <p>
-                                Soyez à l’avant-garde avec les dernières
-                                nouveautés du streetwear. Ces articles
-                                fraîchement arrivés sont prêts à définir les
-                                prochaines tendances urbaines.
-                            </p>
-                        </div>
-                        <div className='modal-stickers-body-item'>
-                            <img src='/product/stickers/ship.png' alt='ship' />
-                            <p>
-                                Livraison immédiate, cette sélection est dédiée
-                                aux articles expédiés en 48H puisque nous
-                                possédons l’article dans nos locaux.
-                            </p>
-                        </div>
+                            <div className='modal-stickers-body'>
+                                <div className='modal-stickers-body-item'>
+                                    <img
+                                        src='/product/stickers/release.png'
+                                        alt='release'
+                                    />
+                                    <p>
+                                        Accédez à la crème de la crème avec nos
+                                        sorties « Exclusive item ». Ces articles
+                                        premium définissent les standards du
+                                        streetwear haut de gamme.
+                                    </p>
+                                </div>
+                                <div className='modal-stickers-body-item'>
+                                    <img
+                                        src='/product/stickers/hotDeal.png'
+                                        alt='hotDeal'
+                                    />
+                                    <p>
+                                        Offres incontournables, sélectionnées
+                                        pour leur style audacieux et leurs prix
+                                        avantageux. Des opportunités éphémères à
+                                        saisir rapidement pour les amateurs de
+                                        streetwear.
+                                    </p>
+                                </div>
 
-                        <div className='modal-stickers-body-item'>
-                            <img
-                                src='/product/stickers/promotion.png'
-                                alt='promotion'
-                            />
+                                <div className='modal-stickers-body-item'>
+                                    <img
+                                        src='/product/stickers/new.png'
+                                        alt='new'
+                                    />
+                                    <p>
+                                        Soyez à l’avant-garde avec les dernières
+                                        nouveautés du streetwear. Ces articles
+                                        fraîchement arrivés sont prêts à définir
+                                        les prochaines tendances urbaines.
+                                    </p>
+                                </div>
+                                <div className='modal-stickers-body-item'>
+                                    <img
+                                        src='/product/stickers/ship.png'
+                                        alt='ship'
+                                    />
+                                    <p>
+                                        Livraison immédiate, cette sélection est
+                                        dédiée aux articles expédiés en 48H
+                                        puisque nous possédons l’article dans
+                                        nos locaux.
+                                    </p>
+                                </div>
+
+                                <div className='modal-stickers-body-item'>
+                                    <img
+                                        src='/product/stickers/promotion.png'
+                                        alt='promotion'
+                                    />
+                                    <p>
+                                        Profitez de promotions exclusives pour
+                                        enrichir votre collection de streetwear.
+                                        Des pièces uniques et des réductions
+                                        alléchantes vous attendent.
+                                    </p>
+                                </div>
+                                <div className='modal-stickers-body-item'>
+                                    <img
+                                        src='/product/stickers/ooo.png'
+                                        alt='ooo'
+                                        className='img-ooo'
+                                    />
+                                    <p>
+                                        Ces articles prisés sont actuellement en
+                                        rupture de stock, victimes de leur
+                                        succès dans l’univers du streetwear.
+                                        Inscrivez-vous pour être alerté de leur
+                                        retour.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='a-third-stick'>
+                            <h2>Une étiquette pour votre taille</h2>
                             <p>
-                                Profitez de promotions exclusives pour enrichir
-                                votre collection de streetwear. Des pièces
-                                uniques et des réductions alléchantes vous
-                                attendent.
+                                Trackt a innové en créant des étiquettes
+                                visuelles handmade, apportant une touche
+                                personnelle et authentique pour distinguer et
+                                identifier chaque taille.
+                            </p>
+                            <div className='a-third-stick-container'>
+                                <video muted autoPlay loop>
+                                    0
+                                    <source
+                                        src='/about/tagprices.mp4'
+                                        type='video/mp4'
+                                    />
+                                </video>
+                                <video muted autoPlay loop>
+                                    <source
+                                        src='/about/tagprices2.mp4'
+                                        type='video/mp4'
+                                    />
+                                </video>
+                            </div>
+                            <div className='a-third-guid'>
+                                <h2>Guide des tailles</h2>
+                                <p>
+                                    Nous avons classifié nos articles en trois
+                                    catégories distinctes pour mieux vous aider
+                                    à choisir vos tailles : Little, Medium et
+                                    Over. <br />
+                                    Nous vous invitons à explorer ces
+                                    différentes options pour trouver la coupe
+                                    qui vous convient le mieux.
+                                </p>
+                                <div className='a-third-guid-container'>
+                                    <div className='a-third-guid-container-item'>
+                                        <img
+                                            src='/about/little_toothbrush.png'
+                                            alt='little_toothbrush'
+                                        />
+                                        <p>Little</p>
+                                        <p>
+                                            Adapté à ceux qui aiment un style
+                                            structuré. Coupe sérée.
+                                        </p>
+                                    </div>
+                                    <div className='a-third-guid-container-item'>
+                                        <img
+                                            src='/about/medium_toothbrush.png'
+                                            alt='medium_toothbrush'
+                                        />
+                                        <p>Medium</p>
+                                        <p>
+                                            Conçu pour ceux qui cherchent
+                                            l’équilibre. Sizing universel.
+                                        </p>
+                                    </div>
+                                    <div className='a-third-guid-container-item'>
+                                        <img
+                                            src='/about/over_toothbrush.png'
+                                            alt='over_toothbrush'
+                                        />
+                                        <p>over</p>
+                                        <p>
+                                            Destiné à ceux qui privilégient
+                                            l’espace et la liberté de mouvement.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='a-third-guid'>
+                                <h2>OPTIONS DE LIVRAISON & RETOUR</h2>
+                                <p>
+                                    Nous avons crée trois catégories d’achats
+                                    pour nuancer les différentes options de
+                                    retours et remboursement. <br />
+                                    Repérez-les lors de vos achats pour
+                                    comprendre les modalités de
+                                    renvois/livraison et choisir ce qui vous
+                                    convient le mieux.
+                                </p>
+                                <div className='a-third-guid-container a-third-cart'>
+                                    <div className='a-third-guid-container-item'>
+                                        <img
+                                            src='/cart/cartClassic.png'
+                                            alt='cartClassic'
+                                        />
+                                        <p>Panier classique</p>
+                                        <span>0 - 250€</span>
+                                        <p>
+                                            <br />
+                                            RETOURS PAYANTS <br />
+                                            {/*BOOSTER RETOUR* 24H (10 €)*/}
+                                        </p>
+                                        <p>Livraison 10€ - Retours 10€</p>
+                                    </div>
+                                    <div className='a-third-guid-container-item'>
+                                        <img
+                                            src='/cart/cartPremium.png'
+                                            alt='cartClassic'
+                                        />
+                                        <p>Panier premium</p>
+                                        <span>250€ - 500€</span>
+                                        <p>
+                                            RÉDUCTION LIVRAISON <br />
+                                            RETOURS GRATUITS <br />
+                                            {/*BOOSTER RETOUR* 24H (20 €)*/}
+                                        </p>
+                                        <p>Livraison 5€</p>
+                                    </div>
+                                    <div className='a-third-guid-container-item'>
+                                        <img
+                                            src='/cart/cartExclusif.png'
+                                            alt='cartClassic'
+                                        />
+                                        <p>Panier premium</p>
+                                        <span>+500€</span>
+                                        <p>
+                                            LIVRAISON GRATUITE EXPRESS
+                                            <br />
+                                            RETOURS GRATUITS <br />
+                                            POCKET ITEM SURPRISE
+                                        </p>
+                                        <p>Livraison express</p>
+                                    </div>
+                                </div>
+                            </div>
+                            {/*<p*/}
+                            {/*    style={{*/}
+                            {/*        width: '80%',*/}
+                            {/*        margin: '0 auto',*/}
+                            {/*        marginTop: '-50px',*/}
+                            {/*    }}*/}
+                            {/*>*/}
+                            {/*    * Les booster retours sont des codes de réductions que*/}
+                            {/*    vous pouvez activer sur toute notre boutique. Leur*/}
+                            {/*    montant et leur durée de vie sont variable selon le type*/}
+                            {/*    de panier que vous avez commandé. Dès que notre équipe*/}
+                            {/*    valide votre retour, vous pouvez délibérément activer*/}
+                            {/*    votre booster ou le préserver pour de futurs achats.*/}
+                            {/*</p>*/}
+                        </div>
+                    </>
+                ) : (
+                    <div className='res-visuel'>
+                        <div className='res-visuel-header'>
+                            <h4>UNE ÉTIQUETTE POUR VOTRE TAILLE</h4>
+                            <p>
+                                Trackt a innové en créant des étiquettes
+                                visuelles handmade, apportant une touche
+                                personnelle et authentique pour distinguer et
+                                identifier chaque taille.
                             </p>
                         </div>
-                        <div className='modal-stickers-body-item'>
-                            <img
-                                src='/product/stickers/ooo.png'
-                                alt='ooo'
-                                className='img-ooo'
-                            />
-                            <p>
-                                Ces articles prisés sont actuellement en rupture
-                                de stock, victimes de leur succès dans l’univers
-                                du streetwear. Inscrivez-vous pour être alerté
-                                de leur retour.
-                            </p>
+                        <div>
+                            <video muted autoPlay loop controls={false}>
+                                0
+                                <source
+                                    src='/about/tagprices.mp4'
+                                    type='video/mp4'
+                                />
+                            </video>
+                            <video muted autoPlay loop>
+                                <source
+                                    src='/about/tagprices2.mp4'
+                                    type='video/mp4'
+                                />
+                            </video>
                         </div>
-                    </div>
-                </div>
-                <div className='a-third-stick'>
-                    <h2>Une étiquette pour votre taille</h2>
-                    <p>
-                        Trackt a innové en créant des étiquettes visuelles
-                        handmade, apportant une touche personnelle et
-                        authentique pour distinguer et identifier chaque taille.
-                    </p>
-                    <div className='a-third-stick-container'>
-                        <video muted autoPlay loop>
-                            0
-                            <source
-                                src='/about/tagprices.mp4'
-                                type='video/mp4'
-                            />
-                        </video>
-                        <video muted autoPlay loop>
-                            <source
-                                src='/about/tagprices2.mp4'
-                                type='video/mp4'
-                            />
-                        </video>
-                    </div>
-                    <div className='a-third-guid'>
-                        <h2>Guide des tailles</h2>
-                        <p>
-                            Nous avons classifié nos articles en trois
-                            catégories distinctes pour mieux vous aider à
-                            choisir vos tailles : Little, Medium et Over. <br />
-                            Nous vous invitons à explorer ces différentes
-                            options pour trouver la coupe qui vous convient le
-                            mieux.
-                        </p>
-                        <div className='a-third-guid-container'>
-                            <div className='a-third-guid-container-item'>
-                                <img
-                                    src='/about/little_toothbrush.png'
-                                    alt='little_toothbrush'
-                                />
-                                <p>Little</p>
-                                <p>
-                                    Adapté à ceux qui aiment un style structuré.
-                                    Coupe sérée.
-                                </p>
-                            </div>
-                            <div className='a-third-guid-container-item'>
-                                <img
-                                    src='/about/medium_toothbrush.png'
-                                    alt='medium_toothbrush'
-                                />
-                                <p>Medium</p>
-                                <p>
-                                    Conçu pour ceux qui cherchent l’équilibre.
-                                    Sizing universel.
-                                </p>
-                            </div>
-                            <div className='a-third-guid-container-item'>
-                                <img
-                                    src='/about/over_toothbrush.png'
-                                    alt='over_toothbrush'
-                                />
-                                <p>over</p>
-                                <p>
-                                    Destiné à ceux qui privilégient l’espace et
-                                    la liberté de mouvement.
-                                </p>
+                        <div className='res-visuel-more'>
+                            <h4>EXPLICATIONS SUPPLÉMENTAIRES</h4>
+                            <div className='res-visuel-btn'>
+                                <button onClick={() => openLabels()}>
+                                    labels trackt
+                                </button>
+                                <button onClick={() => openCronws()}>
+                                    options de livraison & retours
+                                </button>
+                                <button>Guide des tailles</button>
                             </div>
                         </div>
+                        {crownsOpen && (
+                            <Crowns isOpen={openCronws} onClose={closeCrowns} />
+                        )}
+                        {labelsOpen && (
+                            <Labels isOpen={openLabels} onClose={closeLabels} />
+                        )}
                     </div>
-                    <div className='a-third-guid'>
-                        <h2>OPTIONS DE LIVRAISON & RETOUR</h2>
-                        <p>
-                            Nous avons crée trois catégories d’achats pour
-                            nuancer les différentes options de retours et
-                            remboursement. <br />
-                            Repérez-les lors de vos achats pour comprendre les
-                            modalités de renvois/livraison et choisir ce qui
-                            vous convient le mieux.
-                        </p>
-                        <div className='a-third-guid-container a-third-cart'>
-                            <div className='a-third-guid-container-item'>
-                                <img
-                                    src='/cart/cartClassic.png'
-                                    alt='cartClassic'
-                                />
-                                <p>Panier classique</p>
-                                <span>0 - 250€</span>
-                                <p>
-                                    <br />
-                                    RETOURS PAYANTS <br />
-                                    {/*BOOSTER RETOUR* 24H (10 €)*/}
-                                </p>
-                                <p>Livraison 10€ - Retours 10€</p>
-                            </div>
-                            <div className='a-third-guid-container-item'>
-                                <img
-                                    src='/cart/cartPremium.png'
-                                    alt='cartClassic'
-                                />
-                                <p>Panier premium</p>
-                                <span>250€ - 500€</span>
-                                <p>
-                                    RÉDUCTION LIVRAISON <br />
-                                    RETOURS GRATUITS <br />
-                                    {/*BOOSTER RETOUR* 24H (20 €)*/}
-                                </p>
-                                <p>Livraison 5€</p>
-                            </div>
-                            <div className='a-third-guid-container-item'>
-                                <img
-                                    src='/cart/cartExclusif.png'
-                                    alt='cartClassic'
-                                />
-                                <p>Panier premium</p>
-                                <span>+500€</span>
-                                <p>
-                                    LIVRAISON GRATUITE EXPRESS
-                                    <br />
-                                    RETOURS GRATUITS <br />
-                                    POCKET ITEM SURPRISE
-                                </p>
-                                <p>Livraison express</p>
-                            </div>
-                        </div>
-                    </div>
-                    {/*<p*/}
-                    {/*    style={{*/}
-                    {/*        width: '80%',*/}
-                    {/*        margin: '0 auto',*/}
-                    {/*        marginTop: '-50px',*/}
-                    {/*    }}*/}
-                    {/*>*/}
-                    {/*    * Les booster retours sont des codes de réductions que*/}
-                    {/*    vous pouvez activer sur toute notre boutique. Leur*/}
-                    {/*    montant et leur durée de vie sont variable selon le type*/}
-                    {/*    de panier que vous avez commandé. Dès que notre équipe*/}
-                    {/*    valide votre retour, vous pouvez délibérément activer*/}
-                    {/*    votre booster ou le préserver pour de futurs achats.*/}
-                    {/*</p>*/}
-                </div>
+                )}
             </div>
             <div className='a-fourth'>
                 <div
@@ -585,7 +767,11 @@ export default function About() {
                         margin: '40px 0',
                     }}
                 >
-                    <img src='/about/4.png' alt='about' />
+                    <img
+                        src='/about/4.png'
+                        alt='about'
+                        width={width > 768 ? '250px' : '150px'}
+                    />
                     <h2
                         style={{
                             marginTop: '80px',
@@ -595,7 +781,14 @@ export default function About() {
                     </h2>
                 </div>
                 <div className='a-fourth-exclusive'>
-                    <img src='/about/green.png' alt='green' />
+                    <img
+                        src={
+                            width > 768
+                                ? '/about/green.png'
+                                : '/about/responsiveExclusif.png'
+                        }
+                        alt='green'
+                    />
                     <div className='a-fourth-exclusive-text'>
                         <h2>EXCLUSIVITÉ À VOTRE PORTÉE</h2>
                         <p>

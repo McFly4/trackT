@@ -532,7 +532,7 @@ export default function HomePage() {
                                 )}
 
                                 <button
-                                    onClick={() => setShowText1(!showText2)}
+                                    onClick={() => setShowText2(!showText2)}
                                 >
                                     {showText2 ? '-' : '+'}
                                 </button>
