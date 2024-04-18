@@ -22,7 +22,13 @@ const Labels = ({ isOpen, onClose }: any) => {
                 </svg>
             </button>
             <div className='stickers-responsive'>
-                <h4>Labels trackt</h4>
+                <h4
+                    style={{
+                        marginBottom: '20px',
+                    }}
+                >
+                    Labels trackt
+                </h4>
                 <div className='stickers-responsive-item'>
                     <img src='/product/stickers/release.png' alt='release' />
                     <p>

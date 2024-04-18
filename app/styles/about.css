@@ -422,6 +422,7 @@ text-align: center;
 
     .res-visuel-btn button{
         background-color: #fff;
+        color: #000;
         border-radius: 10px;
         text-transform: uppercase;
         padding: 20px 30px;
@@ -438,6 +439,15 @@ text-align: center;
 
     .a-third-guid-container-item p:first-of-type{
         font-size: 20px;
+    }
+
+    .a-third-guid-container-item p{
+        margin: 0 20px;
+    }
+
+    .a-third-guid-container-item{
+        border-top: 1px solid #222222;
+        border-bottom: 1px solid #222222;
     }
 
 

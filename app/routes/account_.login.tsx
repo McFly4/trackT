@@ -6,6 +6,7 @@ import {
 } from '@shopify/remix-oxygen'
 import { Form, Link, useActionData, type MetaFunction } from '@remix-run/react'
 import { useState } from 'react'
+import useWindowDimensions from '~/hooks/useWindowDimension'
 
 type ActionResponse = {
     error: string | null
@@ -73,6 +74,8 @@ export async function action({ request, context }: ActionFunctionArgs) {
 }
 
 export default function Login() {
+    const useWidth = useWindowDimensions()
+    const width = useWidth.width || 1920
     const data = useActionData<ActionResponse>()
     const error = data?.error || null
     const [showPassword, setShowPassword] = useState(false)
@@ -111,7 +114,7 @@ export default function Login() {
                             minLength={8}
                             required
                             style={{
-                                width: '93%',
+                                width: width > 768 ? '93%' : '88%',
                                 border: error ? '2px solid red ' : '',
                                 outline: error ? 'unset !important' : '',
                             }}

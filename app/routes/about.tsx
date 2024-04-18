@@ -6,6 +6,7 @@ import React from 'react'
 import useWindowDimensions from '~/hooks/useWindowDimension'
 import Crowns from '~/components/Common/Modals/Crowns'
 import Labels from '~/components/Common/Modals/Labels'
+import Size from '~/components/Common/Modals/Size'
 export const meta: MetaFunction = () => {
     return [{ title: 'About' }]
 }
@@ -26,6 +27,7 @@ export default function About() {
     const [showText2, setShowText2] = React.useState(false)
     const [crownsOpen, setCronwsOpen] = React.useState(false)
     const [labelsOpen, setLabelsOpen] = React.useState(false)
+    const [size, setSize] = React.useState(false)
 
     const openLabels = () => {
         setLabelsOpen(true)
@@ -41,6 +43,14 @@ export default function About() {
 
     const closeCrowns = () => {
         setCronwsOpen(false)
+    }
+
+    const openSize = () => {
+        setSize(true)
+    }
+
+    const closeSize = () => {
+        setSize(false)
     }
 
     return (
@@ -744,7 +754,9 @@ export default function About() {
                                 <button onClick={() => openCronws()}>
                                     options de livraison & retours
                                 </button>
-                                <button>Guide des tailles</button>
+                                <button onClick={() => openSize()}>
+                                    Guide des tailles
+                                </button>
                             </div>
                         </div>
                         {crownsOpen && (
@@ -753,6 +765,7 @@ export default function About() {
                         {labelsOpen && (
                             <Labels isOpen={openLabels} onClose={closeLabels} />
                         )}
+                        {size && <Size isOpen={openSize} onClose={closeSize} />}
                     </div>
                 )}
             </div>

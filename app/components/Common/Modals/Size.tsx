@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Crowns = ({ isOpen, onClose }: any) => {
+const Size = ({ isOpen, onClose }: any) => {
     if (!isOpen) return null
 
     return (
@@ -22,54 +22,56 @@ const Crowns = ({ isOpen, onClose }: any) => {
                 </svg>
             </button>
             <div className='responsive-crowns'>
-                <h4>Options de livraison & retour</h4>
+                <h4>Guide des tailles</h4>
                 <p
                     style={{
                         marginBottom: '20px',
                     }}
                 >
-                    Nous avons crée trois catégories d’achats pour nuancer les
-                    différentes options de retours et remboursement. Repérez-les
-                    lors de vos achats pour comprendre les modalités de
-                    renvois/livraison et choisir ce qui vous convient le mieux.
+                    Nous avons classifié nos articles en trois catégories
+                    distinctes pour mieux vous aider à choisir vos tailles :
+                    Little, Medium et Over.
+                    <br />
+                    <br />
+                    Repérez ces différentes options pour trouver la coupe qui
+                    vous convient le mieux.
                 </p>
                 <div className='a-third-guid-container-item'>
-                    <img src='/cart/cartClassic.png' alt='cartClassic' />
-                    <p>Panier classique</p>
-                    <span>0 - 250€</span>
+                    <img
+                        src='/about/little_toothbrush.png'
+                        alt='little_toothbrush'
+                    />
+                    <p>Little</p>
                     <p>
-                        <br />
-                        RETOURS PAYANTS <br />
-                        {/*BOOSTER RETOUR* 24H (10 €)*/}
+                        Adapté à ceux qui aiment un style structuré. Coupe
+                        sérée.
                     </p>
-                    <p>Livraison 10€ - Retours 10€</p>
                 </div>
                 <div className='a-third-guid-container-item'>
-                    <img src='/cart/cartPremium.png' alt='cartClassic' />
-                    <p>Panier premium</p>
-                    <span>250€ - 500€</span>
+                    <img
+                        src='/about/medium_toothbrush.png'
+                        alt='medium_toothbrush'
+                    />
+                    <p>Medium</p>
                     <p>
-                        RÉDUCTION LIVRAISON <br />
-                        RETOURS GRATUITS <br />
-                        {/*BOOSTER RETOUR* 24H (20 €)*/}
+                        Conçu pour ceux qui cherchent l’équilibre. Sizing
+                        universel.
                     </p>
-                    <p>Livraison 5€</p>
                 </div>
                 <div className='a-third-guid-container-item'>
-                    <img src='/cart/cartExclusif.png' alt='cartClassic' />
-                    <p>Panier premium</p>
-                    <span>+500€</span>
+                    <img
+                        src='/about/over_toothbrush.png'
+                        alt='over_toothbrush'
+                    />
+                    <p>over</p>
                     <p>
-                        LIVRAISON GRATUITE EXPRESS
-                        <br />
-                        RETOURS GRATUITS <br />
-                        POCKET ITEM SURPRISE
+                        Destiné à ceux qui privilégient l’espace et la liberté
+                        de mouvement.
                     </p>
-                    <p>Livraison express</p>
                 </div>
             </div>
         </div>
     )
 }
 
-export default Crowns
+export default Size

@@ -54,6 +54,7 @@ button {
     outline: none;
     border: unset;
     cursor: pointer;
+    text-decoration: unset;
 }
 
 /* DESIGN SYSTEM */
@@ -313,9 +314,10 @@ code {
 }
 
 
-.responsive-crowns p:first-child {
+.responsive-crowns:nth-child(2) {
+    margin-bottom: 20px;
     font-size: 20px;
     font-weight: 300;
     text-align: center;
-    margin-bottom: 30px;
 }
+
