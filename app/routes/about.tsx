@@ -576,8 +576,7 @@ export default function About() {
                                 identifier chaque taille.
                             </p>
                             <div className='a-third-stick-container'>
-                                <video muted autoPlay loop>
-                                    0
+                                <video muted autoPlay loop playsInline>
                                     <source
                                         src='/about/tagprices.mp4'
                                         type='video/mp4'
