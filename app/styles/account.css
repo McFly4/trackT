@@ -689,13 +689,13 @@
     .login{
         justify-content: unset;
         padding-top: 50px;
-        padding: 50px 30px 0 30px;
+        padding: 0 30px;
     }
 
     .login h1{
+        padding-top: 50px;
         font-size: 29px;
         text-align: center;
-        margin: 0 30px;
     }
 
     .login-form{
@@ -724,5 +724,63 @@
         margin-top: -10px;
         font-size: 13px;
         font-weight: 300;
+    }
+
+    .login-form-field label{
+        font-size: 12px;
+    }
+
+    .account-recover h2{
+        text-align: center;
+        padding-top: 50px;
+    }
+
+    .account-recover{
+        padding: 0 30px;
+    }
+
+    .register2{
+        margin-top: 70px;
+    }
+
+    .register-form{
+        flex-direction: column-reverse;
+        padding: unset;
+        width: 100%;
+    }
+
+    .account-reset{
+        padding: 0 30px;
+    }
+
+    .account-reset h1{
+        padding-top: 50px;
+        font-size: 29px;
+        text-align: center;
+    }
+
+    .account-reset .input-field{
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .account-reset .input-field input{
+        height: 63px;
+    }
+
+
+    .account-reset .input-field label{
+        font-size: 12px;
+    }
+
+    .account-reset .btn-fields{
+        margin: unset;
+    }
+
+    .account-recover-success h1{
+        padding-top: 50px;
+        font-size: 29px;
+        text-align: center;
+        margin-bottom: 50px;
     }
 }

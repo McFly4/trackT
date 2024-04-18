@@ -1,7 +1,11 @@
 import { NavLink } from '@remix-run/react'
 import React from 'react'
+import useWindowDimensions from '~/hooks/useWindowDimension'
 
 export default function Politics() {
+    const useWidth = useWindowDimensions()
+    const width = useWidth.width || 1920
+
     return (
         <div
             style={{
@@ -9,7 +13,7 @@ export default function Politics() {
             }}
             className='politics'
         >
-            <Menu />
+            {width > 768 && <Menu />}
             <div className='legals' id='legals'>
                 <h1>infos légales et conditions</h1>
                 <h2>Mentions légales</h2>
@@ -22,7 +26,7 @@ export default function Politics() {
                     exploité par TrackT, Auto entreprise au capital de 1.000 €,
                     immatriculée a la chambre de commerce de Lyon sous le numéro
                     de
-                    <strong>SIRET 98011790700017</strong> dont le siège social
+                    <strong> SIRET 98011790700017</strong> dont le siège social
                     est situé a <strong>Lyon 69005.</strong> <br /> <br /> Vous
                     pouvez nous joindre par courrier électronique à l’adresse
                     <strong>tracktonline@gmail.com</strong> <br />

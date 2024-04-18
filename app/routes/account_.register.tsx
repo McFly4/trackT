@@ -8,6 +8,7 @@ import { Form, Link, useActionData } from '@remix-run/react'
 import type { CustomerCreateMutation } from 'storefrontapi.generated'
 import { useState } from 'react'
 import { brown } from '@mui/material/colors'
+import useWindowDimensions from '~/hooks/useWindowDimension'
 type ActionResponse = {
     error: string | null
     newCustomer:
@@ -116,6 +117,8 @@ export default function Register() {
     const error = data?.error || null
     const [showPassword, setShowPassword] = useState(false)
     const [showPassword2, setShowPassword2] = useState(false)
+    const useWidth = useWindowDimensions()
+    const width = useWidth.width || 1920
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword)
@@ -165,7 +168,7 @@ export default function Register() {
                                     required
                                     type={showPassword ? 'text' : 'password'}
                                     style={{
-                                        width: '93%',
+                                        width: width > 768 ? '93%' : '88%',
                                     }}
                                 />
                                 {showPassword ? (
@@ -234,7 +237,7 @@ export default function Register() {
                                     minLength={8}
                                     required
                                     style={{
-                                        width: '93%',
+                                        width: width > 768 ? '93%' : '88%',
                                         border: error ? '2px solid red ' : '',
                                         outline: error
                                             ? 'unset !important'
@@ -294,7 +297,7 @@ export default function Register() {
                     </div>
                     <div
                         style={{
-                            marginLeft: '50px',
+                            marginLeft: width > 768 ? '50px' : '0',
                         }}
                     >
                         <div className='login-form-field'>

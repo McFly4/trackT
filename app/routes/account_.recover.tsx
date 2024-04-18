@@ -6,6 +6,7 @@ import {
 } from '@shopify/remix-oxygen'
 import { Form, Link, useActionData } from '@remix-run/react'
 import React, { useState } from 'react'
+import useWindowDimensions from '~/hooks/useWindowDimension'
 
 type ActionResponse = {
     error?: string
@@ -54,11 +55,13 @@ export async function action({ request, context }: ActionFunctionArgs) {
 export default function Recover() {
     const action = useActionData<ActionResponse>()
     const [mail, setMail] = useState('')
+    const useWidth = useWindowDimensions()
+    const width = useWidth.width || 1920
 
     return (
         <div>
             {action?.resetRequested ? (
-                <div className='account-recover-success'>
+                <div className='account-recover-success login-form-field'>
                     <h1>Votre nouveau mot de passe se trouve ici</h1>
                     <input
                         aria-label='Email address'
@@ -79,13 +82,14 @@ export default function Recover() {
                 </div>
             ) : (
                 <div className='account-recover'>
+                    {width < 768 && <h2>Mot de passe oublié</h2>}
                     <br />
                     <Form method='POST' className='login-form'>
                         <div
                             className='login-form-field'
                             style={{
-                                marginLeft: '200px',
-                                marginTop: '20vh',
+                                marginLeft: width > 768 ? '200px' : 'unset',
+                                marginTop: width > 768 ? '20vh' : 'unset',
                             }}
                         >
                             <label htmlFor='email'>Adresse e-mail</label>
@@ -112,11 +116,17 @@ export default function Recover() {
                             )}
                             <button
                                 type='submit'
-                                style={{
-                                    marginTop: '50px',
-                                    marginLeft: '10px',
-                                    width: '400px',
-                                }}
+                                style={
+                                    width > 768
+                                        ? {
+                                              marginTop: '50px',
+                                              marginLeft: '10px',
+                                              width: '400px',
+                                          }
+                                        : {
+                                              fontSize: '18px',
+                                          }
+                                }
                             >
                                 Changer de mot de passe
                             </button>

@@ -4,6 +4,8 @@ import type { CartApiQueryFragment } from 'storefrontapi.generated'
 import { useVariantUrl } from '~/utils'
 import React, { useState } from 'react'
 import { Link } from '@remix-run/react'
+import useWindowDimension from '~/hooks/useWindowDimension'
+import Crowns from '~/components/Common/Modals/Crowns'
 
 type CartLine = CartApiQueryFragment['lines']['nodes'][0]
 
@@ -30,6 +32,9 @@ export function CartMain({
     const cartHasItems = !!cart && cart.totalQuantity > 0
     const cartTotalPrice = cart?.cost?.totalAmount?.amount as any
     const [isValid, setIsValid] = useState(false)
+    const [crown, setCrown] = useState(false)
+    const useWidth = useWindowDimension()
+    const width = useWidth.width || 1920
 
     const toggleModal = () => {
         onToggleModal(!isModalOpen)
@@ -40,24 +45,33 @@ export function CartMain({
         setIsValid(true)
     }
 
+    const openCrown = () => {
+        setCrown(true)
+    }
+
+    const closeCrown = () => {
+        setCrown(false)
+    }
+
     return (
         <>
+            {crown && <Crowns isOpen={openCrown} onClose={closeCrown} />}
             <div className={className}>
                 <CartEmpty
                     hidden={linesCount}
                     layout={layout}
                     isModalOpen={isModalOpen}
-                    toggle={toggleModal}
+                    toggle={width > 768 ? toggleModal : ''}
                 />
                 {linesCount && (
                     <div
-                        onClick={toggleModal}
+                        onClick={width > 768 ? toggleModal : openCrown}
                         style={{
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            width: '450px',
+                            width: width > 768 ? '450px' : '100%',
                         }}
                     >
                         {cartTotalPrice <= 250 ? (
@@ -65,8 +79,9 @@ export function CartMain({
                                 src='/cart/cartClassic.png'
                                 alt='panier classic'
                                 style={{
-                                    width: 'fit-content',
-                                    marginBottom: '50px',
+                                    width:
+                                        width > 768 ? 'fit-content' : '150px',
+                                    marginBottom: width > 768 ? '50px' : '30px',
                                 }}
                             />
                         ) : cartTotalPrice <= 500 ? (
@@ -74,8 +89,9 @@ export function CartMain({
                                 src='/cart/cartPremium.png'
                                 alt='panier premium'
                                 style={{
-                                    width: 'fit-content',
-                                    marginBottom: '50px',
+                                    width:
+                                        width > 768 ? 'fit-content' : '150px',
+                                    marginBottom: width > 768 ? '50px' : '30px',
                                 }}
                             />
                         ) : (
@@ -83,8 +99,9 @@ export function CartMain({
                                 src='/cart/cartExclusif.png'
                                 alt='panier vide'
                                 style={{
-                                    width: 'fit-content',
-                                    marginBottom: '50px',
+                                    width:
+                                        width > 768 ? 'fit-content' : '150px',
+                                    marginBottom: width > 768 ? '50px' : '30px',
                                 }}
                             />
                         )}
@@ -378,11 +395,22 @@ export function CartEmpty({
 }: {
     hidden: any
     layout?: any
-    toggle: any
+    toggle?: any
     isModalOpen: any
 }) {
+    const useWidth = useWindowDimension()
+    const width = useWidth.width || 1920
     const toggleModal = () => {
         toggle(!isModalOpen)
+    }
+    const [crown, setCrown] = useState(false)
+
+    const openCrown = () => {
+        setCrown(true)
+    }
+
+    const closeCrown = () => {
+        setCrown(false)
     }
 
     return (
@@ -397,7 +425,9 @@ export function CartEmpty({
                 marginLeft: '85px',
             }}
         >
-            <div onClick={toggleModal}>
+            {crown && <Crowns isOpen={openCrown} onClose={closeCrown} />}
+
+            <div onClick={width > 768 ? toggleModal : openCrown}>
                 <img
                     src='/cart/cartEmpty.png'
                     alt='panier vide'

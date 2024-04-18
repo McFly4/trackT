@@ -1,7 +1,10 @@
 import { NavLink } from '@remix-run/react'
 import React from 'react'
+import useWindowDimensions from '~/hooks/useWindowDimension'
 
 export default function Retours() {
+    const useWidth = useWindowDimensions()
+    const width = useWidth.width || 1920
     return (
         <div
             style={{
@@ -9,7 +12,7 @@ export default function Retours() {
             }}
             className='politics'
         >
-            <Menu />
+            {width > 768 && <Menu />}
             <div className='legals'>
                 <h1>Livraisons retour & remboursement</h1>
                 <h2 id='option'>OPTIONS DE LIVRAISON & RETOUR</h2>

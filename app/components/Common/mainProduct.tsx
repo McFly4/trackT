@@ -1,10 +1,24 @@
 import { Link } from '@remix-run/react'
 import React, { useState } from 'react'
 import { useNavigate } from '@remix-run/react'
+import useWindowDimension from '~/hooks/useWindowDimension'
+import Labels from '~/components/Common/Modals/Labels'
 
 export default function ({ product, stickers, isCarousel, quantity }: any) {
     const navigate = useNavigate()
+    const useWidth = useWindowDimension()
+    const width = useWidth.width || 1920
+
     const [isOpen, setIsOpen] = useState(false)
+    const [labelsOpen, setLabelsOpen] = useState(false)
+
+    const openLabels = () => {
+        setLabelsOpen(true)
+    }
+
+    const closeLabels = () => {
+        setLabelsOpen(false)
+    }
 
     const toggleDialog = () => {
         setIsOpen(!isOpen)
@@ -35,7 +49,8 @@ export default function ({ product, stickers, isCarousel, quantity }: any) {
 
     return (
         <>
-            {isOpen && (
+            {labelsOpen && <Labels isOpen={labelsOpen} onClose={closeLabels} />}
+            {isOpen && width > 768 && (
                 <div className='dialog-overlay' onClick={handleOutsideClick}>
                     <div className='dialog'>
                         <div className='modal-stickers'>
@@ -186,7 +201,9 @@ export default function ({ product, stickers, isCarousel, quantity }: any) {
                     onClick={() => {
                         stickers === false || stickers !== undefined
                             ? navigate('/products/' + product.handle)
-                            : toggleDialog()
+                            : width > 768
+                            ? toggleDialog()
+                            : openLabels()
                     }}
                 >
                     {stickersData.map((item: any, index: any, array: any[]) => (

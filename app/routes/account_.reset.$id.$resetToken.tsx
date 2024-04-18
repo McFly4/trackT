@@ -1,6 +1,7 @@
 import { type ActionFunctionArgs, json, redirect } from '@shopify/remix-oxygen'
 import { Form, useActionData, type MetaFunction } from '@remix-run/react'
 import { useState } from 'react'
+import useWindowDimension from '~/hooks/useWindowDimension'
 
 type ActionResponse = {
     error: string | null
@@ -70,6 +71,8 @@ export default function Reset() {
     const action = useActionData<ActionResponse>()
     const [showPassword, setShowPassword] = useState(false)
     const [showPassword2, setShowPassword2] = useState(false)
+    const useWidth = useWindowDimension()
+    const width = useWidth.width || 1920
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword)
@@ -81,14 +84,20 @@ export default function Reset() {
 
     return (
         <div className='account-reset'>
-            <h1>Reset Password.</h1>
+            <h1>Créer votre nouveau mot de passe</h1>
             <Form method='POST'>
                 <div
-                    style={{
-                        display: 'flex',
-                        justifyContent: 'space-evenly',
-                        marginTop: '200px',
-                    }}
+                    style={
+                        width > 768
+                            ? {
+                                  display: 'flex',
+                                  justifyContent: 'space-evenly',
+                                  marginTop: '200px',
+                              }
+                            : {
+                                  marginTop: '50px',
+                              }
+                    }
                 >
                     <div className='input-field'>
                         <label htmlFor='password'>Nouveau mot de passe</label>
@@ -240,7 +249,7 @@ export default function Reset() {
                     <button type='submit'>
                         Mettre à jour mon mot de passe
                     </button>
-                    <a href='/account/login'>Back to login →</a>
+                    <a href='/account/login'>Retour à la connexion →</a>
                 </div>
             </Form>
             <br />

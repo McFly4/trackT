@@ -13,6 +13,7 @@ import GoFilters from '~/components/Common/GoFilters'
 import TrackT from '~/components/Common/TrackT'
 import MarketDrag from '~/components/Common/MarketDrag'
 import React, { useState } from 'react'
+import useWindowDimension from '~/hooks/useWindowDimension'
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
     return [{ title: `Hydrogen | ${data?.collection.title ?? ''} Collection` }]
@@ -73,6 +74,8 @@ export default function Collection() {
         useLoaderData<typeof loader>()
     const carousel = randomProduct.collections.nodes[0].products.nodes
     const all = allProducts?.collection?.products?.nodes
+    const useWidth = useWindowDimension()
+    const width = useWidth.width || 1920
 
     const [randomProducts, setRandomProducts] = useState([]) as any
     const [isRandom, setIsRandom] = useState(false)
@@ -117,7 +120,7 @@ export default function Collection() {
                         {collection.products?.nodes?.length > 0 ? (
                             <>
                                 <div className='search-txt'>
-                                    <h1>SÉLECTION PERSONNALISÉE</h1>
+                                    <h2>SÉLECTION PERSONNALISÉE</h2>
                                     <p>
                                         Voici les articles qui correspondent à
                                         votre recherche. Ajustez vos critères si
@@ -192,7 +195,8 @@ export default function Collection() {
                                         playsInline
                                         loop
                                         style={{
-                                            width: '360px',
+                                            width:
+                                                width > 768 ? '360px' : '280px',
                                         }}
                                     >
                                         <img
@@ -287,8 +291,23 @@ export default function Collection() {
                         className='panel-container'
                     >
                         {isRandom ? (
-                            <div className='panel-products-grid'>
+                            width > 768 ? (
                                 <div className='panel-products-grid'>
+                                    <div className='panel-products-grid'>
+                                        {randomProducts.map(
+                                            (product: any, index: number) => {
+                                                return (
+                                                    <MainProduct
+                                                        key={index}
+                                                        product={product}
+                                                    />
+                                                )
+                                            }
+                                        )}
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className='responsive-products-grid'>
                                     {randomProducts.map(
                                         (product: any, index: number) => {
                                             return (
@@ -300,7 +319,7 @@ export default function Collection() {
                                         }
                                     )}
                                 </div>
-                            </div>
+                            )
                         ) : (
                             <Pagination connection={collection.products}>
                                 {({
@@ -323,8 +342,24 @@ export default function Collection() {
                                                 </button>
                                             </div>
                                         </PreviousLink>
-                                        <div className='panel-products-grid'>
+                                        {width > 768 ? (
                                             <div className='panel-products-grid'>
+                                                <div className='panel-products-grid'>
+                                                    {nodes.map((product) => (
+                                                        <MainProduct
+                                                            product={product}
+                                                            quantity={
+                                                                collection
+                                                                    .products
+                                                                    ?.nodes
+                                                                    ?.length
+                                                            }
+                                                        />
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            <div className='responsive-products-grid'>
                                                 {nodes.map((product) => (
                                                     <MainProduct
                                                         product={product}
@@ -335,7 +370,7 @@ export default function Collection() {
                                                     />
                                                 ))}
                                             </div>
-                                        </div>
+                                        )}
                                         <div className='pagination'>
                                             <NextLink>
                                                 <button>
@@ -360,23 +395,30 @@ export default function Collection() {
                     }}
                 >
                     <GoFilters />
-                    <div
-                        style={{
-                            width: '100%',
-                            height: '10px',
-                            backgroundColor: '#121212',
-                            marginBottom: '60px',
-                        }}
-                    ></div>
-                    <video
-                        src='/product/banner.mp4'
-                        autoPlay
-                        muted
-                        playsInline
-                        loop
-                    />
-                    <TrackT products={carousel} title={randomNameFunction()} />
-                    <MarketDrag />
+                    {width > 768 && (
+                        <>
+                            <div
+                                style={{
+                                    width: '100%',
+                                    height: '10px',
+                                    backgroundColor: '#121212',
+                                    marginBottom: '60px',
+                                }}
+                            ></div>
+                            <video
+                                src='/product/banner.mp4'
+                                autoPlay
+                                muted
+                                playsInline
+                                loop
+                            />
+                            <TrackT
+                                products={carousel}
+                                title={randomNameFunction()}
+                            />
+                            <MarketDrag />
+                        </>
+                    )}
                 </div>
             )}
         </>
