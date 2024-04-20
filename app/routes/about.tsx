@@ -237,6 +237,7 @@ export default function About() {
                         muted
                         autoPlay
                         loop
+                        playsInline
                         style={{
                             width: width > 768 ? 'unset' : '100%',
                             marginBottom: width > 768 ? '0' : '100px',
@@ -281,7 +282,7 @@ export default function About() {
                     </p>
                 </div>
                 <div className='a-first-video'>
-                    <video muted autoPlay loop>
+                    <video muted autoPlay loop playsInline>
                         <source
                             src='/about/TracktHistory.mp4'
                             type='video/mp4'
@@ -592,7 +593,7 @@ export default function About() {
                                         type='video/mp4'
                                     />
                                 </video>
-                                <video muted autoPlay loop>
+                                <video muted autoPlay loop playsInline>
                                     <source
                                         src='/about/tagprices2.mp4'
                                         type='video/mp4'
@@ -731,14 +732,20 @@ export default function About() {
                             </p>
                         </div>
                         <div>
-                            <video muted autoPlay loop controls={false}>
+                            <video
+                                muted
+                                autoPlay
+                                loop
+                                playsInline
+                                controls={false}
+                            >
                                 0
                                 <source
                                     src='/about/tagprices.mp4'
                                     type='video/mp4'
                                 />
                             </video>
-                            <video muted autoPlay loop>
+                            <video muted autoPlay loop playsInline>
                                 <source
                                     src='/about/tagprices2.mp4'
                                     type='video/mp4'
