@@ -184,13 +184,17 @@
     }
 
     .footer div:first-child img {
-        width: 110px;
+        width: 150px;
         object-fit: unset;
     }
 
     .footer .footer-menu p {
         font-size: 12px;
-        font-weight: 400;
+        font-weight: 500;
+    }
+
+    .footer h4{
+        margin-bottom: 20px;
     }
 
     .footer .footer-media {

@@ -343,7 +343,9 @@ export default function HomePage() {
                         {sizeScreen < 768 && (
                             <div className='responsive-home-header'>
                                 <h4>panel trackt </h4>
-                                <span>Tout afficher</span>
+                                <Link to='/filtered'>
+                                    <span>Tout afficher</span>
+                                </Link>
                                 <p>
                                     Découvrez le Panel Trackt, une sélection
                                     soigneusement élaborée de ce que le

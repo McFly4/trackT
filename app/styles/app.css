@@ -2010,7 +2010,8 @@ input[type="search"]::-webkit-search-results-decoration {
     }
 
     .autoplay-progress{
-        top: 70px;
+        top: 20px;
+        right: 20px;
     }
 
     .home img {
