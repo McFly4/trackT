@@ -244,11 +244,16 @@ export default function HomePage() {
             </div>
             <div className='panel-trackt'>
                 <div
+                    className='res-discover-vision-trackt'
                     style={{
                         display: 'flex',
                         flexDirection: 'column',
                     }}
                 >
+                    {sizeScreen < 768 && (
+                        <button>Découvrir la vision trackt</button>
+                    )}
+
                     <div className='panel-container'>
                         {sizeScreen > 768 && (
                             <>

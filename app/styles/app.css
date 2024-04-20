@@ -2504,4 +2504,16 @@ input[type="search"]::-webkit-search-results-decoration {
          margin-top:unset;
          width: unset;
     }
+
+    .res-discover-vision-trackt button{
+        border-radius: 5px;
+        background-color: #fff;
+        font-size: 15px;
+        text-transform: uppercase;
+        font-weight: 400;
+        padding: 20px 40px;
+        width: 90%;
+        font-family: 'HelveticaNeue500', sans-serif;
+        margin: 20px auto;
+    }
 }
