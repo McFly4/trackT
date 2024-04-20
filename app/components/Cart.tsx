@@ -3,9 +3,10 @@ import type { CartLineUpdateInput } from '@shopify/hydrogen/storefront-api-types
 import type { CartApiQueryFragment } from 'storefrontapi.generated'
 import { useVariantUrl } from '~/utils'
 import React, { useState } from 'react'
-import { Link } from '@remix-run/react'
+import { FetcherWithComponents, Link } from '@remix-run/react'
 import useWindowDimension from '~/hooks/useWindowDimension'
 import Crowns from '~/components/Common/Modals/Crowns'
+import type { CartLineInput } from '@shopify/hydrogen/storefront-api-types'
 
 type CartLine = CartApiQueryFragment['lines']['nodes'][0]
 
@@ -21,6 +22,7 @@ export function CartMain({
     isPocketOpen,
     onToggleModal,
     onTogglePocket,
+    pocketItems,
 }: any) {
     const linesCount = Boolean(cart?.lines?.nodes?.length || 0)
     const withDiscount =
@@ -33,11 +35,16 @@ export function CartMain({
     const cartTotalPrice = cart?.cost?.totalAmount?.amount as any
     const [isValid, setIsValid] = useState(false)
     const [crown, setCrown] = useState(false)
+    const [openPocket, setOpenPocket] = useState(false)
     const useWidth = useWindowDimension()
     const width = useWidth.width || 1920
-
+    const pocketProducts = pocketItems?.collection?.products?.nodes.slice(0, 19)
     const toggleModal = () => {
         onToggleModal(!isModalOpen)
+    }
+
+    const toggleResponsivePocket = () => {
+        setOpenPocket(!openPocket)
     }
 
     const togglePocket = () => {
@@ -56,6 +63,135 @@ export function CartMain({
     return (
         <>
             {crown && <Crowns isOpen={openCrown} onClose={closeCrown} />}
+            {openPocket && (
+                <div className='res-pocket'>
+                    <h2>Pocket items</h2>
+                    <p>
+                        Ajoutez quelques items pour atteindre la couronne
+                        supérieure.
+                    </p>
+                    <div className='res-pocket-items'>
+                        {pocketProducts?.map((item: any, index: number) => (
+                            <div
+                                key={index}
+                                style={{
+                                    padding: '15px',
+                                    position: 'relative',
+                                }}
+                                className={`pocket-items-product ${
+                                    item.variants.nodes[0].availableForSale
+                                        ? ''
+                                        : 'pocketItemOOO'
+                                }`}
+                            >
+                                <AddToCartButton
+                                    disabled={
+                                        !item.variants.nodes[0].availableForSale
+                                    }
+                                    lines={[
+                                        {
+                                            merchandiseId:
+                                                item.variants.nodes[0].id,
+                                            quantity: 1,
+                                        },
+                                    ]}
+                                />
+                                <div
+                                    className='pocket-items-product-img'
+                                    onClick={() => {
+                                        window.location.href = `/products/${item.handle}`
+                                    }}
+                                >
+                                    {!item.variants.nodes[0]
+                                        .availableForSale && (
+                                        <span>Sold out</span>
+                                    )}{' '}
+                                    <img
+                                        src={item.images.nodes[0].url}
+                                        className='pocket-items-product-img-main'
+                                        style={{
+                                            objectFit:
+                                                item?.box?.value == '4:5' ||
+                                                item?.box?.value == '1:1'
+                                                    ? 'contain'
+                                                    : 'cover',
+                                        }}
+                                    />
+                                    <img
+                                        src={
+                                            '/cart/pocket/' +
+                                            (index % 8) +
+                                            '.png'
+                                        }
+                                        className='pocket-items-product-img-price'
+                                    />
+                                    <p>
+                                        +
+                                        {
+                                            item.variants.nodes[0].price.amount.split(
+                                                '.'
+                                            )[0]
+                                        }
+                                        €
+                                    </p>
+                                </div>
+                                <div
+                                    style={{
+                                        width: '150px',
+                                    }}
+                                >
+                                    <h4 className='p-title'>
+                                        {item.vendor?.length > 20
+                                            ? item.vendor.slice(0, 19) + '...'
+                                            : item.vendor}
+                                    </h4>
+                                    <h6 className='p-title'>
+                                        {item.title?.length > 18
+                                            ? item.title.slice(0, 18) + '...'
+                                            : item.title}
+                                    </h6>
+                                </div>
+                                {/*<AddToCartButton*/}
+                                {/*    disabled={*/}
+                                {/*        !item.variants.nodes[0].availableForSale*/}
+                                {/*    }*/}
+                                {/*    lines={[*/}
+                                {/*        {*/}
+                                {/*            merchandiseId:*/}
+                                {/*                item.variants.nodes[0].id,*/}
+                                {/*            quantity: 1,*/}
+                                {/*        },*/}
+                                {/*    ]}*/}
+                                {/*/>*/}
+                            </div>
+                        ))}
+                    </div>
+                    <div className='res-pocket-footer'>
+                        {cartTotalPrice <= 250 ? (
+                            <img
+                                src='/cart/cartClassic.png'
+                                alt='panier classic'
+                            />
+                        ) : cartTotalPrice <= 500 ? (
+                            <img
+                                src='/cart/cartPremium.png'
+                                alt='panier premium'
+                            />
+                        ) : (
+                            <img
+                                src='/cart/cartExclusif.png'
+                                alt='panier vide'
+                            />
+                        )}
+                        <div className='res-pocket-footer-prices'>
+                            <h5>SOUS-TOTAL</h5>
+                            <h2>{cartTotalPrice} €</h2>
+                        </div>
+                        <ResponsiveCheckout checkoutUrl={cart.checkoutUrl} />
+                    </div>
+                </div>
+            )}
+
             <div className={className}>
                 <CartEmpty
                     hidden={linesCount}
@@ -126,7 +262,13 @@ export function CartMain({
                                     checkoutUrl={cart.checkoutUrl}
                                 />
                             ) : (
-                                <div onClick={togglePocket}>
+                                <div
+                                    onClick={
+                                        width > 768
+                                            ? togglePocket
+                                            : toggleResponsivePocket
+                                    }
+                                >
                                     <div className='cart-checkout'>
                                         <a>
                                             <h6>Passer à la caisse</h6>
@@ -140,6 +282,44 @@ export function CartMain({
                 </div>
             </div>
         </>
+    )
+}
+
+function AddToCartButton({
+    analytics,
+    disabled,
+    lines,
+    onClick,
+}: {
+    analytics?: unknown
+    disabled?: boolean
+    lines: CartLineInput[]
+    onClick?: () => void
+}) {
+    return (
+        <CartForm
+            route='/cart'
+            inputs={{ lines }}
+            action={CartForm.ACTIONS.LinesAdd}
+        >
+            {(fetcher: FetcherWithComponents<any>) => (
+                <>
+                    <input
+                        name='analytics'
+                        type='hidden'
+                        value={JSON.stringify(analytics)}
+                    />
+                    <button
+                        type='submit'
+                        className='res-pocket-items-add'
+                        onClick={onClick}
+                        disabled={disabled ?? fetcher.state !== 'idle'}
+                    >
+                        <img src='/icons/plus.svg' alt='add' />
+                    </button>
+                </>
+            )}
+        </CartForm>
     )
 }
 
@@ -226,6 +406,22 @@ function CartLineItem({
                 }}
             ></div>
         </div>
+    )
+}
+
+function ResponsiveCheckout({ checkoutUrl }: { checkoutUrl: string }) {
+    if (!checkoutUrl) return null
+
+    return (
+        <a
+            href={checkoutUrl}
+            target='_self'
+            style={{
+                textAlign: 'center',
+            }}
+        >
+            <button>RÉCAPITULATIF ET PAIEMENT</button>
+        </a>
     )
 }
 

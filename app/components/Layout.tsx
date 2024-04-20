@@ -310,6 +310,7 @@ function CartAside({ cart, pocketItems }: any) {
                                     isPocketOpen={isPocketOpen}
                                     onToggleModal={toggleModal}
                                     onTogglePocket={togglePocket}
+                                    pocketItems={pocketItems}
                                 />
                             )
                         }}

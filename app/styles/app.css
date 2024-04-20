@@ -2240,4 +2240,267 @@ input[type="search"]::-webkit-search-results-decoration {
         margin: auto;
     }
 
+    .predictive-search-form{
+        padding: 40px 20px 20px 20px;
+    }
+
+    .predictive-search-results{
+        padding: 0 20px;
+    }
+
+    .predictive-search-result h5{
+        font-size: 15px;
+        font-weight: 300;
+    }
+
+    .predictive-search-result-item a .search-result-box-img img{
+        width: 70px !important;
+        height: 45px;
+    }
+
+    .no-results{
+        width: 90%;
+        margin: auto;
+        height: unset;
+    }
+
+    .no-results-found{
+        padding: 20px;
+    }
+
+     p:nth-child(1){
+        font-size: 20px;
+    }
+
+    .no-results-found button{
+        font-size: 15px;
+    }
+
+    .no-results-found p:nth-child(2){
+        font-size: 16px;
+        font-weight: 300;
+        text-align: start;
+    }
+
+    .categoriesAside{
+        overflow-y: scroll;
+    }
+
+    .categoriesAside::-webkit-scrollbar {
+        width: 0;  /* Masquer la barre de défilement */
+    }
+
+    /* Pour Firefox */
+    .categoriesAside {
+        scrollbar-width: none;  /* Masquer la barre de défilement */
+    }
+
+
+    .categoriesAside-container{
+        flex-direction: column;
+    }
+
+    .categoriesAside-column{
+        border-right: unset;
+        border-bottom: 2px solid #8d8d8d3d;
+        padding-left: 30px;
+        padding-top: 30px;
+        width: 100%;
+    }
+
+    .categoriesAside-column:last-child{
+        padding-left: 30px;
+        padding-top: 30px;
+
+    }
+
+    .categoriesAsideNav{
+        position: unset;
+        margin-top: 30px;
+    }
+
+    .filters-responsive h4{
+        text-align: center;
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
+    .filters-responsive .filters__footer{
+        background-image: unset;
+    }
+
+    .filters__title{
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .filters__footer .filters__footer__buttons{
+        justify-content: center;
+        width: 100%;
+        margin-left: unset;
+    }
+
+    .filters__footer .filters__footer__buttons a button:first-child{
+        margin-right: unset;
+    }
+
+    .filters__list{
+        padding-left: 60px;
+    }
+
+    .filters-navigation-bts{
+        z-index: 8888;
+        position: absolute;
+        top: 15%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    /* CART POCKET ITEMS */
+    .res-pocket{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: 9999;
+        overflow-y: scroll;
+
+    }
+
+    .res-pocket::-webkit-scrollbar {
+        width: 0;  /* Masquer la barre de défilement */
+    }
+
+    /* Pour Firefox */
+    .res-pocket {
+        scrollbar-width: none;  /* Masquer la barre de défilement */
+    }
+
+
+    .res-pocket h2{
+        margin-top: 50px;
+        text-align: center;
+    }
+
+    .res-pocket-items{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .res-pocket p{
+        font-size: 16px;
+        text-align: center;
+        width: 80%;
+        margin: 30px auto !important;
+    }
+
+    .res-pocket .pocket-items-product-img-main{
+        width: 150px;
+        height: 90px;
+    }
+
+    .res-pocket h4{
+        font-size: 15px;
+        font-weight: 400;
+    }
+
+    .res-pocket h6{
+        font-size: 12px;
+        font-weight: 300;
+    }
+
+    .res-pocket .pocket-items-product-img-price{
+        position: absolute;
+        bottom: -25px;
+        right: -20px;
+        width: 80px;
+    }
+
+    .res-pocket .pocket-items-product-img p{
+        width: unset !important;
+        margin: unset !important;
+    }
+
+    .res-pocket .pocketItemOOO span{
+        font-size: 15px;
+    }
+
+    .res-pocket .pocketItemOOO span:before{
+        width: 20% ;
+    }
+
+    .res-pocket .pocketItemOOO span:after{
+        width: 20% ;
+    }
+
+    .res-pocket-footer{
+        z-index: 999999;
+        position: fixed;
+        height: 230px;
+        width: 100%;
+        left: 0;
+        bottom: 0;
+        background-color: #000000b3;
+        backdrop-filter: blur(8px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .res-pocket-footer img{
+        width: 100px;
+        margin-top: 14px;
+        margin-bottom: 20px;
+    }
+
+    .res-pocket-footer-prices{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 90%;
+    }
+
+    .res-pocket-footer-prices h2{
+        margin-top: unset !important;
+    }
+
+    .res-pocket-footer-prices{
+        color: #fff;
+    }
+
+    .res-pocket-footer button{
+        border-radius: 5px;
+        background-color: #fff;
+        font-size: 15px;
+        text-transform: uppercase;
+        font-weight: 400;
+        padding: 20px 40px;
+        margin-top: 15px;
+        width: 90%;
+        font-family: 'HelveticaNeue500', sans-serif;
+    }
+
+    .res-pocket-items-add{
+        position: absolute !important;
+        top: -10px !important;
+        right: -10px !important;
+        width: 50px !important;
+        height: 52px !important;
+        border-radius: 50px !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        background-color: #ffffff59 !important;
+        backdrop-filter: blur(13px) !important;
+        z-index: 9999 !important;
+    }
+
+    .pocket-items-product button {
+         border-radius: unset;
+         font-size: unset;
+         padding: unset;
+         margin-top:unset;
+         width: unset;
+    }
 }

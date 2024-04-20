@@ -15,6 +15,7 @@ import type {
     PredictiveArticleFragment,
     SearchQuery,
 } from 'storefrontapi.generated'
+import useWindowDimension from '~/hooks/useWindowDimension'
 
 type PredicticeSearchResultItemImage =
     | PredictiveCollectionFragment['image']
@@ -395,6 +396,7 @@ function NoPredictiveSearchResults({
                     }}
                     style={{
                         display: 'flex',
+                        alignItems: 'center',
                     }}
                 >
                     <svg
@@ -583,11 +585,13 @@ function SearchResultItem({ goToSearchResult, item, inList }: any) {
 
 function ImageComponent({ keyName, offset, zIdx }: any) {
     const stickerPath = `/product/stickers/${keyName}.png`
+    const useWidth = useWindowDimension()
+    const width = useWidth.width || 1920
 
     const style = {
         zIndex: zIdx,
-        height: '70px',
-        width: '75px',
+        height: width > 768 ? '70px' : '39px',
+        width: width > 768 ? '70px' : '43px',
     }
     return <img src={stickerPath} alt={keyName} style={style} />
 }

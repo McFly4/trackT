@@ -37,6 +37,9 @@ import MarketDrag from '~/components/Common/MarketDrag'
 import { Mousewheel, Pagination } from 'swiper/modules'
 import GoFilters from '~/components/Common/GoFilters'
 import useWindowDimensions from '~/hooks/useWindowDimension'
+import Crowns from '~/components/Common/Modals/Crowns'
+import Labels from '~/components/Common/Modals/Labels'
+import Size from '~/components/Common/Modals/Size'
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
     return [{ title: `TrackT | ${data?.product.title ?? ''}` }]
@@ -155,7 +158,6 @@ export default function Product() {
     const { product, variants, randomProduct, metafieldRandom } =
         useLoaderData<typeof loader>()
     const { selectedVariant } = product
-    const [size, setSize] = useState(false)
     const [stickers, setStickers] = useState(false)
     const [tobasket, setTobasket] = useState(false)
     const random = randomProduct.collections.nodes[0].products.nodes
@@ -164,7 +166,33 @@ export default function Product() {
     const parsedColors = JSON.parse(product.colors?.value) as any
     const [showText1, setShowText1] = useState(false)
     const [expanded, setExpanded] = useState(false)
+    const [crownsOpen, setCronwsOpen] = React.useState(false)
+    const [labelsOpen, setLabelsOpen] = React.useState(false)
+    const [size, setSize] = React.useState(false)
 
+    const openLabels = () => {
+        setLabelsOpen(true)
+    }
+
+    const closeLabels = () => {
+        setLabelsOpen(false)
+    }
+
+    const openCronws = () => {
+        setCronwsOpen(true)
+    }
+
+    const closeCrowns = () => {
+        setCronwsOpen(false)
+    }
+
+    const openSize = () => {
+        setSize(true)
+    }
+
+    const closeSize = () => {
+        setSize(false)
+    }
     function randomNameFunction() {
         if (metafieldRandom === 'hotDeal') {
             return 'Hot Deal'
@@ -222,8 +250,15 @@ export default function Product() {
         }
     }
 
+    function toggleFromChild() {
+        setTobasket(false)
+    }
+
     return (
         <>
+            {crownsOpen && <Crowns isOpen={openCronws} onClose={closeCrowns} />}
+            {labelsOpen && <Labels isOpen={openLabels} onClose={closeLabels} />}
+            {size && <Size isOpen={openSize} onClose={closeSize} />}
             <div
                 style={{
                     marginTop: width > 768 ? '300px' : '200px',
@@ -265,6 +300,7 @@ export default function Product() {
                                         <div
                                             key={index}
                                             className='product-menu-stickers'
+                                            onClick={openLabels}
                                         >
                                             <img
                                                 src={`/product/stickers/${item.key}.png`}
@@ -274,15 +310,15 @@ export default function Product() {
                                                     height: '39px',
                                                     paddingBottom: '18px',
                                                 }}
-                                                onClick={() =>
-                                                    setStickers(!stickers)
-                                                }
                                             />
                                         </div>
                                     )
                                 )}
                                 {toothBrush === 'Small' ? (
-                                    <div className='product-menu-stickers'>
+                                    <div
+                                        className='product-menu-stickers'
+                                        onClick={openCronws}
+                                    >
                                         <img
                                             src='/about/little_toothbrush.png'
                                             alt='little toothbrush'
@@ -293,7 +329,10 @@ export default function Product() {
                                         />
                                     </div>
                                 ) : toothBrush === 'Medium' ? (
-                                    <div className='product-menu-stickers'>
+                                    <div
+                                        className='product-menu-stickers'
+                                        onClick={openCronws}
+                                    >
                                         <img
                                             src='/about/medium_toothbrush.png'
                                             alt='medium toothbrush'
@@ -304,7 +343,10 @@ export default function Product() {
                                         />
                                     </div>
                                 ) : (
-                                    <div className='product-menu-stickers'>
+                                    <div
+                                        className='product-menu-stickers'
+                                        onClick={openCronws}
+                                    >
                                         <img
                                             src='/about/over_toothbrush.png'
                                             alt='over toothbrush'
@@ -500,6 +542,7 @@ export default function Product() {
                             <ProductPrice
                                 selectedVariant={selectedVariant}
                                 soon={product.soon}
+                                setBasket={toggleFromChild}
                             />
                             <Suspense
                                 fallback={
@@ -1466,8 +1509,8 @@ function ToggleModal(toggle: any) {
     )
 }
 
-function ProductPrice(selectedVariant: any) {
-    const size = selectedVariant?.selectedVariant?.selectedOptions?.find(
+function ProductPrice({ selectedVariant, setBasket }: any) {
+    const size = selectedVariant?.selectedOptions?.find(
         (option: any) =>
             option.name === 'Size' ||
             option.name === 'Taille' ||
@@ -1475,6 +1518,13 @@ function ProductPrice(selectedVariant: any) {
     )?.value
     const useWidth = useWindowDimensions()
     const width = useWidth.width || 1920
+
+    function handleCloseBasket() {
+        setTimeout(() => {
+            setBasket(true)
+            window.location.href = window.location.href + '#cart-aside'
+        }, 1000)
+    }
 
     return (
         <div className='product-price'>
@@ -1488,32 +1538,23 @@ function ProductPrice(selectedVariant: any) {
                     />
                     <span className='soon'>soon</span>
                 </div>
-            ) : selectedVariant?.selectedVariant?.availableForSale ? (
-                selectedVariant?.selectedVariant?.compareAtPrice ? (
+            ) : selectedVariant?.availableForSale ? (
+                selectedVariant?.compareAtPrice ? (
                     <>
                         <p>Sale</p>
 
                         <br />
                         <div className='product-price-on-sale' style={{}}>
-                            {selectedVariant?.selectedVariant ? (
-                                <Money
-                                    data={
-                                        selectedVariant?.selectedVariant?.price
-                                    }
-                                />
+                            {selectedVariant ? (
+                                <Money data={selectedVariant?.price} />
                             ) : null}
                             <s>
-                                <Money
-                                    data={
-                                        selectedVariant?.selectedVariant
-                                            ?.compareAtPrice
-                                    }
-                                />
+                                <Money data={selectedVariant?.compareAtPrice} />
                             </s>
                         </div>
                     </>
                 ) : (
-                    selectedVariant?.selectedVariant?.price && (
+                    selectedVariant?.price && (
                         <div className='product-price-container'>
                             {size == undefined ||
                             size == 'OS' ||
@@ -1553,7 +1594,7 @@ function ProductPrice(selectedVariant: any) {
                                             ? '10%'
                                             : '',
                                 }}
-                                data={selectedVariant?.selectedVariant?.price}
+                                data={selectedVariant?.price}
                             />
                         </div>
                     )
@@ -1570,16 +1611,15 @@ function ProductPrice(selectedVariant: any) {
             )}
             <AddToCartButton
                 disabled={
-                    !selectedVariant?.selectedVariant ||
-                    !selectedVariant?.selectedVariant?.availableForSale ||
+                    !selectedVariant ||
+                    !selectedVariant?.availableForSale ||
                     selectedVariant?.soon?.value === 'true'
                 }
                 lines={
-                    selectedVariant?.selectedVariant
+                    selectedVariant
                         ? [
                               {
-                                  merchandiseId:
-                                      selectedVariant?.selectedVariant?.id,
+                                  merchandiseId: selectedVariant?.id,
                                   quantity: 1,
                               },
                           ]
@@ -1589,7 +1629,7 @@ function ProductPrice(selectedVariant: any) {
                     width > 768
                         ? (window.location.href =
                               window.location.href + '#cart-aside')
-                        : window.location.reload()
+                        : handleCloseBasket()
                 }}
             >
                 Ajouter au panier
@@ -1678,6 +1718,18 @@ function ProductForm({
 }
 
 function ProductOptions({ option, variants }: any) {
+    const [crownsOpen, setCronwsOpen] = React.useState(false)
+
+    const openCronws = () => {
+        setCronwsOpen(true)
+    }
+
+    const closeCrowns = () => {
+        setCronwsOpen(false)
+    }
+
+    const useWidth = useWindowDimensions()
+    const width = useWidth.width || 1920
     const [isModalOpenToothbrush, setIsModalOpenToothbrush] = useState(false)
     const defaultSize =
         typeof window !== 'undefined'
@@ -1852,9 +1904,13 @@ function ProductOptions({ option, variants }: any) {
                     <NavButtons next={nexto} previous={previo} />
                 </div>
             </div>
-            <button onClick={toggleModalToothbrush} className='sizes-guid'>
+            <button
+                onClick={width > 768 ? toggleModalToothbrush : openCronws}
+                className='sizes-guid'
+            >
                 Guide des tailles
             </button>
+            {crownsOpen && <Crowns isOpen={openCronws} onClose={closeCrowns} />}
         </div>
     )
 }
