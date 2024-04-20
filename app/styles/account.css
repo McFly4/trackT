@@ -236,7 +236,8 @@
     cursor: pointer;
     border-radius: 5px;
     background: #FF9147;
-    padding: 20px 40px
+    padding: 20px 40px;
+    color: #000;
 }
 
 .account{

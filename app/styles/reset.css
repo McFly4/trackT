@@ -49,6 +49,9 @@ p {
     padding: 0;
 }
 
+a{
+    text-decoration: unset;
+}
 
 button {
     outline: none;
