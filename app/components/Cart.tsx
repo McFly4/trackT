@@ -618,7 +618,7 @@ export function CartEmpty({
                 alignItems: 'center',
                 justifyContent: 'center',
                 height: '100%',
-                marginLeft: '85px',
+                marginLeft: width > 768 ? '85px' : '0',
             }}
         >
             {crown && <Crowns isOpen={openCrown} onClose={closeCrown} />}
@@ -636,6 +636,7 @@ export function CartEmpty({
             <h1
                 style={{
                     textTransform: 'uppercase',
+                    fontSize: width > 768 ? '' : '35px',
                 }}
             >
                 Panier vide
