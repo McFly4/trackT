@@ -382,6 +382,7 @@ export default function HomePage() {
                         autoPlay
                         muted
                         loop
+                        playsInline
                         style={{
                             marginTop: '130px',
                             marginBottom: '80px',
