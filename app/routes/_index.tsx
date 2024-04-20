@@ -393,7 +393,14 @@ export default function HomePage() {
                     </video>
                 ) : (
                     <div className='responsive-video-banner'>
-                        <video width='100%' height='auto' autoPlay muted loop>
+                        <video
+                            width='100%'
+                            height='auto'
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                        >
                             <source
                                 src='/product/banner.mp4'
                                 type='video/mp4'
