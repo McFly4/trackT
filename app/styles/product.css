@@ -908,6 +908,23 @@
 
     }
 
+    .product-grid span{
+        font-size: 15px;
+    }
+
+    .product-grid span:before{
+        width: 20% ;
+    }
+
+    .product-grid span:after{
+        width: 20% ;
+    }
+
+    .product-grid span{
+        left: 45%;
+    }
+
+
 }
 
 

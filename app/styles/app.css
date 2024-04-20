@@ -2210,7 +2210,7 @@ input[type="search"]::-webkit-search-results-decoration {
     }
 
     .panel-container .responsive-products-grid .product-grid{
-        padding-bottom: 30px;
+        padding-bottom: 0px;
         flex: 150px;
     }
 
@@ -2223,7 +2223,7 @@ input[type="search"]::-webkit-search-results-decoration {
     }
     .product-grid .product-info-grid h4{
         font-size: 15px;
-        font-weight: 400;
+        font-weight: 500;
     }
 
     .product-grid .product-info-grid p{
