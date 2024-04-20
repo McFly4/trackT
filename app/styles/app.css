@@ -2039,7 +2039,6 @@ input[type="search"]::-webkit-search-results-decoration {
     .responsive-home-header p {
         font-size: 16px;
         line-height: 1.5;
-        padding-right: 30px;
         margin-top: 10px;
         font-weight: 300;
     }
@@ -2085,6 +2084,7 @@ input[type="search"]::-webkit-search-results-decoration {
         margin-bottom: 40px;
         width: unset;
         align-items: center;
+        padding: 15px;
     }
 
 
@@ -2094,7 +2094,7 @@ input[type="search"]::-webkit-search-results-decoration {
     }
 
     .panel-container-box img{
-        width: 80% !important;
+        width: 100% !important;
         height: unset !important;
     }
 
