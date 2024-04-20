@@ -269,11 +269,11 @@ export default function ({ product, stickers, isCarousel, quantity }: any) {
                         key={product.title}
                         to={`/products/${product.handle}`}
                     >
-                        <h3>
+                        <h4>
                             {product.vendor?.length > 20
                                 ? product.vendor.slice(0, 19) + '...'
                                 : product.vendor}
-                        </h3>
+                        </h4>
                         <p>
                             {product.title?.length > 25
                                 ? product.title.slice(0, 20) + '...'
