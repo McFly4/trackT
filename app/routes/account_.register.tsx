@@ -148,7 +148,7 @@ export default function Register() {
                                 type='email'
                                 autoComplete='email'
                                 required
-                                placeholder='Mail'
+                                placeholder='alex@tracktonline.com'
                                 aria-label='Email address'
                                 // eslint-disable-next-line jsx-a11y/no-autofocus
                                 autoFocus
@@ -162,7 +162,7 @@ export default function Register() {
                                     id='password'
                                     name='password'
                                     autoComplete='current-password'
-                                    placeholder='Mot de passe'
+                                    placeholder='●●●●●●●●●●●'
                                     aria-label='Password'
                                     minLength={8}
                                     required
@@ -232,7 +232,7 @@ export default function Register() {
                                     name='passwordConfirm'
                                     type={showPassword2 ? 'text' : 'password'}
                                     autoComplete='current-password'
-                                    placeholder='Confirmer mot de passe'
+                                    placeholder='●●●●●●●●●●●'
                                     aria-label='Re-enter password'
                                     minLength={8}
                                     required
@@ -307,7 +307,7 @@ export default function Register() {
                                 name='lastName'
                                 type='text'
                                 autoComplete='lastName'
-                                placeholder='Nom'
+                                placeholder='Streetwear'
                                 aria-label='lastName'
                                 required
                             />
@@ -319,7 +319,7 @@ export default function Register() {
                                 name='firstName'
                                 type='text'
                                 autoComplete='firstName'
-                                placeholder='Prénom'
+                                placeholder='Alex'
                                 aria-label='firstName'
                                 required
                             />

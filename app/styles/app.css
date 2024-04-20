@@ -1792,7 +1792,7 @@ input[type="search"]::-webkit-search-results-decoration {
 .pocket-items-product-img-price{
     position: absolute;
     bottom: -40px;
-    right: -30px;
+    right: 10px;
 }
 
 .pocket-items-product-img p{
@@ -2237,6 +2237,8 @@ input[type="search"]::-webkit-search-results-decoration {
 
     .search .search-container .search-txt p{
         margin-top: 10px;
+        font-size: 15px;
+        font-weight: 300;
     }
 
     .search .search-container .search-img{

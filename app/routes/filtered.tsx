@@ -233,7 +233,7 @@ export default function filtered() {
             <div
                 className='panel-trackt'
                 style={{
-                    marginTop: '200px',
+                    marginTop: width > 768 ? '200px' : '140px',
                     justifyContent:
                         productList.nodes?.length === 0 ? 'center' : '',
                 }}

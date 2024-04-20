@@ -108,7 +108,7 @@ export default function Collection() {
             <div
                 className='panel-trackt'
                 style={{
-                    marginTop: '200px',
+                    marginTop: width > 768 ? '200px' : '140px',
                     justifyContent:
                         collection.products?.nodes?.length === 0
                             ? 'center'
