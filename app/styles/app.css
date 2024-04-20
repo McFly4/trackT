@@ -2539,4 +2539,16 @@ input[type="search"]::-webkit-search-results-decoration {
     .politics .politics-panier div{
         background: unset;
     }
+
+    .product-img-grid-overlay{
+        display: none;
+    }
+
+    .product-grid .product-img-grid:hover .product-img{
+        filter: blur(0);
+        -webkit-filter: blur(0);
+        -moz-filter: blur(0);
+        -o-filter: blur(0);
+        -ms-filter: blur(0);
+    }
 }

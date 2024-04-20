@@ -373,7 +373,11 @@ export default function Collection() {
                                         )}
                                         <div className='pagination'>
                                             <NextLink>
-                                                <button>
+                                                <button
+                                                    style={{
+                                                        color: '#000',
+                                                    }}
+                                                >
                                                     {isLoading
                                                         ? 'Chargement...'
                                                         : 'Afficher plus de résultats'}

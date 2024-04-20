@@ -383,7 +383,11 @@ export default function SearchPage() {
                                         )}
                                         <div className='pagination'>
                                             <NextLink>
-                                                <button>
+                                                <button
+                                                    style={{
+                                                        color: '#000',
+                                                    }}
+                                                >
                                                     {isLoading
                                                         ? 'Chargement...'
                                                         : 'Afficher plus de résultats'}

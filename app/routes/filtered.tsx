@@ -410,6 +410,7 @@ export default function filtered() {
                             marginTop: '70px',
                             marginLeft: 'unset',
                             paddingLeft: 'unset !important',
+                            marginBottom: width > 768 ? '' : '50px',
                         }}
                         className='panel-container'
                     >
@@ -490,7 +491,11 @@ export default function filtered() {
                                         )}
                                         <div className='pagination'>
                                             <NextLink>
-                                                <button>
+                                                <button
+                                                    style={{
+                                                        color: '#000',
+                                                    }}
+                                                >
                                                     {isLoading
                                                         ? 'Chargement...'
                                                         : 'Plus de produits'}
