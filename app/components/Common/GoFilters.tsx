@@ -1,16 +1,19 @@
 import { Link } from '@remix-run/react'
 import React from 'react'
+import useWindowDimension from '~/hooks/useWindowDimension'
 
 export default function GoFilters() {
+    const useWidth = useWindowDimension()
+    const width = useWidth.width || 1920
     return (
         <div className='gofilters'>
             <h1>Pas encore trouvé votre perle rare ?</h1>
             <p>
                 Nous avons une multitude de styles et de pièces uniques, mais
                 nous savons que parfois, vous cherchez quelque chose de très
-                spécifique. <br />
-                Si vous n’avez pas encore trouvé exactement ce que vous voulez
-                dans notre Panel Trackt, nous sommes là pour vous aider.
+                spécifique. {width > 768 && <br />}
+                Si vous n’avez pas encore trouvé exactement ce que vous voulez,
+                vous avez le choix entre plusieurs options.
             </p>
             <div className='gofilters-btn'>
                 <div className='four-btns'>
@@ -70,6 +73,7 @@ export default function GoFilters() {
                                 style={{
                                     marginRight: '10px',
                                     opacity: '1 !important',
+                                    width: '20px',
                                 }}
                             />
                             Random item

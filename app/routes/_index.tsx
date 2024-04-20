@@ -338,6 +338,7 @@ export default function HomePage() {
                                                 style={{
                                                     marginRight: '10px',
                                                     opacity: '1 !important',
+                                                    width: '20px',
                                                 }}
                                             />
                                             Random item

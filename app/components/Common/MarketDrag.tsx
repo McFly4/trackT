@@ -14,7 +14,7 @@ export default function MarketDrag() {
     return (
         <div
             style={{
-                margin: '100px 0',
+                padding: '100px 20px',
             }}
         >
             <Swiper

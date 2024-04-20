@@ -2146,11 +2146,18 @@ input[type="search"]::-webkit-search-results-decoration {
     .four-btns{
         flex-direction: column;
         align-items: center;
+        margin-top: 50px;
+    }
+
+    .four-btns a{
+        width: 100%;
     }
 
     .four-btns button{
         margin-bottom: 20px;
         margin-right: unset;
+        width: 100%;
+
     }
 
     /* cart aside */

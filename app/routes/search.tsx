@@ -284,6 +284,7 @@ export default function SearchPage() {
                                                 alt='arrow'
                                                 style={{
                                                     marginRight: '10px',
+                                                    width: '20px',
                                                 }}
                                             />
                                             Random item
