@@ -132,7 +132,7 @@ export default function Register() {
         <div className='register login'>
             <h1
                 style={{
-                    marginTop: '100px',
+                    marginTop: width > 768 ? '100px' : '50px',
                 }}
             >
                 Créer mon compte trackt
