@@ -1792,7 +1792,7 @@ input[type="search"]::-webkit-search-results-decoration {
 .pocket-items-product-img-price{
     position: absolute;
     bottom: -40px;
-    right: 10px;
+    right: -30px;
 }
 
 .pocket-items-product-img p{
@@ -2053,7 +2053,7 @@ input[type="search"]::-webkit-search-results-decoration {
     .product-grid .product-img-grid-sticker {
         width: 43px;
         height: 39px;
-        right: 25px;
+        right: 0px;
         top: -20px;
     }
 
