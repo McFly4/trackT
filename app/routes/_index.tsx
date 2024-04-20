@@ -119,7 +119,7 @@ export default function HomePage() {
                     }}
                     onAutoplayTimeLeft={(s, time, progress) =>
                         onAutoplayTimeLeft(s, time, progress, 0)
-                    } // Pour la première diapositive
+                    }
                 >
                     {heroSection?.map((hero: any, index: number) => (
                         <SwiperSlide
