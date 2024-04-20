@@ -140,23 +140,33 @@ export default function HomePage() {
                                         width: '100%',
                                     }}
                                 >
-                                    <img
-                                        src={
-                                            hero.fields?.find(
-                                                (field: any) =>
-                                                    field?.key ===
-                                                    (sizeScreen > 1600
-                                                        ? 'fileBig'
-                                                        : sizeScreen > 768
-                                                        ? 'file_desktop'
-                                                        : 'file_mobile')
-                                            )?.reference?.image?.url
-                                        }
-                                        alt='home'
-                                        style={{
-                                            width: '100%',
-                                        }}
-                                    />
+                                    {hero.fields?.find(
+                                        (field: any) =>
+                                            field?.key ===
+                                            (sizeScreen > 1600
+                                                ? 'fileBig'
+                                                : sizeScreen > 768
+                                                ? 'file_desktop'
+                                                : 'file_mobile')
+                                    )?.reference?.image?.url && (
+                                        <img
+                                            src={
+                                                hero.fields?.find(
+                                                    (field: any) =>
+                                                        field?.key ===
+                                                        (sizeScreen > 1600
+                                                            ? 'fileBig'
+                                                            : sizeScreen > 768
+                                                            ? 'file_desktop'
+                                                            : 'file_mobile')
+                                                )?.reference?.image?.url
+                                            }
+                                            alt='home'
+                                            style={{
+                                                width: '100%',
+                                            }}
+                                        />
+                                    )}
 
                                     {hero.fields?.find(
                                         (field: any) =>
@@ -251,7 +261,15 @@ export default function HomePage() {
                     }}
                 >
                     {sizeScreen < 768 && (
-                        <button>Découvrir la vision trackt</button>
+                        <Link to='/about'>
+                            <button
+                                style={{
+                                    color: ' #000',
+                                }}
+                            >
+                                Découvrir la vision trackt
+                            </button>
+                        </Link>
                     )}
 
                     <div className='panel-container'>
