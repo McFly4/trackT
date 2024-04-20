@@ -114,7 +114,7 @@ export default function Login() {
                             minLength={8}
                             required
                             style={{
-                                width: width > 768 ? '93%' : '90%',
+                                width: width > 768 ? '93%' : '88%',
                                 border: error ? '2px solid red ' : '',
                                 outline: error ? 'unset !important' : '',
                             }}
