@@ -1,5 +1,6 @@
 .a-futur {
     font-family: 'Helvetica Neue', sans-serif;
+    margin-top: 200px;
 }
 
 .a-futur p {
@@ -280,13 +281,21 @@ text-align: center;
 
 @media screen and (max-width: 768px){
     .a-futur{
-        margin-top: 175px;
+        margin-top: 120px;
     }
 
     .a-futur p {
         margin: 30px;
         font-size: 16px;
         font-weight: 300;
+    }
+
+    .a-futur-double a:nth-child(1) div:before{
+        opacity: 0.5;
+    }
+
+    .a-futur-double a:nth-child(2) div:before{
+        opacity: 0.5;
     }
 
     .a-futur-double{
@@ -433,7 +442,6 @@ text-align: center;
     }
 
     .a-third-guid-container-item{
-        background-color: #181818;
         padding: 40px 0;
     }
 

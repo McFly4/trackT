@@ -179,7 +179,7 @@ export default function About() {
                     style={{
                         display: 'flex',
                         justifyContent: 'center',
-                        marginTop: '300px',
+                        marginTop: width > 768 ? '300px' : '100px',
                     }}
                 >
                     <div className='a-assets-container'>
@@ -240,7 +240,6 @@ export default function About() {
                         playsInline
                         style={{
                             width: width > 768 ? 'unset' : '100%',
-                            marginBottom: width > 768 ? '0' : '100px',
                         }}
                     >
                         <source src='/about/betaVersion.mp4' type='video/mp4' />

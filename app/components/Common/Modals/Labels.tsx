@@ -72,9 +72,8 @@ const Labels = ({ isOpen, onClose }: any) => {
                 <div className='stickers-responsive-item'>
                     <img src='/product/stickers/ooo.png' alt='release' />
                     <p>
-                        Ces articles prisés sont actuellement en rupture de
-                        stock, victimes de leur succès dans l’univers du
-                        streetwear. Inscrivez-vous pour être alerté de leur
+                        Articles prisés actuellement en rupture de stock.
+                        Inscrivez-vous sur trackt.fr pour être alerté de leur
                         retour.
                     </p>
                 </div>

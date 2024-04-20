@@ -1932,7 +1932,6 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .politics-retours-cb{
     margin-top: 45px;
-    background-color: #363636;
     border-radius: 5px;
     padding: 50px;
     margin-bottom: 500px;
@@ -2280,6 +2279,7 @@ input[type="search"]::-webkit-search-results-decoration {
 
      p:nth-child(1){
         font-size: 20px;
+         font-weight: 300;
     }
 
     .no-results-found button{
@@ -2524,5 +2524,17 @@ input[type="search"]::-webkit-search-results-decoration {
         width: 90%;
         font-family: 'HelveticaNeue500', sans-serif;
         margin: 20px auto;
+    }
+
+    .politics-panier{
+        display: flex;
+        margin-left: 0 !important;
+        margin-top: 30px !important;
+        margin-bottom: 0 !important;
+        flex-direction: column;
+    }
+
+    .politics .politics-panier div{
+        background: unset;
     }
 }

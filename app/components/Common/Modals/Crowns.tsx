@@ -39,10 +39,17 @@ const Crowns = ({ isOpen, onClose }: any) => {
                     <span>0 - 250€</span>
                     <p>
                         <br />
-                        RETOURS PAYANTS <br />
+                        LIVRAISON PAYANTE <br />
+                        CLASSIC BETA STICKERS
                         {/*BOOSTER RETOUR* 24H (10 €)*/}
                     </p>
-                    <p>Livraison 10€ - Retours 10€</p>
+                    <p
+                        style={{
+                            marginTop: '20px',
+                        }}
+                    >
+                        Livraison 10€ - Retours 10€
+                    </p>
                 </div>
                 <div className='a-third-guid-container-item'>
                     <img src='/cart/cartPremium.png' alt='cartClassic' />
@@ -50,10 +57,16 @@ const Crowns = ({ isOpen, onClose }: any) => {
                     <span>250€ - 500€</span>
                     <p>
                         RÉDUCTION LIVRAISON <br />
-                        RETOURS GRATUITS <br />
+                        PREMIUM BETA STICKERS <br />
                         {/*BOOSTER RETOUR* 24H (20 €)*/}
                     </p>
-                    <p>Livraison 5€</p>
+                    <p
+                        style={{
+                            marginTop: '20px',
+                        }}
+                    >
+                        Livraison 5€
+                    </p>
                 </div>
                 <div className='a-third-guid-container-item'>
                     <img src='/cart/cartExclusif.png' alt='cartClassic' />
@@ -62,10 +75,16 @@ const Crowns = ({ isOpen, onClose }: any) => {
                     <p>
                         LIVRAISON GRATUITE EXPRESS
                         <br />
-                        RETOURS GRATUITS <br />
+                        EXCLUSIVE BETA STICKERS <br />
                         POCKET ITEM SURPRISE
                     </p>
-                    <p>Livraison express</p>
+                    <p
+                        style={{
+                            marginTop: '20px',
+                        }}
+                    >
+                        Livraison express
+                    </p>
                 </div>
             </div>
         </div>
