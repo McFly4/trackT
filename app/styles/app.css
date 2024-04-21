@@ -2614,10 +2614,29 @@ input[type="search"]::-webkit-search-results-decoration {
 
     .predictive-search-form input{
         backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
     }
 
     .predictive-search-results{
         margin-top: -25px;
         margin-top: -25px;
     }
+
+    .predictive-search-result-item{
+        -webkit-backdrop-filter: blur(5px);
+    }
+
+    .searchAside{
+        overflow-y: scroll;
+    }
+
+    .searchAside::-webkit-scrollbar {
+        width: 0;  /* Masquer la barre de défilement */
+    }
+
+    /* Pour Firefox */
+    .searchAside {
+        scrollbar-width: none;  /* Masquer la barre de défilement */
+    }
+
 }
