@@ -185,7 +185,15 @@ export function ErrorBoundary() {
                 <Links />
             </head>
             <body className='error'>
-                <video muted autoPlay loop>
+                <video
+                    muted
+                    autoPlay
+                    loop
+                    playsInline
+                    style={{
+                        height: '100%',
+                    }}
+                >
                     <source src='/404.mp4' type='video/webm' />
                     Chargement ...
                 </video>
