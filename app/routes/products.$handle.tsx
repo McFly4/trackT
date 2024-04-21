@@ -280,6 +280,7 @@ export default function Product() {
                 style={{
                     marginTop: width > 768 ? '300px' : '170px',
                 }}
+                id='product-image'
             >
                 {width < 768 && scrollPosition < 1000 && (
                     <div
@@ -746,16 +747,20 @@ export default function Product() {
                     )}
                     {scrollPosition > 1000 && (
                         <div className='product-header-sticky'>
-                            <div className='product-header-sticky-product'>
-                                <img
-                                    src={product?.selectedVariant?.image?.url}
-                                    alt={product?.vendor}
-                                />
-                                <div className='product-header-sticky-product-info'>
-                                    <p>{product.vendor}</p>
-                                    <p>{product.title}</p>
+                            <a href='#product-image'>
+                                <div className='product-header-sticky-product'>
+                                    <img
+                                        src={
+                                            product?.selectedVariant?.image?.url
+                                        }
+                                        alt={product?.vendor}
+                                    />
+                                    <div className='product-header-sticky-product-info'>
+                                        <p>{product.vendor}</p>
+                                        <p>{product.title}</p>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     )}
                 </>
