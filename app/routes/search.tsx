@@ -324,6 +324,7 @@ export default function SearchPage() {
                                         (product: any, index: number) => {
                                             return (
                                                 <MainProduct
+                                                    isDouble={true}
                                                     key={index}
                                                     product={product}
                                                 />
@@ -372,6 +373,7 @@ export default function SearchPage() {
                                             <div className='responsive-products-grid'>
                                                 {nodes.map((product) => (
                                                     <MainProduct
+                                                        isDouble={true}
                                                         product={product}
                                                         quantity={
                                                             products?.nodes

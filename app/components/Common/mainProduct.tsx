@@ -4,11 +4,17 @@ import { useNavigate } from '@remix-run/react'
 import useWindowDimension from '~/hooks/useWindowDimension'
 import Labels from '~/components/Common/Modals/Labels'
 
-export default function ({ product, stickers, isCarousel, quantity }: any) {
+export default function ({
+    product,
+    stickers,
+    isCarousel,
+    quantity,
+    isDouble,
+}: any) {
     const navigate = useNavigate()
     const useWidth = useWindowDimension()
     const width = useWidth.width || 1920
-
+    const isDoubleGrid = isDouble ?? false
     const [isOpen, setIsOpen] = useState(false)
     const [labelsOpen, setLabelsOpen] = useState(false)
 
@@ -222,7 +228,9 @@ export default function ({ product, stickers, isCarousel, quantity }: any) {
                 {product.soon?.value && <span className='soon'>soon</span>}
 
                 <div
-                    className='product-img-grid'
+                    className={`product-img-grid ${
+                        isDoubleGrid ? 'double' : ''
+                    }`}
                     style={{
                         filter:
                             product.ooo?.value == 'true' || product.soon?.value

@@ -312,6 +312,7 @@ export default function Collection() {
                                         (product: any, index: number) => {
                                             return (
                                                 <MainProduct
+                                                    isDouble={true}
                                                     key={index}
                                                     product={product}
                                                 />
@@ -362,6 +363,7 @@ export default function Collection() {
                                             <div className='responsive-products-grid'>
                                                 {nodes.map((product) => (
                                                     <MainProduct
+                                                        isDouble={true}
                                                         product={product}
                                                         quantity={
                                                             collection.products

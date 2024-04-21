@@ -438,6 +438,7 @@ export default function filtered() {
                                                 <MainProduct
                                                     key={index}
                                                     product={product}
+                                                    isDouble={true}
                                                 />
                                             )
                                         }
@@ -481,6 +482,7 @@ export default function filtered() {
                                                 {nodes.map((product) => (
                                                     <MainProduct
                                                         product={product}
+                                                        isDouble={true}
                                                         quantity={
                                                             products?.nodes
                                                                 ?.length
