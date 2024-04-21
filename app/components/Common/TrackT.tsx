@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
 import { FreeMode, Scrollbar } from 'swiper/modules'
 import { useLocation } from '@remix-run/react'
 import useWindowDimensions from '~/hooks/useWindowDimension'
+import { freeMode } from '../../../dist/client/build/_shared/chunk-NJPQXKWY'
 
 export default function TrackT({ products, title, isAccount }: any) {
     const location = useLocation()

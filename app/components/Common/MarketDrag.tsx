@@ -147,20 +147,16 @@ export default function MarketDrag() {
                             {sizeScreen > 768 ? (
                                 <p>
                                     <p>
-                                        Exclusif ne signifie pas inaccessible.
-                                        Sur Trackt, nous vous ouvrons les portes
-                                        d’un monde où l’exclusivité et le style
-                                        se rencontrent. Des éditions limitées,
-                                        des collaborations uniques, et des
-                                        trouvailles rares – tout est sélectionné
-                                        pour vous offrir une expérience de mode
-                                        streetwear hors du commun. Notre
-                                        sélection est votre passeport pour un
-                                        style qui se démarque, pour des pièces
-                                        que tout le monde ne peut pas avoir.
-                                        Avec Trackt, habillez-vous dans ce qui
-                                        définit le futur du streetwear,
-                                        aujourd’hui.
+                                        Nous nous engageons à vous offrir une
+                                        expérience de navigation la plus
+                                        sécurisée possible. Votre sécurité en
+                                        ligne est notre priorité et nous mettons
+                                        en place des… certifications de sécurité
+                                        robustes. Pas de mauvaises surprises,
+                                        juste des découvertes de mode
+                                        incroyables. Chez Trackt, votre
+                                        tranquillité d’esprit est aussi
+                                        importante que votre style.
                                     </p>
                                 </p>
                             ) : (
@@ -169,27 +165,22 @@ export default function MarketDrag() {
                                         <p>
                                             Nous nous engageons à vous offrir
                                             une expérience de navigation la plus
-                                            sécurisée possible. Votre
-                                            sécurité...
+                                            sécurisée possible. Votre sécurité
+                                            en ligne ...
                                         </p>
                                     ) : (
                                         <p>
-                                            Exclusif ne signifie pas
-                                            inaccessible. Sur Trackt, nous vous
-                                            ouvrons les portes d’un monde où
-                                            l’exclusivité et le style se
-                                            rencontrent. Des éditions limitées,
-                                            des collaborations uniques, et des
-                                            trouvailles rares – tout est
-                                            sélectionné pour vous offrir une
-                                            expérience de mode streetwear hors
-                                            du commun. Notre sélection est votre
-                                            passeport pour un style qui se
-                                            démarque, pour des pièces que tout
-                                            le monde ne peut pas avoir. Avec
-                                            Trackt, habillez-vous dans ce qui
-                                            définit le futur du streetwear,
-                                            aujourd’hui.
+                                            Nous nous engageons à vous offrir
+                                            une expérience de navigation la plus
+                                            sécurisée possible. Votre sécurité
+                                            en ligne est notre priorité et nous
+                                            mettons en place des… certifications
+                                            de sécurité robustes. Pas de
+                                            mauvaises surprises, juste des
+                                            découvertes de mode incroyables.
+                                            Chez Trackt, votre tranquillité
+                                            d’esprit est aussi importante que
+                                            votre style.
                                         </p>
                                     )}
 
