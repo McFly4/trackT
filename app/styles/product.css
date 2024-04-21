@@ -859,6 +859,7 @@
         width: 90%;
         margin-top: unset;
         margin: 0 5%;
+        color: #000 !important;
     }
 
     .add-to-cart{
@@ -938,7 +939,7 @@
         height: 70px;
         background-color: #000000a6;
         backdrop-filter: blur(5px);
-        z-index: 99999;
+        z-index: 90;
     }
 
     .product-header-sticky-product img{

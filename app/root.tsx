@@ -191,7 +191,7 @@ export function ErrorBoundary() {
                     loop
                     playsInline
                     style={{
-                        height: '100%',
+                        height: '90%',
                     }}
                 >
                     <source src='/404.mp4' type='video/webm' />
