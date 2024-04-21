@@ -2102,6 +2102,9 @@ function ProductOptions({ option, variants }: any) {
             <button
                 onClick={width > 768 ? toggleModalToothbrush : openCronws}
                 className='sizes-guid'
+                style={{
+                    color: '#000 !important',
+                }}
             >
                 Guide des tailles
             </button>
@@ -2181,6 +2184,7 @@ function AddToCartButton({
                         disabled={disabled ?? fetcher.state !== 'idle'}
                         style={{
                             opacity: disabled ? 0.5 : 1,
+                            color: '#000 !important',
                         }}
                         className='add-to-cart'
                     >
