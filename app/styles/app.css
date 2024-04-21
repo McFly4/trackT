@@ -1111,6 +1111,11 @@ input[type="search"]::-webkit-search-results-decoration {
     .product-grid{
         margin: unset !important;
     }
+
+    .product-grid .product-img-grid {
+        width: 220px !important;
+        height: 150px !important;
+    }
 }
 
 

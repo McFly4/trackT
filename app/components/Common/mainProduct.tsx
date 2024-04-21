@@ -178,7 +178,9 @@ export default function ({ product, stickers, isCarousel, quantity }: any) {
             <div
                 className='product-grid'
                 style={{
-                    ...(isCarousel && { width: 'unset' }),
+                    ...(isCarousel && {
+                        width: width > 768 ? 'unset' : 'fit-content',
+                    }),
                     ...(quantity === 4 && {
                         flexBasis: 'calc(25% - 60px)',
                         width: 'calc(25% - 60px)',

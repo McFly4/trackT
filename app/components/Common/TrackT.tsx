@@ -50,7 +50,7 @@ export default function TrackT({ products, title, isAccount }: any) {
                     hide: false,
                 }}
                 watchSlidesProgress={true}
-                slidesPerGroup={2}
+                slidesPerGroup={1}
                 slidesPerView={
                     location.pathname === '/account/profile' ||
                     location.pathname === '/account/orders'
@@ -67,7 +67,7 @@ export default function TrackT({ products, title, isAccount }: any) {
                 onSwiper={(swiper) => (swiperRef.current = swiper)}
                 breakpoints={{
                     0: {
-                        slidesPerView: 1,
+                        slidesPerView: 1.5,
                     },
                     800: {
                         slidesPerView: 3,
