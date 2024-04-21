@@ -2119,10 +2119,6 @@ input[type="search"]::-webkit-search-results-decoration {
         padding: 0 20px;
     }
 
-    .market-drag-swiper div{
-        width: 100% !important;
-
-    }
 
     .market-drag-item div{
         padding-left: unset !important;
@@ -2130,9 +2126,8 @@ input[type="search"]::-webkit-search-results-decoration {
         margin-right: unset;
     }
 
-
-    .market-drag-item img{
-        transform: rotate(90deg);
+    .market-drag-swiper div{
+        margin-right: unset;
     }
 
     .hfooter .gofilters{
@@ -2525,7 +2520,7 @@ input[type="search"]::-webkit-search-results-decoration {
          width: unset;
     }
 
-    .res-discover-vision-trackt button{
+    .res-discover-vision-trackt .discover{
         border-radius: 5px;
         background-color: #fff;
         font-size: 15px;
@@ -2568,4 +2563,26 @@ input[type="search"]::-webkit-search-results-decoration {
     .product-grid .product-info-grid{
         padding-left: 5px;
     }
+
+    .searchOptions .searchOptionsButton {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        border-radius: 5px;
+        font-size: 18px;
+        text-transform: uppercase;
+        font-weight: 500;
+        padding: 20px 40px;
+        width: 90%;
+        font-family: HelveticaNeue500, sans-serif;
+        margin: 20px auto;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: #000;
+        background-image: url(public/manual.png);
+
+    }
+
 }

@@ -14,6 +14,7 @@ import TrackT from '~/components/Common/TrackT'
 import GoFilters from '~/components/Common/GoFilters'
 import { getPaginationVariables } from '@shopify/hydrogen'
 import useWindowDimensions from '~/hooks/useWindowDimension'
+import SearchOptions from '~/components/Common/Modals/SearchOptions'
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
     return [{ title: `TrackT ` }]
@@ -261,21 +262,29 @@ export default function HomePage() {
                     }}
                 >
                     {sizeScreen < 768 && (
-                        <Link to='/about'>
-                            <button
+                        <>
+                            <Link
+                                to='/about'
                                 style={{
-                                    color: ' #000',
+                                    display: 'flex',
                                 }}
                             >
-                                Découvrir la vision trackt
-                            </button>
-                        </Link>
+                                <button
+                                    className='discover'
+                                    style={{
+                                        color: ' #000',
+                                    }}
+                                >
+                                    Découvrir la vision trackt
+                                </button>
+                            </Link>
+                            <SearchOptions />
+                        </>
                     )}
 
                     <div className='panel-container'>
                         {sizeScreen > 768 && (
                             <>
-                                {' '}
                                 <div
                                     className='four-btns'
                                     style={{

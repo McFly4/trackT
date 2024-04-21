@@ -317,7 +317,7 @@ export default function Product() {
                                 {toothBrush === 'Small' ? (
                                     <div
                                         className='product-menu-stickers'
-                                        onClick={openCronws}
+                                        onClick={openSize}
                                     >
                                         <img
                                             src='/about/little_toothbrush.png'
@@ -331,7 +331,7 @@ export default function Product() {
                                 ) : toothBrush === 'Medium' ? (
                                     <div
                                         className='product-menu-stickers'
-                                        onClick={openCronws}
+                                        onClick={openSize}
                                     >
                                         <img
                                             src='/about/medium_toothbrush.png'
@@ -345,7 +345,7 @@ export default function Product() {
                                 ) : (
                                     <div
                                         className='product-menu-stickers'
-                                        onClick={openCronws}
+                                        onClick={openSize}
                                     >
                                         <img
                                             src='/about/over_toothbrush.png'

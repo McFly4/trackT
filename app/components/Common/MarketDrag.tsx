@@ -10,15 +10,16 @@ export default function MarketDrag() {
     const [showText2, setShowText2] = useState(false)
     const [showText3, setShowText3] = useState(false)
     const [showText4, setShowText4] = useState(false)
+    const [showText5, setShowText5] = useState(false)
 
     return (
         <div
             style={{
-                padding: '100px 20px',
+                padding: sizeScreen > 768 ? '100px 20px' : '100px 0',
             }}
         >
             <Swiper
-                slidesPerView={'auto'}
+                slidesPerView={sizeScreen > 768 ? 'auto' : 1}
                 grabCursor={true}
                 loop={true}
                 className='market-drag-swiper'
@@ -30,11 +31,16 @@ export default function MarketDrag() {
                 >
                     <div className='market-drag-item'>
                         <img
-                            src='/component/green.png'
+                            src={
+                                sizeScreen > 768
+                                    ? '/component/green.png'
+                                    : '/component/Responsive/green.png'
+                            }
                             alt='green'
                             style={{
-                                width: '150px',
-                                height: '260px',
+                                width: sizeScreen > 768 ? '150px' : 'unset',
+                                height: sizeScreen > 768 ? '260px' : 'unset',
+                                padding: sizeScreen > 768 ? 'unset' : '20px',
                             }}
                         />
                         <div
@@ -114,11 +120,16 @@ export default function MarketDrag() {
                 >
                     <div className='market-drag-item'>
                         <img
-                            src='/component/violet.png'
+                            src={
+                                sizeScreen > 768
+                                    ? '/component/vioet.png'
+                                    : '/component/Responsive/violet.png'
+                            }
                             alt='green'
                             style={{
-                                width: '150px',
-                                height: '260px',
+                                width: sizeScreen > 768 ? '150px' : 'unset',
+                                height: sizeScreen > 768 ? '260px' : 'unset',
+                                padding: sizeScreen > 768 ? 'unset' : '20px',
                             }}
                         />
                         <div
@@ -158,9 +169,8 @@ export default function MarketDrag() {
                                         <p>
                                             Nous nous engageons à vous offrir
                                             une expérience de navigation la plus
-                                            sécurisée possible. Votre sécurité
-                                            en ligne est notre priorité et nous
-                                            mettons en place des…
+                                            sécurisée possible. Votre
+                                            sécurité...
                                         </p>
                                     ) : (
                                         <p>
@@ -184,7 +194,7 @@ export default function MarketDrag() {
                                     )}
 
                                     <button
-                                        onClick={() => setShowText1(!showText2)}
+                                        onClick={() => setShowText2(!showText2)}
                                     >
                                         {showText2 ? '-' : '+'}
                                     </button>
@@ -200,11 +210,16 @@ export default function MarketDrag() {
                 >
                     <div className='market-drag-item'>
                         <img
-                            src='/component/yellow.png'
+                            src={
+                                sizeScreen > 768
+                                    ? '/component/yellow.png'
+                                    : '/component/Responsive/yellow.png'
+                            }
                             alt='green'
                             style={{
-                                width: '150px',
-                                height: '260px',
+                                width: sizeScreen > 768 ? '150px' : 'unset',
+                                height: sizeScreen > 768 ? '260px' : 'unset',
+                                padding: sizeScreen > 768 ? 'unset' : '20px',
                             }}
                         />
                         <div
@@ -259,7 +274,7 @@ export default function MarketDrag() {
                                     )}
 
                                     <button
-                                        onClick={() => setShowText1(!showText3)}
+                                        onClick={() => setShowText3(!showText3)}
                                     >
                                         {showText3 ? '-' : '+'}
                                     </button>
@@ -275,11 +290,16 @@ export default function MarketDrag() {
                 >
                     <div className='market-drag-item'>
                         <img
-                            src='/component/red.png'
+                            src={
+                                sizeScreen > 768
+                                    ? '/component/red.png'
+                                    : '/component/Responsive/red.png'
+                            }
                             alt='green'
                             style={{
-                                width: '150px',
-                                height: '260px',
+                                width: sizeScreen > 768 ? '150px' : 'unset',
+                                height: sizeScreen > 768 ? '260px' : 'unset',
+                                padding: sizeScreen > 768 ? 'unset' : '20px',
                             }}
                         />
                         <div
@@ -344,9 +364,81 @@ export default function MarketDrag() {
                                     )}
 
                                     <button
-                                        onClick={() => setShowText1(!showText4)}
+                                        onClick={() => setShowText4(!showText4)}
                                     >
                                         {showText4 ? '-' : '+'}
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </SwiperSlide>
+                <SwiperSlide
+                    style={{
+                        width: '70%',
+                    }}
+                >
+                    <div className='market-drag-item'>
+                        <img
+                            src={
+                                sizeScreen > 768
+                                    ? '/component/brown.png'
+                                    : '/component/Responsive/brown.png'
+                            }
+                            alt='green'
+                            style={{
+                                width: sizeScreen > 768 ? '150px' : 'unset',
+                                height: sizeScreen > 768 ? '260px' : 'unset',
+                                padding: sizeScreen > 768 ? 'unset' : '20px',
+                            }}
+                        />
+                        <div
+                            style={{
+                                paddingLeft: '60px',
+                            }}
+                        >
+                            <h3
+                                style={{
+                                    marginBottom: '25px',
+                                }}
+                            >
+                                Livraison rapide et fiable
+                            </h3>
+                            {sizeScreen > 768 ? (
+                                <p>
+                                    <p>
+                                        Prêt à recevoir votre prochain coup de
+                                        cœur ? Vous n’attendrez pas longtemps !
+                                        Nous offrons une livraison rapide et
+                                        fiable. Suivez votre commande à la trace
+                                        pour savoir exactement quand vous
+                                        pourrez apprécier votre nouvelle perle.
+                                    </p>
+                                </p>
+                            ) : (
+                                <div className='responsive-show-more'>
+                                    {!showText5 ? (
+                                        <p>
+                                            Prêt à recevoir votre prochain coup
+                                            de cœur ? Vous n’attendrez pas
+                                            longtemps ! Nous offrons une
+                                        </p>
+                                    ) : (
+                                        <p>
+                                            Prêt à recevoir votre prochain coup
+                                            de cœur ? Vous n’attendrez pas
+                                            longtemps ! Nous offrons une
+                                            livraison rapide et fiable. Suivez
+                                            votre commande à la trace pour
+                                            savoir exactement quand vous pourrez
+                                            apprécier votre nouvelle perle.
+                                        </p>
+                                    )}
+
+                                    <button
+                                        onClick={() => setShowText5(!showText5)}
+                                    >
+                                        {showText5 ? '-' : '+'}
                                     </button>
                                 </div>
                             )}
