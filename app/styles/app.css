@@ -2386,6 +2386,7 @@ input[type="search"]::-webkit-search-results-decoration {
         background: #000;
         z-index: 9999;
         overflow-y: scroll;
+        overflow-x: hidden;
 
     }
 
@@ -2463,7 +2464,7 @@ input[type="search"]::-webkit-search-results-decoration {
         width: 100%;
         left: 0;
         bottom: 0;
-        background-color: #000000b3;
+        background-color:#000000d9;
         backdrop-filter: blur(8px);
         display: flex;
         flex-direction: column;
@@ -2499,7 +2500,7 @@ input[type="search"]::-webkit-search-results-decoration {
         font-weight: 400;
         padding: 20px 40px;
         margin-top: 15px;
-        width: 90%;
+        width: 100%;
         font-family: 'HelveticaNeue500', sans-serif;
     }
 
@@ -2513,7 +2514,7 @@ input[type="search"]::-webkit-search-results-decoration {
         display: flex !important;
         justify-content: center !important;
         align-items: center !important;
-        background-color: #ffffff59 !important;
+        background-color: #ffffff1f !important;
         backdrop-filter: blur(13px) !important;
         z-index: 9999 !important;
     }
