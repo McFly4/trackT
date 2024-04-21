@@ -2362,9 +2362,9 @@ input[type="search"]::-webkit-search-results-decoration {
     }
 
     .filters-navigation-bts{
-        z-index: 8888;
+        z-index     : 8888;
         position: fixed;
-        top: 10%;
+        top: 15%;
         left: 50%;
         transform: translate(-50%, -50%);
         display: flex;

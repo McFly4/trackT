@@ -715,6 +715,10 @@ export default function Filters() {
                             next={nexto}
                             previous={previo}
                             activeIndex={activeIndex}
+                            first={manwoman?.length}
+                            second={tag?.length}
+                            third={colors?.length}
+                            fourth={productVendor?.length}
                         />
                     </div>
                     <Swiper
@@ -1014,7 +1018,15 @@ export default function Filters() {
     )
 }
 
-function NavButtons({ next, previous, activeIndex }: any) {
+function NavButtons({
+    next,
+    previous,
+    activeIndex,
+    first,
+    second,
+    third,
+    fourth,
+}: any) {
     function Title() {
         if (activeIndex === 0) {
             return 'Genre'
@@ -1028,6 +1040,20 @@ function NavButtons({ next, previous, activeIndex }: any) {
             return 'Prix'
         } else {
             return 'genre'
+        }
+    }
+
+    function isDisabled() {
+        if (activeIndex === 0) {
+            return first <= 0
+        } else if (activeIndex === 1) {
+            return second <= 0
+        } else if (activeIndex === 2) {
+            return third <= 0
+        } else if (activeIndex === 3) {
+            return fourth <= 0
+        } else {
+            return false
         }
     }
 
@@ -1067,7 +1093,13 @@ function NavButtons({ next, previous, activeIndex }: any) {
                     </svg>
                 </button>
                 <h5>{Title()}</h5>
-                <button onClick={next}>
+                <button
+                    onClick={next}
+                    disabled={isDisabled()}
+                    style={{
+                        opacity: isDisabled() ? 0.5 : 1,
+                    }}
+                >
                     <svg
                         xmlns='http://www.w3.org/2000/svg'
                         width='7.574'
