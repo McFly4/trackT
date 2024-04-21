@@ -43,6 +43,7 @@ export default function TrackT({ products, title, isAccount }: any) {
                         ? 'APPAREMMENT, CES ARTICLES NE VOUS ONT PAS LAISSÉ INDIFFÉRENTS'
                         : title}
                 </h2>
+                <p>Tout afficher</p>
 
                 {sizeScreen > 768 && (
                     <NavButtons next={nexto} previous={previo} />

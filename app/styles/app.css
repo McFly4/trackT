@@ -2657,4 +2657,15 @@ input[type="search"]::-webkit-search-results-decoration {
 
     }
 
+    .search .search-container .search-txt button{
+        font-weight: unset;
+        font-size: unset;
+        background-color: unset;
+        border-radius: 5px;
+    }
+
+    .responsive-modal-close{
+        padding: unset !important;
+    }
+
 }
