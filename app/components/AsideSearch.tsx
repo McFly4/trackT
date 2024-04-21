@@ -45,6 +45,8 @@ function CloseAside() {
                 style={{
                     top: '10px',
                     right: '5px',
+                    background: 'transparent',
+                    backdropFilter: 'blur(10px)',
                 }}
             >
                 <svg
