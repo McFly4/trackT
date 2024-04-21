@@ -47,6 +47,7 @@ function CloseAside() {
                     right: '5px',
                     background: 'transparent',
                     backdropFilter: 'blur(10px)',
+                    WebkitBackdropFilter: 'blur(10px)',
                 }}
             >
                 <svg
