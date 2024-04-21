@@ -142,7 +142,13 @@ export default function Register() {
             >
                 Créer mon compte trackt
             </h1>
-            <Form method='POST' className='login-form register2'>
+            <Form
+                method='POST'
+                className='login-form register2'
+                style={{
+                    overflow: 'hidden',
+                }}
+            >
                 <div className='register-form'>
                     <div>
                         <div className='login-form-field'>
@@ -353,6 +359,7 @@ export default function Register() {
                         display: 'flex',
                         justifyContent: 'center',
                         marginTop: '20px',
+                        marginBottom: '20px',
                     }}
                 >
                     <button type='submit'>
