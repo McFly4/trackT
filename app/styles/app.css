@@ -2591,7 +2591,7 @@ input[type="search"]::-webkit-search-results-decoration {
         background-position: center;
         background-repeat: no-repeat;
         background-color: #000;
-        background-image: url(public/manual.png);
+        background-image: url(public/searchOptions.png);
 
     }
 
