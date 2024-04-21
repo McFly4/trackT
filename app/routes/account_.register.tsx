@@ -129,10 +129,15 @@ export default function Register() {
     }
 
     return (
-        <div className='register login'>
+        <div
+            className='register login'
+            style={{
+                height: width > 768 ? '100vh' : 'unset',
+            }}
+        >
             <h1
                 style={{
-                    marginTop: width > 768 ? '100px' : '50px',
+                    marginTop: width > 768 ? '100px' : '0',
                 }}
             >
                 Créer mon compte trackt
