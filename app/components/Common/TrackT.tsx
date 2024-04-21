@@ -63,7 +63,6 @@ export default function TrackT({ products, title, isAccount }: any) {
                         : 4
                 }
                 grabCursor={true}
-                centeredSlides={true}
                 navigation={{
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
@@ -72,7 +71,7 @@ export default function TrackT({ products, title, isAccount }: any) {
                 onSwiper={(swiper) => (swiperRef.current = swiper)}
                 breakpoints={{
                     0: {
-                        slidesPerView: 1.5,
+                        slidesPerView: 1,
                     },
                     800: {
                         slidesPerView: 3,
