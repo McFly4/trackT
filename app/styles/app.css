@@ -1653,6 +1653,7 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .filters-btn-disabled{
     background-color: #64646450 !important;
+    opacity: 0.5;
 }
 
 .filters__footer .filters__footer__buttons button:last-child{
