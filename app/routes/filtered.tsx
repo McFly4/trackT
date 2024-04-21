@@ -477,7 +477,8 @@ export default function filtered() {
                                                         <MainProduct
                                                             product={product}
                                                             quantity={
-                                                                products?.nodes
+                                                                productList
+                                                                    ?.nodes
                                                                     ?.length
                                                             }
                                                         />
@@ -491,7 +492,7 @@ export default function filtered() {
                                                         product={product}
                                                         isDouble={true}
                                                         quantity={
-                                                            products?.nodes
+                                                            productList?.nodes
                                                                 ?.length
                                                         }
                                                     />
