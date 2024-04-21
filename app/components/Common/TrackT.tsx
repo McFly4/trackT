@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import MainProduct from '~/components/Common/mainProduct'
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
-import { Scrollbar } from 'swiper/modules'
+import { FreeMode, Scrollbar } from 'swiper/modules'
 import { useLocation } from '@remix-run/react'
 import useWindowDimensions from '~/hooks/useWindowDimension'
 
@@ -50,7 +50,7 @@ export default function TrackT({ products, title, isAccount }: any) {
                 )}
             </div>
             <Swiper
-                modules={[Scrollbar]}
+                modules={[Scrollbar, FreeMode]}
                 scrollbar={{
                     hide: false,
                 }}
