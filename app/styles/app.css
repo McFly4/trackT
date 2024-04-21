@@ -204,7 +204,6 @@ aside li {
 
 .categoriesAside{
     background-image: url(public/categoriesAside.png);
-
 }
 
 
@@ -2337,8 +2336,6 @@ input[type="search"]::-webkit-search-results-decoration {
 
     .filters-responsive h4{
         text-align: center;
-        margin-top: 50px;
-        margin-bottom: 50px;
     }
 
     .filters-responsive .filters__footer{
@@ -2366,10 +2363,14 @@ input[type="search"]::-webkit-search-results-decoration {
 
     .filters-navigation-bts{
         z-index: 8888;
-        position: absolute;
-        top: 15%;
+        position: fixed;
+        top: 10%;
         left: 50%;
         transform: translate(-50%, -50%);
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+        align-items: center;
     }
 
     /* CART POCKET ITEMS */
@@ -2583,6 +2584,18 @@ input[type="search"]::-webkit-search-results-decoration {
         background-color: #000;
         background-image: url(public/manual.png);
 
+    }
+
+    .predictive-search-form input{
+        width: 80%;
+    }
+
+    .categoriesAside{
+        background-image: url(public/categoriesAsideResponsive.png);
+    }
+
+    .categoriesAsideNav{
+        padding: 0 20px;
     }
 
 }

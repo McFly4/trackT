@@ -478,7 +478,14 @@ function SearchAside() {
                                               display: 'flex',
                                               alignItems: 'center',
                                               justifyContent: 'center',
-                                              width: '100%',
+                                              position: 'fixed',
+                                              bottom: '20px',
+                                              width: '80%',
+                                              height: '60px',
+                                              left: '0',
+                                              right: '0',
+                                              marginLeft: 'auto',
+                                              marginRight: 'auto',
                                           }
                                 }
                                 className={

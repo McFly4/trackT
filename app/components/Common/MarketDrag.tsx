@@ -122,7 +122,7 @@ export default function MarketDrag() {
                         <img
                             src={
                                 sizeScreen > 768
-                                    ? '/component/vioet.png'
+                                    ? '/component/violet.png'
                                     : '/component/Responsive/violet.png'
                             }
                             alt='green'

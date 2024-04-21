@@ -310,6 +310,12 @@ export default function Filters() {
         swiperRef.current?.slidePrev()
     }
 
+    //
+    const [activeIndex, setActiveIndex] = useState(0)
+
+    const handleSlideChange = (index: number) => {
+        setActiveIndex(index)
+    }
     return (
         <>
             {width > 768 ? (
@@ -682,7 +688,12 @@ export default function Filters() {
             ) : (
                 <>
                     <Link to='/'>
-                        <button className='responsive-modal-close'>
+                        <button
+                            className='responsive-modal-close'
+                            style={{
+                                zIndex: 9999,
+                            }}
+                        >
                             <svg
                                 xmlns='http://www.w3.org/2000/svg'
                                 width='16'
@@ -700,316 +711,301 @@ export default function Filters() {
                         </button>
                     </Link>
                     <div className='filters-responsive'>
-                        <h4>FILTRES</h4>
-                        <NavButtons next={nexto} previous={previo} />
-
-                        <Swiper
-                            slidesPerGroup={1}
-                            centeredSlides={true}
-                            navigation={{
-                                nextEl: '.swiper-button-next',
-                                prevEl: '.swiper-button-prev',
-                            }}
-                            spaceBetween={0}
-                            onSwiper={(swiper: any) =>
-                                (swiperRef.current = swiper)
-                            }
-                        >
-                            <SwiperSlide>
-                                <div
-                                    style={{
-                                        marginBottom: '50px',
-                                    }}
-                                >
-                                    <h5 className='filters__title'>Genre</h5>
-                                    <ul className='filters__list'>
+                        <NavButtons
+                            next={nexto}
+                            previous={previo}
+                            activeIndex={activeIndex}
+                        />
+                    </div>
+                    <Swiper
+                        slidesPerGroup={1}
+                        centeredSlides={true}
+                        navigation={{
+                            nextEl: '.swiper-button-next',
+                            prevEl: '.swiper-button-prev',
+                        }}
+                        onSlideChange={(e: any) => {
+                            handleSlideChange(e.activeIndex)
+                        }}
+                        spaceBetween={0}
+                        onSwiper={(swiper: any) => (swiperRef.current = swiper)}
+                        style={{
+                            marginTop: '200px',
+                        }}
+                    >
+                        <SwiperSlide>
+                            <div
+                                style={{
+                                    marginBottom: '50px',
+                                }}
+                            >
+                                <ul className='filters__list'>
+                                    <li className='filters__item' key='Tout'>
+                                        <label>
+                                            <input
+                                                type='checkbox'
+                                                onChange={() =>
+                                                    handleGenre('Tout')
+                                                }
+                                                checked={
+                                                    manwoman.length ===
+                                                        genre.length &&
+                                                    genre.every((gen) =>
+                                                        manwoman.includes(
+                                                            gen.name
+                                                        )
+                                                    )
+                                                }
+                                            />
+                                            Tout
+                                        </label>
+                                    </li>
+                                    {genre.map((gen) => (
                                         <li
                                             className='filters__item'
-                                            key='Tout'
+                                            key={gen.name}
                                         >
                                             <label>
                                                 <input
                                                     type='checkbox'
+                                                    checked={manwoman.includes(
+                                                        gen.name
+                                                    )}
                                                     onChange={() =>
-                                                        handleGenre('Tout')
-                                                    }
-                                                    checked={
-                                                        manwoman.length ===
-                                                            genre.length &&
-                                                        genre.every((gen) =>
-                                                            manwoman.includes(
-                                                                gen.name
-                                                            )
-                                                        )
+                                                        handleGenre(gen.name)
                                                     }
                                                 />
-                                                Tout
+                                                {gen.name}
                                             </label>
                                         </li>
-                                        {genre.map((gen) => (
-                                            <li
-                                                className='filters__item'
-                                                key={gen.name}
-                                            >
-                                                <label>
-                                                    <input
-                                                        type='checkbox'
-                                                        checked={manwoman.includes(
-                                                            gen.name
-                                                        )}
-                                                        onChange={() =>
-                                                            handleGenre(
-                                                                gen.name
-                                                            )
-                                                        }
-                                                    />
-                                                    {gen.name}
-                                                </label>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div>
-                                    <h5 className='filters__title'>
-                                        Catégories
-                                    </h5>
-                                    <ul className='filters__list'>
-                                        <li className='filters__item'>
+                                    ))}
+                                </ul>
+                            </div>
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <div>
+                                <ul className='filters__list'>
+                                    <li className='filters__item'>
+                                        <label>
+                                            <input
+                                                type='checkbox'
+                                                checked={
+                                                    tag.length ===
+                                                        category.length &&
+                                                    category.every((cat) =>
+                                                        tag.includes(cat.value)
+                                                    )
+                                                }
+                                                onChange={() => {
+                                                    handleTags('Tout')
+                                                }}
+                                            />
+                                            Tout
+                                        </label>
+                                    </li>
+                                    {category.map((cat) => (
+                                        <li
+                                            className='filters__item'
+                                            key={cat.name}
+                                        >
                                             <label>
                                                 <input
                                                     type='checkbox'
-                                                    checked={
-                                                        tag.length ===
-                                                            category.length &&
-                                                        category.every((cat) =>
-                                                            tag.includes(
-                                                                cat.value
-                                                            )
-                                                        )
+                                                    checked={tag.includes(
+                                                        cat.value
+                                                    )}
+                                                    onChange={() =>
+                                                        handleTags(cat.value)
                                                     }
+                                                />
+                                                {cat.name}
+                                            </label>
+                                        </li>
+                                    ))}
+                                    {ProductTypeList?.map((item: any) => (
+                                        <li
+                                            className='filters__item'
+                                            key={item.name}
+                                        >
+                                            <label>
+                                                <input
+                                                    type='checkbox'
+                                                    checked={ProductType.includes(
+                                                        item.value
+                                                    )}
                                                     onChange={() => {
-                                                        handleTags('Tout')
+                                                        handleProductType(
+                                                            item.value
+                                                        )
                                                     }}
                                                 />
-                                                Tout
+                                                {item.name}
                                             </label>
                                         </li>
-                                        {category.map((cat) => (
-                                            <li
-                                                className='filters__item'
-                                                key={cat.name}
-                                            >
-                                                <label>
-                                                    <input
-                                                        type='checkbox'
-                                                        checked={tag.includes(
-                                                            cat.value
-                                                        )}
-                                                        onChange={() =>
-                                                            handleTags(
-                                                                cat.value
-                                                            )
-                                                        }
-                                                    />
-                                                    {cat.name}
-                                                </label>
-                                            </li>
-                                        ))}
-                                        {ProductTypeList?.map((item: any) => (
-                                            <li
-                                                className='filters__item'
-                                                key={item.name}
-                                            >
-                                                <label>
-                                                    <input
-                                                        type='checkbox'
-                                                        checked={ProductType.includes(
-                                                            item.value
-                                                        )}
-                                                        onChange={() => {
-                                                            handleProductType(
-                                                                item.value
-                                                            )
-                                                        }}
-                                                    />
-                                                    {item.name}
-                                                </label>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className='filters__categories'>
-                                    <h5 className='filters__title'>Couleurs</h5>
-                                    <ul className='filters__list'>
-                                        <li className='filters__item'>
+                                    ))}
+                                </ul>
+                            </div>
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <div className='filters__categories'>
+                                <ul className='filters__list'>
+                                    <li className='filters__item'>
+                                        <label>
+                                            <input
+                                                type='checkbox'
+                                                checked={
+                                                    colors.length ===
+                                                        colorsList.length &&
+                                                    colorsList.every((color) =>
+                                                        colors.includes(
+                                                            color.value
+                                                        )
+                                                    )
+                                                }
+                                                onChange={() =>
+                                                    handleColors('Tout')
+                                                }
+                                            />
+                                            Tout
+                                        </label>
+                                    </li>
+                                    {colorsList.map((color) => (
+                                        <li
+                                            className='filters__item'
+                                            key={color.name}
+                                        >
                                             <label>
                                                 <input
                                                     type='checkbox'
-                                                    checked={
-                                                        colors.length ===
-                                                            colorsList.length &&
-                                                        colorsList.every(
-                                                            (color) =>
-                                                                colors.includes(
-                                                                    color.value
-                                                                )
-                                                        )
-                                                    }
+                                                    checked={colors.includes(
+                                                        color.value
+                                                    )}
                                                     onChange={() =>
-                                                        handleColors('Tout')
+                                                        handleColors(
+                                                            color.value
+                                                        )
                                                     }
                                                 />
-                                                Tout
+                                                {color.name}
                                             </label>
                                         </li>
-                                        {colorsList.map((color) => (
-                                            <li
-                                                className='filters__item'
-                                                key={color.name}
-                                            >
-                                                <label>
-                                                    <input
-                                                        type='checkbox'
-                                                        checked={colors.includes(
-                                                            color.value
-                                                        )}
-                                                        onChange={() =>
-                                                            handleColors(
-                                                                color.value
-                                                            )
-                                                        }
-                                                    />
-                                                    {color.name}
-                                                </label>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className='filters__categories'>
-                                    <h5 className='filters__title'>Marques</h5>
-                                    <ul className='filters__list'>
-                                        <li className='filters__item'>
+                                    ))}
+                                </ul>
+                            </div>
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <div className='filters__categories'>
+                                <ul className='filters__list'>
+                                    <li className='filters__item'>
+                                        <label>
+                                            <input
+                                                type='checkbox'
+                                                checked={
+                                                    productVendor.length ===
+                                                        brands.length &&
+                                                    brands.every((brand) =>
+                                                        productVendor.includes(
+                                                            brand.name
+                                                        )
+                                                    )
+                                                }
+                                                onChange={() =>
+                                                    handleProductVendor('Tout')
+                                                }
+                                            />
+                                            Tout
+                                        </label>
+                                    </li>
+                                    {brands.map((brand) => (
+                                        <li
+                                            className='filters__item'
+                                            key={brand.name}
+                                        >
                                             <label>
                                                 <input
                                                     type='checkbox'
-                                                    checked={
-                                                        productVendor.length ===
-                                                            brands.length &&
-                                                        brands.every((brand) =>
-                                                            productVendor.includes(
-                                                                brand.name
-                                                            )
-                                                        )
-                                                    }
+                                                    checked={productVendor.includes(
+                                                        brand.name
+                                                    )}
                                                     onChange={() =>
                                                         handleProductVendor(
-                                                            'Tout'
+                                                            brand.name
                                                         )
                                                     }
                                                 />
-                                                Tout
+                                                {brand.name}
                                             </label>
                                         </li>
-                                        {brands.map((brand) => (
-                                            <li
-                                                className='filters__item'
-                                                key={brand.name}
-                                            >
-                                                <label>
-                                                    <input
-                                                        type='checkbox'
-                                                        checked={productVendor.includes(
-                                                            brand.name
-                                                        )}
-                                                        onChange={() =>
-                                                            handleProductVendor(
-                                                                brand.name
-                                                            )
-                                                        }
-                                                    />
-                                                    {brand.name}
-                                                </label>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className='filters__categories'>
-                                    <h5 className='filters__title'>Prix</h5>
-                                    <ul className='filters__list'>
-                                        <li className='filters__item'>
+                                    ))}
+                                </ul>
+                            </div>
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <div className='filters__categories'>
+                                <ul className='filters__list'>
+                                    <li className='filters__item'>
+                                        <label>
+                                            <input
+                                                type='checkbox'
+                                                checked={
+                                                    prices.length ===
+                                                        price.length &&
+                                                    price.every((p) =>
+                                                        prices.includes(p.name)
+                                                    )
+                                                }
+                                                onChange={() =>
+                                                    handlePrice('Tout')
+                                                }
+                                            />
+                                            Tout
+                                        </label>
+                                    </li>
+                                    {price.map((p) => (
+                                        <li
+                                            className='filters__item'
+                                            key={p.name}
+                                        >
                                             <label>
                                                 <input
                                                     type='checkbox'
-                                                    checked={
-                                                        prices.length ===
-                                                            price.length &&
-                                                        price.every((p) =>
-                                                            prices.includes(
-                                                                p.name
-                                                            )
-                                                        )
-                                                    }
+                                                    checked={prices.includes(
+                                                        p.name
+                                                    )}
                                                     onChange={() =>
-                                                        handlePrice('Tout')
+                                                        handlePrice(p.name)
                                                     }
                                                 />
-                                                Tout
+                                                {p.name}
                                             </label>
                                         </li>
-                                        {price.map((p) => (
-                                            <li
-                                                className='filters__item'
-                                                key={p.name}
-                                            >
-                                                <label>
-                                                    <input
-                                                        type='checkbox'
-                                                        checked={prices.includes(
-                                                            p.name
-                                                        )}
-                                                        onChange={() =>
-                                                            handlePrice(p.name)
-                                                        }
-                                                    />
-                                                    {p.name}
-                                                </label>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </SwiperSlide>
-                        </Swiper>
-                        <div className='filters__footer'>
-                            <div className='filters__footer__buttons'>
-                                <Link to={`/filtered${handleSearch()}`}>
-                                    <button
-                                        className={
-                                            manwoman?.length === 0
-                                                ? 'filters-btn-disabled'
-                                                : ''
-                                        }
-                                    >
-                                        <h5
-                                            style={{
-                                                color:
-                                                    manwoman?.length === 0
-                                                        ? '#fff'
-                                                        : '#000',
-                                            }}
-                                        >
-                                            Afficher les résultats
-                                        </h5>
-                                    </button>
-                                </Link>
+                                    ))}
+                                </ul>
                             </div>
+                        </SwiperSlide>
+                    </Swiper>
+                    <div className='filters__footer'>
+                        <div className='filters__footer__buttons'>
+                            <Link to={`/filtered${handleSearch()}`}>
+                                <button
+                                    className={
+                                        manwoman?.length === 0
+                                            ? 'filters-btn-disabled'
+                                            : ''
+                                    }
+                                >
+                                    <h5
+                                        style={{
+                                            color:
+                                                manwoman?.length === 0
+                                                    ? '#fff'
+                                                    : '#000',
+                                        }}
+                                    >
+                                        Afficher les résultats
+                                    </h5>
+                                </button>
+                            </Link>
                         </div>
                     </div>
                 </>
@@ -1018,46 +1014,76 @@ export default function Filters() {
     )
 }
 
-function NavButtons({ next, previous }: any) {
+function NavButtons({ next, previous, activeIndex }: any) {
+    function Title() {
+        if (activeIndex === 0) {
+            return 'Genre'
+        } else if (activeIndex === 1) {
+            return 'Catégories'
+        } else if (activeIndex === 2) {
+            return 'Couleurs'
+        } else if (activeIndex === 3) {
+            return 'Marques'
+        } else if (activeIndex === 4) {
+            return 'Prix'
+        } else {
+            return 'genre'
+        }
+    }
+
     return (
-        <div className='navigation-buttons filters-navigation-bts'>
-            <button onClick={previous}>
-                <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    width='7.574'
-                    height='13.928'
-                    viewBox='0 0 7.574 13.928'
-                >
-                    <path
-                        id='Tracé_416'
-                        data-name='Tracé 416'
-                        d='M-20862.068-17757.791a.61.61,0,0,1-.432-.18.612.612,0,0,1,0-.861l5.924-5.924-5.924-5.924a.612.612,0,0,1,0-.861.611.611,0,0,1,.863,0l6.355,6.354a.614.614,0,0,1,0,.863l-6.355,6.354A.61.61,0,0,1-20862.068-17757.791Z'
-                        transform='translate(20862.678 17771.719)'
-                        fill='#fff'
-                    />
-                </svg>
-            </button>
-            <button
-                onClick={next}
+        <div
+            style={{
+                backgroundColor: '#000',
+                position: 'fixed',
+                width: '100%',
+                zIndex: 1000,
+                height: '13%',
+            }}
+        >
+            <h4
                 style={{
-                    marginLeft: '130px',
+                    marginTop: '50px',
                 }}
             >
-                <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    width='7.574'
-                    height='13.928'
-                    viewBox='0 0 7.574 13.928'
-                >
-                    <path
-                        id='Tracé_416'
-                        data-name='Tracé 416'
-                        d='M-20862.068-17757.791a.61.61,0,0,1-.432-.18.612.612,0,0,1,0-.861l5.924-5.924-5.924-5.924a.612.612,0,0,1,0-.861.611.611,0,0,1,.863,0l6.355,6.354a.614.614,0,0,1,0,.863l-6.355,6.354A.61.61,0,0,1-20862.068-17757.791Z'
-                        transform='translate(20862.678 17771.719)'
-                        fill='#fff'
-                    />
-                </svg>
-            </button>
+                FILTRES
+            </h4>
+
+            <div className='navigation-buttons filters-navigation-bts'>
+                <button onClick={previous}>
+                    <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        width='7.574'
+                        height='13.928'
+                        viewBox='0 0 7.574 13.928'
+                    >
+                        <path
+                            id='Tracé_416'
+                            data-name='Tracé 416'
+                            d='M-20862.068-17757.791a.61.61,0,0,1-.432-.18.612.612,0,0,1,0-.861l5.924-5.924-5.924-5.924a.612.612,0,0,1,0-.861.611.611,0,0,1,.863,0l6.355,6.354a.614.614,0,0,1,0,.863l-6.355,6.354A.61.61,0,0,1-20862.068-17757.791Z'
+                            transform='translate(20862.678 17771.719)'
+                            fill='#fff'
+                        />
+                    </svg>
+                </button>
+                <h5>{Title()}</h5>
+                <button onClick={next}>
+                    <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        width='7.574'
+                        height='13.928'
+                        viewBox='0 0 7.574 13.928'
+                    >
+                        <path
+                            id='Tracé_416'
+                            data-name='Tracé 416'
+                            d='M-20862.068-17757.791a.61.61,0,0,1-.432-.18.612.612,0,0,1,0-.861l5.924-5.924-5.924-5.924a.612.612,0,0,1,0-.861.611.611,0,0,1,.863,0l6.355,6.354a.614.614,0,0,1,0,.863l-6.355,6.354A.61.61,0,0,1-20862.068-17757.791Z'
+                            transform='translate(20862.678 17771.719)'
+                            fill='#fff'
+                        />
+                    </svg>
+                </button>
+            </div>
         </div>
     )
 }
