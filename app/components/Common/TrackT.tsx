@@ -62,6 +62,7 @@ export default function TrackT({ products, title, isAccount }: any) {
                         ? 3
                         : 4
                 }
+                freeMode={sizeScreen < 768}
                 grabCursor={true}
                 navigation={{
                     nextEl: '.swiper-button-next',
