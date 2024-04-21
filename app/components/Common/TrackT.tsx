@@ -27,9 +27,13 @@ export default function TrackT({ products, title, isAccount }: any) {
             style={{
                 margin:
                     location.pathname === '/account/profile'
-                        ? '50px 50px 0 0'
+                        ? sizeScreen > 768
+                            ? '50px 50px 0 0'
+                            : '0'
                         : location.pathname === '/account/orders'
-                        ? '50px 0'
+                        ? sizeScreen > 768
+                            ? '50px 0'
+                            : '0'
                         : '',
             }}
         >

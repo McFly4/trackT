@@ -85,7 +85,10 @@ export default function SearchOptions() {
                             justifyContent: 'unset',
                         }}
                     >
-                        <Link to='/filters'>
+                        <Link
+                            to='/filters'
+                            onClick={() => setSearchOptions(false)}
+                        >
                             <button>
                                 <img
                                     src='/filters/checkbox.png'
@@ -100,10 +103,16 @@ export default function SearchOptions() {
                                 Rechercher par filtres
                             </button>
                         </Link>
-                        <a href='#categories-aside'>
+                        <a
+                            href='#categories-aside'
+                            onClick={() => setSearchOptions(false)}
+                        >
                             <button>Shopping par catégories</button>
                         </a>
-                        <a href='#search-aside'>
+                        <a
+                            href='#search-aside'
+                            onClick={() => setSearchOptions(false)}
+                        >
                             <button>
                                 <svg
                                     id='icon'
@@ -133,7 +142,10 @@ export default function SearchOptions() {
                                 Rechercher manuellement
                             </button>
                         </a>
-                        <Link to='/filtered'>
+                        <Link
+                            to='/filtered'
+                            onClick={() => setSearchOptions(false)}
+                        >
                             <button>
                                 <img
                                     src='/filters/arrow-shuffle.png'

@@ -23,6 +23,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import React from 'react'
 import cliSpinners from 'cli-spinners'
 import TrackT from '~/components/Common/TrackT'
+import useWindowDimension from '~/hooks/useWindowDimension'
 
 export type ActionResponse = {
     error: string | null
@@ -138,6 +139,8 @@ export default function AccountProfile() {
     const [selectedClothesSize, setSelectedClothesSize] = useState('')
     const productsList =
         products?.metaobjects?.nodes[0]?.field?.references?.nodes
+    const useWidth = useWindowDimension()
+    const width = useWidth.width || 1920
 
     const shoesSize = [
         { index: 0, size: '36' },
@@ -205,7 +208,7 @@ export default function AccountProfile() {
     return (
         <>
             <div className='account-profile'>
-                <h2>Informations personnelles</h2>
+                <h4>Informations personnelles</h4>
                 <br />
                 <br />
                 <Form method='PUT'>
@@ -244,7 +247,7 @@ export default function AccountProfile() {
                         </div>
                         <div
                             style={{
-                                marginLeft: '50px',
+                                marginLeft: width > 768 ? '50px' : '0',
                             }}
                         >
                             <div className='login-form-field'>
@@ -282,6 +285,7 @@ export default function AccountProfile() {
                     <div
                         style={{
                             display: 'flex',
+                            flexDirection: width > 768 ? 'row' : 'column',
                         }}
                     >
                         <div className='login-form-field'>
@@ -354,7 +358,7 @@ export default function AccountProfile() {
                         <div
                             className='login-form-field'
                             style={{
-                                marginLeft: '50px',
+                                marginLeft: width > 768 ? '50px' : '0',
                             }}
                         >
                             <label htmlFor='newPassword'>
@@ -481,7 +485,7 @@ export default function AccountProfile() {
                     <div
                         style={{
                             width: '100%',
-                            display: 'flex',
+                            display: width > 768 ? 'flex' : 'block',
                             justifyContent: 'flex-end',
                         }}
                     >
@@ -498,7 +502,7 @@ export default function AccountProfile() {
                 </Form>
             </div>
             <div className='trackT-size'>
-                <h2>Ajuster TrackT à votre taille</h2>
+                <h4>Ajuster TrackT à votre taille</h4>
                 <p>
                     Nous vous encourageons à sélectionner vos tailles favorites
                     pour les textiles et les sneakers dans votre profil. Cette
@@ -545,7 +549,8 @@ export default function AccountProfile() {
                     <div
                         className='trackT-size-container-item'
                         style={{
-                            marginLeft: '100px',
+                            marginLeft: width > 768 ? '100px' : '0',
+                            marginTop: width > 768 ? '0' : '50px',
                         }}
                     >
                         <h2>Vêtements</h2>
@@ -584,7 +589,17 @@ export default function AccountProfile() {
                     </div>
                 </div>
             </div>
-            <TrackT products={productsList} isAccount={true} />
+            {width > 768 ? (
+                <TrackT products={productsList} isAccount={true} />
+            ) : (
+                <div
+                    style={{
+                        marginTop: '50px',
+                    }}
+                >
+                    <TrackT products={productsList} isAccount={true} />
+                </div>
+            )}
         </>
     )
 }

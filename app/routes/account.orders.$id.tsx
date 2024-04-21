@@ -4,6 +4,7 @@ import { Money, Image, flattenConnection } from '@shopify/hydrogen'
 import type { OrderLineItemFullFragment } from 'storefrontapi.generated'
 import React from 'react'
 import dayjs from 'dayjs'
+import useWindowDimensions from '~/hooks/useWindowDimension'
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
     return [{ title: `Order ${data?.order?.name}` }]
@@ -62,6 +63,9 @@ export default function OrderRoute() {
         setModalOpen(!modalOpen)
     }
 
+    const useWidth = useWindowDimensions()
+    const width = useWidth.width || 1920
+
     return (
         <div className='account-order'>
             {modalOpen && (
@@ -87,41 +91,43 @@ export default function OrderRoute() {
                     }}
                 >
                     <h2>commande {order.name}</h2>
-                    <div
-                        onClick={toggleModal}
-                        style={{
-                            marginRight: '50px',
-                        }}
-                    >
-                        {cartTotalPrice <= 250 ? (
-                            <img
-                                src='/cart/cartClassic.png'
-                                alt='panier classic'
-                                style={{
-                                    width: 'fit-content',
-                                    marginBottom: '50px',
-                                }}
-                            />
-                        ) : cartTotalPrice <= 500 ? (
-                            <img
-                                src='/cart/cartPremium.png'
-                                alt='panier premium'
-                                style={{
-                                    width: 'fit-content',
-                                    marginBottom: '50px',
-                                }}
-                            />
-                        ) : (
-                            <img
-                                src='/cart/cartExclusif.png'
-                                alt='panier vide'
-                                style={{
-                                    width: 'fit-content',
-                                    marginBottom: '50px',
-                                }}
-                            />
-                        )}
-                    </div>
+                    {width > 768 && (
+                        <div
+                            onClick={toggleModal}
+                            style={{
+                                marginRight: '50px',
+                            }}
+                        >
+                            {cartTotalPrice <= 250 ? (
+                                <img
+                                    src='/cart/cartClassic.png'
+                                    alt='panier classic'
+                                    style={{
+                                        width: 'fit-content',
+                                        marginBottom: '50px',
+                                    }}
+                                />
+                            ) : cartTotalPrice <= 500 ? (
+                                <img
+                                    src='/cart/cartPremium.png'
+                                    alt='panier premium'
+                                    style={{
+                                        width: 'fit-content',
+                                        marginBottom: '50px',
+                                    }}
+                                />
+                            ) : (
+                                <img
+                                    src='/cart/cartExclusif.png'
+                                    alt='panier vide'
+                                    style={{
+                                        width: 'fit-content',
+                                        marginBottom: '50px',
+                                    }}
+                                />
+                            )}
+                        </div>
+                    )}
                 </div>
             </div>
             {/*<div className='orders-status'>*/}

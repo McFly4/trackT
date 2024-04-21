@@ -7,6 +7,7 @@ import type {
 } from 'storefrontapi.generated'
 import React, { useRef, useState } from 'react'
 import TrackT from '~/components/Common/TrackT'
+import useWindowDimensions from '~/hooks/useWindowDimension'
 
 export const meta: MetaFunction = () => {
     return [{ title: 'Orders' }]
@@ -166,8 +167,10 @@ function OrderItem({ order }: { order: OrderItemFragment }) {
         gridTemplateRows: `repeat(${numRows}, 1fr)`,
         gridTemplateColumns: `repeat(${numCols}, 1fr)`,
     }
-    console.log(order)
-    return (
+    const useWidth = useWindowDimensions()
+    const width = useWidth.width || 1920
+
+    return width > 768 ? (
         <Link to={`/account/orders/${btoa(order.id)}`}>
             <div className='order'>
                 <div className='order-head'>
@@ -222,6 +225,30 @@ function OrderItem({ order }: { order: OrderItemFragment }) {
                 </div>
             </div>
         </Link>
+    ) : (
+        <div className='order'>
+            <div className='order-head'>
+                <div className='order-head-image' style={gridStyle}>
+                    {images?.slice(0, 4).map((image, index) => (
+                        <div key={index} className='order-head-image-item'>
+                            <img
+                                src={image?.variant?.image?.url}
+                                alt={`Image ${index + 1}`}
+                                style={{
+                                    width: imageCount <= 2 ? '100%' : '',
+                                }}
+                            />
+                        </div>
+                    ))}
+                </div>
+                <div className='order-head-title'>
+                    <p>Commande #{order.orderNumber}</p>
+                    <Link to={`/account/orders/${btoa(order.id)}`}>
+                        <button>Détails commande</button>
+                    </Link>
+                </div>
+            </div>
+        </div>
     )
 }
 

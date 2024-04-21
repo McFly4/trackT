@@ -3,6 +3,7 @@ import { Form, NavLink, Outlet, useLoaderData } from '@remix-run/react'
 import { json, redirect, type LoaderFunctionArgs } from '@shopify/remix-oxygen'
 import type { CustomerFragment } from 'storefrontapi.generated'
 import { useLocation } from '@remix-run/react'
+import useWindowDimensions from '~/hooks/useWindowDimension'
 
 export function shouldRevalidate() {
     return true
@@ -117,6 +118,8 @@ function AccountLayout({
         : 'Account Details'
 
     const location = useLocation()
+    const useWidth = useWindowDimensions()
+    const width = useWidth.width || 1920
     const [isOpen, setIsOpen] = useState(false)
 
     const toggleDialog = () => {
@@ -131,7 +134,11 @@ function AccountLayout({
 
     return (
         <div className='account'>
-            <AccountMenu images={images} />
+            {width > 768 ? (
+                <AccountMenu images={images} />
+            ) : (
+                <AccountMenuResponsive images={images} />
+            )}
             <div className='account-head'>
                 {location.pathname === '/account/profile' && (
                     <>
@@ -209,6 +216,124 @@ function AccountLayout({
 
                 {children}
             </div>
+        </div>
+    )
+}
+
+function AccountMenuResponsive(images: any) {
+    function isActiveStyle({
+        isActive,
+        isPending,
+    }: {
+        isActive: boolean
+        isPending: boolean
+    }) {
+        return {
+            backgroundColor: isActive ? 'rgba(255, 255, 255, 0.1)' : undefined,
+            backdropFilter: isActive ? 'blur(10px)' : undefined,
+        }
+    }
+    const [imageURL, setImageURL] = useState('/account/nav.png')
+    const [expanded, setExpanded] = useState(false)
+
+    const toggleExpanded = () => {
+        setExpanded(!expanded)
+    }
+
+    const location = useLocation()
+
+    const allImages =
+        images?.images?.metaobjects?.edges[0]?.node?.fields[0]?.references
+            ?.nodes
+
+    function randomImage() {
+        if (allImages && allImages.length > 0) {
+            const randomIndex = Math.floor(Math.random() * allImages.length)
+            const randomImageObject = allImages[randomIndex]
+            if (
+                randomImageObject &&
+                randomImageObject.image &&
+                randomImageObject.image.url
+            ) {
+                return randomImageObject.image.url
+            } else {
+                return '/account/nav.png'
+            }
+        } else {
+            return '/account/nav.png'
+        }
+    }
+
+    useEffect(() => {
+        setImageURL(randomImage())
+    }, [location])
+
+    return (
+        <div
+            className='responsive-menu'
+            style={{
+                backgroundImage: `url(${imageURL})`,
+                height: expanded ? '100vh' : '75px',
+            }}
+        >
+            {expanded ? (
+                <div className='responsive-menu-expanded'>
+                    <NavLink to='/account/profile' style={isActiveStyle}>
+                        <p>
+                            Mon espace trackt
+                            <svg
+                                xmlns='http://www.w3.org/2000/svg'
+                                width='17.064'
+                                height='10.268'
+                                viewBox='0 0 17.064 10.268'
+                            >
+                                <path
+                                    id='Tracé_445'
+                                    data-name='Tracé 445'
+                                    d='M-13626.686,22648.77l-6.809-6.822a1.72,1.72,0,0,1-.506-1.225,1.709,1.709,0,0,1,.506-1.219,1.745,1.745,0,0,1,2.436-.008l5.592,5.6,5.59-5.594a1.723,1.723,0,0,1,2.436,0,1.7,1.7,0,0,1,.506,1.219,1.712,1.712,0,0,1-.506,1.225l-6.8,6.814a1.732,1.732,0,0,1-1.225.506A1.74,1.74,0,0,1-13626.686,22648.77Z'
+                                    transform='translate(13634 -22639)'
+                                    fill='#fff'
+                                />
+                            </svg>
+                        </p>
+                    </NavLink>
+                    <NavLink to='/account/orders' style={isActiveStyle}>
+                        <p>Commandes</p>
+                    </NavLink>
+                    <NavLink to='/account/mybestitem' style={isActiveStyle}>
+                        <p> My best item</p>
+                    </NavLink>
+                    <NavLink to='/account/addresses' style={isActiveStyle}>
+                        <p>Adresses</p>
+                    </NavLink>
+                </div>
+            ) : (
+                <div
+                    className='responsive-menu-unexpanded'
+                    onClick={toggleExpanded}
+                >
+                    <h6>
+                        Mon epsace trackt
+                        <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            width='17.064'
+                            height='10.268'
+                            viewBox='0 0 17.064 10.268'
+                            style={{
+                                marginLeft: '10px',
+                            }}
+                        >
+                            <path
+                                id='Tracé_445'
+                                data-name='Tracé 445'
+                                d='M-13626.686,22648.77l-6.809-6.822a1.72,1.72,0,0,1-.506-1.225,1.709,1.709,0,0,1,.506-1.219,1.745,1.745,0,0,1,2.436-.008l5.592,5.6,5.59-5.594a1.723,1.723,0,0,1,2.436,0,1.7,1.7,0,0,1,.506,1.219,1.712,1.712,0,0,1-.506,1.225l-6.8,6.814a1.732,1.732,0,0,1-1.225.506A1.74,1.74,0,0,1-13626.686,22648.77Z'
+                                transform='translate(13634 -22639)'
+                                fill='#fff'
+                            />
+                        </svg>
+                    </h6>
+                </div>
+            )}
         </div>
     )
 }

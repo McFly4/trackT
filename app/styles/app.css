@@ -39,6 +39,7 @@
     font-weight: normal;
     font-style: italic;
 }
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
 
 /* DS font */
 
@@ -891,7 +892,9 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .autoplay-progress span{
     font-size: 40px;
-    font-family: "DS-Digital", sans-serif;
+    font-family: "Silkscreen", sans-serif;
+    font-weight: 700;
+    font-style: normal;
 }
 
 

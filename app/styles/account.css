@@ -788,4 +788,105 @@
         margin-bottom: 50px;
     }
 
+
+    .account-head{
+        width: 90%;
+        margin: 50px auto;
+
+    }
+
+    .trackT-size-container{
+        flex-direction: column;
+    }
+
+    .trackT-size-container-item{
+        width: 100%;
+    }
+
+    .btn-update{
+        font-size: 15px;
+    }
+
+    .account .account-head h1{
+        font-size: 25px;
+    }
+
+    .trackT-size-container-item h2{
+        font-size: 23px;
+    }
+
+    .trackT-size-container-item{
+        padding: 20px 0;
+    }
+
+    .order-head-title button{
+        padding: 0 40px;
+        height: 60px;
+        border-radius: 5px;
+        background: #fff;
+        color: #000;
+        font-size: 15px;
+        font-weight: 400;
+        text-transform: uppercase;
+        cursor: pointer;
+        font-family: "Helvetica Neue", sans-serif;
+        margin-top: 15px;
+        width: 100%;
+    }
+
+    .account-orders{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .orders-informations {
+        margin-top: 20px;
+        flex-direction: column;
+        padding: 30px;
+        width: 80%;
+        margin-bottom: 30px;
+    }
+
+    .order-products{
+        margin-right: unset;
+        align-items: center;
+    }
+    .order-product{
+        flex-direction: column;
+
+    }
+
+    .order-description{
+        margin-left: unset;
+        margin-top: 10px;
+    }
+    .order-description-item{
+        flex: unset;
+    }
+
+    .responsive-menu{
+        position: fixed;
+        top: 120px;
+        height: 75px;
+        width: 100%;
+        transition: .2s ease-in-out;
+        overflow: hidden;
+        background-position: center;
+        z-index: 999;
+        background-repeat: no-repeat;
+        background-color: #000;
+    }
+
+    .responsive-menu-unexpanded{
+        display: flex;
+        align-items: center;
+        height: 100%;
+        margin-left: 35px;
+    }
+
+    .logout img{
+        width: 80px;
+    }
+
 }
