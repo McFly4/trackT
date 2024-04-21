@@ -972,7 +972,9 @@
         margin-bottom: unset;
     }
 
-
+    .product-price form button{
+        color: #000 !important;
+    }
 
 }
 

@@ -397,7 +397,14 @@ export default function Product() {
                         title='Produits connexes'
                     />
                     <div className='productBanner'>
-                        <video width='100%' height='auto' autoPlay muted loop>
+                        <video
+                            width='100%'
+                            height='auto'
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                        >
                             <source
                                 src='/product/banner.mp4'
                                 type='video/mp4'
@@ -564,6 +571,7 @@ export default function Product() {
                                 autoPlay
                                 muted
                                 loop
+                                playsInline
                             >
                                 <source
                                     src='/product/banner.mp4'
@@ -1903,6 +1911,9 @@ function ProductForm({
                     <button
                         className='sizes-guid'
                         onClick={toggleModalToothbrush}
+                        style={{
+                            color: '#000 !important',
+                        }}
                     >
                         Guide des tailles
                     </button>

@@ -2386,7 +2386,6 @@ input[type="search"]::-webkit-search-results-decoration {
         background: #000;
         z-index: 9999;
         overflow-y: scroll;
-        overflow-x: hidden;
 
     }
 
