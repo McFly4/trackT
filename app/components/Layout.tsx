@@ -458,6 +458,7 @@ function SearchAside() {
                                 type='search'
                                 autoComplete='off'
                                 id='search'
+                                placeholder='Nike dunk low'
                             />
                             &nbsp;
                             <button

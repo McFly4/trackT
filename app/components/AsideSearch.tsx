@@ -43,7 +43,8 @@ function CloseAside() {
             <button
                 className='responsive-modal-close'
                 style={{
-                    top: '3.5%',
+                    top: '10px',
+                    right: '5px',
                 }}
             >
                 <svg
