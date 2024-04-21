@@ -2264,7 +2264,7 @@ input[type="search"]::-webkit-search-results-decoration {
     }
 
     .predictive-search-form{
-        padding: 20px 10px 20px;
+        padding: 20px 10px 0 10px;
     }
 
     .predictive-search-results{
@@ -2617,6 +2617,7 @@ input[type="search"]::-webkit-search-results-decoration {
     }
 
     .predictive-search-results{
-        margin-top: 0;
+        margin-top: -25px;
+        margin-top: -25px;
     }
 }
