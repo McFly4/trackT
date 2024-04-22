@@ -331,6 +331,7 @@ function CartLines({
     lines: CartApiQueryFragment['lines'] | undefined
 }) {
     if (!lines) return null
+
     return (
         <div aria-labelledby='cart-lines'>
             <ul>

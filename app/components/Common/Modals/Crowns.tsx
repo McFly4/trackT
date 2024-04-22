@@ -21,7 +21,12 @@ const Crowns = ({ isOpen, onClose }: any) => {
                     />
                 </svg>
             </button>
-            <div className='responsive-crowns'>
+            <div
+                className='responsive-crowns'
+                style={{
+                    paddingBottom: '50px',
+                }}
+            >
                 <h4>Options de livraison & retour</h4>
                 <p
                     style={{

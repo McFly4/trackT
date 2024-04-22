@@ -164,6 +164,12 @@ aside header .close {
     right: 10px;
     padding: 20px;
     z-index: 9999;
+    background: #121212;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 
@@ -2221,6 +2227,7 @@ input[type="search"]::-webkit-search-results-decoration {
 
     .cart-summary-aside{
         padding: unset;
+        bottom: 30px;
     }
 
     .cart-main h1{
@@ -2687,6 +2694,10 @@ input[type="search"]::-webkit-search-results-decoration {
 
     .responsive-modal-close{
         padding: unset !important;
+    }
+
+    .cart-line-price p{
+        font-weight: 500;
     }
 
 }

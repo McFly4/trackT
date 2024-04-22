@@ -294,6 +294,8 @@ code {
     width: 65px;
     height: 65px;
     border-radius: 50px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 /* Pour WebKit (Chrome, Safari) */
