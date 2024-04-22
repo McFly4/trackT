@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { Pagination } from 'swiper/modules'
+
 import { Link } from '@remix-run/react'
 import useWindowDimensions from '~/hooks/useWindowDimension'
 
@@ -23,6 +25,11 @@ export default function MarketDrag() {
                 grabCursor={true}
                 loop={true}
                 className='market-drag-swiper'
+                modules={[Pagination]}
+                pagination={{
+                    el: '.swiper-custom-pagination',
+                    clickable: true,
+                }}
             >
                 <SwiperSlide
                     style={{
@@ -437,6 +444,7 @@ export default function MarketDrag() {
                     </div>
                 </SwiperSlide>
             </Swiper>
+            <div className='swiper-custom-pagination custom-pagination-marketDrag'></div>
         </div>
     )
 }

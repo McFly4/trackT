@@ -25,7 +25,8 @@ const Crowns = ({ isOpen, onClose }: any) => {
                 <h4>Options de livraison & retour</h4>
                 <p
                     style={{
-                        marginBottom: '20px',
+                        width: '90%',
+                        margin: '20px auto',
                     }}
                 >
                     Nous avons crée trois catégories d’achats pour nuancer les

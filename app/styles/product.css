@@ -13,7 +13,7 @@
     position: fixed;
     top: 170px;
     width: 100%;
-    z-index: 99;
+    z-index: 90;
 }
 
 .breadcrumb-container{
@@ -938,7 +938,7 @@
 
     .trackT-header h2{
         font-size: 23px;
-        margin-left: 20px;
+        margin-left: 5px;
     }
 
     .product-header-sticky{
@@ -986,6 +986,14 @@
 
     .product-price form button{
         color: #000 !important;
+    }
+
+    .trackT-header p{
+        margin-left: 5px;
+    }
+
+    .trackT-header{
+        margin-bottom: 0;
     }
 
 }

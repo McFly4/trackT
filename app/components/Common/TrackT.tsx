@@ -1,10 +1,9 @@
 import React, { useRef } from 'react'
 import MainProduct from '~/components/Common/mainProduct'
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
-import { FreeMode, Scrollbar } from 'swiper/modules'
+import { Autoplay, FreeMode, Scrollbar } from 'swiper/modules'
 import { useLocation } from '@remix-run/react'
 import useWindowDimensions from '~/hooks/useWindowDimension'
-import { freeMode } from '../../../dist/client/build/_shared/chunk-NJPQXKWY'
 
 export default function TrackT({ products, title, isAccount }: any) {
     const location = useLocation()
@@ -51,7 +50,7 @@ export default function TrackT({ products, title, isAccount }: any) {
                 )}
             </div>
             <Swiper
-                modules={[Scrollbar, FreeMode]}
+                modules={[Scrollbar, FreeMode, Autoplay]}
                 scrollbar={{
                     hide: false,
                 }}
@@ -63,7 +62,10 @@ export default function TrackT({ products, title, isAccount }: any) {
                         ? 3
                         : 4
                 }
-                freeMode={sizeScreen < 768}
+                autoplay={{
+                    delay: 3000,
+                }}
+                freeMode={true}
                 grabCursor={true}
                 navigation={{
                     nextEl: '.swiper-button-next',

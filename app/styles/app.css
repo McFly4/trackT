@@ -2025,6 +2025,26 @@ input[type="search"]::-webkit-search-results-decoration {
     margin-right: 20px;
 }
 
+.custom-pagination-marketDrag{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.custom-pagination-marketDrag span{
+    background: #212121;
+    opacity: 1;
+    margin: 0 2px;
+    border-radius: unset;
+    width: 15px;
+    height: 2px;
+    transition: 0.2s ease-in-out;
+}
+
+.custom-pagination-marketDrag .swiper-pagination-bullet-active{
+    background-color: #fff !important;
+    width: 40px;
+}
 @media screen and (max-width: 768px) {
     .home {
         margin-top: 120px;
@@ -2048,6 +2068,7 @@ input[type="search"]::-webkit-search-results-decoration {
 
     .responsive-home-header {
         margin-top: 20px;
+        margin-bottom: 30px;
     }
 
     .responsive-home-header span {
@@ -2587,13 +2608,13 @@ input[type="search"]::-webkit-search-results-decoration {
         align-items: center;
         color: #fff;
         border-radius: 5px;
-        font-size: 18px;
+        font-size: 15px;
         text-transform: uppercase;
-        font-weight: 500;
+        font-weight: 400;
         padding: 20px 40px;
         width: 90%;
         font-family: HelveticaNeue500, sans-serif;
-        margin: 20px auto;
+        margin: 0px auto;
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;

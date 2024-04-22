@@ -450,15 +450,20 @@ text-align: center;
     }
 
     .a-third-guid-container-item p{
-        margin: 0 20px;
+        margin: 20px 0 !important;
+    }
+    .a-third-guid-container-item span{
+        font-weight: 400;
     }
 
     .a-third-guid-container-item{
         border-top: 1px solid #222222;
         border-bottom: 1px solid #222222;
+        border-right: unset;
     }
 
-
-
+    .a-third-guid-container-item:not(:last-child){
+        border-right: unset;
+    }
 
 }
