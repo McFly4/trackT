@@ -2,10 +2,10 @@ import React, { useRef } from 'react'
 import MainProduct from '~/components/Common/mainProduct'
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
 import { Autoplay, FreeMode, Scrollbar } from 'swiper/modules'
-import { useLocation } from '@remix-run/react'
+import { Link, useLocation } from '@remix-run/react'
 import useWindowDimensions from '~/hooks/useWindowDimension'
 
-export default function TrackT({ products, title, isAccount }: any) {
+export default function TrackT({ products, title, isAccount, link }: any) {
     const location = useLocation()
     const { width } = useWindowDimensions()
 
@@ -43,7 +43,9 @@ export default function TrackT({ products, title, isAccount }: any) {
                         ? 'APPAREMMENT, CES ARTICLES NE VOUS ONT PAS LAISSÉ INDIFFÉRENTS'
                         : title}
                 </h2>
-                <p>Tout afficher</p>
+                <Link to={link}>
+                    <p>Tout afficher</p>
+                </Link>
 
                 {sizeScreen > 768 && (
                     <NavButtons next={nexto} previous={previo} />

@@ -216,6 +216,8 @@ export default function Product() {
               )?.products.nodes
             : product?.collections?.nodes[0].products.nodes
 
+    const collection = product?.collections?.nodes[0]?.handle
+
     const toggleExpand = () => {
         setExpanded(!expanded)
     }
@@ -396,6 +398,7 @@ export default function Product() {
                     <TrackT
                         products={productsFromCollection}
                         title='Produits connexes'
+                        link={`/collections/${collection}`}
                     />
                     <div className='productBanner'>
                         <video
@@ -413,7 +416,11 @@ export default function Product() {
                             <img src='/product/banner.png' alt='banner' />
                         </video>
                     </div>
-                    <TrackT products={random} title={randomNameFunction()} />
+                    <TrackT
+                        products={random}
+                        title={randomNameFunction()}
+                        link={`/filtered`}
+                    />
                     <MarketDrag />
 
                     <div
@@ -564,6 +571,7 @@ export default function Product() {
                         <TrackT
                             products={productsFromCollection}
                             title='Produits connexes'
+                            link={`/search?q=${collection}`}
                         />
                         <div className='productBanner'>
                             <video
@@ -584,6 +592,7 @@ export default function Product() {
                         <TrackT
                             products={random}
                             title={randomNameFunction()}
+                            link={`/filtered`}
                         />
                         <MarketDrag />
 
@@ -672,6 +681,7 @@ export default function Product() {
                                                 style={{
                                                     marginRight: '10px',
                                                     opacity: '1 !important',
+                                                    width: '20px',
                                                 }}
                                             />
                                             Random item
@@ -2350,6 +2360,7 @@ fragment Product on Product {
     nodes {
       title
       id
+      handle
       products(first: 25) {
         nodes {
           title

@@ -996,6 +996,10 @@
         margin-bottom: 0;
     }
 
+    .product-price-container div{
+        bottom: 30% !important;
+    }
+
 }
 
 

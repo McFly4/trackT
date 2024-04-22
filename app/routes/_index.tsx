@@ -407,7 +407,9 @@ export default function HomePage() {
                     </div>
                 </div>
             </div>
-            {sizeScreen < 768 && <TrackT products={productsList} />}
+            {sizeScreen < 768 && (
+                <TrackT products={productsList} link={'/filtered'} />
+            )}
 
             <div className='hfooter'>
                 {sizeScreen > 768 ? (
@@ -583,10 +585,18 @@ export default function HomePage() {
                         )}
                     </div>
                 </div>
-                <TrackT products={fastShipProducts} title='Chez vous en 48h' />
+                <TrackT
+                    products={fastShipProducts}
+                    title='Chez vous en 48h'
+                    link={'/filtered?fast=true'}
+                />
                 <MarketDrag />
                 <GoFilters />
-                <TrackT products={exclusiveProducts} title='Exclusive Items' />
+                <TrackT
+                    products={exclusiveProducts}
+                    title='Exclusive Items'
+                    link={'/filtered?release=true'}
+                />
             </div>
         </div>
     )

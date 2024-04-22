@@ -3,6 +3,7 @@ import {
     Await,
     FetcherWithComponents,
     Link,
+    useFetchers,
     useNavigation,
 } from '@remix-run/react'
 import { Suspense } from 'react'
@@ -16,6 +17,8 @@ import { Footer } from '~/components/Footer'
 import { Header } from '~/components/Header'
 import { CartMain } from '~/components/Cart'
 import {
+    NO_PREDICTIVE_SEARCH_RESULTS,
+    NormalizedPredictiveSearch,
     PredictiveSearchForm,
     PredictiveSearchResults,
 } from '~/components/Search'
@@ -422,12 +425,43 @@ function CategoriesAside() {
     return <AsideCategories id='categories-aside' heading='CATEGORIES' />
 }
 
+type UseSearchReturn = NormalizedPredictiveSearch & {
+    searchInputRef: React.MutableRefObject<HTMLInputElement | null>
+    searchTerm: React.MutableRefObject<string>
+}
+
+function usePredictiveSearch(): UseSearchReturn {
+    const fetchers = useFetchers()
+    const searchTerm = useRef<string>('')
+    const searchInputRef = useRef<HTMLInputElement | null>(null)
+    const searchFetcher = fetchers.find(
+        (fetcher) => fetcher.data?.searchResults
+    )
+
+    if (searchFetcher?.state === 'loading') {
+        searchTerm.current = (searchFetcher.formData?.get('q') || '') as string
+    }
+
+    const search = (searchFetcher?.data?.searchResults || {
+        results: NO_PREDICTIVE_SEARCH_RESULTS,
+        totalResults: 0,
+    }) as NormalizedPredictiveSearch
+
+    // capture the search input element as a ref
+    useEffect(() => {
+        if (searchInputRef.current) return
+        searchInputRef.current = document.querySelector('input[type="search"]')
+    }, [])
+
+    return { ...search, searchInputRef, searchTerm }
+}
+
 function SearchAside() {
     // Déclarez une référence pour l'élément input
     const inputRef = useRef<HTMLInputElement | null>(null)
     const useWidth = useWindowDimension()
     const width = useWidth.width || 1920
-
+    const { totalResults } = usePredictiveSearch()
     useEffect(() => {
         const handleHashChange = () => {
             if (window.location.hash === '#search-aside' && inputRef.current) {
@@ -461,82 +495,86 @@ function SearchAside() {
                                 placeholder='Nike dunk low'
                             />
                             &nbsp;
-                            <button
-                                disabled={inputRef.current?.value?.length === 0}
-                                onClick={() => {
-                                    history.go(-1)
-                                    window.location.href = `/search?q=${inputRef?.current?.value}`
-                                }}
-                                style={
-                                    width > 768
-                                        ? {
-                                              display: 'flex',
-                                              alignItems: 'center',
-                                              justifyContent: 'center',
-                                              width: '500px',
-                                          }
-                                        : {
-                                              display: 'flex',
-                                              alignItems: 'center',
-                                              justifyContent: 'center',
-                                              position: 'fixed',
-                                              bottom: '20px',
-                                              width: '80%',
-                                              height: '60px',
-                                              left: '0',
-                                              right: '0',
-                                              marginLeft: 'auto',
-                                              marginRight: 'auto',
-                                          }
-                                }
-                                className={
-                                    inputRef.current?.value?.length === 0
-                                        ? 'btn-disabled'
-                                        : 'btn-active'
-                                }
-                            >
-                                <svg
-                                    xmlns='http://www.w3.org/2000/svg'
-                                    width='21.798'
-                                    height='21.797'
-                                    viewBox='0 0 21.798 21.797'
-                                >
-                                    <g id='icon' transform='translate(0 0)'>
-                                        <path
-                                            id='Tracé_219'
-                                            data-name='Tracé 219'
-                                            d='M988.286,241.616a8.174,8.174,0,1,1,8.174-8.174A8.183,8.183,0,0,1,988.286,241.616Zm0-13.623a5.449,5.449,0,1,0,5.449,5.449A5.456,5.456,0,0,0,988.286,227.993Z'
-                                            transform='translate(-980.112 -225.268)'
-                                            fill={
-                                                inputRef.current?.value
-                                                    ?.length !== 0
-                                                    ? '#000'
-                                                    : '#fff'
-                                            }
-                                        />
-                                        <path
-                                            id='Tracé_220'
-                                            data-name='Tracé 220'
-                                            d='M997.286,243.8a1.352,1.352,0,0,1-.963-.4l-6.812-6.812a1.362,1.362,0,0,1,1.926-1.926l6.812,6.812a1.362,1.362,0,0,1-.963,2.325Z'
-                                            transform='translate(-976.851 -222.007)'
-                                            fill={
-                                                inputRef.current?.value
-                                                    ?.length !== 0
-                                                    ? '#000'
-                                                    : '#fff'
-                                            }
-                                        />
-                                    </g>
-                                </svg>
-
-                                <h5
-                                    style={{
-                                        marginLeft: '20px',
+                            {totalResults > 0 && (
+                                <button
+                                    disabled={
+                                        inputRef.current?.value?.length === 0
+                                    }
+                                    onClick={() => {
+                                        history.go(-1)
+                                        window.location.href = `/search?q=${inputRef?.current?.value}`
                                     }}
+                                    style={
+                                        width > 768
+                                            ? {
+                                                  display: 'flex',
+                                                  alignItems: 'center',
+                                                  justifyContent: 'center',
+                                                  width: '500px',
+                                              }
+                                            : {
+                                                  display: 'flex',
+                                                  alignItems: 'center',
+                                                  justifyContent: 'center',
+                                                  position: 'fixed',
+                                                  bottom: '20px',
+                                                  width: '80%',
+                                                  height: '60px',
+                                                  left: '0',
+                                                  right: '0',
+                                                  marginLeft: 'auto',
+                                                  marginRight: 'auto',
+                                              }
+                                    }
+                                    className={
+                                        inputRef.current?.value?.length === 0
+                                            ? 'btn-disabled'
+                                            : 'btn-active'
+                                    }
                                 >
-                                    afficher tous les resultats
-                                </h5>
-                            </button>
+                                    <svg
+                                        xmlns='http://www.w3.org/2000/svg'
+                                        width='21.798'
+                                        height='21.797'
+                                        viewBox='0 0 21.798 21.797'
+                                    >
+                                        <g id='icon' transform='translate(0 0)'>
+                                            <path
+                                                id='Tracé_219'
+                                                data-name='Tracé 219'
+                                                d='M988.286,241.616a8.174,8.174,0,1,1,8.174-8.174A8.183,8.183,0,0,1,988.286,241.616Zm0-13.623a5.449,5.449,0,1,0,5.449,5.449A5.456,5.456,0,0,0,988.286,227.993Z'
+                                                transform='translate(-980.112 -225.268)'
+                                                fill={
+                                                    inputRef.current?.value
+                                                        ?.length !== 0
+                                                        ? '#000'
+                                                        : '#fff'
+                                                }
+                                            />
+                                            <path
+                                                id='Tracé_220'
+                                                data-name='Tracé 220'
+                                                d='M997.286,243.8a1.352,1.352,0,0,1-.963-.4l-6.812-6.812a1.362,1.362,0,0,1,1.926-1.926l6.812,6.812a1.362,1.362,0,0,1-.963,2.325Z'
+                                                transform='translate(-976.851 -222.007)'
+                                                fill={
+                                                    inputRef.current?.value
+                                                        ?.length !== 0
+                                                        ? '#000'
+                                                        : '#fff'
+                                                }
+                                            />
+                                        </g>
+                                    </svg>
+
+                                    <h5
+                                        style={{
+                                            marginLeft: '20px',
+                                        }}
+                                    >
+                                        afficher tous les resultats
+                                    </h5>
+                                </button>
+                            )}
                         </div>
                     )}
                 </PredictiveSearchForm>
