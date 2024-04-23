@@ -38,14 +38,16 @@ export default function TrackT({ products, title, isAccount, link }: any) {
             }}
         >
             <div className='trackT-header'>
-                <h2>
-                    {location.pathname === '/account/profile'
-                        ? 'APPAREMMENT, CES ARTICLES NE VOUS ONT PAS LAISSÉ INDIFFÉRENTS'
-                        : title}
-                </h2>
-                <Link to={link}>
-                    <p>Tout afficher</p>
-                </Link>
+                <div>
+                    <h2>
+                        {location.pathname === '/account/profile'
+                            ? 'APPAREMMENT, CES ARTICLES NE VOUS ONT PAS LAISSÉ INDIFFÉRENTS'
+                            : title}
+                    </h2>
+                    <Link to={link}>
+                        <p>Tout afficher</p>
+                    </Link>
+                </div>
 
                 {sizeScreen > 768 && (
                     <NavButtons next={nexto} previous={previo} />
@@ -74,6 +76,7 @@ export default function TrackT({ products, title, isAccount, link }: any) {
                     prevEl: '.swiper-button-prev',
                 }}
                 spaceBetween={0}
+                loop={true}
                 onSwiper={(swiper) => (swiperRef.current = swiper)}
                 breakpoints={{
                     0: {
