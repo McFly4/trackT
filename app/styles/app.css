@@ -2229,7 +2229,7 @@ input[type="search"]::-webkit-search-results-decoration {
 
     .cart-summary-aside{
         padding: unset;
-        bottom: 30px;
+        bottom: 100px;
     }
 
     .cart-main h1{
