@@ -248,7 +248,7 @@ export default function ({
                         to={`/products/${product.handle}`}
                     >
                         <img
-                            src={product.images?.nodes[0].url}
+                            src={product.images?.nodes[0]?.url}
                             alt={product.title}
                             className={
                                 product.ooo?.value == 'true' ||

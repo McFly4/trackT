@@ -209,7 +209,7 @@ export default function Product() {
               )?.products.nodes
             : product?.collections?.nodes[0].products.nodes
 
-    const collection = product?.collections?.nodes[0]?.handle
+    const collection = product?.collections?.nodes[0]?.handle || 'All'
 
     const toggleExpand = () => {
         setExpanded(!expanded)
