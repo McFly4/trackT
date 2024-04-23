@@ -284,7 +284,11 @@ function AccountMenuResponsive(images: any) {
                             alignItems: 'flex-start',
                         }}
                     >
-                        <NavLink to='/account/orders' style={isActiveStyle}>
+                        <NavLink
+                            to='/account/orders'
+                            style={isActiveStyle}
+                            onClick={() => setExpanded(false)}
+                        >
                             <p>Commandes</p>
                         </NavLink>
                         <svg
@@ -308,10 +312,18 @@ function AccountMenuResponsive(images: any) {
                             />
                         </svg>
                     </div>
-                    <NavLink to='/account/profile' style={isActiveStyle}>
+                    <NavLink
+                        to='/account/profile'
+                        style={isActiveStyle}
+                        onClick={() => setExpanded(false)}
+                    >
                         <p>Informations perso</p>
                     </NavLink>
-                    <NavLink to='/account/mybestitem' style={isActiveStyle}>
+                    <NavLink
+                        to='/account/mybestitem'
+                        style={isActiveStyle}
+                        onClick={() => setExpanded(false)}
+                    >
                         <p> My best item</p>
                     </NavLink>
                     <a
