@@ -2051,6 +2051,8 @@ input[type="search"]::-webkit-search-results-decoration {
     background-color: #fff !important;
     width: 40px;
 }
+
+
 @media screen and (max-width: 768px) {
     .home {
         margin-top: 120px;

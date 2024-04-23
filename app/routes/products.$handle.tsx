@@ -11,15 +11,11 @@ import {
 import type {
     ProductFragment,
     ProductVariantsQuery,
-    ProductVariantFragment,
 } from 'storefrontapi.generated'
-import { Transition } from 'react-transition-group'
 
 import {
-    Image,
     Money,
     VariantSelector,
-    type VariantOption,
     getSelectedProductOptions,
     CartForm,
     getPaginationVariables,
@@ -30,12 +26,9 @@ import type {
 } from '@shopify/hydrogen/storefront-api-types'
 import { getVariantUrl } from '~/utils'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import MainProduct from '~/components/Common/mainProduct'
 import TrackT from '~/components/Common/TrackT'
-import { Scrollbar, Grid } from 'swiper/modules'
 import MarketDrag from '~/components/Common/MarketDrag'
 import { Mousewheel, Pagination } from 'swiper/modules'
-import GoFilters from '~/components/Common/GoFilters'
 import useWindowDimensions from '~/hooks/useWindowDimension'
 import Crowns from '~/components/Common/Modals/Crowns'
 import Labels from '~/components/Common/Modals/Labels'
@@ -1024,23 +1017,6 @@ function ProductImage({ image, product }: { image: any; product: any }) {
 
     const [mainImage, setMainImage] = useState(firstImage || image?.url)
 
-    const productsFromCollection =
-        product?.collections?.nodes?.length > 1
-            ? product?.collections?.nodes?.find(
-                  (collection: any) => collection.title !== 'All'
-              )?.products.nodes
-            : product?.collections?.nodes[0].products.nodes
-
-    const swiperRef = useRef<any>(null)
-
-    const nexto = () => {
-        swiperRef.current?.slideNext()
-    }
-
-    const previo = () => {
-        swiperRef.current?.slidePrev()
-    }
-
     useEffect(() => {
         setMainImage(firstImage)
     }, [firstImage])
@@ -1867,7 +1843,6 @@ function ProductForm({
 }) {
     const variantName = selectedVariant?.selectedOptions[0].value
     const [isModalOpenToothbrush, setIsModalOpenToothbrush] = useState(false)
-    const isSoon = product?.soon?.value
 
     function toggleModalToothbrush() {
         setIsModalOpenToothbrush(!isModalOpenToothbrush)
