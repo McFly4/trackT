@@ -466,4 +466,7 @@ text-align: center;
         border-right: unset;
     }
 
+    .a-third-guid-container-item p:nth-child(4) {
+        font-weight: 400;
+    }
 }

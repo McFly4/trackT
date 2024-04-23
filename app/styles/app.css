@@ -2070,8 +2070,8 @@ input[type="search"]::-webkit-search-results-decoration {
     }
 
     .panel-container {
-        padding-left: unset;
-        padding: 0 10px;
+        padding: 20px 10px;
+        overflow: hidden;
     }
 
     .responsive-home-header {
@@ -2617,10 +2617,10 @@ input[type="search"]::-webkit-search-results-decoration {
         align-items: center;
         color: #fff;
         border-radius: 5px;
-        font-size: 15px;
+        font-size: 15px !important;
         text-transform: uppercase;
         font-weight: 400;
-        padding: 20px 40px;
+        padding: 20px 10px !important;
         width: 90%;
         font-family: HelveticaNeue500, sans-serif;
         margin: 0px auto;
@@ -2629,6 +2629,7 @@ input[type="search"]::-webkit-search-results-decoration {
         background-repeat: no-repeat;
         background-color: #000;
         background-image: url(public/searchOptions.png);
+        margin-bottom: 20px;
 
     }
 

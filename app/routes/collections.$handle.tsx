@@ -407,7 +407,7 @@ export default function Collection() {
                         backgroundColor: '#000',
                     }}
                 >
-                    {width > 768 ? <GoFilters /> : <SearchOptions />}
+                    <GoFilters />
 
                     {width > 768 && (
                         <>

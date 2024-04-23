@@ -184,25 +184,30 @@ export default function ({
             <div
                 className='product-grid'
                 style={{
-                    ...(isCarousel && {
-                        width: width > 768 ? 'unset' : 'fit-content',
-                    }),
-                    ...(quantity === 4 && {
-                        flexBasis: 'calc(25% - 60px)',
-                        width: 'calc(25% - 60px)',
-                    }),
-                    ...(quantity === 3 && {
-                        flexBasis: 'calc(33.33333% - 60px)',
-                        width: 'calc(33.33333% - 60px)',
-                    }),
-                    ...(quantity === 2 && {
-                        flexBasis: 'calc(50% - 60px)',
-                        width: 'calc(50% - 60px)',
-                    }),
-                    ...(quantity === 1 && {
-                        width: 'calc(100% - 60px)',
-                        flexBasis: 'calc(100% - 60px)',
-                    }),
+                    ...(isCarousel &&
+                        width > 768 && {
+                            width: width > 768 ? 'unset' : 'fit-content',
+                        }),
+                    ...(quantity === 4 &&
+                        width > 768 && {
+                            flexBasis: 'calc(25% - 60px)',
+                            width: 'calc(25% - 60px)',
+                        }),
+                    ...(quantity === 3 &&
+                        width > 768 && {
+                            flexBasis: 'calc(33.33333% - 60px)',
+                            width: 'calc(33.33333% - 60px)',
+                        }),
+                    ...(quantity === 2 &&
+                        width > 768 && {
+                            flexBasis: 'calc(50% - 60px)',
+                            width: 'calc(50% - 60px)',
+                        }),
+                    ...(quantity === 1 &&
+                        width > 768 && {
+                            width: 'calc(100% - 60px)',
+                            flexBasis: 'calc(100% - 60px)',
+                        }),
                 }}
             >
                 <div

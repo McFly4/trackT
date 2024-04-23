@@ -415,7 +415,7 @@ export default function SearchPage() {
                         backgroundColor: '#000',
                     }}
                 >
-                    {width > 768 ? <GoFilters /> : <SearchOptions />}
+                    <GoFilters />
 
                     {width > 768 && (
                         <>

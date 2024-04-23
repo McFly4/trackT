@@ -512,7 +512,7 @@ export default function filtered() {
                                                 >
                                                     {isLoading
                                                         ? 'Chargement...'
-                                                        : 'Plus de produits'}
+                                                        : 'Afficher plus de résultats'}
                                                 </button>
                                             </NextLink>
                                         </div>
@@ -535,7 +535,7 @@ export default function filtered() {
                         backgroundColor: '#000',
                     }}
                 >
-                    {width > 768 ? <GoFilters /> : <SearchOptions />}
+                    <GoFilters />
                     {width > 768 && (
                         <>
                             <div
