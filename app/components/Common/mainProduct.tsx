@@ -184,10 +184,9 @@ export default function ({
             <div
                 className='product-grid'
                 style={{
-                    ...(isCarousel &&
-                        width > 768 && {
-                            width: width > 768 ? 'unset' : 'fit-content',
-                        }),
+                    ...(isCarousel && {
+                        width: width > 768 ? 'unset' : 'fit-content',
+                    }),
                     ...(quantity === 4 &&
                         width > 768 && {
                             flexBasis: 'calc(25% - 60px)',

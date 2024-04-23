@@ -736,6 +736,7 @@ export default function Filters() {
                         style={{
                             marginTop: '200px',
                         }}
+                        allowSlideNext={false}
                     >
                         <SwiperSlide>
                             <div
@@ -988,7 +989,12 @@ export default function Filters() {
                             </div>
                         </SwiperSlide>
                     </Swiper>
-                    <div className='filters__footer'>
+                    <div
+                        className='filters__footer'
+                        style={{
+                            zIndex: 11,
+                        }}
+                    >
                         <div className='filters__footer__buttons'>
                             <Link to={`/filtered${handleSearch()}`}>
                                 <button
@@ -1069,7 +1075,7 @@ function NavButtons({
         >
             <h4
                 style={{
-                    marginTop: '50px',
+                    marginTop: '40px',
                 }}
             >
                 FILTRES

@@ -278,34 +278,86 @@ function AccountMenuResponsive(images: any) {
         >
             {expanded ? (
                 <div className='responsive-menu-expanded'>
+                    <div
+                        style={{
+                            display: 'flex',
+                            alignItems: 'flex-start',
+                        }}
+                    >
+                        <NavLink to='/account/orders' style={isActiveStyle}>
+                            <p>Commandes</p>
+                        </NavLink>
+                        <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            width='17.064'
+                            height='10.268'
+                            viewBox='0 0 17.064 10.268'
+                            style={{
+                                marginLeft: '15px',
+                                paddingTop: '5px',
+                                transform: expanded ? 'rotate(180deg)' : 'none',
+                            }}
+                            onClick={toggleExpanded}
+                        >
+                            <path
+                                id='Tracé_445'
+                                data-name='Tracé 445'
+                                d='M-13626.686,22648.77l-6.809-6.822a1.72,1.72,0,0,1-.506-1.225,1.709,1.709,0,0,1,.506-1.219,1.745,1.745,0,0,1,2.436-.008l5.592,5.6,5.59-5.594a1.723,1.723,0,0,1,2.436,0,1.7,1.7,0,0,1,.506,1.219,1.712,1.712,0,0,1-.506,1.225l-6.8,6.814a1.732,1.732,0,0,1-1.225.506A1.74,1.74,0,0,1-13626.686,22648.77Z'
+                                transform='translate(13634 -22639)'
+                                fill='#fff'
+                            />
+                        </svg>
+                    </div>
                     <NavLink to='/account/profile' style={isActiveStyle}>
-                        <p>
-                            Mon espace trackt
-                            <svg
-                                xmlns='http://www.w3.org/2000/svg'
-                                width='17.064'
-                                height='10.268'
-                                viewBox='0 0 17.064 10.268'
-                            >
-                                <path
-                                    id='Tracé_445'
-                                    data-name='Tracé 445'
-                                    d='M-13626.686,22648.77l-6.809-6.822a1.72,1.72,0,0,1-.506-1.225,1.709,1.709,0,0,1,.506-1.219,1.745,1.745,0,0,1,2.436-.008l5.592,5.6,5.59-5.594a1.723,1.723,0,0,1,2.436,0,1.7,1.7,0,0,1,.506,1.219,1.712,1.712,0,0,1-.506,1.225l-6.8,6.814a1.732,1.732,0,0,1-1.225.506A1.74,1.74,0,0,1-13626.686,22648.77Z'
-                                    transform='translate(13634 -22639)'
-                                    fill='#fff'
-                                />
-                            </svg>
-                        </p>
-                    </NavLink>
-                    <NavLink to='/account/orders' style={isActiveStyle}>
-                        <p>Commandes</p>
+                        <p>Informations perso</p>
                     </NavLink>
                     <NavLink to='/account/mybestitem' style={isActiveStyle}>
                         <p> My best item</p>
                     </NavLink>
-                    <NavLink to='/account/addresses' style={isActiveStyle}>
-                        <p>Adresses</p>
-                    </NavLink>
+                    <a
+                        href='/about'
+                        style={{
+                            display: 'flex',
+                            alignItems: 'flex-start',
+                        }}
+                    >
+                        <p
+                            style={{
+                                opacity: 0.3,
+                            }}
+                        >
+                            Messagerie
+                        </p>
+                        <img
+                            src='/coming.png'
+                            alt='coming soon'
+                            style={{
+                                width: '70px',
+                            }}
+                        />
+                    </a>
+                    <a
+                        href='/about'
+                        style={{
+                            display: 'flex',
+                            alignItems: 'flex-start',
+                        }}
+                    >
+                        <p
+                            style={{
+                                opacity: 0.3,
+                            }}
+                        >
+                            Fidélité
+                        </p>
+                        <img
+                            src='/coming.png'
+                            alt='coming soon'
+                            style={{
+                                width: '70px',
+                            }}
+                        />
+                    </a>
                 </div>
             ) : (
                 <div
@@ -313,7 +365,7 @@ function AccountMenuResponsive(images: any) {
                     onClick={toggleExpanded}
                 >
                     <h6>
-                        Mon epsace trackt
+                        Commandes
                         <svg
                             xmlns='http://www.w3.org/2000/svg'
                             width='17.064'

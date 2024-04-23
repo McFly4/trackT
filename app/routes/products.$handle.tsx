@@ -881,9 +881,7 @@ export default function Product() {
 }
 
 function BreadCrumb({ product }: { product: any }) {
-    const isMixte = product?.manwoman
-        ? (JSON.parse(product?.manwoman?.value) as any)
-        : 'Homme'
+    const isMixte = product?.manwoman ? product?.manwoman?.value : 'Homme'
     const type = product?.productType
     const vendor = product?.vendor
     const productName = product?.title

@@ -889,4 +889,20 @@
         width: 80px;
     }
 
+    .responsive-menu p{
+        font-size: 15px;
+        font-weight: 400;
+        text-transform: uppercase;
+    }
+
+    .responsive-menu-expanded{
+        padding-left: 30px;
+        padding-top: 30px;
+    }
+
+    .responsive-menu-expanded p {
+        padding-bottom: 100px;
+    }
+
+
 }
