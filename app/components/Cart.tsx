@@ -335,9 +335,16 @@ function CartLines({
     return (
         <div aria-labelledby='cart-lines'>
             <ul>
-                {lines.nodes.map((line) => (
-                    <CartLineItem key={line.id} line={line} layout={layout} />
-                ))}
+                {lines.nodes.map((line) =>
+                    // Utiliser une boucle pour rendre chaque ligne autant de fois que spécifié par la quantité
+                    Array.from({ length: line.quantity }).map((_, index) => (
+                        <CartLineItem
+                            key={`${line.id}-${index}`}
+                            line={line}
+                            layout={layout}
+                        />
+                    ))
+                )}
             </ul>
         </div>
     )

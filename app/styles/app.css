@@ -2216,6 +2216,7 @@ input[type="search"]::-webkit-search-results-decoration {
     }
     .cart-details{
         padding: 0 20px;
+        margin-bottom: 80px;
     }
 
     .cart-main{
