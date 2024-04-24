@@ -19,7 +19,7 @@ type ActionResponse = {
 export async function loader({ context }: LoaderFunctionArgs) {
     const customerAccessToken = await context.session.get('customerAccessToken')
     if (customerAccessToken) {
-        return redirect('/account')
+        return redirect('/account/profile')
     }
 
     return json({})
@@ -100,7 +100,7 @@ export async function action({ request, context }: ActionFunctionArgs) {
                 status: 302,
                 headers: {
                     'Set-Cookie': await session.commit(),
-                    Location: '/account',
+                    Location: '/account/profile',
                 },
             }
         )

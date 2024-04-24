@@ -115,6 +115,9 @@ export default function HomePage() {
                     style={{
                         maxHeight: '100vh',
                     }}
+                    autoplay={{
+                        delay: 5000,
+                    }}
                     onAutoplayTimeLeft={(s, time, progress) =>
                         onAutoplayTimeLeft(s, time, progress, 0)
                     }

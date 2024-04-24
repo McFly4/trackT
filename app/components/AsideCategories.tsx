@@ -350,13 +350,7 @@ export function AsideCategories({
                                 >
                                     Planches de skate
                                 </p>
-                                <p
-                                    onClick={() => {
-                                        window.location.href = '/search?q=toy'
-                                    }}
-                                >
-                                    funny toy
-                                </p>
+
                                 <p
                                     onClick={() => {
                                         window.location.href =
