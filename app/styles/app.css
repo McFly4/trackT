@@ -2656,6 +2656,10 @@ input[type="search"]::-webkit-search-results-decoration {
         background-image: url(public/searchAsideResponsive.png);
     }
 
+
+
+
+
     .categoriesAside{
         background-image: url(public/categoriesAsideResponsive.png);
     }
@@ -2672,7 +2676,7 @@ input[type="search"]::-webkit-search-results-decoration {
 
     .predictive-search-results{
         margin-top: -25px;
-        margin-top: -25px;
+        padding-bottom: 200px;
     }
 
     .predictive-search-result-item{

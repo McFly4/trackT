@@ -375,7 +375,7 @@ export default function HomePage() {
                         )}
                         {sizeScreen < 768 && (
                             <div className='responsive-home-header'>
-                                - <h4>panel trackt </h4>
+                                <h4>panel trackt </h4>
                                 {/*<Link to='/filtered'>*/}
                                 {/*    <span>Tout afficher</span>*/}
                                 {/*</Link>*/}

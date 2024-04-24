@@ -2,14 +2,12 @@ import React, { useState } from 'react'
 import { Link } from '@remix-run/react'
 import useWindowDimensions from '~/hooks/useWindowDimension'
 
-export default function SearchOptions() {
+export default function SearchOptions({ icon }: any) {
     const [searchOptions, setSearchOptions] = useState(false)
-    const useWidth = useWindowDimensions()
-    const width = useWidth.width || 1920
 
     return (
         <div className='searchOptions'>
-            {width > 768 ? (
+            {!icon ? (
                 <button
                     className='searchOptionsButton'
                     onClick={() => {
@@ -55,8 +53,10 @@ export default function SearchOptions() {
                     </svg>
                 </button>
             ) : (
-                <div className='icon'>
-                    <img src='/icons/heart.svg' alt='heart' />
+                <div className='icon' onClick={() => setSearchOptions(true)}>
+                    <a href='#'>
+                        <img src='/icons/search.svg' alt='search' />
+                    </a>
                 </div>
             )}
             {searchOptions && (

@@ -1,6 +1,7 @@
 import { NavLink, Link } from '@remix-run/react'
 import useWindowDimensions from '~/hooks/useWindowDimension'
 import SearchOptions from '~/components/Common/Modals/SearchOptions'
+import React from 'react'
 
 export function Header({ header, isLoggedIn, cart, logo }: any) {
     const urlLogo = logo.metaobjects.nodes[0]?.field?.reference?.sources[0]?.url
@@ -58,11 +59,7 @@ export function Header({ header, isLoggedIn, cart, logo }: any) {
             ) : (
                 <div className='nav-responsive'>
                     <div>
-                        <div className='icon'>
-                            <a href='#search-aside'>
-                                <img src='/icons/search.svg' alt='search' />
-                            </a>
-                        </div>
+                        <SearchOptions icon={true} />
                         <div className='icon'>
                             <NavLink prefetch='intent' to='/account/profile'>
                                 <img src='/icons/person.svg' alt='person' />
@@ -89,8 +86,9 @@ export function Header({ header, isLoggedIn, cart, logo }: any) {
                         </NavLink>
                     </div>
                     <div>
-                        <SearchOptions />
-
+                        <div className='icon'>
+                            <img src='/icons/heart.svg' alt='heart' />
+                        </div>
                         <div className='icon icon-cart'>
                             {cart?._data?.totalQuantity > 0 && (
                                 <span>{cart?._data?.totalQuantity || 0}</span>
