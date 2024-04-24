@@ -1,5 +1,6 @@
 import { NavLink, Link } from '@remix-run/react'
 import useWindowDimensions from '~/hooks/useWindowDimension'
+import SearchOptions from '~/components/Common/Modals/SearchOptions'
 
 export function Header({ header, isLoggedIn, cart, logo }: any) {
     const urlLogo = logo.metaobjects.nodes[0]?.field?.reference?.sources[0]?.url
@@ -88,9 +89,8 @@ export function Header({ header, isLoggedIn, cart, logo }: any) {
                         </NavLink>
                     </div>
                     <div>
-                        <div className='icon'>
-                            <img src='/icons/heart.svg' alt='heart' />
-                        </div>
+                        <SearchOptions />
+
                         <div className='icon icon-cart'>
                             {cart?._data?.totalQuantity > 0 && (
                                 <span>{cart?._data?.totalQuantity || 0}</span>

@@ -1,55 +1,64 @@
 import React, { useState } from 'react'
 import { Link } from '@remix-run/react'
+import useWindowDimensions from '~/hooks/useWindowDimension'
 
 export default function SearchOptions() {
     const [searchOptions, setSearchOptions] = useState(false)
+    const useWidth = useWindowDimensions()
+    const width = useWidth.width || 1920
 
     return (
         <div className='searchOptions'>
-            <button
-                className='searchOptionsButton'
-                onClick={() => {
-                    setSearchOptions(true)
-                }}
-            >
-                Options de recherche
-                <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    width='14.792'
-                    height='14.792'
-                    viewBox='0 0 14.792 14.792'
-                    style={{
-                        marginLeft: '10px',
+            {width > 768 ? (
+                <button
+                    className='searchOptionsButton'
+                    onClick={() => {
+                        setSearchOptions(true)
                     }}
                 >
-                    <g
-                        id='Groupe_2148'
-                        data-name='Groupe 2148'
-                        transform='translate(1 1)'
+                    Options de recherche
+                    <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        width='14.792'
+                        height='14.792'
+                        viewBox='0 0 14.792 14.792'
+                        style={{
+                            marginLeft: '10px',
+                        }}
                     >
-                        <path
-                            id='Ligne_230'
-                            data-name='Ligne 230'
-                            d='M-.755,11.292a.745.745,0,0,1-.745-.745V-.755A.745.745,0,0,1-.755-1.5.745.745,0,0,1-.01-.755v11.3A.745.745,0,0,1-.755,11.292Z'
-                            transform='translate(7.151 1.5)'
-                            fill='#fff'
-                            stroke='#fff'
-                            stroke-linecap='round'
-                            stroke-width='2'
-                        />
-                        <path
-                            id='Ligne_231'
-                            data-name='Ligne 231'
-                            d='M.745,12.792A.745.745,0,0,1,0,12.046V.745a.745.745,0,1,1,1.49,0v11.3A.745.745,0,0,1,.745,12.792Z'
-                            transform='translate(12.792 5.651) rotate(90)'
-                            fill='#fff'
-                            stroke='#fff'
-                            stroke-linecap='round'
-                            stroke-width='2'
-                        />
-                    </g>
-                </svg>
-            </button>
+                        <g
+                            id='Groupe_2148'
+                            data-name='Groupe 2148'
+                            transform='translate(1 1)'
+                        >
+                            <path
+                                id='Ligne_230'
+                                data-name='Ligne 230'
+                                d='M-.755,11.292a.745.745,0,0,1-.745-.745V-.755A.745.745,0,0,1-.755-1.5.745.745,0,0,1-.01-.755v11.3A.745.745,0,0,1-.755,11.292Z'
+                                transform='translate(7.151 1.5)'
+                                fill='#fff'
+                                stroke='#fff'
+                                stroke-linecap='round'
+                                stroke-width='2'
+                            />
+                            <path
+                                id='Ligne_231'
+                                data-name='Ligne 231'
+                                d='M.745,12.792A.745.745,0,0,1,0,12.046V.745a.745.745,0,1,1,1.49,0v11.3A.745.745,0,0,1,.745,12.792Z'
+                                transform='translate(12.792 5.651) rotate(90)'
+                                fill='#fff'
+                                stroke='#fff'
+                                stroke-linecap='round'
+                                stroke-width='2'
+                            />
+                        </g>
+                    </svg>
+                </button>
+            ) : (
+                <div className='icon'>
+                    <img src='/icons/heart.svg' alt='heart' />
+                </div>
+            )}
             {searchOptions && (
                 <div
                     className='responsive-modal'
