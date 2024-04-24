@@ -2266,7 +2266,6 @@ input[type="search"]::-webkit-search-results-decoration {
 
     .panel-container .responsive-products-grid .product-grid{
         padding-bottom: 15px;
-        flex: 150px;
     }
 
     .product-grid .product-info-grid p{

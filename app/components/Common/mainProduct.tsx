@@ -263,13 +263,19 @@ export default function ({
                             //         ? 'contain'
                             //         : 'cover',
                             // }}
-                            style={{
-                                objectFit: 'contain',
-                                width:
-                                    quantity === 1 || quantity === 3
-                                        ? '333px'
-                                        : '',
-                            }}
+                            style={
+                                width > 768
+                                    ? {
+                                          objectFit: 'contain',
+                                          width:
+                                              quantity === 1 || quantity === 3
+                                                  ? '333px'
+                                                  : '',
+                                      }
+                                    : {
+                                          objectFit: 'contain',
+                                      }
+                            }
                         />
                     </Link>
                     <div className='product-img-grid-overlay'>
