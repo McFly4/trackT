@@ -177,7 +177,6 @@ export default function OrderRoute() {
                 </div>
                 <div className='order-description-item'>
                     <p>Méthode de paiment</p>
-                    <p>{console.log(order)}</p>
                 </div>
                 <div className='order-description-item'>
                     <p>Adresse de livraison</p>

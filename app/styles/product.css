@@ -717,6 +717,7 @@
         height: 40px;
         top: 120px;
         display: block;
+        z-index: 15;
     }
 
     .breadcrumb-container{
@@ -819,7 +820,7 @@
         position: fixed;
         bottom: 0;
         width: 100%;
-        z-index: 90;
+        z-index: 15;
         background: #000;
         height: 90px;
         display: flex;
@@ -949,7 +950,7 @@
         background-color: #000000a6;
         backdrop-filter: blur(5px);
         -webkit-backdrop-filter: blur(5px);
-        z-index: 90;
+        z-index: 15;
     }
 
     .product-header-sticky-product img{
@@ -996,7 +997,7 @@
     }
 
     .product-price-container div{
-        bottom: 30% !important;
+        bottom: 20% !important;
     }
 
 }

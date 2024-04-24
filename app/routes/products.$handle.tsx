@@ -222,10 +222,11 @@ export default function Product() {
         promotion: product.promotion,
         release: product.release,
         ship:
-            selectedVariant.title === 'One Size'
-                ? product.ship
-                : selectedVariant?.weight >= 1 && product.ship,
-        soon: product.soon,
+            width > 768
+                ? selectedVariant.title === 'One Size'
+                    ? product.ship
+                    : selectedVariant?.weight >= 1 && product.ship
+                : product.ship,
     } as any
 
     const stickersData = Object.keys(mapping).reduce((acc: any, key: any) => {
@@ -1019,6 +1020,7 @@ function ProductImage({ image, product }: { image: any; product: any }) {
         setMainImage(firstImage)
     }, [firstImage])
 
+    console.log(product?.title?.length)
     return (
         <div className='product-image-container'>
             <div className='product-image'>
@@ -1042,7 +1044,17 @@ function ProductImage({ image, product }: { image: any; product: any }) {
                         </h2>
                     </Link>
                     {width < 768 && (
-                        <p className='product-image-name'>{product.title}</p>
+                        <p
+                            className='product-image-name'
+                            style={{
+                                fontSize:
+                                    product?.title?.length > 30 ? '40px' : '',
+                                lineHeight:
+                                    product?.title?.length > 30 ? '35px' : '',
+                            }}
+                        >
+                            {product.title}
+                        </p>
                     )}
                 </div>
                 <div className='product-image-main'>
@@ -1544,6 +1556,7 @@ function ToggleModal(toggle: any) {
         promotion: product.promotion,
         release: product.release,
         ship: product.ship,
+        soon: product.soon,
     } as any
 
     const stickersData = Object.keys(mapping).reduce((acc: any, key: any) => {
@@ -1561,7 +1574,6 @@ function ToggleModal(toggle: any) {
     )
     const isRelease = stickersData.find((item: any) => item.key === 'release')
     const isShip = stickersData.find((item: any) => item.key === 'ship')
-
     return (
         <div className='modal-stickers-overlay'>
             <div className='modal-stickers'>

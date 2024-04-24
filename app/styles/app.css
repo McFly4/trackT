@@ -2714,6 +2714,7 @@ input[type="search"]::-webkit-search-results-decoration {
 
     .responsive-modal-close{
         padding: unset !important;
+        z-index: 999;
     }
 
     .cart-line-price p{

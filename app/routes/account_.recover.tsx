@@ -61,7 +61,12 @@ export default function Recover() {
     return (
         <div>
             {action?.resetRequested ? (
-                <div className='account-recover-success login-form-field'>
+                <div
+                    className='account-recover-success login-form-field'
+                    style={{
+                        width: '100%',
+                    }}
+                >
                     <h1>Votre nouveau mot de passe se trouve ici</h1>
                     <input
                         aria-label='Email address'
