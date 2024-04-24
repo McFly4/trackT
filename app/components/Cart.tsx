@@ -60,8 +60,6 @@ export function CartMain({
         setCrown(false)
     }
 
-    console.log(crown)
-
     return (
         <>
             {crown && <Crowns isOpen={openCrown} onClose={closeCrown} />}
@@ -152,18 +150,36 @@ export function CartMain({
                                         : 'pocketItemOOO'
                                 }`}
                             >
-                                <AddToCartButton
-                                    disabled={
-                                        !item.variants.nodes[0].availableForSale
-                                    }
-                                    lines={[
-                                        {
-                                            merchandiseId:
-                                                item.variants.nodes[0].id,
-                                            quantity: 1,
-                                        },
-                                    ]}
-                                />
+                                {cart?.lines?.nodes?.find(
+                                    (line: any) =>
+                                        line.merchandise?.id ===
+                                        item.variants.nodes[0].id
+                                ) ? (
+                                    <CartLineRemoveButton2
+                                        lineIds={[
+                                            cart?.lines?.nodes?.find(
+                                                (line: any) =>
+                                                    line.merchandise?.id ===
+                                                    item.variants.nodes[0].id
+                                            )?.id,
+                                        ]}
+                                    />
+                                ) : (
+                                    <AddToCartButton
+                                        disabled={
+                                            !item.variants.nodes[0]
+                                                .availableForSale
+                                        }
+                                        lines={[
+                                            {
+                                                merchandiseId:
+                                                    item.variants.nodes[0].id,
+                                                quantity: 1,
+                                            },
+                                        ]}
+                                    />
+                                )}
+
                                 <div
                                     className='pocket-items-product-img'
                                     onClick={() => {
@@ -480,7 +496,13 @@ function ResponsiveCheckout({ checkoutUrl }: { checkoutUrl: string }) {
                 textAlign: 'center',
             }}
         >
-            <button>RÉCAPITULATIF ET PAIEMENT</button>
+            <button
+                style={{
+                    color: '#000',
+                }}
+            >
+                RÉCAPITULATIF ET PAIEMENT
+            </button>
         </a>
     )
 }
@@ -560,6 +582,20 @@ function CartLineRemoveButton({ lineIds }: { lineIds: string[] }) {
                 >
                     supprimer
                 </p>
+            </button>
+        </CartForm>
+    )
+}
+
+function CartLineRemoveButton2({ lineIds }: { lineIds: string[] }) {
+    return (
+        <CartForm
+            route='/cart'
+            action={CartForm.ACTIONS.LinesRemove}
+            inputs={{ lineIds }}
+        >
+            <button type='submit' className='res-pocket-items-add'>
+                -
             </button>
         </CartForm>
     )
