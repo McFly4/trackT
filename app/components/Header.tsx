@@ -103,19 +103,19 @@ export function Header({ header, isLoggedIn, cart, logo }: any) {
             {sizeScreen > 768 && (
                 <div className='nav-right'>
                     <div className='nav-images'>
-                        <Link to='/about'>
+                        <Link to='/about#vision'>
                             <img src='/nav/dropReused.png' alt='drop' />
                             <p>Non disponible</p>
                         </Link>
                     </div>
                     <div className='nav-images'>
-                        <Link to='/about'>
+                        <Link to='/about#vision'>
                             <img src='/nav/wanted.png' alt='drop' />
                             <p>Non disponible</p>
                         </Link>
                     </div>
                     <div className='nav-images'>
-                        <Link to='/about'>
+                        <Link to='/about#vision'>
                             <img src='/nav/track.png' alt='drop' />
                             <p>Non disponible</p>
                         </Link>

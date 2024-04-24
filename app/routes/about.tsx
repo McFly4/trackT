@@ -72,7 +72,16 @@ export default function About() {
                             <h2>L’EXPÉRIENCE FUTURISTE DU STREETWEAR</h2>
                         </div>
                     </a>
-                    <a href='#vision'>
+                    <a
+                        href='#vision'
+                        onClick={(e) => {
+                            e.preventDefault()
+                            window.scrollTo({
+                                top: 500,
+                                behavior: 'smooth',
+                            })
+                        }}
+                    >
                         <div className='a-futur-double-item'>
                             <h2>Vision 2025</h2>
                         </div>
