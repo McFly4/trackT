@@ -60,6 +60,8 @@ export function CartMain({
         setCrown(false)
     }
 
+    console.log(crown)
+
     return (
         <>
             {crown && <Crowns isOpen={openCrown} onClose={closeCrown} />}
@@ -67,7 +69,7 @@ export function CartMain({
                 <div className='res-pocket'>
                     <button
                         className='responsive-modal-close'
-                        onClick={() => history.back()}
+                        onClick={() => setOpenPocket(false)}
                         style={{
                             position: 'unset',
                         }}
@@ -87,7 +89,51 @@ export function CartMain({
                             />
                         </svg>
                     </button>
-                    <h2>Pocket items</h2>
+                    <div
+                        onClick={() => {
+                            openCrown()
+                        }}
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                        }}
+                    >
+                        {cartTotalPrice <= 250 ? (
+                            <img
+                                src='/cart/cartClassic.png'
+                                alt='panier classic'
+                                style={{
+                                    width: '130px',
+                                }}
+                            />
+                        ) : cartTotalPrice <= 500 ? (
+                            <img
+                                src='/cart/cartPremium.png'
+                                alt='panier premium'
+                                style={{
+                                    width: '130px',
+                                }}
+                            />
+                        ) : (
+                            <img
+                                src='/cart/cartExclusif.png'
+                                alt='panier vide'
+                                style={{
+                                    width: '130px',
+                                }}
+                            />
+                        )}
+                    </div>
+                    <div
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            margin: '20px 0',
+                        }}
+                    >
+                        <img src='/pocketItems.png' alt='pocket items' />
+                    </div>
+
                     <p>
                         Ajoutez quelques items pour atteindre la couronne
                         supérieure.
@@ -189,22 +235,6 @@ export function CartMain({
                         ))}
                     </div>
                     <div className='res-pocket-footer'>
-                        {cartTotalPrice <= 250 ? (
-                            <img
-                                src='/cart/cartClassic.png'
-                                alt='panier classic'
-                            />
-                        ) : cartTotalPrice <= 500 ? (
-                            <img
-                                src='/cart/cartPremium.png'
-                                alt='panier premium'
-                            />
-                        ) : (
-                            <img
-                                src='/cart/cartExclusif.png'
-                                alt='panier vide'
-                            />
-                        )}
                         <div className='res-pocket-footer-prices'>
                             <h5>SOUS-TOTAL</h5>
                             <h2>{cartTotalPrice} €</h2>
