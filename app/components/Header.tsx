@@ -51,7 +51,7 @@ export function Header({ header, isLoggedIn, cart, logo }: any) {
                             </a>
                         </div>
                         <div className='icon'>
-                            <img src='/icons/heart.svg' alt='heart' />
+                            <img src='/icons/folder.svg' alt='folder' />
                         </div>
                         {/* <HeaderMenuMobileToggle /> */}
                     </div>
@@ -59,10 +59,14 @@ export function Header({ header, isLoggedIn, cart, logo }: any) {
             ) : (
                 <div className='nav-responsive'>
                     <div>
-                        <SearchOptions icon={true} />
                         <div className='icon'>
                             <NavLink prefetch='intent' to='/account/profile'>
                                 <img src='/icons/person.svg' alt='person' />
+                            </NavLink>
+                        </div>
+                        <div className='icon'>
+                            <NavLink to='/about'>
+                                <img src='/icons/folder.svg' alt='folder' />
                             </NavLink>
                         </div>
                     </div>
@@ -86,9 +90,8 @@ export function Header({ header, isLoggedIn, cart, logo }: any) {
                         </NavLink>
                     </div>
                     <div>
-                        <div className='icon'>
-                            <img src='/icons/heart.svg' alt='heart' />
-                        </div>
+                        <SearchOptions icon={true} />
+
                         <div className='icon icon-cart'>
                             {cart?._data?.totalQuantity > 0 && (
                                 <span>{cart?._data?.totalQuantity || 0}</span>

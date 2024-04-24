@@ -55,7 +55,7 @@ export default function SearchOptions({ icon }: any) {
             ) : (
                 <div className='icon' onClick={() => setSearchOptions(true)}>
                     <a href='#'>
-                        <img src='/icons/search.svg' alt='search' />
+                        <img src='/icons/embedSearch.svg' alt='search' />
                     </a>
                 </div>
             )}

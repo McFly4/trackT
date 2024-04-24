@@ -278,11 +278,11 @@ export default function ({
                             }
                         />
                     </Link>
-                    <div className='product-img-grid-overlay'>
-                        <div className='product-basket'>
-                            <img src='/icons/basket.svg' alt='basket' />
-                        </div>
-                    </div>
+                    {/*<div className='product-img-grid-overlay'>*/}
+                    {/*    <div className='product-basket'>*/}
+                    {/*        <img src='/icons/basket.svg' alt='basket' />*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                 </div>
                 <div className='product-info-grid'>
                     <Link
