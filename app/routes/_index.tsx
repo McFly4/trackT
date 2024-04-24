@@ -112,11 +112,11 @@ export default function HomePage() {
                     loop
                     grabCursor={true}
                     modules={[Autoplay]}
-                    style={{
-                        maxHeight: '100vh',
-                    }}
                     autoplay={{
                         delay: 5000,
+                    }}
+                    style={{
+                        maxHeight: '100vh',
                     }}
                     onAutoplayTimeLeft={(s, time, progress) =>
                         onAutoplayTimeLeft(s, time, progress, 0)
@@ -200,12 +200,14 @@ export default function HomePage() {
                                         ></video>
                                     )}
 
-                                    <div
-                                        className='autoplay-progress'
-                                        slot='container-end'
-                                    >
-                                        <span>{autoplayTimes[0]}</span>
-                                    </div>
+                                    {heroSection?.length > 1 && (
+                                        <div
+                                            className='autoplay-progress'
+                                            slot='container-end'
+                                        >
+                                            <span>{autoplayTimes[0]}</span>
+                                        </div>
+                                    )}
                                     {sizeScreen > 768 && (
                                         <div
                                             className='shop-now'

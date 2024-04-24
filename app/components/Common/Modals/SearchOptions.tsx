@@ -94,24 +94,6 @@ export default function SearchOptions({ icon }: any) {
                             justifyContent: 'unset',
                         }}
                     >
-                        <Link
-                            to='/filters'
-                            onClick={() => setSearchOptions(false)}
-                        >
-                            <button>
-                                <img
-                                    src='/filters/checkbox.png'
-                                    alt='checkbox'
-                                    style={{
-                                        width: '20px',
-                                        height: '20px',
-                                        marginRight: '10px',
-                                        opacity: '1 !important',
-                                    }}
-                                />
-                                Rechercher par filtres
-                            </button>
-                        </Link>
                         <a
                             href='#categories-aside'
                             onClick={() => setSearchOptions(false)}
@@ -166,6 +148,24 @@ export default function SearchOptions({ icon }: any) {
                                     }}
                                 />
                                 Random item
+                            </button>
+                        </Link>
+                        <Link
+                            to='/filters'
+                            onClick={() => setSearchOptions(false)}
+                        >
+                            <button>
+                                <img
+                                    src='/filters/checkbox.png'
+                                    alt='checkbox'
+                                    style={{
+                                        width: '20px',
+                                        height: '20px',
+                                        marginRight: '10px',
+                                        opacity: '1 !important',
+                                    }}
+                                />
+                                Rechercher par filtres
                             </button>
                         </Link>
                     </div>

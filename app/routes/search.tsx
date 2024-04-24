@@ -10,7 +10,7 @@ import useWindowDimension from '~/hooks/useWindowDimension'
 import SearchOptions from '~/components/Common/Modals/SearchOptions'
 
 export const meta: MetaFunction = () => {
-    return [{ title: `Hydrogen | Search` }]
+    return [{ title: `Trackt | Search` }]
 }
 
 export async function loader({ request, context }: LoaderFunctionArgs) {
