@@ -392,7 +392,7 @@ function NoPredictiveSearchResults({
                 </p>
                 <button
                     onClick={() => {
-                        window.location.href = '/filtered'
+                        window.location.href = '/search?q=' + searchTerm.current
                     }}
                     style={{
                         display: 'flex',
