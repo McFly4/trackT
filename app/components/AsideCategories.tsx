@@ -126,7 +126,7 @@ export function AsideCategories({
                                 <p
                                     onClick={() => {
                                         window.location.href =
-                                            '/collections/Figurines'
+                                            '/collections/figurine'
                                     }}
                                 >
                                     Toutes les figurines
@@ -142,7 +142,7 @@ export function AsideCategories({
                                 <p
                                     onClick={() => {
                                         window.location.href =
-                                            '/collections/Bonnets'
+                                            '/collections/bonnet'
                                     }}
                                 >
                                     Tous les bonnets
