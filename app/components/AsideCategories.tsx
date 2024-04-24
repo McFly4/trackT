@@ -25,6 +25,7 @@ export function AsideCategories({
         },
         { name: 'vert', hex: '#008000', link: '/filtered?palette=green' },
         { name: 'jaune', hex: '#ffff00', link: '/filtered?palette=yellow' },
+        { name: 'beige', hex: '#f5f5dc', link: '/filtered?palette=beige' },
         { name: 'orange', hex: '#ffa500', link: '/filtered?palette=orange' },
         { name: 'marron', hex: '#8b4513', link: '/filtered?palette=brown' },
         { name: 'kaki', hex: '#556b2f', link: '/filtered?palette=kaki' },
@@ -157,7 +158,7 @@ export function AsideCategories({
                                 <p
                                     onClick={() => {
                                         window.location.href =
-                                            '/collections/accessoires'
+                                            '/collections/other-accessories'
                                     }}
                                 >
                                     tous les autres accessoires
