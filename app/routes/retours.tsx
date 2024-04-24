@@ -38,7 +38,7 @@ export default function Retours() {
                         RETOURS PAYANTS <br />
                         {/*BOOSTER RETOUR* 24H (10 €)*/}
                     </p>
-                    <p>Livraison 10€ - Retours 10€</p>
+                    <p>Livraison 10€</p>
                 </div>
                 <div className='a-third-guid-container-item'>
                     <img src='/cart/cartPremium.png' alt='cartClassic' />

@@ -54,7 +54,7 @@ const Crowns = ({ isOpen, onClose }: any) => {
                             marginTop: '20px',
                         }}
                     >
-                        Livraison 10€ - Retours 10€
+                        Livraison 10€
                     </p>
                 </div>
                 <div className='a-third-guid-container-item'>
