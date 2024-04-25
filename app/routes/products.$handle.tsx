@@ -1943,6 +1943,7 @@ function ProductOptions({ option, variants }: any) {
     const useWidth = useWindowDimensions()
     const width = useWidth.width || 1920
     const [isModalOpenToothbrush, setIsModalOpenToothbrush] = useState(false)
+    const [size, setSize] = useState(false)
     const defaultSize =
         typeof window !== 'undefined'
             ? localStorage.getItem('selectedShoeSize')
@@ -1990,6 +1991,14 @@ function ProductOptions({ option, variants }: any) {
                 link.click()
             }, 50)
         }
+    }
+
+    const openSize = () => {
+        setSize(true)
+    }
+
+    const closeSize = () => {
+        setSize(false)
     }
 
     const swiperRef = useRef<any>(null)
@@ -2117,7 +2126,7 @@ function ProductOptions({ option, variants }: any) {
                 </div>
             </div>
             <button
-                onClick={width > 768 ? toggleModalToothbrush : openCronws}
+                onClick={width > 768 ? toggleModalToothbrush : openSize}
                 className='sizes-guid'
                 style={{
                     color: '#000 !important',
@@ -2126,6 +2135,7 @@ function ProductOptions({ option, variants }: any) {
                 Guide des tailles
             </button>
             {crownsOpen && <Crowns isOpen={openCronws} onClose={closeCrowns} />}
+            {size && <Size isOpen={openSize} onClose={closeSize} />}
         </div>
     )
 }
