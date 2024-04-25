@@ -1768,16 +1768,6 @@ function ProductPrice({ selectedVariant, setBasket }: any) {
                                     src='/product/size/os.png'
                                     alt='price'
                                     className='product-size-os'
-                                    style={
-                                        width > 768
-                                            ? {
-                                                  width: '250px !important',
-                                                  height: '250px !important',
-                                              }
-                                            : {
-                                                  width: '150px !important',
-                                              }
-                                    }
                                 />
                             ) : (
                                 <img
