@@ -933,9 +933,9 @@
     }
 
     .product-grid span{
-        left: 45%;
+        top: 35%;
+        left: 54%;
     }
-
     .trackT-header h2{
         font-size: 23px;
         margin-left: 5px;
