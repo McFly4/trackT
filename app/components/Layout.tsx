@@ -50,45 +50,10 @@ export function Layout({
     pocketItems,
     logoTrackt,
 }: LayoutProps) {
-    const [isLoading, setIsLoading] = useState(true)
     const location = useLocation()
-
-    useEffect(() => {
-        const handleLoad = () => {
-            setIsLoading(false)
-        }
-
-        const handleUnload = () => {
-            setIsLoading(true)
-        }
-
-        window.addEventListener('load', handleLoad)
-        window.addEventListener('unload', handleUnload)
-
-        const timeoutId = setTimeout(() => {
-            setIsLoading(false)
-        }, 2000)
-
-        return () => {
-            clearTimeout(timeoutId)
-            window.removeEventListener('load', handleLoad)
-            window.removeEventListener('unload', handleUnload)
-        }
-    }, [])
 
     return (
         <>
-            {isLoading && (
-                <div className='loading-video'>
-                    <video
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        src='/loading.mp4'
-                    ></video>
-                </div>
-            )}
             <CartAside cart={cart} pocketItems={pocketItems} />
             <SearchAside />
             <CategoriesAside />
