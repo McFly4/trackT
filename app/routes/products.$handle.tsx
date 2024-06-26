@@ -330,12 +330,7 @@ export default function Product() {
       {width > 768 ? (
         <>
           <TrackT products={productsFromCollection} title='Produits connexes' link={`/collections/${collection}`} />
-          <div className='productBanner'>
-            <video width='100%' height='auto' autoPlay muted loop playsInline>
-              <source src='/product/banner.mp4' type='video/mp4' />
-              <img src='/product/banner.png' alt='banner' />
-            </video>
-          </div>
+
           <TrackT products={random} title={randomNameFunction()} link={`/filtered`} />
           <MarketDrag />
 
@@ -466,12 +461,7 @@ export default function Product() {
 
           <>
             <TrackT products={productsFromCollection} title='Produits connexes' link={`/search?q=${collection}`} />
-            <div className='productBanner'>
-              <video width='100%' height='auto' autoPlay muted loop playsInline>
-                <source src='/product/banner.mp4' type='video/mp4' />
-                <img src='/product/banner.png' alt='banner' />
-              </video>
-            </div>
+
             <TrackT products={random} title={randomNameFunction()} link={`/filtered`} />
             <MarketDrag />
 
