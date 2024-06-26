@@ -1,22 +1,18 @@
 import React, { useRef } from 'react'
 import MainProduct from '~/components/Common/mainProduct'
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
-import { Autoplay, FreeMode, Scrollbar } from 'swiper/modules'
+import { Autoplay, FreeMode, Scrollbar, Grid } from 'swiper/modules'
 import { Link, useLocation } from '@remix-run/react'
 import useWindowDimensions from '~/hooks/useWindowDimension'
+import { Image } from '@shopify/hydrogen'
 
-export default function TrackT({ products, title, isAccount, link }: any) {
-  const location = useLocation()
+export default function TrackT({ articles }: any) {
   const { width } = useWindowDimensions()
-
   const sizeScreen = width || 1920
-
   const swiperRef = useRef<any>(null)
-
   const nexto = () => {
     swiperRef.current?.slideNext()
   }
-
   const previo = () => {
     swiperRef.current?.slidePrev()
   }
@@ -25,40 +21,43 @@ export default function TrackT({ products, title, isAccount, link }: any) {
     <div
       className='trackT'
       style={{
-        margin:
-          location.pathname === '/account/profile'
-            ? sizeScreen > 768
-              ? '50px 50px 0 0'
-              : '0'
-            : location.pathname === '/account/orders'
-            ? sizeScreen > 768
-              ? '50px 0'
-              : '0'
-            : '',
+        padding: '20px',
       }}
     >
-      <div className='trackT-header'>
+      <div
+        className='trackT-header'
+        style={{
+          marginBottom: '10px',
+        }}
+      >
         <div>
-          <h2>
-            {location.pathname === '/account/profile'
-              ? 'APPAREMMENT, CES ARTICLES NE VOUS ONT PAS LAISSÉ INDIFFÉRENTS'
-              : title}
+          <h2
+            style={{
+              marginLeft: '0',
+            }}
+          >
+            Actualités TrackT
           </h2>
-          <Link to={link}>
-            <p>Tout afficher</p>
+          <Link to='/blogs'>
+            <p
+              style={{
+                marginLeft: '0',
+              }}
+            >
+              Tout afficher
+            </p>
           </Link>
         </div>
 
         {sizeScreen > 768 && <NavButtons next={nexto} previous={previo} />}
       </div>
       <Swiper
-        modules={[Scrollbar, FreeMode, Autoplay]}
+        modules={[Scrollbar, FreeMode, Autoplay, Grid]}
         scrollbar={{
           hide: false,
         }}
         watchSlidesProgress={true}
-        slidesPerGroup={1}
-        slidesPerView={location.pathname === '/account/profile' || location.pathname === '/account/orders' ? 3 : 4}
+        slidesPerView={4}
         autoplay={{
           delay: 3000,
         }}
@@ -68,8 +67,7 @@ export default function TrackT({ products, title, isAccount, link }: any) {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
         }}
-        spaceBetween={0}
-        loop={true}
+        spaceBetween={40}
         onSwiper={(swiper) => (swiperRef.current = swiper)}
         breakpoints={{
           0: {
@@ -78,15 +76,9 @@ export default function TrackT({ products, title, isAccount, link }: any) {
           800: {
             slidesPerView: 3,
           },
-          1300: {
-            slidesPerView: isAccount === true ? 2 : 3,
-          },
-          1600: {
-            slidesPerView: isAccount === true ? 3 : 4,
-          },
         }}
       >
-        {products?.map((product: any, index: number) => (
+        {articles?.map((product: any, index: number) => (
           <SwiperSlide
             key={index}
             className='trackT-slide'
@@ -95,7 +87,12 @@ export default function TrackT({ products, title, isAccount, link }: any) {
               width: '300px !important',
             }}
           >
-            <MainProduct product={product} stickers={false} isCarousel={true} />
+            <Link to={`/blogs/news/${product.handle}`}>
+              <div className='swiper-articles'>
+                <Image data={product.image} aspectRatio='3/2' />
+                <p>{product.title?.length > 70 ? product.title.slice(0, 70) + '...' : product.title}</p>
+              </div>
+            </Link>
           </SwiperSlide>
         ))}
       </Swiper>

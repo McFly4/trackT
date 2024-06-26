@@ -1,104 +1,240 @@
+import React, { useState } from 'react'
 import { json, type LoaderFunctionArgs } from '@shopify/remix-oxygen'
 import { Link, useLoaderData, type MetaFunction } from '@remix-run/react'
-import { Pagination, getPaginationVariables } from '@shopify/hydrogen'
+import { Image, Pagination, getPaginationVariables } from '@shopify/hydrogen'
+import type { ArticleItemFragment } from 'storefrontapi.generated'
+import dayjs from 'dayjs'
+import 'dayjs/locale/fr'
+dayjs.locale('fr')
 
-export const meta: MetaFunction = () => {
-    return [{ title: `Hydrogen | Blogs` }]
+// type
+
+type BlogTypes = {
+  name: string
+  color: string
 }
 
-export const loader = async ({
-    request,
-    context: { storefront },
-}: LoaderFunctionArgs) => {
-    const paginationVariables = getPaginationVariables(request, {
-        pageBy: 10,
-    })
+const blogTypes: BlogTypes[] = [
+  {
+    name: 'voix créatives',
+    color: '#6FDD59',
+  },
+  {
+    name: 'Fashion tips',
+    color: '#FFF5B2',
+  },
 
-    const { blogs } = await storefront.query(BLOGS_QUERY, {
-        variables: {
-            ...paginationVariables,
-        },
-    })
+  {
+    name: 'iconic collabs',
+    color: '#FDE333',
+  },
+  {
+    name: 'shopping guide',
+    color: '#FF9147',
+  },
+  {
+    name: 'buy or not buy',
+    color: '#EE0A39',
+  },
+  {
+    name: 'évènements',
+    color: '#80DDFD',
+  },
+  {
+    name: 'marques indépendantes',
+    color: '#831DD9',
+  },
+]
 
-    return json({ blogs })
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
+  return [{ title: `Hydrogen | ${data?.blog.title ?? ''} blog` }]
 }
 
-export default function Blogs() {
-    const { blogs } = useLoaderData<typeof loader>()
+export const loader = async ({ request, params, context: { storefront } }: LoaderFunctionArgs) => {
+  const paginationVariables = getPaginationVariables(request, {
+    pageBy: 4,
+  })
 
-    return (
-        <div className='blogs'>
-            <h1>Blogs</h1>
-            <div className='blogs-grid'>
-                <Pagination connection={blogs}>
-                    {({ nodes, isLoading, PreviousLink, NextLink }) => {
-                        return (
-                            <>
-                                <PreviousLink>
-                                    {isLoading ? (
-                                        'Loading...'
-                                    ) : (
-                                        <span>↑ Load previous</span>
-                                    )}
-                                </PreviousLink>
-                                {nodes.map((blog) => {
-                                    return (
-                                        <Link
-                                            className='blog'
-                                            key={blog.handle}
-                                            prefetch='intent'
-                                            to={`/blogs/${blog.handle}`}
-                                        >
-                                            <h2>{blog.title}</h2>
-                                        </Link>
-                                    )
-                                })}
-                                <NextLink>
-                                    {isLoading ? (
-                                        'Loading...'
-                                    ) : (
-                                        <span>Load more ↓</span>
-                                    )}
-                                </NextLink>
-                            </>
-                        )
-                    }}
-                </Pagination>
-            </div>
-        </div>
-    )
+  const { blog } = await storefront.query(BLOGS_QUERY, {
+    variables: {
+      blogHandle: params.blogHandle,
+      ...paginationVariables,
+    },
+  })
+
+  if (!blog?.articles) {
+    throw new Response('Not found', { status: 404 })
+  }
+
+  return json({ blog })
+}
+
+export default function Blog() {
+  const { blog } = useLoaderData<typeof loader>()
+  const { articles } = blog
+  const [selectedTypes, setSelectedTypes] = useState<string[]>([])
+
+  function parseArticleTypes(value: unknown): string[] {
+    if (typeof value === 'string') {
+      try {
+        return JSON.parse(value) as string[]
+      } catch {
+        return []
+      }
+    }
+    return []
+  }
+
+  const filteredArticles = articles?.nodes?.filter((article: any) => {
+    if (!selectedTypes.length) {
+      return true // If no types are selected, show all articles
+    }
+    const articleTypes = parseArticleTypes(article.types?.value)
+    return selectedTypes.some((type: string) => articleTypes.includes(type))
+  })
+
+  return (
+    <div className='blog'>
+      <div className='blog-grid'>
+        <Pagination connection={articles}>
+          {({ nodes, isLoading, PreviousLink, NextLink }) => {
+            return (
+              <>
+                <PreviousLink>{isLoading ? 'Loading...' : <span>↑ Load previous</span>}</PreviousLink>
+                <div className='blog-title'>
+                  <h1>X-TRACKT, BLOG ACTUS, MODE ET CONSEIL</h1>
+                  <div className='blog-title-txt'>
+                    <p>
+                      TrackT ne se contente pas de vendre des vêtements. Nous racontons des histoires, inspirons des
+                      communautés et connectons des groupes.
+                    </p>
+                    <p>
+                      Notre blog, X-TrackT, est le cœur battant de notre plateforme, où la mode rencontre la culture,
+                      l’actualité et les conseils.
+                    </p>
+                    <p>
+                      Nous avons conçu cet espace pour être une source inépuisable d’inspiration, d’information et de
+                      soutien pour tous les passionnés de streetwear.
+                    </p>
+                  </div>
+                  <div className='blog-types'>
+                    {blogTypes?.map((type) => (
+                      <div
+                        onClick={() => {
+                          if (selectedTypes.includes(type.name)) {
+                            setSelectedTypes(selectedTypes.filter((t) => t !== type.name))
+                          } else {
+                            setSelectedTypes([...selectedTypes, type.name])
+                          }
+                        }}
+                        className='blog-type-item'
+                        key={type.name}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '5px',
+                          backgroundColor: type.color + '20',
+                          outline: selectedTypes.includes(type.name) ? `2px solid ${type.color}` : 'unset',
+                        }}
+                      >
+                        <span
+                          style={{
+                            backgroundColor: type.color,
+                            borderRadius: '50%',
+                            display: 'inline-block',
+                            width: '17px',
+                            height: '17px',
+                          }}
+                        ></span>
+                        <p
+                          style={{
+                            color: type.color,
+                          }}
+                        >
+                          {type.name}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                {filteredArticles.map((article: any) => {
+                  return (
+                    <Link to={`/blogs/news/${article.handle}`}>
+                      <div className='blog-grid-item' key={article.id}>
+                        <Image
+                          alt={article.image.altText || article.title}
+                          aspectRatio='3/2'
+                          data={article.image}
+                          loading='lazy'
+                        />
+                        <h6>{article.title?.length > 35 ? article.title.slice(0, 35) + '...' : article.title}</h6>
+                        <div>
+                          <p>{dayjs(article.publishedAt).format('DD MMM YYYY')}</p>
+                        </div>
+                      </div>
+                    </Link>
+                  )
+                })}
+                <NextLink>{isLoading ? 'Loading...' : <span>Load more ↓</span>}</NextLink>
+              </>
+            )
+          }}
+        </Pagination>
+      </div>
+    </div>
+  )
 }
 
 // NOTE: https://shopify.dev/docs/api/storefront/latest/objects/blog
 const BLOGS_QUERY = `#graphql
-  query Blogs(
-    $country: CountryCode
-    $endCursor: String
-    $first: Int
+    query Blog(
     $language: LanguageCode
-    $last: Int
-    $startCursor: String
-  ) @inContext(country: $country, language: $language) {
-    blogs(
-      first: $first,
-      last: $last,
-      before: $startCursor,
-      after: $endCursor
-    ) {
-      pageInfo {
-        hasNextPage
-        hasPreviousPage
-        startCursor
-        endCursor
-      }
-      nodes {
+  ) @inContext(language: $language) {
+    blog(handle: "news") {
+      title
+      seo {
         title
-        handle
-        seo {
-          title
-          description
-        }
+        description
       }
+      articles(
+        first: 250,
+      ) {
+        nodes {
+          ...ArticleItem
+        }
+        pageInfo {
+          hasPreviousPage
+          hasNextPage
+          hasNextPage
+          endCursor
+          startCursor
+        }
+
+      }
+    }
+  }
+  fragment ArticleItem on Article {
+    author: authorV2 {
+      name
+    }
+    contentHtml
+    handle
+    id
+    image {
+      id
+      altText
+      url
+      width
+      height
+    }
+    publishedAt
+    title
+    blog {
+      handle
+    }
+    types: metafield(namespace: "custom", key: "types") {
+     key
+     value
     }
   }
 ` as const
