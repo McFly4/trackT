@@ -18,12 +18,7 @@ export default function TrackT({ articles }: any) {
   }
 
   return (
-    <div
-      className='trackT'
-      style={{
-        padding: '20px',
-      }}
-    >
+    <div className='trackT article-blog'>
       <div
         className='trackT-header'
         style={{
@@ -73,20 +68,16 @@ export default function TrackT({ articles }: any) {
           0: {
             slidesPerView: 1,
           },
-          800: {
-            slidesPerView: 3,
+          768: {
+            slidesPerView: 2,
+          },
+          1200: {
+            slidesPerView: 4,
           },
         }}
       >
         {articles?.map((product: any, index: number) => (
-          <SwiperSlide
-            key={index}
-            className='trackT-slide'
-            style={{
-              padding: '40px 0',
-              width: '300px !important',
-            }}
-          >
+          <SwiperSlide key={index} className='trackT-slide article-slide'>
             <Link to={`/blogs/news/${product.handle}`}>
               <div className='swiper-articles'>
                 <Image data={product.image} aspectRatio='3/2' />

@@ -35,16 +35,18 @@ export async function loader({ params, context }: LoaderFunctionArgs) {
   const article = blog.articleByHandle
   const topProducts = await context.storefront.query(TOP_PRODUCTS)
   const rightNow = await context.storefront.query(RIGHT_NOW)
+  const trendy = await context.storefront.query(TRENDY)
   const otherArticles = await context.storefront.query(OTHER_ARTICLES)
 
-  return json({ article, topProducts, rightNow, otherArticles })
+  return json({ article, topProducts, rightNow, otherArticles, trendy })
 }
 
 export default function Article() {
-  const { article, topProducts, rightNow, otherArticles } = useLoaderData<typeof loader>()
+  const { article, topProducts, rightNow, otherArticles, trendy } = useLoaderData<typeof loader>()
   const { title, image, contentHtml, author } = article
   const topedProducts = topProducts.metaobjects.nodes[0].field.references.nodes
   const rightNowProducts = rightNow.metaobjects.nodes[0].field.references.nodes
+  const trendyProducts = trendy.metaobjects.nodes[0].field.references.nodes
   const articles = otherArticles.articles.nodes
   const blogTypes = JSON?.parse(article.types?.value) as any
   const blogTypesParent: BlogTypes[] = [
@@ -251,7 +253,6 @@ export default function Article() {
           <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
         </div>
         <div className='article-container-products'>
-          <BestSeller products={topedProducts} title='Top ventes' />
           <div className='right-now'>
             <h2>En ce moment sur trackt</h2>
             <div className='right-now-container'>
@@ -263,8 +264,20 @@ export default function Article() {
               ))}
             </div>
           </div>
+          <div className='right-now'>
+            <h2>Modèles populaires</h2>
+            <div className='right-now-container'>
+              {trendyProducts.map((product: any) => (
+                <div key={product.id} className='right-now-product'>
+                  <Image data={product.images.nodes[0]} loading='lazy' />
+                  <p>{product.title?.length > 12 ? `${product.title.slice(0, 12)}...` : product.title}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
+      <div className='divider-article'></div>
       <div className='articles-list'>
         <Articles articles={articles} />
       </div>
@@ -397,6 +410,31 @@ query MetaObjects {
 const RIGHT_NOW = `#graphql
 query MetaObjects {
   metaobjects(first: 20, type: "right_now") {
+    nodes {
+      field(key: "product") {
+        references(first: 10) {
+          nodes {
+            ... on Product {
+              id
+              title
+              handle
+              images(first: 1) {
+                nodes {
+                  url
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+`
+
+const TRENDY = `#graphql
+query MetaObjects {
+  metaobjects(first: 20, type: "trendy") {
     nodes {
       field(key: "product") {
         references(first: 10) {

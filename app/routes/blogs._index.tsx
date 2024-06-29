@@ -158,6 +158,14 @@ export default function Blog() {
                   </div>
                 </div>
                 {filteredArticles.map((article: any) => {
+                  let types = []
+                  if (article?.types && article?.types?.value) {
+                    try {
+                      types = JSON.parse(article?.types?.value) as any
+                    } catch (error) {
+                      console.error('Error parsing types:', error)
+                    }
+                  }
                   return (
                     <Link to={`/blogs/news/${article.handle}`}>
                       <div className='blog-grid-item' key={article.id}>
@@ -167,9 +175,22 @@ export default function Blog() {
                           data={article.image}
                           loading='lazy'
                         />
-                        <h6>{article.title?.length > 35 ? article.title.slice(0, 35) + '...' : article.title}</h6>
-                        <div>
+                        <h6>{article.title?.length > 60 ? article.title.slice(0, 55) + '...' : article.title}</h6>
+                        <div className='date-type-container'>
                           <p>{dayjs(article.publishedAt).format('DD MMM YYYY')}</p>
+                          <div className='types-container'>
+                            {types.map((type: any) => {
+                              const blogType = blogTypes.find((bt) => bt.name == type)
+                              if (blogType) {
+                                return (
+                                  <span key={type} className='type-badge' style={{ backgroundColor: blogType.color }}>
+                                    {' '}
+                                  </span>
+                                )
+                              }
+                              return null
+                            })}
+                          </div>
                         </div>
                       </div>
                     </Link>
@@ -198,6 +219,8 @@ const BLOGS_QUERY = `#graphql
       }
       articles(
         first: 250,
+        sortKey: PUBLISHED_AT,
+        reverse: true
       ) {
         nodes {
           ...ArticleItem
@@ -205,11 +228,9 @@ const BLOGS_QUERY = `#graphql
         pageInfo {
           hasPreviousPage
           hasNextPage
-          hasNextPage
           endCursor
           startCursor
         }
-
       }
     }
   }
