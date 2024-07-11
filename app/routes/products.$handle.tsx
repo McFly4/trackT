@@ -796,7 +796,6 @@ function ProductImage({ image, product }: { image: any; product: any }) {
     setMainImage(firstImage)
   }, [firstImage])
 
-  console.log(product?.title?.length)
   return (
     <div className='product-image-container'>
       <div className='product-image'>

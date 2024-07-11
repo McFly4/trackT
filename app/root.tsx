@@ -1,22 +1,18 @@
 import { useNonce } from '@shopify/hydrogen'
+import { defer, type SerializeFrom, type LoaderFunctionArgs } from '@shopify/remix-oxygen'
 import {
-    defer,
-    type SerializeFrom,
-    type LoaderFunctionArgs,
-} from '@shopify/remix-oxygen'
-import {
-    Links,
-    Meta,
-    Outlet,
-    Scripts,
-    LiveReload,
-    useMatches,
-    useRouteError,
-    useLoaderData,
-    ScrollRestoration,
-    isRouteErrorResponse,
-    type ShouldRevalidateFunction,
-    Link,
+  Links,
+  Meta,
+  Outlet,
+  Scripts,
+  LiveReload,
+  useMatches,
+  useRouteError,
+  useLoaderData,
+  ScrollRestoration,
+  isRouteErrorResponse,
+  type ShouldRevalidateFunction,
+  Link,
 } from '@remix-run/react'
 import type { CustomerAccessToken } from '@shopify/hydrogen/storefront-api-types'
 import favicon from '../public/favicon.ico'
@@ -33,187 +29,171 @@ import { Layout } from '~/components/Layout'
 /**
  * This is important to avoid re-fetching root queries on sub-navigations
  */
-export const shouldRevalidate: ShouldRevalidateFunction = ({
-    formMethod,
-    currentUrl,
-    nextUrl,
-}) => {
-    // revalidate when a mutation is performed e.g add to cart, login...
-    if (formMethod && formMethod !== 'GET') {
-        return true
-    }
+export const shouldRevalidate: ShouldRevalidateFunction = ({ formMethod, currentUrl, nextUrl }) => {
+  // revalidate when a mutation is performed e.g add to cart, login...
+  if (formMethod && formMethod !== 'GET') {
+    return true
+  }
 
-    // revalidate when manually revalidating via useRevalidator
-    if (currentUrl.toString() === nextUrl.toString()) {
-        return true
-    }
+  // revalidate when manually revalidating via useRevalidator
+  if (currentUrl.toString() === nextUrl.toString()) {
+    return true
+  }
 
-    return false
+  return false
 }
 
 export function links() {
-    return [
-        { rel: 'stylesheet', href: resetStyles },
-        { rel: 'stylesheet', href: appStyles },
-        { rel: 'stylesheet', href: header },
-        { rel: 'stylesheet', href: product },
-        { rel: 'stylesheet', href: swiper },
-        { rel: 'stylesheet', href: account },
-        { rel: 'stylesheet', href: about },
-        { rel: 'stylesheet', href: blog },
-        {
-            rel: 'preconnect',
-            href: 'https://cdn.shopify.com',
-        },
-        {
-            rel: 'preconnect',
-            href: 'https://shop.app',
-        },
-        { rel: 'icon', type: 'image/svg+xml', href: favicon },
-    ]
+  return [
+    { rel: 'stylesheet', href: resetStyles },
+    { rel: 'stylesheet', href: appStyles },
+    { rel: 'stylesheet', href: header },
+    { rel: 'stylesheet', href: product },
+    { rel: 'stylesheet', href: swiper },
+    { rel: 'stylesheet', href: account },
+    { rel: 'stylesheet', href: about },
+    { rel: 'stylesheet', href: blog },
+    {
+      rel: 'preconnect',
+      href: 'https://cdn.shopify.com',
+    },
+    {
+      rel: 'preconnect',
+      href: 'https://shop.app',
+    },
+    { rel: 'icon', type: 'image/svg+xml', href: favicon },
+  ]
 }
 
 export const useRootLoaderData = () => {
-    const [root] = useMatches()
-    return root?.data as SerializeFrom<typeof loader>
+  const [root] = useMatches()
+  return root?.data as SerializeFrom<typeof loader>
 }
 
 export async function loader({ context }: LoaderFunctionArgs) {
-    const { storefront, session, cart } = context
-    const customerAccessToken = await session.get('customerAccessToken')
-    const publicStoreDomain = context.env.PUBLIC_STORE_DOMAIN
+  const { storefront, session, cart } = context
+  const customerAccessToken = await session.get('customerAccessToken')
+  const publicStoreDomain = context.env.PUBLIC_STORE_DOMAIN
 
-    // validate the customer access token is valid
-    const { isLoggedIn, headers } = await validateCustomerAccessToken(
-        session,
-        customerAccessToken
-    )
+  // validate the customer access token is valid
+  const { isLoggedIn, headers } = await validateCustomerAccessToken(session, customerAccessToken)
 
-    // defer the cart query by not awaiting it
-    const cartPromise = cart.get()
+  // defer the cart query by not awaiting it
+  const cartPromise = cart.get()
 
-    // defer the footer query (below the fold)
-    const footerPromise = storefront.query(FOOTER_QUERY, {
-        cache: storefront.CacheLong(),
-        variables: {
-            footerMenuHandle: 'footer', // Adjust to your footer menu handle
-        },
-    })
+  // defer the footer query (below the fold)
+  const footerPromise = storefront.query(FOOTER_QUERY, {
+    cache: storefront.CacheLong(),
+    variables: {
+      footerMenuHandle: 'footer', // Adjust to your footer menu handle
+    },
+  })
 
-    const footerPromise2 = storefront.query(FOOTER_QUERY2, {
-        cache: storefront.CacheLong(),
-        variables: {
-            footerMenuHandle: 'footerincontournables', // Adjust to your footer menu handle
-        },
-    })
+  const footerPromise2 = storefront.query(FOOTER_QUERY2, {
+    cache: storefront.CacheLong(),
+    variables: {
+      footerMenuHandle: 'footerincontournables', // Adjust to your footer menu handle
+    },
+  })
 
-    // await the header query (above the fold)
-    const headerPromise = storefront.query(HEADER_QUERY, {
-        cache: storefront.CacheLong(),
-        variables: {
-            headerMenuHandle: 'main-menu', // Adjust to your header menu handle
-        },
-    })
+  // await the header query (above the fold)
+  const headerPromise = storefront.query(HEADER_QUERY, {
+    cache: storefront.CacheLong(),
+    variables: {
+      headerMenuHandle: 'main-menu', // Adjust to your header menu handle
+    },
+  })
 
-    const pocketItems = await storefront.query(POCKET_ITEMS)
-    const logoTrackt = await storefront.query(LOGO_TRACKT)
+  const pocketItems = await storefront.query(POCKET_ITEMS)
+  const logoTrackt = await storefront.query(LOGO_TRACKT)
 
-    return defer(
-        {
-            cart: cartPromise,
-            footer: footerPromise,
-            footer2: footerPromise2,
-            header: await headerPromise,
-            isLoggedIn,
-            publicStoreDomain,
-            pocketItems,
-            logoTrackt,
-        },
-        { headers }
-    )
+  return defer(
+    {
+      cart: cartPromise,
+      footer: footerPromise,
+      footer2: footerPromise2,
+      header: await headerPromise,
+      isLoggedIn,
+      publicStoreDomain,
+      pocketItems,
+      logoTrackt,
+    },
+    { headers }
+  )
 }
 
 export default function App() {
-    const nonce = useNonce()
-    const data = useLoaderData<typeof loader>()
+  const nonce = useNonce()
+  const data = useLoaderData<typeof loader>()
 
-    return (
-        <html lang='en'>
-            <head>
-                <meta charSet='utf-8' />
-                <meta
-                    name='viewport'
-                    content='width=device-width,initial-scale=1'
-                />
-                <link rel='preconnect' href='https://fonts.googleapis.com' />
-                <link rel='preconnect' href='https://fonts.gstatic.com' />
-                <link
-                    href='https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap'
-                    rel='stylesheet'
-                />
+  return (
+    <html lang='en'>
+      <head>
+        <meta charSet='utf-8' />
+        <meta name='viewport' content='width=device-width,initial-scale=1' />
+        <link rel='preconnect' href='https://fonts.googleapis.com' />
+        <link rel='preconnect' href='https://fonts.gstatic.com' />
+        <link href='https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap' rel='stylesheet' />
 
-                <Meta />
-                <Links />
-            </head>
-            <body>
-                <Layout {...data}>
-                    <Outlet />
-                </Layout>
-                <ScrollRestoration nonce={nonce} />
-                <Scripts nonce={nonce} />
-                <LiveReload nonce={nonce} />
-            </body>
-        </html>
-    )
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <Layout {...data}>
+          <Outlet />
+        </Layout>
+        <ScrollRestoration nonce={nonce} />
+        <Scripts nonce={nonce} />
+        <LiveReload nonce={nonce} />
+      </body>
+    </html>
+  )
 }
 
 export function ErrorBoundary() {
-    const error = useRouteError()
-    const rootData = useRootLoaderData()
-    const nonce = useNonce()
-    let errorMessage = 'Unknown error'
-    let errorStatus = 500
+  const error = useRouteError()
+  const rootData = useRootLoaderData()
+  const nonce = useNonce()
+  let errorMessage = 'Unknown error'
+  let errorStatus = 500
 
-    if (isRouteErrorResponse(error)) {
-        errorMessage = error?.data?.message ?? error.data
-        errorStatus = error.status
-    } else if (error instanceof Error) {
-        errorMessage = error.message
-    }
+  if (isRouteErrorResponse(error)) {
+    errorMessage = error?.data?.message ?? error.data
+    errorStatus = error.status
+  } else if (error instanceof Error) {
+    errorMessage = error.message
+  }
 
-    return (
-        <html lang='en'>
-            <head>
-                <meta charSet='UTF-8' />
-                <meta
-                    name='viewport'
-                    content='width=device-width,initial-scale=1'
-                />
-                <Meta />
-                <Links />
-            </head>
-            <body className='error'>
-                <video
-                    muted
-                    autoPlay
-                    loop
-                    playsInline
-                    style={{
-                        height: '90%',
-                    }}
-                >
-                    <source src='/404.mp4' type='video/webm' />
-                    Chargement ...
-                </video>
-                <button>
-                    <Link to='/'>Back home</Link>
-                </button>
-                <ScrollRestoration nonce={nonce} />
-                <Scripts nonce={nonce} />
-                <LiveReload nonce={nonce} />
-            </body>
-        </html>
-    )
+  return (
+    <html lang='en'>
+      <head>
+        <meta charSet='UTF-8' />
+        <meta name='viewport' content='width=device-width,initial-scale=1' />
+        <Meta />
+        <Links />
+      </head>
+      <body className='error'>
+        <video
+          muted
+          autoPlay
+          loop
+          playsInline
+          style={{
+            height: '90%',
+          }}
+        >
+          <source src='/404.mp4' type='video/webm' />
+          Chargement ...
+        </video>
+        <button>
+          <Link to='/'>Back home</Link>
+        </button>
+        <ScrollRestoration nonce={nonce} />
+        <Scripts nonce={nonce} />
+        <LiveReload nonce={nonce} />
+      </body>
+    </html>
+  )
 }
 
 /**
@@ -229,27 +209,27 @@ export function ErrorBoundary() {
  * ```
  */
 async function validateCustomerAccessToken(
-    session: LoaderFunctionArgs['context']['session'],
-    customerAccessToken?: CustomerAccessToken
+  session: LoaderFunctionArgs['context']['session'],
+  customerAccessToken?: CustomerAccessToken
 ) {
-    let isLoggedIn = false
-    const headers = new Headers()
-    if (!customerAccessToken?.accessToken || !customerAccessToken?.expiresAt) {
-        return { isLoggedIn, headers }
-    }
-
-    const expiresAt = new Date(customerAccessToken.expiresAt).getTime()
-    const dateNow = Date.now()
-    const customerAccessTokenExpired = expiresAt < dateNow
-
-    if (customerAccessTokenExpired) {
-        session.unset('customerAccessToken')
-        headers.append('Set-Cookie', await session.commit())
-    } else {
-        isLoggedIn = true
-    }
-
+  let isLoggedIn = false
+  const headers = new Headers()
+  if (!customerAccessToken?.accessToken || !customerAccessToken?.expiresAt) {
     return { isLoggedIn, headers }
+  }
+
+  const expiresAt = new Date(customerAccessToken.expiresAt).getTime()
+  const dateNow = Date.now()
+  const customerAccessTokenExpired = expiresAt < dateNow
+
+  if (customerAccessTokenExpired) {
+    session.unset('customerAccessToken')
+    headers.append('Set-Cookie', await session.commit())
+  } else {
+    isLoggedIn = true
+  }
+
+  return { isLoggedIn, headers }
 }
 
 const MENU_FRAGMENT = `#graphql
