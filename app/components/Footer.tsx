@@ -7,7 +7,7 @@ export function Footer(menu: FooterQuery) {
       <footer className='footer'>
         <div>
           <Link to='/'>
-            <img src='/footer/trackt.png' />
+            <img src='/footer/trackt.png' alt='trackt' className='footer-logo' />
           </Link>
         </div>
         <div className='footer-menu'>
@@ -40,27 +40,30 @@ export function Footer(menu: FooterQuery) {
             <p>Plan du site</p>
           </Link>
         </div>
-        <div className='footer-menu'>
+        <div className='footer-menu2'>
           <h4>incontournables</h4>
-          <p>
-            indépendant brand
-            <img src='/coming.png' alt='coming soon' />
-          </p>
-          <Link to='/filtered?release=true'>
-            <p>exclusive item</p>
-          </Link>
-          <Link to='/filtered?hotdeal=true'>
-            <p>hot deal</p>
-          </Link>
-          <Link to='/filtered?new=true'>
-            <p>nouveautés</p>
-          </Link>
-          <Link to='/filtered?fast=true'>
-            <p>chez vous en 24h</p>
-          </Link>
-          <Link to='/filtered?promotion=true'>
-            <p>en promo</p>
-          </Link>
+          <div className='footer-menu2-container'>
+            <Link to='/filtered?new=true'>
+              <img src='/product/stickers/new.png' alt='new' />
+              <p>Nouvel arrivage</p>
+            </Link>
+            <Link to='/filtered?fast=true'>
+              <img src='/product/stickers/ship.png' alt='fast' />
+              <p>Livré en 24h</p>
+            </Link>
+            <Link to='/filtered?hotdeal=true'>
+              <img src='/product/stickers/hotDeal.png' alt='hot deal' />
+              <p>hot deal</p>
+            </Link>
+            <Link to='/filtered?release=true'>
+              <img src='/product/stickers/release.png' alt='release' />
+              <p>exclusive item</p>
+            </Link>
+            <Link to='/filtered?promotion=true'>
+              <img src='/product/stickers/promotion.png' alt='promo' />
+              <p>en promo</p>
+            </Link>
+          </div>
         </div>
         <div className='footer-media'>
           <h4>
