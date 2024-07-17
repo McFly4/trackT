@@ -2,9 +2,13 @@ import React, { useState } from 'react'
 import { Link } from '@remix-run/react'
 import useWindowDimensions from '~/hooks/useWindowDimension'
 
-export default function SearchOptions({ icon }: any) {
-  const [searchOptions, setSearchOptions] = useState(false)
+interface SearchOptionsProps {
+  icon: any
+  toggleMenu?: (() => void) | null
+}
 
+const SearchOptions: React.FC<SearchOptionsProps> = ({ icon, toggleMenu }) => {
+  const [searchOptions, setSearchOptions] = useState(false)
   return (
     <div className='searchOptions'>
       {!icon ? (
@@ -85,9 +89,39 @@ export default function SearchOptions({ icon }: any) {
               justifyContent: 'unset',
             }}
           >
-            <a href='#categories-aside' onClick={() => setSearchOptions(false)}>
-              <button>Shopping par catégories</button>
-            </a>
+            {toggleMenu ? (
+              <a>
+                <button
+                  onClick={() => {
+                    setSearchOptions(false)
+                    toggleMenu()
+                  }}
+                >
+                  <img
+                    src='/icons/embedSearch.svg'
+                    alt='search'
+                    style={{
+                      marginRight: '10px',
+                    }}
+                  />
+                  Rechercher par catégories
+                </button>
+              </a>
+            ) : (
+              <a href='#categories-aside'>
+                <button>
+                  <img
+                    src='/icons/embedSearch.svg'
+                    alt='search'
+                    style={{
+                      marginRight: '10px',
+                    }}
+                  />
+                  Rechercher par catégories
+                </button>
+              </a>
+            )}
+
             <a href='#search-aside' onClick={() => setSearchOptions(false)}>
               <button>
                 <svg
@@ -153,3 +187,5 @@ export default function SearchOptions({ icon }: any) {
     </div>
   )
 }
+
+export default SearchOptions

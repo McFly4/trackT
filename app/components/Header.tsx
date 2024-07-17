@@ -261,7 +261,7 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
                 }}
                 className='icon'
               >
-                <SearchOptions icon={true} />
+                <SearchOptions toggleMenu={toggleMenu} icon={true} />
                 <a href='/account/profile'>
                   <img src='/icons/person.svg' alt='person' />
                 </a>
