@@ -71,14 +71,26 @@ export function Footer(menu: FooterQuery) {
           </h4>
           <div className='footer-media-container'>
             <a href='https://www.instagram.com/tracktonline/' target='_blank'>
-              <img src='/footer/insta.png' />
+              <img
+                style={{
+                  width: '150px',
+                }}
+                src='/footer/insta.png'
+                alt='instagram'
+              />
             </a>
             <div className='footer-media-double'>
               <a href='https://twitter.com/tracktonline' target='_blank'>
-                <img src='/footer/twitter.png' />
+                <img
+                  style={{
+                    width: '70px',
+                  }}
+                  alt='twitter'
+                  src='/footer/twitter.png'
+                />
               </a>
               <a href='https://www.tiktok.com/@tracktonline' target='_blank'>
-                <img src='/footer/tiktok.png' />
+                <img width='70px' alt='tiktok' src='/footer/tiktok.png' />
               </a>
             </div>
           </div>
