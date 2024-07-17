@@ -200,6 +200,12 @@
     align-items: center;
 }
 
+.right-now h4 {
+    margin-bottom: 30px;
+
+}
+
+
 .right-now p {
     margin-top: 5px;
     text-transform: uppercase
@@ -210,11 +216,11 @@
     display: flex;
     gap: 30px;
     flex-wrap: wrap;
+    justify-content:  center;
 
 }
 
 .right-now-product {
-    margin-top: 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
