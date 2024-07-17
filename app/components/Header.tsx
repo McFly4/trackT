@@ -124,7 +124,7 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
           <div className={`overflow ${hovered ? 'collapse' : ''}`}></div>
           <div className='logo'>
             <NavLink prefetch='intent' to='/' end>
-              <video style={{ width: '150px' }} autoPlay loop muted playsInline src={urlLogo}>
+              <video style={{ width: '100px' }} autoPlay loop muted playsInline src={urlLogo}>
                 <img src={header?.shop?.brand?.logo?.image?.url} alt='logo' />
               </video>
             </NavLink>
