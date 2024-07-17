@@ -288,32 +288,32 @@ export default function Article() {
               ))}
             </div>
           </div>
-          <div className='right-now'>
-            <h3
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
-              Modèles populaires
-              <img
-                style={{
-                  marginLeft: '10px',
-                  width: '25px',
-                }}
-                src='/icons/heart.gif'
-                alt='coin-mario'
-              />
-            </h3>
-            <div className='right-now-container'>
-              {trendyProducts.map((product: any) => (
-                <div key={product.id} className='right-now-product'>
-                  <Image data={product.images.nodes[0]} loading='lazy' />
-                  <p>{product.title?.length > 12 ? `${product.title.slice(0, 12)}...` : product.title}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+          {/*<div className='right-now'>*/}
+          {/*  <h3*/}
+          {/*    style={{*/}
+          {/*      display: 'flex',*/}
+          {/*      alignItems: 'center',*/}
+          {/*    }}*/}
+          {/*  >*/}
+          {/*    Modèles populaires*/}
+          {/*    <img*/}
+          {/*      style={{*/}
+          {/*        marginLeft: '10px',*/}
+          {/*        width: '25px',*/}
+          {/*      }}*/}
+          {/*      src='/icons/heart.gif'*/}
+          {/*      alt='coin-mario'*/}
+          {/*    />*/}
+          {/*  </h3>*/}
+          {/*  <div className='right-now-container'>*/}
+          {/*    {trendyProducts.map((product: any) => (*/}
+          {/*      <div key={product.id} className='right-now-product'>*/}
+          {/*        <Image data={product.images.nodes[0]} loading='lazy' />*/}
+          {/*        <p>{product.title?.length > 12 ? `${product.title.slice(0, 12)}...` : product.title}</p>*/}
+          {/*      </div>*/}
+          {/*    ))}*/}
+          {/*  </div>*/}
+          {/*</div>*/}
         </div>
       </div>
       <div className='divider-article'></div>
