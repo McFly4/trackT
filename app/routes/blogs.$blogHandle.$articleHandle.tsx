@@ -259,7 +259,7 @@ export default function Article() {
               </p>
             </div>
           </div>
-          <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
+          <div className='blog-content' dangerouslySetInnerHTML={{ __html: contentHtml }} />
         </div>
         <div className='article-container-products'>
           <div className='right-now'>

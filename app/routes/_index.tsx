@@ -303,7 +303,11 @@ export default function HomePage() {
                 </div>
                 <div className='header' id='shop'>
                   <h1>Panel Trackt</h1>
-                  <p>
+                  <p
+                    style={{
+                      fontWeight: '300',
+                    }}
+                  >
                     Découvrez le Panel Trackt, une sélection soigneusement élaborée de ce que le streetwear a de mieux à
                     offrir. Ici, nous rassemblons des pièces uniques, des tendances émergentes et des collaborations
                     exclusives, tout en un seul endroit pour enrichir votre expérience de shopping. Chaque visite au
