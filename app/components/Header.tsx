@@ -311,7 +311,9 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
                     opacity: subMenu ? 1 : 0,
                   }}
                 />
-                <SearchOptions icon={true} />
+                <a href='#search-aside'>
+                  <img src='/icons/search.svg' alt='search' />
+                </a>
                 <div
                   style={{
                     backgroundColor: '#262626',
