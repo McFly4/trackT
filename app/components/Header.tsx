@@ -130,7 +130,9 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
             </NavLink>
           </div>
           <div className='content'>
-            <button className='categories'>Toutes les catégories</button>
+            <a href='#categories-aside'>
+              <button className='categories'>Toutes les catégories</button>
+            </a>
             <p
               onMouseEnter={() => {
                 setHovered(true)
@@ -186,11 +188,11 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
               <div className='submenu'>
                 {sneakers && (
                   <>
-                    <NavLink to='/search?q=jordan'>Jordan</NavLink>
-                    <NavLink to='/search?q=dunk'>Dunk</NavLink>
-                    <NavLink to='/search?q=yeezy'>Yeezy</NavLink>
-                    <NavLink to='/search?q=adidas'>Adidas</NavLink>
-                    <NavLink to='/search?q=collab'>Collab's</NavLink>
+                    <NavLink to='/collections/jordan'>Jordan</NavLink>
+                    <NavLink to='/collection/dunk'>Dunk</NavLink>
+                    <NavLink to='/collections/yeezy'>Yeezy</NavLink>
+                    <NavLink to='/collections/adidas'>Adidas</NavLink>
+                    <NavLink to='/collections/collab'>Collab's</NavLink>
                   </>
                 )}
                 {textile && (
@@ -584,12 +586,7 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
                       <p>Accessoires</p>
                       <img src='/icons/arrowRight.svg' alt='arrow-right' />
                     </li>
-                    <li
-                      onClick={() => {
-                        setMarques(true)
-                        setSubMenu(true)
-                      }}
-                    >
+                    <li>
                       <p>Marques</p>
                       <img src='/icons/arrowRight.svg' alt='arrow-right' />
                     </li>

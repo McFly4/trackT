@@ -353,21 +353,21 @@ export default function Product() {
             </p>
             <div className='gofilters-btn'>
               <div className='four-btns'>
-                <Link to='/filters'>
-                  <button>
-                    <img
-                      src='/filters/checkbox.png'
-                      alt='checkbox'
-                      style={{
-                        width: '20px',
-                        height: '20px',
-                        marginRight: '10px',
-                        opacity: '1 !important',
-                      }}
-                    />
-                    Rechercher par filtres
-                  </button>
-                </Link>
+                {/*<Link to='/filters'>*/}
+                {/*  <button>*/}
+                {/*    <img*/}
+                {/*      src='/filters/checkbox.png'*/}
+                {/*      alt='checkbox'*/}
+                {/*      style={{*/}
+                {/*        width: '20px',*/}
+                {/*        height: '20px',*/}
+                {/*        marginRight: '10px',*/}
+                {/*        opacity: '1 !important',*/}
+                {/*      }}*/}
+                {/*    />*/}
+                {/*    Rechercher par filtres*/}
+                {/*  </button>*/}
+                {/*</Link>*/}
                 <a href='#categories-aside'>
                   <button>Shopping par catégories</button>
                 </a>
@@ -491,21 +491,21 @@ export default function Product() {
               </p>
               <div className='gofilters-btn'>
                 <div className='four-btns'>
-                  <Link to='/filters'>
-                    <button>
-                      <img
-                        src='/filters/checkbox.png'
-                        alt='checkbox'
-                        style={{
-                          width: '20px',
-                          height: '20px',
-                          marginRight: '10px',
-                          opacity: '1 !important',
-                        }}
-                      />
-                      Rechercher par filtres
-                    </button>
-                  </Link>
+                  {/*<Link to='/filters'>*/}
+                  {/*  <button>*/}
+                  {/*    <img*/}
+                  {/*      src='/filters/checkbox.png'*/}
+                  {/*      alt='checkbox'*/}
+                  {/*      style={{*/}
+                  {/*        width: '20px',*/}
+                  {/*        height: '20px',*/}
+                  {/*        marginRight: '10px',*/}
+                  {/*        opacity: '1 !important',*/}
+                  {/*      }}*/}
+                  {/*    />*/}
+                  {/*    Rechercher par filtres*/}
+                  {/*  </button>*/}
+                  {/*</Link>*/}
                   <a href='#categories-aside'>
                     <button>Shopping par catégories</button>
                   </a>

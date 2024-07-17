@@ -427,21 +427,21 @@ export function AsideCategories({
                 marginTop: '40px',
               }}
             >
-              <button
-                onClick={() => {
-                  window.location.href = '/filters'
-                }}
-              >
-                <img
-                  src='/filters/checkbox.png'
-                  alt='check'
-                  style={{
-                    width: '20px',
-                    marginRight: '10px',
-                  }}
-                />
-                Rechercher par filtres
-              </button>
+              {/*<button*/}
+              {/*  onClick={() => {*/}
+              {/*    window.location.href = '/filters'*/}
+              {/*  }}*/}
+              {/*>*/}
+              {/*  <img*/}
+              {/*    src='/filters/checkbox.png'*/}
+              {/*    alt='check'*/}
+              {/*    style={{*/}
+              {/*      width: '20px',*/}
+              {/*      marginRight: '10px',*/}
+              {/*    }}*/}
+              {/*  />*/}
+              {/*  Rechercher par filtres*/}
+              {/*</button>*/}
 
               <button
                 onClick={() => {
