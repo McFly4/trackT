@@ -269,7 +269,7 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
             </div>
             <div className='logo'>
               <a href='/'>
-                <video style={{ width: '120px' }} autoPlay loop muted playsInline src={urlLogo}>
+                <video style={{ width: '90px' }} autoPlay loop muted playsInline src={urlLogo}>
                   <img src={header?.shop?.brand?.logo?.image?.url} alt='logo' />
                 </video>
               </a>
@@ -438,7 +438,7 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
                                 marginLeft: '10px',
                                 width: '25px',
                               }}
-                              src='/icons/coin-mario.gif'
+                              src='/icons/heart.gif'
                               alt='coin-mario'
                             />
                           </h5>
