@@ -157,6 +157,7 @@ export default function Blog() {
                     ))}
                   </div>
                 </div>
+
                 {filteredArticles.map((article: any) => {
                   let types = []
                   if (article?.types && article?.types?.value) {
