@@ -1477,11 +1477,36 @@ input[type="search"]::-webkit-search-results-decoration {
 * routes/blog._index.tsx
 * --------------------------------------------------
 */
+
+
 .blog-grid {
+    max-width: 1350px;
     display: grid;
-    grid-gap: 1.5rem;
-    grid-template-columns: repeat(auto-fit, minmax(var(--grid-item-width), 1fr));
+    grid-gap: 2rem;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
     margin-bottom: 2rem;
+    flex-grow: 1;
+}
+
+@media screen and (max-width: 1350px){
+    .blog-grid{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width: 960px){
+    .blog-grid{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .blog-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 }
 
 .blog-article-image {
