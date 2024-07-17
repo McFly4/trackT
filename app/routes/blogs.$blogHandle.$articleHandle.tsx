@@ -55,12 +55,12 @@ export default function Article() {
       color: '#6FDD59',
     },
     {
-      name: 'fashion tips ',
+      name: 'fashion tips',
       color: '#FFF5B2',
     },
 
     {
-      name: 'iconic collabs ',
+      name: 'iconic collabs',
       color: '#FDE333',
     },
     {
