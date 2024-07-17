@@ -609,7 +609,12 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
                       <p>Accessoires</p>
                       <img src='/icons/arrowRight.svg' alt='arrow-right' />
                     </li>
-                    <li>
+                    <li
+                      onClick={() => {
+                        setMarques(true)
+                        setSubMenu(true)
+                      }}
+                    >
                       <p>Marques</p>
                       <img src='/icons/arrowRight.svg' alt='arrow-right' />
                     </li>
