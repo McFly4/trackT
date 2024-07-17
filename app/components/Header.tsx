@@ -196,7 +196,7 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
                 {sneakers && (
                   <>
                     <NavLink to='/collections/jordan'>Jordan</NavLink>
-                    <NavLink to='/collection/dunk'>Dunk</NavLink>
+                    <NavLink to='/collections/dunk'>Dunk</NavLink>
                     <NavLink to='/collections/yeezy'>Yeezy</NavLink>
                     <NavLink to='/collections/adidas'>Adidas</NavLink>
                     <NavLink to='/collections/collab'>Collab's</NavLink>

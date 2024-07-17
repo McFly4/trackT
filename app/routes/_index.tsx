@@ -133,6 +133,7 @@ export default function HomePage() {
                       field?.key === (sizeScreen > 1600 ? 'fileBig' : sizeScreen > 768 ? 'file_desktop' : 'file_mobile')
                   )?.reference?.image?.url && (
                     <img
+                      loading='lazy'
                       src={
                         hero.fields?.find(
                           (field: any) =>
@@ -287,6 +288,7 @@ export default function HomePage() {
                   <Link to='/filtered'>
                     <button>
                       <img
+                        loading='lazy'
                         src='/filters/arrow-shuffle.png'
                         alt='arrow-shuffle'
                         style={{
@@ -342,6 +344,7 @@ export default function HomePage() {
         <div className='panel-container-box'>
           <div className='panel-container-box-item'>
             <img
+              loading='lazy'
               src='/home/red.png'
               alt='red'
               style={{
@@ -390,6 +393,7 @@ export default function HomePage() {
           </div>
           <div className='panel-container-box-item'>
             <img
+              loading='lazy'
               src='/home/blue.png'
               alt='blue'
               style={{
