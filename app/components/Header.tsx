@@ -414,7 +414,7 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
                                 marginLeft: '10px',
                                 width: '25px',
                               }}
-                              src='/icons/coin-mario.gif'
+                              src='/icons/heart.gif'
                               alt='coin-mario'
                             />
                           </h5>
@@ -438,7 +438,7 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
                                 marginLeft: '10px',
                                 width: '25px',
                               }}
-                              src='/icons/heart.gif'
+                              src='/icons/coin-mario.gif'
                               alt='coin-mario'
                             />
                           </h5>

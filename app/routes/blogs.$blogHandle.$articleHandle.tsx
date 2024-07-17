@@ -124,7 +124,13 @@ export default function Article() {
                   </div>
                 ))}
             </div>
-            <h1>{article.title}</h1>
+            <h1
+              style={{
+                fontSize: '30px',
+              }}
+            >
+              {article.title}
+            </h1>
             <div className='articles-infos'>
               <p>
                 <svg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'>
@@ -269,7 +275,7 @@ export default function Article() {
                   marginLeft: '10px',
                   width: '25px',
                 }}
-                src='/icons/heart.gif'
+                src='/icons/coin-mario.gif'
                 alt='coin-mario'
               />
             </h2>
@@ -283,7 +289,22 @@ export default function Article() {
             </div>
           </div>
           <div className='right-now'>
-            <h2>Modèles populaires</h2>
+            <h2
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              Modèles populaires
+              <img
+                style={{
+                  marginLeft: '10px',
+                  width: '25px',
+                }}
+                src='/icons/heart.gif'
+                alt='coin-mario'
+              />
+            </h2>
             <div className='right-now-container'>
               {trendyProducts.map((product: any) => (
                 <div key={product.id} className='right-now-product'>

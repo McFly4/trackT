@@ -178,14 +178,14 @@
 }
 
 .article-content{
-    width: 50%;
+    width: 60%;
 }
 
 .article-container-products{
     display: flex;
     flex-direction: column;
     gap: 20px;
-    width: 50%;
+    width: 40%;
     position: sticky;
     top: 200px;
 }
