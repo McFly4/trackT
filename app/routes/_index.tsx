@@ -133,6 +133,7 @@ export default function HomePage() {
                       field?.key === (sizeScreen > 1600 ? 'fileBig' : sizeScreen > 768 ? 'file_desktop' : 'file_mobile')
                   )?.reference?.image?.url && (
                     <img
+                      loading='lazy'
                       src={
                         hero.fields?.find(
                           (field: any) =>
@@ -236,21 +237,21 @@ export default function HomePage() {
                     justifyContent: 'unset',
                   }}
                 >
-                  <Link to='/filters'>
-                    <button>
-                      <img
-                        src='/filters/checkbox.png'
-                        alt='checkbox'
-                        style={{
-                          width: '20px',
-                          height: '20px',
-                          marginRight: '10px',
-                          opacity: '1 !important',
-                        }}
-                      />
-                      Rechercher par filtres
-                    </button>
-                  </Link>
+                  {/*<Link to='/filters'>*/}
+                  {/*  <button>*/}
+                  {/*    <img*/}
+                  {/*      src='/filters/checkbox.png'*/}
+                  {/*      alt='checkbox'*/}
+                  {/*      style={{*/}
+                  {/*        width: '20px',*/}
+                  {/*        height: '20px',*/}
+                  {/*        marginRight: '10px',*/}
+                  {/*        opacity: '1 !important',*/}
+                  {/*      }}*/}
+                  {/*    />*/}
+                  {/*    Rechercher par filtres*/}
+                  {/*  </button>*/}
+                  {/*</Link>*/}
                   <a href='#categories-aside'>
                     <button>Shopping par catégories</button>
                   </a>
@@ -287,6 +288,7 @@ export default function HomePage() {
                   <Link to='/filtered'>
                     <button>
                       <img
+                        loading='lazy'
                         src='/filters/arrow-shuffle.png'
                         alt='arrow-shuffle'
                         style={{
@@ -301,7 +303,11 @@ export default function HomePage() {
                 </div>
                 <div className='header' id='shop'>
                   <h1>Panel Trackt</h1>
-                  <p>
+                  <p
+                    style={{
+                      fontWeight: '300',
+                    }}
+                  >
                     Découvrez le Panel Trackt, une sélection soigneusement élaborée de ce que le streetwear a de mieux à
                     offrir. Ici, nous rassemblons des pièces uniques, des tendances émergentes et des collaborations
                     exclusives, tout en un seul endroit pour enrichir votre expérience de shopping. Chaque visite au
@@ -342,6 +348,7 @@ export default function HomePage() {
         <div className='panel-container-box'>
           <div className='panel-container-box-item'>
             <img
+              loading='lazy'
               src='/home/red.png'
               alt='red'
               style={{
@@ -390,6 +397,7 @@ export default function HomePage() {
           </div>
           <div className='panel-container-box-item'>
             <img
+              loading='lazy'
               src='/home/blue.png'
               alt='blue'
               style={{

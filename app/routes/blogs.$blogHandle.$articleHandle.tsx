@@ -55,12 +55,12 @@ export default function Article() {
       color: '#6FDD59',
     },
     {
-      name: 'fashion tips ',
+      name: 'fashion tips',
       color: '#FFF5B2',
     },
 
     {
-      name: 'iconic collabs ',
+      name: 'iconic collabs',
       color: '#FDE333',
     },
     {
@@ -93,6 +93,9 @@ export default function Article() {
               {blogTypes &&
                 blogTypes?.map((type: any) => (
                   <div
+                    onClick={() => {
+                      window.location.href = `/blogs`
+                    }}
                     className='blog-type-item'
                     key={type.name}
                     style={{
@@ -121,7 +124,13 @@ export default function Article() {
                   </div>
                 ))}
             </div>
-            <h1>{article.title}</h1>
+            <h1
+              style={{
+                fontSize: '30px',
+              }}
+            >
+              {article.title}
+            </h1>
             <div className='articles-infos'>
               <p>
                 <svg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'>
@@ -250,11 +259,26 @@ export default function Article() {
               </p>
             </div>
           </div>
-          <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
+          <div className='blog-content' dangerouslySetInnerHTML={{ __html: contentHtml }} />
         </div>
         <div className='article-container-products'>
           <div className='right-now'>
-            <h2>En ce moment sur trackt</h2>
+            <h4
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              En ce moment sur trackt
+              <img
+                style={{
+                  marginLeft: '10px',
+                  width: '25px',
+                }}
+                src='/icons/coin-mario.gif'
+                alt='coin-mario'
+              />
+            </h4>
             <div className='right-now-container'>
               {rightNowProducts.map((product: any) => (
                 <div key={product.id} className='right-now-product'>
@@ -264,17 +288,32 @@ export default function Article() {
               ))}
             </div>
           </div>
-          <div className='right-now'>
-            <h2>Modèles populaires</h2>
-            <div className='right-now-container'>
-              {trendyProducts.map((product: any) => (
-                <div key={product.id} className='right-now-product'>
-                  <Image data={product.images.nodes[0]} loading='lazy' />
-                  <p>{product.title?.length > 12 ? `${product.title.slice(0, 12)}...` : product.title}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+          {/*<div className='right-now'>*/}
+          {/*  <h3*/}
+          {/*    style={{*/}
+          {/*      display: 'flex',*/}
+          {/*      alignItems: 'center',*/}
+          {/*    }}*/}
+          {/*  >*/}
+          {/*    Modèles populaires*/}
+          {/*    <img*/}
+          {/*      style={{*/}
+          {/*        marginLeft: '10px',*/}
+          {/*        width: '25px',*/}
+          {/*      }}*/}
+          {/*      src='/icons/heart.gif'*/}
+          {/*      alt='coin-mario'*/}
+          {/*    />*/}
+          {/*  </h3>*/}
+          {/*  <div className='right-now-container'>*/}
+          {/*    {trendyProducts.map((product: any) => (*/}
+          {/*      <div key={product.id} className='right-now-product'>*/}
+          {/*        <Image data={product.images.nodes[0]} loading='lazy' />*/}
+          {/*        <p>{product.title?.length > 12 ? `${product.title.slice(0, 12)}...` : product.title}</p>*/}
+          {/*      </div>*/}
+          {/*    ))}*/}
+          {/*  </div>*/}
+          {/*</div>*/}
         </div>
       </div>
       <div className='divider-article'></div>

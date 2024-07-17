@@ -106,6 +106,8 @@ export async function loader({ context }: LoaderFunctionArgs) {
 
   const pocketItems = await storefront.query(POCKET_ITEMS)
   const logoTrackt = await storefront.query(LOGO_TRACKT)
+  const rightNow = await context.storefront.query(RIGHT_NOW)
+  const trendy = await context.storefront.query(TRENDY)
 
   return defer(
     {
@@ -117,6 +119,8 @@ export async function loader({ context }: LoaderFunctionArgs) {
       publicStoreDomain,
       pocketItems,
       logoTrackt,
+      rightNow,
+      trendy,
     },
     { headers }
   )
@@ -397,3 +401,55 @@ query MetaObjects {
   }
 }
 ` as const
+
+const RIGHT_NOW = `#graphql
+query MetaObjects {
+  metaobjects(first: 20, type: "right_now") {
+    nodes {
+      field(key: "product") {
+        references(first: 10) {
+          nodes {
+            ... on Product {
+              id
+              title
+              handle
+              vendor
+              images(first: 1) {
+                nodes {
+                  url
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+`
+
+const TRENDY = `#graphql
+query MetaObjects {
+  metaobjects(first: 20, type: "trendy") {
+    nodes {
+      field(key: "product") {
+        references(first: 10) {
+          nodes {
+            ... on Product {
+              id
+              title
+              handle
+              vendor
+              images(first: 1) {
+                nodes {
+                  url
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+`

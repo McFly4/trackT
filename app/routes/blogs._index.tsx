@@ -41,7 +41,7 @@ const blogTypes: BlogTypes[] = [
     color: '#80DDFD',
   },
   {
-    name: 'marques indépendantes',
+    name: 'marques indépendante',
     color: '#831DD9',
   },
 ]
@@ -157,6 +157,7 @@ export default function Blog() {
                     ))}
                   </div>
                 </div>
+
                 {filteredArticles.map((article: any) => {
                   let types = []
                   if (article?.types && article?.types?.value) {

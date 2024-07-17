@@ -770,20 +770,18 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .four-btns a:nth-child(1) button {
-    background-image: url(public/filters.png);
+    background-image: url(public/categories.png);
+
 }
 
 .four-btns a:nth-child(2) button{
-    background-image: url(public/categories.png);
-}
-
-.four-btns a:nth-child(3) button{
     background-image: url(public/manual.png);
 }
 
-.four-btns a:nth-child(4) button{
+.four-btns a:nth-child(3) button{
     background-image: url(public/random.png);
 }
+
 
 .four-btns button:nth-child(1) {
     background-image: url(public/filters.png);
@@ -2098,6 +2096,10 @@ input[type="search"]::-webkit-search-results-decoration {
 
 
 @media screen and (max-width: 768px) {
+    .search-container{
+        display: none !important;
+    }
+
     .home {
         margin-top: 120px;
     }

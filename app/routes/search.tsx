@@ -136,19 +136,19 @@ export default function SearchPage() {
                         marginTop: '30px',
                       }}
                     >
-                      <Link to='/filters'>
-                        <button>
-                          <img
-                            src='/filters/checkbox.png'
-                            alt='check'
-                            style={{
-                              width: '20px',
-                              marginRight: '10px',
-                            }}
-                          />
-                          Rechercher par filtres
-                        </button>
-                      </Link>
+                      {/*<Link to='/filters'>*/}
+                      {/*  <button>*/}
+                      {/*    <img*/}
+                      {/*      src='/filters/checkbox.png'*/}
+                      {/*      alt='check'*/}
+                      {/*      style={{*/}
+                      {/*        width: '20px',*/}
+                      {/*        marginRight: '10px',*/}
+                      {/*      }}*/}
+                      {/*    />*/}
+                      {/*    Rechercher par filtres*/}
+                      {/*  </button>*/}
+                      {/*</Link>*/}
 
                       <a href='#categories-aside'>
                         <button>Shopping par catégories</button>
@@ -210,19 +210,19 @@ export default function SearchPage() {
                   <p>Réessayez, vous avez le choix entre plusieurs options !</p>
                 </div>
                 <div className='four-btns'>
-                  <Link to='/filters'>
-                    <button>
-                      <img
-                        src='/filters/checkbox.png'
-                        alt='check'
-                        style={{
-                          width: '20px',
-                          marginRight: '10px',
-                        }}
-                      />
-                      Rechercher par filtres
-                    </button>
-                  </Link>
+                  {/*<Link to='/filters'>*/}
+                  {/*  <button>*/}
+                  {/*    <img*/}
+                  {/*      src='/filters/checkbox.png'*/}
+                  {/*      alt='check'*/}
+                  {/*      style={{*/}
+                  {/*        width: '20px',*/}
+                  {/*        marginRight: '10px',*/}
+                  {/*      }}*/}
+                  {/*    />*/}
+                  {/*    Rechercher par filtres*/}
+                  {/*  </button>*/}
+                  {/*</Link>*/}
 
                   <a href='#categories-aside'>
                     <button>Shopping par catégories</button>

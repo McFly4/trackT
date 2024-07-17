@@ -7,28 +7,25 @@ export function Footer(menu: FooterQuery) {
       <footer className='footer'>
         <div>
           <Link to='/'>
-            <img src='/footer/trackt.png' alt='trackt' className='footer-logo' />
+            <img src='/footer/logoFooter.PNG' alt='trackt' className='footer-logo' />
           </Link>
         </div>
         <div className='footer-menu'>
           <h4>liens utiles</h4>
+          <Link to='/about'>
+            <p>A propos de TrackT</p>
+          </Link>
+          <Link to='/blogs'>
+            <p>blog</p>
+          </Link>
           <Link to='/politics'>
-            <p>mentions légales</p>
+            <p>infos légales</p>
           </Link>
           <Link to='/retours'>
             <p>RETOURS & REMBOURSEMENTS</p>
           </Link>
-          <Link to='/about'>
-            <p>
-              FAQ
-              <img src='/coming.png' alt='coming soon' />
-            </p>
-          </Link>
-          <Link to='/about'>
-            <p>
-              blog
-              <img src='/coming.png' alt='coming soon' />
-            </p>
+          <Link to='/sitemap'>
+            <p>Plan du site</p>
           </Link>
           <Link to='/about'>
             <p>
@@ -36,8 +33,11 @@ export function Footer(menu: FooterQuery) {
               <img src='/coming.png' alt='coming soon' />
             </p>
           </Link>
-          <Link to='/sitemap'>
-            <p>Plan du site</p>
+          <Link to='/about'>
+            <p>
+              FAQ
+              <img src='/coming.png' alt='coming soon' />
+            </p>
           </Link>
         </div>
         <div className='footer-menu2'>
@@ -71,14 +71,26 @@ export function Footer(menu: FooterQuery) {
           </h4>
           <div className='footer-media-container'>
             <a href='https://www.instagram.com/tracktonline/' target='_blank'>
-              <img src='/footer/insta.png' />
+              <img
+                style={{
+                  width: '150px',
+                }}
+                src='/footer/insta.png'
+                alt='instagram'
+              />
             </a>
             <div className='footer-media-double'>
               <a href='https://twitter.com/tracktonline' target='_blank'>
-                <img src='/footer/twitter.png' />
+                <img
+                  style={{
+                    width: '70px',
+                  }}
+                  alt='twitter'
+                  src='/footer/twitter.png'
+                />
               </a>
               <a href='https://www.tiktok.com/@tracktonline' target='_blank'>
-                <img src='/footer/tiktok.png' />
+                <img width='70px' alt='tiktok' src='/footer/tiktok.png' />
               </a>
             </div>
           </div>
