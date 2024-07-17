@@ -450,10 +450,10 @@
     }
 
     .shop-labels a p{
-        font-size: 14px !important;
+        font-size: 13px !important;
         text-transform: uppercase;
         margin-left: 5px;
-        font-weight: normal !important;
+        font-weight: 500 !important;
         position: relative;
         font-family: 'Helvetica Neue', sans-serif;
     }
@@ -483,10 +483,10 @@
     }
 
     .shop-colors p{
-        font-size: 14px !important;
+        font-size: 13px !important;
         text-transform: uppercase;
         margin-left: 5px;
-        font-weight: normal !important;
+        font-weight: 500 !important;
         position: relative;
         font-family: 'Helvetica Neue', sans-serif;
     }

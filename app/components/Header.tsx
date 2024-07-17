@@ -673,8 +673,8 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
                               style={{
                                 backgroundColor: color.hex,
                                 margin: 'unset',
-                                width: '20px',
-                                height: '20px',
+                                width: '13px',
+                                height: '13px',
                                 padding: 'unset',
                               }}
                             ></span>
