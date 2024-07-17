@@ -263,7 +263,7 @@ export default function Article() {
         </div>
         <div className='article-container-products'>
           <div className='right-now'>
-            <h2
+            <h3
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -278,7 +278,7 @@ export default function Article() {
                 src='/icons/coin-mario.gif'
                 alt='coin-mario'
               />
-            </h2>
+            </h3>
             <div className='right-now-container'>
               {rightNowProducts.map((product: any) => (
                 <div key={product.id} className='right-now-product'>
@@ -289,7 +289,7 @@ export default function Article() {
             </div>
           </div>
           <div className='right-now'>
-            <h2
+            <h3
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -304,7 +304,7 @@ export default function Article() {
                 src='/icons/heart.gif'
                 alt='coin-mario'
               />
-            </h2>
+            </h3>
             <div className='right-now-container'>
               {trendyProducts.map((product: any) => (
                 <div key={product.id} className='right-now-product'>
