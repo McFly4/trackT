@@ -38,22 +38,37 @@
     gap: 30px;
 }
 
+.myheader .content a{
+    font-size: 13px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.myheader .content p{
+    font-size: 13px;
+    font-weight: 500;
+    color: #fff;
+}
+
+
 .myheader .categories{
     margin-left: 60px;
-    border-radius: 15px;
+    border-radius: 5px;
     text-transform: uppercase;
-    height: 60px;
+    height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 18px !important;
+    font-size: 13px !important;
     font-weight: 500 !important;
-    padding: 0 20px;
+    padding: 10px;
     color: #fff;
     background-size: cover;
     background-position: center;
     background-color: #000 !important;
     background-image: url(public/categories.png);
+    font-family: 'Helvetica Neue', sans-serif;
+
 }
 
 .myheader .content .submenu {

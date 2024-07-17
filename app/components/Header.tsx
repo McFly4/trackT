@@ -141,7 +141,7 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
               }}
               className={getParentClass(sneakers)}
             >
-              Sneakers
+              <NavLink to='/search?q=sneakers'>Sneakers</NavLink>
             </p>
             <p
               onMouseEnter={() => {
@@ -151,7 +151,7 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
               }}
               className={getParentClass(textile)}
             >
-              Textile
+              <NavLink to='/search?q=Clothing'>Textile</NavLink>
             </p>
             <p
               onMouseEnter={() => {
@@ -161,7 +161,7 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
               }}
               className={getParentClass(accessoires)}
             >
-              Accessoires
+              <NavLink to='/search?q=Accessories'>Accessoires</NavLink>
             </p>
             <p
               onMouseEnter={() => {
@@ -181,9 +181,11 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
               }}
               className={getParentClass(about)}
             >
-              A propos de trackt
+              <NavLink to='/about'>A propos de trackt</NavLink>
             </p>
-            <span className={hovered ? 'parent-opacity' : ''}>Blog</span>
+            <span className={hovered ? 'parent-opacity' : ''}>
+              <NavLink to='/about'>Blog</NavLink>
+            </span>
             {hovered && (
               <div className='submenu'>
                 {sneakers && (
@@ -248,7 +250,13 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
         <header className='myheader'>
           <div className='nav-responsive'>
             <div>
-              <div className='icon'>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+                className='icon'
+              >
                 <SearchOptions icon={true} />
                 <NavLink prefetch='intent' to='/account/profile'>
                   <img src='/icons/person.svg' alt='person' />
