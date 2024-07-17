@@ -315,6 +315,7 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
                   <img src='/icons/search.svg' alt='search' />
                 </a>
                 <div
+                  onClick={toggleMenu}
                   style={{
                     backgroundColor: '#262626',
                     borderRadius: '50px',
@@ -322,12 +323,7 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
                     height: '15px',
                   }}
                 >
-                  <img
-                    style={{ width: '15px', height: '15px' }}
-                    src='/icons/close.svg'
-                    alt='close'
-                    onClick={toggleMenu}
-                  />
+                  <img style={{ width: '15px', height: '15px' }} src='/icons/close.svg' alt='close' />
                 </div>
               </div>
               {subMenu ? (
@@ -618,12 +614,14 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
                       <img src='/icons/arrowRight.svg' alt='arrow-right' />
                     </li>
                     <li>
-                      <p>A propos de trackt, la safe place streetwear</p>
-                      <img src='/icons/arrowRight.svg' alt='arrow-right' />
+                      <NavLink to='/about'>
+                        <p>A propos de trackt, la safe place streetwear</p>
+                      </NavLink>
                     </li>
                     <li>
-                      <p>X-Trackt, le blog</p>
-                      <img src='/icons/arrowRight.svg' alt='arrow-right' />
+                      <NavLink to='/blogs'>
+                        <p>X-Trackt, le blog</p>
+                      </NavLink>
                     </li>
                     <li
                       style={{
