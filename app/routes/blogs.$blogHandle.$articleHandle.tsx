@@ -93,6 +93,9 @@ export default function Article() {
               {blogTypes &&
                 blogTypes?.map((type: any) => (
                   <div
+                    onClick={() => {
+                      window.location.href = `/blogs`
+                    }}
                     className='blog-type-item'
                     key={type.name}
                     style={{
@@ -254,7 +257,22 @@ export default function Article() {
         </div>
         <div className='article-container-products'>
           <div className='right-now'>
-            <h2>En ce moment sur trackt</h2>
+            <h2
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              En ce moment sur trackt
+              <img
+                style={{
+                  marginLeft: '10px',
+                  width: '25px',
+                }}
+                src='/icons/heart.gif'
+                alt='coin-mario'
+              />
+            </h2>
             <div className='right-now-container'>
               {rightNowProducts.map((product: any) => (
                 <div key={product.id} className='right-now-product'>
