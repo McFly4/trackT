@@ -41,7 +41,7 @@ const blogTypes: BlogTypes[] = [
     color: '#80DDFD',
   },
   {
-    name: 'marques indépendantes',
+    name: 'marques indépendante',
     color: '#831DD9',
   },
 ]
