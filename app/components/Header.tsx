@@ -262,17 +262,17 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
                 className='icon'
               >
                 <SearchOptions icon={true} />
-                <NavLink prefetch='intent' to='/account/profile'>
+                <a href='/account/profile'>
                   <img src='/icons/person.svg' alt='person' />
-                </NavLink>
+                </a>
               </div>
             </div>
             <div className='logo'>
-              <NavLink prefetch='intent' to='/' end>
+              <a href='/' end>
                 <video style={{ width: '120px' }} autoPlay loop muted playsInline src={urlLogo}>
                   <img src={header?.shop?.brand?.logo?.image?.url} alt='logo' />
                 </video>
-              </NavLink>
+              </a>
             </div>
             <div>
               <div className='icon icon-cart'>
@@ -332,67 +332,67 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
                     {jordan && (
                       <ul>
                         <li>
-                          <NavLink to='/collections/Jordan-1'>Jordan 1</NavLink>
+                          <a href='/collections/Jordan-1'>Jordan 1</a>
                         </li>
                         <li>
-                          <NavLink to='/collections/Jordan-3'>Jordan 3</NavLink>
+                          <a href='/collections/Jordan-3'>Jordan 3</a>
                         </li>
                         <li>
-                          <NavLink to='/collections/Jordan-4'>Jordan 4</NavLink>
+                          <a href='/collections/Jordan-4'>Jordan 4</a>
                         </li>
                         <li>
-                          <NavLink to='/search?q=jordan-6'>Jordan 6</NavLink>
+                          <a href='/search?q=jordan-6'>Jordan 6</a>
                         </li>
                         <li>
-                          <NavLink to='/search?q=jordan'>Voir toutes les jordan</NavLink>
+                          <a href='/search?q=jordan'>Voir toutes les jordan</a>
                         </li>
                       </ul>
                     )}
                     {dunk && (
                       <ul>
                         <li>
-                          <NavLink to='/collections/dunk-low'>Dunk Low</NavLink>
+                          <a href='/collections/dunk-low'>Dunk Low</a>
                         </li>
                         <li>
-                          <NavLink to='/collections/sb-dunk-low'>Dunk Low sb</NavLink>
+                          <a href='/collections/sb-dunk-low'>Dunk Low sb</a>
                         </li>
                         <li>
-                          <NavLink to='/collections/dunk-high'>Dunk High (+sb)</NavLink>
+                          <a href='/collections/dunk-high'>Dunk High (+sb)</a>
                         </li>
                         <li>
-                          <NavLink to='/search?q=dunk'>Voir toutes les dunk</NavLink>
+                          <a href='/search?q=dunk'>Voir toutes les dunk</a>
                         </li>
                       </ul>
                     )}
                     {yeezy && (
                       <ul>
                         <li>
-                          <NavLink to='/collections/yeezy-boost'>Yeezy boost</NavLink>
+                          <a href='/collections/yeezy-boost'>Yeezy boost</a>
                         </li>
                         <li>
-                          <NavLink to='/collections/yeezy-slide'>Yeezy slide</NavLink>
+                          <a href='/collections/yeezy-slide'>Yeezy slide</a>
                         </li>
                         <li>
-                          <NavLink to='/collections/yeezy-foam'>Yeezy foam</NavLink>
+                          <a href='/collections/yeezy-foam'>Yeezy foam</a>
                         </li>
                         <li>
-                          <NavLink to='/search?q=yeezy'>Voir toutes les yeezy</NavLink>
+                          <a href='/search?q=yeezy'>Voir toutes les yeezy</a>
                         </li>
                       </ul>
                     )}
                     {adidas && (
                       <ul>
                         <li>
-                          <NavLink to='/collections/campus-00s'>Campus</NavLink>
+                          <a href='/collections/campus-00s'>Campus</a>
                         </li>
                         <li>
-                          <NavLink to='/collections/gazelle'>Gazelle</NavLink>
+                          <a href='/collections/gazelle'>Gazelle</a>
                         </li>
                         <li>
-                          <NavLink to='/collections/samba'>samba</NavLink>
+                          <a href='/collections/samba'>samba</a>
                         </li>
                         <li>
-                          <NavLink to='/search?q=adidas'>Voir toutes les adidas</NavLink>
+                          <a href='/search?q=adidas'>Voir toutes les adidas</a>
                         </li>
                       </ul>
                     )}
@@ -454,7 +454,7 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
                     {sneakers && (
                       <ul>
                         <li>
-                          <NavLink to='/search?q=sneakers'>Voir toutes les sneakers</NavLink>
+                          <a href='/search?q=sneakers'>Voir toutes les sneakers</a>
                         </li>
                         <li
                           onClick={() => {
@@ -493,7 +493,7 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
                           <img src='/icons/arrowRight.svg' alt='arrow-right' />
                         </li>{' '}
                         <li>
-                          <NavLink to='/search?q=collab'>
+                          <a href='/search?q=collab'>
                             <p>
                               collab's
                               <br />
@@ -506,7 +506,7 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
                                 (travis, suprême, kobe, dior, off white, j-balvin...)
                               </span>
                             </p>
-                          </NavLink>
+                          </a>
                         </li>
                       </ul>
                     )}
@@ -514,7 +514,7 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
                       <ul>
                         {textileList.map((textile, index) => (
                           <li key={index}>
-                            <NavLink to={textile.link}>{textile.name}</NavLink>
+                            <a href={textile.link}>{textile.name}</a>
                           </li>
                         ))}
                         <li
@@ -539,7 +539,7 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
                       <ul>
                         {accessoiresList.map((accessoire, index) => (
                           <li key={index}>
-                            <NavLink to={accessoire.link}>{accessoire.name}</NavLink>
+                            <a href={accessoire.link}>{accessoire.name}</a>
                           </li>
                         ))}
                       </ul>
@@ -548,7 +548,7 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
                       <ul>
                         {brandList.map((brand, index) => (
                           <li key={index}>
-                            <NavLink to={brand.link}>{brand.name}</NavLink>
+                            <a href={brand.link}>{brand.name}</a>
                           </li>
                         ))}
                       </ul>
@@ -614,14 +614,14 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
                       <img src='/icons/arrowRight.svg' alt='arrow-right' />
                     </li>
                     <li>
-                      <NavLink to='/about'>
+                      <a href='/about'>
                         <p>A propos de trackt, la safe place streetwear</p>
-                      </NavLink>
+                      </a>
                     </li>
                     <li>
-                      <NavLink to='/blogs'>
+                      <a href='/blogs'>
                         <p>X-Trackt, le blog</p>
-                      </NavLink>
+                      </a>
                     </li>
                     <li
                       style={{
@@ -631,26 +631,26 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
                     >
                       <p>Shop with labels</p>
                       <div className='shop-labels'>
-                        <Link to='/filtered?new=true'>
+                        <a href='/filtered?new=true'>
                           <img src='/product/stickers/new.png' alt='new' />
                           <p>Nouvel arrivage</p>
-                        </Link>
-                        <Link to='/filtered?fast=true'>
+                        </a>
+                        <a href='/filtered?fast=true'>
                           <img src='/product/stickers/ship.png' alt='fast' />
                           <p>Livré en 24h</p>
-                        </Link>
-                        <Link to='/filtered?hotdeal=true'>
+                        </a>
+                        <a href='/filtered?hotdeal=true'>
                           <img src='/product/stickers/hotDeal.png' alt='hot deal' />
                           <p>hot deal</p>
-                        </Link>
-                        <Link to='/filtered?release=true'>
+                        </a>
+                        <a href='/filtered?release=true'>
                           <img src='/product/stickers/release.png' alt='release' />
                           <p>exclusive item</p>
-                        </Link>
-                        <Link to='/filtered?promotion=true'>
+                        </a>
+                        <a href='/filtered?promotion=true'>
                           <img src='/product/stickers/promotion.png' alt='promo' />
                           <p>en promo</p>
-                        </Link>
+                        </a>
                       </div>
                     </li>
                     <li
