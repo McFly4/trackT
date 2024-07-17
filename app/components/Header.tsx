@@ -308,15 +308,25 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
                     height: '25px',
                     transform: 'rotate(180deg)',
                     cursor: 'pointer',
+                    opacity: subMenu ? 1 : 0,
                   }}
                 />
                 <SearchOptions icon={true} />
-                <img
-                  style={{ width: '25px', height: '25px' }}
-                  src='/icons/close.svg'
-                  alt='close'
-                  onClick={toggleMenu}
-                />
+                <div
+                  style={{
+                    backgroundColor: '#262626',
+                    borderRadius: '50px',
+                    padding: '15px',
+                    height: '15px',
+                  }}
+                >
+                  <img
+                    style={{ width: '15px', height: '15px' }}
+                    src='/icons/close.svg'
+                    alt='close'
+                    onClick={toggleMenu}
+                  />
+                </div>
               </div>
               {subMenu ? (
                 subsubMenu ? (
