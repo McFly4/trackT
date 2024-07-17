@@ -268,7 +268,7 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
               </div>
             </div>
             <div className='logo'>
-              <a href='/' end>
+              <a href='/'>
                 <video style={{ width: '120px' }} autoPlay loop muted playsInline src={urlLogo}>
                   <img src={header?.shop?.brand?.logo?.image?.url} alt='logo' />
                 </video>
