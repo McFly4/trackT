@@ -770,11 +770,12 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .four-btns a:nth-child(1) button {
-    background-image: url(public/filters.png);
+    background-image: url(public/categories.png);
+
 }
 
 .four-btns a:nth-child(2) button{
-    background-image: url(public/categories.png);
+    background-image: url(public/manual.png);
 }
 
 .four-btns a:nth-child(3) button{
