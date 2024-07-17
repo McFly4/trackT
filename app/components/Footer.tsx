@@ -7,7 +7,7 @@ export function Footer(menu: FooterQuery) {
       <footer className='footer'>
         <div>
           <Link to='/'>
-            <img src='/footer/trackt.png' alt='trackt' className='footer-logo' />
+            <img src='/footer/logoFooter.PNG' alt='trackt' className='footer-logo' />
           </Link>
         </div>
         <div className='footer-menu'>
