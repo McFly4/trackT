@@ -24,11 +24,8 @@ export function Footer(menu: FooterQuery) {
               <img src='/coming.png' alt='coming soon' />
             </p>
           </Link>
-          <Link to='/about'>
-            <p>
-              blog
-              <img src='/coming.png' alt='coming soon' />
-            </p>
+          <Link to='/blogs'>
+            <p>blog</p>
           </Link>
           <Link to='/about'>
             <p>
