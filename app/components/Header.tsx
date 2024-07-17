@@ -226,10 +226,13 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
             )}
           </div>
           <div className='icons'>
-            <SearchOptions icon={true} />
-            <NavLink to='/about'>
-              <img src='/icons/folder.svg' alt='folder' />
-            </NavLink>
+            <a href='#search-aside'>
+              <img src='/icons/search.svg' alt='search' />
+            </a>
+            {/*<SearchOptions icon={true} />*/}
+            {/*<NavLink to='/about'>*/}
+            {/*  <img src='/icons/folder.svg' alt='folder' />*/}
+            {/*</NavLink>*/}
             <NavLink prefetch='intent' to='/account/profile'>
               <img src='/icons/person.svg' alt='person' />
             </NavLink>
