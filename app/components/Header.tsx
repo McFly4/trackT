@@ -175,15 +175,20 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
             </p>
             <p
               onMouseEnter={() => {
-                setHovered(true)
+                setHovered(false)
                 resetSubmenuStates()
-                setAbout(true)
               }}
               className={getParentClass(about)}
             >
               <NavLink to='/about'>A propos de trackt</NavLink>
             </p>
-            <span className={hovered ? 'parent-opacity' : ''}>
+            <span
+              onMouseEnter={() => {
+                setHovered(false)
+                resetSubmenuStates()
+              }}
+              className={hovered ? 'parent-opacity' : ''}
+            >
               <NavLink to='/about'>Blog</NavLink>
             </span>
             {hovered && (
