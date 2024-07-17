@@ -490,6 +490,15 @@
         font-family: 'Helvetica Neue', sans-serif;
     }
 
+    .menu-footer{
+        position: sticky;
+        bottom: 0;
+        background-color: #000;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+    }
+
     .menu-footer p{
         font-size: 14px !important;
         font-weight: normal !important;

@@ -689,14 +689,29 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
                         ))}
                       </div>
                     </li>
-                    <li className='menu-footer'>
+                  </ul>
+                  <div className='menu-footer'>
+                    <div>
                       <p>
                         Assistance TrackT <br />
                         7/7 - 24/24
                       </p>
-                      <a href='https://instagram.com/tracktonline'>Contact ici - Instagram</a>
-                    </li>
-                  </ul>
+                      <a
+                        style={{
+                          color: '#fee233',
+                          marginTop: '10px',
+                        }}
+                        href='https://instagram.com/tracktonline'
+                      >
+                        Contact ici - Instagram
+                      </a>
+                    </div>
+                    <div className='menu-footer-tv'>
+                      <a href='https://instagram.com/tracktonline'>
+                        <img src='/instaSmall.png' alt='tv' />
+                      </a>
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
