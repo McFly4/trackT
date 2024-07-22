@@ -420,8 +420,8 @@ export function Header({ header, isLoggedIn, cart, logo, rightNow, trendy }: any
                           </h5>
                           {rightNowProducts.map((product: any) => (
                             <div key={product.id} className='right-now-product'>
-                              <Image data={product.images.nodes[0]} loading='lazy' />
-                              <p>{product.vendor}</p>
+                              <Image data={product.image} loading='lazy' />
+                              <p>{product.title}</p>
                             </div>
                           ))}
                         </div>

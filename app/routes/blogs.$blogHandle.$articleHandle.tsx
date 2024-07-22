@@ -282,7 +282,7 @@ export default function Article() {
             <div className='right-now-container'>
               {rightNowProducts.map((product: any) => (
                 <div key={product.id} className='right-now-product'>
-                  <Image data={product.images.nodes[0]} loading='lazy' />
+                  <Image data={product.image} loading='lazy' />
                   <p>{product.title?.length > 12 ? `${product.title.slice(0, 12)}...` : product.title}</p>
                 </div>
               ))}
@@ -450,17 +450,15 @@ const RIGHT_NOW = `#graphql
 query MetaObjects {
   metaobjects(first: 20, type: "right_now") {
     nodes {
-      field(key: "product") {
+      field(key: "collection") {
         references(first: 10) {
           nodes {
-            ... on Product {
+            ... on Collection {
               id
               title
               handle
-              images(first: 1) {
-                nodes {
-                  url
-                }
+              image {
+                url
               }
             }
           }

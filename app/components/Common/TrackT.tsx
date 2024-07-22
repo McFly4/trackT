@@ -73,7 +73,8 @@ export default function TrackT({ products, title, isAccount, link }: any) {
         onSwiper={(swiper) => (swiperRef.current = swiper)}
         breakpoints={{
           0: {
-            slidesPerView: 1,
+            slidesPerView: 2,
+            loop: false,
           },
           800: {
             slidesPerView: 3,

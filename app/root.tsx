@@ -406,18 +406,15 @@ const RIGHT_NOW = `#graphql
 query MetaObjects {
   metaobjects(first: 20, type: "right_now") {
     nodes {
-      field(key: "product") {
+      field(key: "collection") {
         references(first: 10) {
           nodes {
-            ... on Product {
+            ... on Collection {
               id
               title
               handle
-              vendor
-              images(first: 1) {
-                nodes {
-                  url
-                }
+              image {
+                url
               }
             }
           }
