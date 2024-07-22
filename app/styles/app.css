@@ -2222,6 +2222,10 @@ input[type="search"]::-webkit-search-results-decoration {
         margin-right: unset;
     }
 
+    .hfooter{
+        margin-top: 50px;
+    }
+
     .hfooter .gofilters{
         margin: 0 0 60px 0;
         padding: 0 20px;
