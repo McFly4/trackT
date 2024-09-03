@@ -321,7 +321,7 @@ export default function Product() {
             )}
           </div>
         )}
-        <BreadCrumb product={product} />
+        {/*<BreadCrumb product={product} />*/}
         <div className='product'>
           <ProductImage image={selectedVariant} product={product} />
           {width > 768 && <ProductMain selectedVariant={selectedVariant} product={product} variants={variants} />}
